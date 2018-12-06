@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Laundress</string>
+    <string name="radiomale">Male</string>
+    <string name="radiofemale">Female</string>
+
+    <string-array name="civilstatus">
+        <item>Single</item>
+        <item>Married</item>
+        <item>Divorced</item>
+    </string-array>
+</resources>
