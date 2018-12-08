@@ -2,7 +2,8 @@
     <string name="app_name">Laundress</string>
     <string name="radiomale">Male</string>
     <string name="radiofemale">Female</string>
-    <string name="myLaundry">My Laundry</string>
+    <string name="mylaundry">My Laundries</string>
+    <string name="post">Post</string>
     <string-array name="civilstatus">
         <item>Single</item>
         <item>Married</item>
