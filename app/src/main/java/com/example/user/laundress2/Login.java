@@ -30,8 +30,8 @@ public class Login extends AppCompatActivity {
     private EditText email, password;
     private Button login;
     private ProgressBar load;
-   // private static String URL_LOGIN = "http://192.168.254.117/laundress/login.php";
-   private static String URL_LOGIN = "http://192.168.1.4/laundress/login.php";
+    private static String URL_LOGIN = "http://192.168.254.117/laundress/login.php";
+  // private static String URL_LOGIN = "http://192.168.1.5/laundress/login.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +84,7 @@ public class Login extends AppCompatActivity {
                                     Toast.makeText(Login.this, "Login Successfully Your Name: " + name + "Your email: " + email, Toast.LENGTH_SHORT).show();
                                     load.setVisibility(View.GONE);
                                     login.setVisibility(View.VISIBLE);
-                                    Intent intent = new Intent(context, Homepage.class);
+                                    Intent intent = new Intent(context, ClientHomepage.class);
                                     startActivity(intent);
                                 }
                             } else if (success.equals("0")) {

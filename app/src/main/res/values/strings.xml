@@ -2,11 +2,29 @@
     <string name="app_name">Laundress</string>
     <string name="radiomale">Male</string>
     <string name="radiofemale">Female</string>
-    <string name="mylaundry">My Laundries</string>
-    <string name="post">Post</string>
+
     <string-array name="civilstatus">
         <item>Single</item>
         <item>Married</item>
         <item>Divorced</item>
     </string-array>
+    <string name="title_activity_client_homepage">ClientHomepage</string>
+    <string name="mylaundry">My Laundries</string>
+    <string name="post">Post</string>
+
+
+    <!--gridview-->
+    <!--<string name = "tshirt_and_polo">T-shirt and Polo</string>-->
+    <!--<string name = "sleeveless" >Sleeveless</string>-->
+    <!--<string name = "long_sleeve" >Long Sleeve</string>-->
+    <!--<string name = "pants" >Pants</string>-->
+    <!--<string name = "shorts" >Shorts</string>-->
+    <!--<string name = "skirt" >Skirt</string>-->
+    <!--<string name = "dress" >Dress</string>-->
+    <!--<string name = "blankets_curtains_etc" >Blankets, Curtains, etc.</string>-->
+    <!--<string name = "socks_gloves_etc" >Socks, Gloves, etc.</string>-->
+    <!--<string name = "towels" >Towels</string>-->
+    <!--<string name = "others" >Others</string>-->
+    <!--<string name = "done" >Done</string>-->
+
 </resources>
