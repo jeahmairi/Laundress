@@ -27,6 +27,14 @@ public class ClientMyLaundry extends Fragment {
                 startActivity(intent);
             }
         });
+        findlsp = rootView.findViewById(R.id.findlsp);
+        findlsp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), FindLaundryServiceProv.class);
+                startActivity(intent);
+            }
+        });
         return rootView;
     }
 

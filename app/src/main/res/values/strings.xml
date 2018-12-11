@@ -11,7 +11,13 @@
     <string name="title_activity_client_homepage">ClientHomepage</string>
     <string name="mylaundry">My Laundries</string>
     <string name="post">Post</string>
-
+    <string name="findlaundryshop">Laundry Shop</string>
+    <string name="findhandwasher">Laundry Handwasher</string>
+    <string-array name="filterby">
+        <item>Nearest Location</item>
+        <item>Cheapest Laundry Service</item>
+        <item>Recommended Laundry Shop</item>
+    </string-array>
 
     <!--gridview-->
     <!--<string name = "tshirt_and_polo">T-shirt and Polo</string>-->
