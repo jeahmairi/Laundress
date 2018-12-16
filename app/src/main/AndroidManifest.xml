@@ -30,15 +30,22 @@
         <activity
             android:name=".Login"
             android:label="@string/app_name" />
-        <activity android:name=".ClientHomepage"
-        android:label="@string/app_name"/>
-        <activity android:name=".ClientLaundryDetails"
-            android:label="@string/app_name"/>
-        <activity android:name=".AddLaundryDetails"
+        <activity
+            android:name=".ClientHomepage"
+            android:label="@string/app_name" />
+        <activity
+            android:name=".ClientLaundryDetails"
+            android:label="@string/app_name" />
+        <activity
+            android:name=".AddLaundryDetails"
             android:label="@string/app_name"
-            android:theme="@style/MyDialog"/>
-        <activity android:name=".FindLaundryServiceProv"
-        android:label="@string/app_name" />
+            android:theme="@style/MyDialog" />
+        <activity
+            android:name=".FindLaundryServiceProv"
+            android:label="@string/app_name" />
+        <activity
+            android:name=".ChooseLaundryShop"
+            android:label="Book New Request"></activity>
     </application>
 
 </manifest>

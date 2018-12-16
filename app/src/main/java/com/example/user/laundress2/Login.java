@@ -30,9 +30,9 @@ public class Login extends AppCompatActivity {
     private EditText email, password;
     private Button login;
     private ProgressBar load;
-    //private static String URL_LOGIN = "http://192.168.254.117/laundress/login.php";
+    private static String URL_LOGIN = "http://192.168.254.117/laundress/login.php";
     //private static String URL_LOGIN = "http://192.168.1.5/laundress/login.php";
-    private static String URL_LOGIN = "http://192.168.1.2/laundress/login.php";
+    //private static String URL_LOGIN = "http://192.168.1.2/laundress/login.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
