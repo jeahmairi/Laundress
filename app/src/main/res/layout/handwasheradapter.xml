@@ -14,7 +14,6 @@
             android:id="@+id/handwasherpic"
             android:layout_width="167dp"
             android:layout_height="154dp"
-            android:visibility="gone"
             app:srcCompat="@drawable/handwasher" />
 
         <LinearLayout

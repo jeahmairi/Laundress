@@ -77,7 +77,7 @@ public class FindHandwasher extends Fragment {
                 for (int i =0;i<jsonArray.length();i++)
                 {
 
-                    String name=jsonArray.getJSONObject(i).getString("fname").toString();
+                    String name=jsonArray.getJSONObject(i).getString("name").toString();
                     String meter = jsonArray.getJSONObject(i).getString("address").toString();
                     String contact = jsonArray.getJSONObject(i).getString("contact").toString();;
                     arrname.add(name);

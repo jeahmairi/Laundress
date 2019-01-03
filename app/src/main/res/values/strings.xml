@@ -18,6 +18,11 @@
         <item>Cheapest Laundry Service</item>
         <item>Recommended Laundry Shop</item>
     </string-array>
+    <string-array name="filterbyh">
+        <item>Nearest Location</item>
+        <item>Cheapest Laundry Handwasher</item>
+        <item>Recommended Laundry Handwasher</item>
+    </string-array>
     <string name="title_activity_laundry_shop_location">Map</string>
 
     <!--gridview-->
