@@ -11,9 +11,10 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/imageView6"
+            android:id="@+id/handwasherpic"
             android:layout_width="167dp"
             android:layout_height="154dp"
+            android:visibility="gone"
             app:srcCompat="@drawable/handwasher" />
 
         <LinearLayout
@@ -22,7 +23,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView13"
+                android:id="@+id/hwname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
@@ -31,21 +32,21 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/textView14"
+                android:id="@+id/hwcont"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:text="Contact Number" />
 
             <TextView
-                android:id="@+id/textView15"
+                android:id="@+id/hwmeters"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:text="Meters Away" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/btnchoose"
                 android:layout_width="106dp"
                 android:layout_height="35dp"
                 android:layout_marginLeft="100dp"

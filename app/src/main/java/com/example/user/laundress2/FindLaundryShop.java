@@ -15,14 +15,14 @@ import android.widget.ListView;
 public class FindLaundryShop extends Fragment{
     Button btnchoose;
     String[] laundryDetailName = {
-            "Laundry Shop Name", "Laundry Shop Name2", "Laundry Shop Name3", "Laundry Shop Name4", "Laundry Shop Name5"};
+            "Laundry Shop Name", "Laundry Shop Name2", "bla bla", "bla bla"};
     String[] lslocation = {
-            "Location", "Location 1", "Location 2", "Location 3", "Location 4" };
+            "Location", "Location 1", "loc loc", "loc loc2"};
     String[] lsmeter = {
-            "meter", "meter 2", "meter 3", "meter 4","meter 5" };
+            "meter", "meter 2", "met met", "met met2"};
 
     int[] laundryDetailId = {
-            R.drawable.laundryshop, R.drawable.buttondone, R.drawable.laundryshop, R.drawable.buttondone, R.drawable.handwasher,
+            R.drawable.laundryshop, R.drawable.buttondone, R.drawable.add, R.drawable.logo
     };
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.findlaundryshop, container, false);

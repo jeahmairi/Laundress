@@ -25,7 +25,7 @@ public class ClientLaundryDetails extends AppCompatActivity {
 
     String[] laundryDetailName = {
             "T-shirt and Polo", "Sleeveless", "Long Sleeve", "Pants", "Shorts", "Skirt",
-            "Dress", "Blankets, Curtains, etc.", "Socks, Gloves, etc.", "Towels", "Others", "",
+            "Dress", "Blankets, Curtains, etc.", "Socks, Gloves, etc.", "Towels", "Others", " ",
     };
 
     int[] laundryDetailId = {

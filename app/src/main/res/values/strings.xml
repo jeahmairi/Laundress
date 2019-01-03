@@ -18,6 +18,7 @@
         <item>Cheapest Laundry Service</item>
         <item>Recommended Laundry Shop</item>
     </string-array>
+    <string name="title_activity_laundry_shop_location">Map</string>
 
     <!--gridview-->
     <!--<string name = "tshirt_and_polo">T-shirt and Polo</string>-->
