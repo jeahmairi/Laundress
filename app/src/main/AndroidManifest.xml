@@ -56,6 +56,10 @@
         <activity
             android:name=".LaundryShopLocation"
             android:label="Laundry Shop's Location" />
+        <activity android:name=".HandwasherHomepage"
+            android:label="@string/app_name" />
+        <activity android:name=".ChooseHandwasher"
+            android:label="Book New Request" />
 
     </application>
 

@@ -79,14 +79,20 @@ public class Login extends AppCompatActivity {
 
                                 for (int i = 0; i < jsonArray.length(); i++) {
                                     JSONObject object = jsonArray.getJSONObject(i);
-
+                                    String user = object.getString("user").trim();
                                     String name = object.getString("name").trim();
                                     String email = object.getString("email").trim();
                                     Toast.makeText(Login.this, "Login Successfully Your Name: " + name + "Your email: " + email, Toast.LENGTH_SHORT).show();
                                     load.setVisibility(View.GONE);
                                     login.setVisibility(View.VISIBLE);
-                                    Intent intent = new Intent(context, ClientHomepage.class);
-                                    startActivity(intent);
+                                    if(user.equals("laundryclient")) {
+                                        Intent intent = new Intent(context, ClientHomepage.class);
+                                        startActivity(intent);
+                                    }
+                                    else if(user.equals("handwasher")) {
+                                        Intent intent = new Intent(context, HandwasherHomepage.class);
+                                        startActivity(intent);
+                                    }
                                 }
                             } else if (success.equals("0")) {
 

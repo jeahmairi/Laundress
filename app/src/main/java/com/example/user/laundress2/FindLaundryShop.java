@@ -37,7 +37,6 @@ public class FindLaundryShop extends Fragment{
     LaundryShopAdapter laundryShopAdapter;
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.findlaundryshop, container, false);
-        ListView androidGridView = rootView.findViewById(R.id.lvlaundryshop);
         ListView listView = rootView.findViewById(R.id.lvlaundryshop);
         context = getActivity();
         try {

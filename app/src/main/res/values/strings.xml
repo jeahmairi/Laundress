@@ -10,7 +10,7 @@
     </string-array>
     <string name="title_activity_client_homepage">ClientHomepage</string>
     <string name="mylaundry">My Laundries</string>
-    <string name="post">Post</string>
+    <string name="post">Posts</string>
     <string name="findlaundryshop">Laundry Shop</string>
     <string name="findhandwasher">Laundry Handwasher</string>
     <string-array name="filterby">
@@ -24,7 +24,9 @@
         <item>Recommended Laundry Handwasher</item>
     </string-array>
     <string name="title_activity_laundry_shop_location">Map</string>
-
+    <string name="mylaundryh">My Laundry</string>
+    <string name="bookings">Bookings</string>
+    <string name="posts">Posts</string>
     <!--gridview-->
     <!--<string name = "tshirt_and_polo">T-shirt and Polo</string>-->
     <!--<string name = "sleeveless" >Sleeveless</string>-->
