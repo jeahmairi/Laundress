@@ -89,7 +89,7 @@ public class Login extends AppCompatActivity {
                                         Intent intent = new Intent(context, ClientHomepage.class);
                                         startActivity(intent);
                                     }
-                                    else if(user.equals("handwasher")) {
+                                    else if(user.equals("Laundry Handwasher")) {
                                         Intent intent = new Intent(context, HandwasherHomepage.class);
                                         startActivity(intent);
                                     }

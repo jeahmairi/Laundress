@@ -1,57 +1,57 @@
 package com.example.user.laundress2;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class LaundryDetailsAdapter extends BaseAdapter {
     private final Context context;
-    private final String[] laundryDetailName;
-    private final int[] laundryDetailId;
+    ItemHolder itemHolder;
+    ArrayList<LaundryDetailList> laundryDetailLists;
 
-    public LaundryDetailsAdapter(Context context, String[] laundryDetailName, int[] laundryDetailId) {
+    public LaundryDetailsAdapter(Context context, ArrayList<LaundryDetailList> laundryDetailLists) {
         this.context = context;
-        this.laundryDetailName = laundryDetailName;
-        this.laundryDetailId = laundryDetailId;
+        this.laundryDetailLists = laundryDetailLists;
     }
 
     @Override
     public int getCount() {
-        return laundryDetailName.length;
+        return laundryDetailLists.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return null;
+        return laundryDetailLists.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return position;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View gridViewAndroid;
-        LayoutInflater inflater = (LayoutInflater) context
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+      //  if (convertView == null) {
+            LayoutInflater layoutInflater =  (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            itemHolder = new LaundryDetailsAdapter.ItemHolder();
+            convertView = layoutInflater.inflate(R.layout.clntlaundrydet_layout, parent, false);
+            itemHolder.name = (TextView) convertView.findViewById(R.id.android_gridview_text);
+            itemHolder.name.setText(laundryDetailLists.get(position).getName());
 
-        if (convertView == null) {
+        //}
 
-            gridViewAndroid = new View(context);
-            gridViewAndroid = inflater.inflate(R.layout.clntlaundrydet_layout, null);
-            TextView textViewAndroid = (TextView) gridViewAndroid.findViewById(R.id.android_gridview_text);
-            ImageView imageViewAndroid = (ImageView) gridViewAndroid.findViewById(R.id.android_gridview_image);
-            textViewAndroid.setText(laundryDetailName[position]);
-            imageViewAndroid.setImageResource(laundryDetailId[position]);
-        } else {
-            gridViewAndroid = (View) convertView;
-        }
-
-        return gridViewAndroid;
+        return convertView;
+    }
+    private class ItemHolder {
+        TextView name;
     }
 }

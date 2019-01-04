@@ -1,6 +1,7 @@
 package com.example.user.laundress2;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,61 +17,98 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class ClientLaundryDetails extends AppCompatActivity {
-    GridView androidGridView;
-    Spinner laundrytag;
 
-    String[] laundryDetailName = {
-            "T-shirt and Polo", "Sleeveless", "Long Sleeve", "Pants", "Shorts", "Skirt",
-            "Dress", "Blankets, Curtains, etc.", "Socks, Gloves, etc.", "Towels", "Others", " ",
-    };
+    ArrayList<String> arrname = new ArrayList<>();
+    ArrayList<Integer> arrid = new ArrayList<>();
 
-    int[] laundryDetailId = {
-            R.drawable.tshirt, R.drawable.sleeveless, R.drawable.polo, R.drawable.pants, R.drawable.shorts,
-            R.drawable.skirt, R.drawable.dress, R.drawable.towel, R.drawable.socks, R.drawable.towel, R.drawable.add,
-            R.drawable.buttondone
-
-    };
+    //  ListView listview;
+    private Context context;
+    private static final String URL_ALL ="http://192.168.254.117/laundress/detailscategory.php";
+    ArrayList<LaundryDetailList> laundryDetailLists = new ArrayList<LaundryDetailList>();
+    LaundryDetailsAdapter laundryDetailsAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.clientlaundrydet);
-        LaundryDetailsAdapter laundryDetailsAdapter = new LaundryDetailsAdapter(ClientLaundryDetails.this, laundryDetailName, laundryDetailId);
-        androidGridView = findViewById(R.id.gridview);
-        androidGridView.setAdapter(laundryDetailsAdapter);
+        GridView androidGridView = findViewById(R.id.gridview);
         androidGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getApplicationContext(),AddLaundryDetails.class);
-                intent.putExtra("name",laundryDetailName[position]);
+                intent.putExtra("name",laundryDetailLists.get(position).getName());
+                intent.putExtra("id",laundryDetailLists.get(position).getId());
                 //intent.putExtra("image",laundryDetailId[position]);
                 startActivity(intent);
-
-               /* AlertDialog.Builder builder = new AlertDialog.Builder(ClientLaundryDetails.this);
-                View mView = getLayoutInflater().inflate(R.layout.addclientlaundrydet, null);
-                final TextView title = findViewById(R.id.title);
-                builder.setTitle(laundryDetailName[position]);
-                builder.setView(mView);
-                final Dialog dialog = builder.create();
-                dialog.show();
-
-                DisplayMetrics displayMetrics = new DisplayMetrics();
-                getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-                int displayWidth = displayMetrics.widthPixels;
-                int displayHeight = displayMetrics.heightPixels;
-                WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
-                layoutParams.copyFrom(dialog.getWindow().getAttributes());
-                int dialogWindowWidth = (int) (displayWidth * 0.99f);
-                int dialogWindowHeight = (int) (displayHeight * 0.99f);
-                layoutParams.width = dialogWindowWidth;
-                layoutParams.height = dialogWindowHeight;
-                dialog.getWindow().setAttributes(layoutParams);*/
             }
         });
+        try {
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_ALL,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            getJsonResponse(response);
+                            System.out.println("RESPONSEesponse");
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
+                        }
+                    });
 
+            RequestQueue requestQueue = Volley.newRequestQueue(ClientLaundryDetails.this);
+            requestQueue.add(stringRequest);
+        }
+        catch (Exception e)
+        {
+
+        }
+        laundryDetailsAdapter = new LaundryDetailsAdapter(ClientLaundryDetails.this,laundryDetailLists);
+        androidGridView.setAdapter(laundryDetailsAdapter);
     }
+
+    private void getJsonResponse(String response)
+    {
+        try {
+            JSONObject jsonObject = new JSONObject(response);
+            String success = jsonObject.getString("success");
+            //JSONArray jArray = json.getJSONArray("platform");
+            //JSONArray jsonArray = new JSONArray(response);
+            JSONArray jsonArray = jsonObject.getJSONArray("category");
+            if (success.equals("1")){
+                for (int i =0;i<jsonArray.length();i++)
+                {
+                    String name=jsonArray.getJSONObject(i).getString("name").toString();
+                    int id= Integer.parseInt(jsonArray.getJSONObject(i).getString("id").toString());
+                    arrname.add(name);
+                    arrid.add(id);
+                    LaundryDetailList laundryDetailList = new LaundryDetailList();
+                    laundryDetailList.setName(name);
+                    laundryDetailList.setId(id);
+                    laundryDetailLists.add(laundryDetailList);
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Toast.makeText(ClientLaundryDetails.this, "failedddd" +e.toString(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
 }
