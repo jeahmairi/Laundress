@@ -1,5 +1,6 @@
 package com.example.user.laundress2;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import android.support.design.widget.TabLayout;
@@ -9,6 +10,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.telephony.mbms.MbmsErrors;
 
 public class ClientHomepage extends AppCompatActivity {
 
@@ -17,12 +19,14 @@ public class ClientHomepage extends AppCompatActivity {
     private ClientHomepage.SectionsPagerAdapter mSectionsPagerAdapter;
 
     private ViewPager mViewPager;
-
+    String client_name;
+    int client_id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.client_homepage);
-
+        client_name = getIntent().getStringExtra("name");
+        client_id = getIntent().getIntExtra("id", 0);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new ClientHomepage.SectionsPagerAdapter(getSupportFragmentManager());
@@ -49,9 +53,13 @@ public class ClientHomepage extends AppCompatActivity {
             switch (position) {
                 case 0:
                     ClientMyLaundry clientMyLaundry = new ClientMyLaundry();
+                    clientMyLaundry.setClientId(client_id);
+                    clientMyLaundry.setClientName(client_name);
                     return clientMyLaundry;
                 case 1:
                     ClientPost clientPost = new ClientPost();
+                    clientPost.setClientId(client_id);
+                    clientPost.setClientName(client_name);
                     return clientPost;
                 default:
                     return null;

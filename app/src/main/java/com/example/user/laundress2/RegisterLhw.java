@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -36,7 +37,7 @@ public class RegisterLhw extends AppCompatActivity {
     private EditText fname, midname, lname, addr, bdate, phonenumber, username, password;
     private RadioGroup radioGender;
     private Spinner civilstat;
-    private String gender;
+    private String genders;
     private String cvlstat;
     private Button register;
     private DatePickerDialog picker;
@@ -70,14 +71,6 @@ public class RegisterLhw extends AppCompatActivity {
 
             }
         });
-        int selectedID = radioGender.getCheckedRadioButtonId();
-
-        if(selectedID == R.id.radioMale)
-        {
-            gender = "Male";
-        } else if(selectedID==R.id.radioFemale) {
-            gender = "Female";
-        }
 
         bdate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,7 +84,7 @@ public class RegisterLhw extends AppCompatActivity {
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                                bdate.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                                bdate.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
                             }
                         }, year, month, day);
                 picker.show();
@@ -104,6 +97,21 @@ public class RegisterLhw extends AppCompatActivity {
             }
         });
     }
+    public void onRadioButtonClicked(View view) {
+        boolean checked = ((RadioButton) view).isChecked();
+
+        // Check which radio button was clicked
+        switch(view.getId()) {
+            case R.id.radioMale:
+                if(checked)
+                    genders = "Male";
+                break;
+            case R.id.radioFemale:
+                if(checked)
+                    genders = "Female";
+                break;
+        }
+    }
     private void Register(){
 
         load.setVisibility(View.VISIBLE);
@@ -115,7 +123,7 @@ public class RegisterLhw extends AppCompatActivity {
         final String addr = this.addr.getText().toString().trim();
         final String bdate = this.bdate.getText().toString().trim();
         final String phonenumber = this.phonenumber.getText().toString().trim();
-        final String gender = this.gender.trim();
+        final String gender = this.genders.trim();
         final String cvlstat = this.cvlstat.trim();
         final String username = this.username.getText().toString().trim();
         final String password = this.password.getText().toString().trim();

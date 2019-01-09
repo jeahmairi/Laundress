@@ -35,8 +35,9 @@ public class RegisterLc extends AppCompatActivity {
     private EditText fname, midname, lname, addr;
     private EditText bdate, phonenumber, email, password;
     private RadioGroup radiogender;
+    private RadioButton radiogendermale, radiogenderfemale;
     //private RadioButton gender;
-    private String gender;
+    private String genders = "";
     private DatePickerDialog picker;
     private Button reg;
     private ProgressBar load;
@@ -46,7 +47,8 @@ public class RegisterLc extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lcregistration);
-        radiogender = findViewById(R.id.radioGender);
+        radiogendermale = findViewById(R.id.radioMale);
+        radiogenderfemale = findViewById(R.id.radioFemale);
         load = findViewById(R.id.loading);
         fname= findViewById(R.id.fname);
         midname = findViewById(R.id.midname);
@@ -55,17 +57,9 @@ public class RegisterLc extends AppCompatActivity {
         reg = findViewById(R.id.register);
         bdate = findViewById(R.id.bdate);
         phonenumber = findViewById(R.id.phonenumber);
-       // gender = findViewById(radiogender.getCheckedRadioButtonId());
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
-        int selectedID = radiogender.getCheckedRadioButtonId();
 
-        if(selectedID == R.id.radioMale)
-        {
-            gender = "Male";
-        } else if(selectedID==R.id.radioFemale) {
-            gender = "Female";
-        }
         bdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,7 +72,7 @@ public class RegisterLc extends AppCompatActivity {
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                                bdate.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                                bdate.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
                             }
                         }, year, month, day);
                 picker.show();
@@ -87,11 +81,27 @@ public class RegisterLc extends AppCompatActivity {
         reg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //final String gender = genders.trim();
+                //Toast.makeText(RegisterLc.this, "gender" +gender, Toast.LENGTH_SHORT).show();
                 Register();
             }
         });
     }
+    public void onRadioButtonClicked(View view) {
+        boolean checked = ((RadioButton) view).isChecked();
 
+        // Check which radio button was clicked
+        switch(view.getId()) {
+            case R.id.radioMale:
+                if(checked)
+                    genders = "Male";
+                break;
+            case R.id.radioFemale:
+                if(checked)
+                    genders = "Female";
+                break;
+        }
+    }
     private void Register(){
 
         load.setVisibility(View.VISIBLE);
@@ -103,10 +113,11 @@ public class RegisterLc extends AppCompatActivity {
         final String addr = this.addr.getText().toString().trim();
         final String bdate = this.bdate.getText().toString().trim();
         final String phonenumber = this.phonenumber.getText().toString().trim();
-        final String gender = this.gender.trim();
+        final String gender = this.genders.trim();
+        //final String gender = this.radioButton.getText().toString().trim();
         final String email = this.email.getText().toString().trim();
         final String password = this.password.getText().toString().trim();
-
+        Toast.makeText(RegisterLc.this, "bdate" +bdate, Toast.LENGTH_SHORT).show();
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_REGISTER,
                 new Response.Listener<String>() {
                     @Override

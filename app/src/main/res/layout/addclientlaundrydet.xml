@@ -63,53 +63,6 @@
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                        <EditText
-                            android:id="@+id/editText3"
-                            android:layout_width="78dp"
-                            android:layout_height="46dp"
-                            android:layout_marginTop="10dp"
-                            android:ems="10"
-                            android:inputType="textPersonName" />
-
-                        <EditText
-                            android:id="@+id/brand"
-                            android:layout_width="70dp"
-                            android:layout_height="46dp"
-                            android:layout_marginStart="28dp"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginTop="10dp"
-                            android:ems="10"
-                            android:hint="Brand"
-                            android:inputType="textPersonName" />
-
-                        <EditText
-                            android:id="@+id/color"
-                            android:layout_width="70dp"
-                            android:layout_height="46dp"
-                            android:layout_marginStart="28dp"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="10dp"
-                            android:ems="10"
-                            android:hint="Color"
-                            android:inputType="textPersonName" />
-
-                        <EditText
-                            android:id="@+id/noofpieces"
-                            android:layout_width="70dp"
-                            android:layout_height="46dp"
-                            android:layout_marginStart="28dp"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginEnd="8dp"
-                            android:ems="10"
-                            android:inputType="number" />
-                </LinearLayout>
-
 
                 <Button
                     android:id="@+id/additemcateg"

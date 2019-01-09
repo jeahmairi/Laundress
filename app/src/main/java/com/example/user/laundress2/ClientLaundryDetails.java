@@ -35,10 +35,11 @@ public class ClientLaundryDetails extends AppCompatActivity {
 
     ArrayList<String> arrname = new ArrayList<>();
     ArrayList<Integer> arrid = new ArrayList<>();
-
+    String client_name; int client_id;
     //  ListView listview;
     private Context context;
     private static final String URL_ALL ="http://192.168.254.117/laundress/detailscategory.php";
+    //private static final String URL_ALL ="http://192.168.1.2/laundress/detailscategory.php";
     ArrayList<LaundryDetailList> laundryDetailLists = new ArrayList<LaundryDetailList>();
     LaundryDetailsAdapter laundryDetailsAdapter;
 
@@ -47,13 +48,16 @@ public class ClientLaundryDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.clientlaundrydet);
         GridView androidGridView = findViewById(R.id.gridview);
+        client_name = getIntent().getStringExtra("client_name");
+        client_id = getIntent().getIntExtra("client_id", 0);
         androidGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getApplicationContext(),AddLaundryDetails.class);
-                intent.putExtra("name",laundryDetailLists.get(position).getName());
-                intent.putExtra("id",laundryDetailLists.get(position).getId());
-                //intent.putExtra("image",laundryDetailId[position]);
+                intent.putExtra("categ_name",laundryDetailLists.get(position).getName());
+                intent.putExtra("categ_id",laundryDetailLists.get(position).getId());
+                intent.putExtra("client_id",client_id);
+                intent.putExtra("client_name",client_name);
                 startActivity(intent);
             }
         });

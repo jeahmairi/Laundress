@@ -92,6 +92,7 @@
                 android:id="@+id/radioGender"
                 android:layout_width="244dp"
                 android:layout_height="match_parent"
+                android:checkedButton="@+id/radioMale"
                 android:contentDescription="Gender">
 
                 <RadioButton
@@ -99,6 +100,7 @@
                     android:layout_width="112dp"
                     android:layout_height="wrap_content"
                     android:checked="true"
+                    android:onClick="onRadioButtonClicked"
                     android:text="@string/radiomale"
                     />
 
@@ -107,6 +109,7 @@
                     android:layout_width="111dp"
                     android:layout_height="wrap_content"
                     android:text="@string/radiofemale"
+                    android:onClick="onRadioButtonClicked"
                     />
 
             </RadioGroup>

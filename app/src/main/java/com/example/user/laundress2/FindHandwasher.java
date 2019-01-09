@@ -30,7 +30,8 @@ public class FindHandwasher extends Fragment {
     ArrayList<String> arrcontact = new ArrayList<>();
     //  ListView listview;
     private Context context;
-    private static final String URL_ALL ="http://192.168.254.117/laundress/allhandwasher.php";
+   private static final String URL_ALL ="http://192.168.254.117/laundress/allhandwasher.php";
+   // private static final String URL_ALL ="http://192.168.1.2/laundress/allhandwasher.php";
     ArrayList<HandwasherList> handwasherLists = new ArrayList<HandwasherList>();
     HandwasherAdapter handwasherAdapter;
     public View onCreateView(@NonNull LayoutInflater inflater,  ViewGroup container, @Nullable Bundle savedInstanceState) {

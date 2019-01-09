@@ -31,6 +31,7 @@ public class Login extends AppCompatActivity {
     private Button login;
     private ProgressBar load;
     private static String URL_LOGIN = "http://192.168.254.117/laundress/login.php";
+    //private static String URL_LOGIN = "http://192.168.1.2/laundress/login.php";
     //private static String URL_LOGIN = "http://192.168.1.5/laundress/login.php";
    // private static String URL_LOGIN = "http://192.168.1.7/laundress/login.php";
 
@@ -79,18 +80,23 @@ public class Login extends AppCompatActivity {
 
                                 for (int i = 0; i < jsonArray.length(); i++) {
                                     JSONObject object = jsonArray.getJSONObject(i);
+                                    int id = object.getInt("id");
                                     String user = object.getString("user").trim();
                                     String name = object.getString("name").trim();
-                                    String email = object.getString("email").trim();
-                                    Toast.makeText(Login.this, "Login Successfully Your Name: " + name + "Your email: " + email, Toast.LENGTH_SHORT).show();
+                                    //String email = object.getString("email").trim();
+                                    Toast.makeText(Login.this, "name " + name, Toast.LENGTH_SHORT).show();
                                     load.setVisibility(View.GONE);
                                     login.setVisibility(View.VISIBLE);
                                     if(user.equals("laundryclient")) {
                                         Intent intent = new Intent(context, ClientHomepage.class);
+                                        intent.putExtra("id", id);
+                                        intent.putExtra("name", name);
                                         startActivity(intent);
                                     }
                                     else if(user.equals("Laundry Handwasher")) {
                                         Intent intent = new Intent(context, HandwasherHomepage.class);
+                                        intent.putExtra("id", id);
+                                        intent.putExtra("name", name);
                                         startActivity(intent);
                                     }
                                 }

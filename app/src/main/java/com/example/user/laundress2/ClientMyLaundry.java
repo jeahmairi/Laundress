@@ -12,11 +12,29 @@ import android.view.LayoutInflater;
 import android.widget.Button;
 
 public class ClientMyLaundry extends Fragment {
+    String clientName;
+    int clientId;
+
+    public String getClientName() {
+        return clientName;
+    }
+
+    public void setClientName(String clientName) {
+        this.clientName = clientName;
+    }
+
+    public int getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(int clientId) {
+        this.clientId = clientId;
+    }
     Button laundrydetails, findlsp;
     @Nullable
     @Override
 
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.client_mylaundry, container, false);
         laundrydetails = rootView.findViewById(R.id.laundrydetails);
@@ -24,6 +42,8 @@ public class ClientMyLaundry extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), ClientLaundryDetails.class);
+                intent.putExtra("client_name", getClientName());
+                intent.putExtra("client_id", getClientId());
                 startActivity(intent);
             }
         });
@@ -32,6 +52,8 @@ public class ClientMyLaundry extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), FindLaundryServiceProv.class);
+                intent.putExtra("client_name", getClientName());
+                intent.putExtra("client_id", getClientId());
                 startActivity(intent);
             }
         });
