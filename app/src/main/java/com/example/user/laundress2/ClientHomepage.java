@@ -21,6 +21,7 @@ public class ClientHomepage extends AppCompatActivity {
     private ViewPager mViewPager;
     String client_name;
     int client_id;
+    //ClientMyLaundry.LaundryDetList laundryDetList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +30,8 @@ public class ClientHomepage extends AppCompatActivity {
         client_id = getIntent().getIntExtra("id", 0);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
+        /*laundryDetList.setClientName(client_name);
+        laundryDetList.setClientId(client_id);*/
         mSectionsPagerAdapter = new ClientHomepage.SectionsPagerAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
@@ -52,10 +55,7 @@ public class ClientHomepage extends AppCompatActivity {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    ClientMyLaundry clientMyLaundry = new ClientMyLaundry();
-                    clientMyLaundry.setClientId(client_id);
-                    clientMyLaundry.setClientName(client_name);
-                    return clientMyLaundry;
+                    return ClientMyLaundry.newInstance(client_id, client_name);
                 case 1:
                     ClientPost clientPost = new ClientPost();
                     clientPost.setClientId(client_id);

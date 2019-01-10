@@ -33,9 +33,11 @@ import java.util.List;
 
 public class ClientLaundryDetails extends AppCompatActivity {
 
+
     ArrayList<String> arrname = new ArrayList<>();
     ArrayList<Integer> arrid = new ArrayList<>();
     String client_name; int client_id;
+    GridView androidGridView;
     //  ListView listview;
     private Context context;
     private static final String URL_ALL ="http://192.168.254.117/laundress/detailscategory.php";
@@ -47,13 +49,19 @@ public class ClientLaundryDetails extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.clientlaundrydet);
-        GridView androidGridView = findViewById(R.id.gridview);
-        client_name = getIntent().getStringExtra("client_name");
-        client_id = getIntent().getIntExtra("client_id", 0);
+        androidGridView = findViewById(R.id.gridview);
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
+        client_name = extras.getString("client_name");
+        client_id = extras.getInt("client_id");
+        /*client_name = "Sample";
+        client_id = 11;*/
+        Toast.makeText(ClientLaundryDetails.this, " " +client_name+"ID" +client_id, Toast.LENGTH_LONG).show();
+
         androidGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getApplicationContext(),AddLaundryDetails.class);
+                Intent intent = new Intent(ClientLaundryDetails.this,AddLaundryDetails.class);
                 intent.putExtra("categ_name",laundryDetailLists.get(position).getName());
                 intent.putExtra("categ_id",laundryDetailLists.get(position).getId());
                 intent.putExtra("client_id",client_id);
@@ -84,8 +92,8 @@ public class ClientLaundryDetails extends AppCompatActivity {
         {
 
         }
-        laundryDetailsAdapter = new LaundryDetailsAdapter(ClientLaundryDetails.this,laundryDetailLists);
-        androidGridView.setAdapter(laundryDetailsAdapter);
+        /*laundryDetailsAdapter = new LaundryDetailsAdapter(ClientLaundryDetails.this,laundryDetailLists);
+        androidGridView.setAdapter(laundryDetailsAdapter);*/
     }
 
     private void getJsonResponse(String response)
@@ -101,6 +109,7 @@ public class ClientLaundryDetails extends AppCompatActivity {
                 {
                     String name=jsonArray.getJSONObject(i).getString("name").toString();
                     int id= Integer.parseInt(jsonArray.getJSONObject(i).getString("id").toString());
+                    Toast.makeText(ClientLaundryDetails.this, " " +name, Toast.LENGTH_LONG).show();
                     arrname.add(name);
                     arrid.add(id);
                     LaundryDetailList laundryDetailList = new LaundryDetailList();
@@ -108,6 +117,8 @@ public class ClientLaundryDetails extends AppCompatActivity {
                     laundryDetailList.setId(id);
                     laundryDetailLists.add(laundryDetailList);
                 }
+                laundryDetailsAdapter = new LaundryDetailsAdapter(ClientLaundryDetails.this,laundryDetailLists);
+                androidGridView.setAdapter(laundryDetailsAdapter);
             }
         } catch (JSONException e) {
             e.printStackTrace();
