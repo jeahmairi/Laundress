@@ -56,7 +56,7 @@ public class ClientLaundryDetails extends AppCompatActivity {
         client_id = extras.getInt("client_id");
         /*client_name = "Sample";
         client_id = 11;*/
-        Toast.makeText(ClientLaundryDetails.this, " " +client_name+"ID" +client_id, Toast.LENGTH_LONG).show();
+       // Toast.makeText(ClientLaundryDetails.this, " " +client_name+"ID" +client_id, Toast.LENGTH_LONG).show();
 
         androidGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -109,7 +109,7 @@ public class ClientLaundryDetails extends AppCompatActivity {
                 {
                     String name=jsonArray.getJSONObject(i).getString("name").toString();
                     int id= Integer.parseInt(jsonArray.getJSONObject(i).getString("id").toString());
-                    Toast.makeText(ClientLaundryDetails.this, " " +name, Toast.LENGTH_LONG).show();
+                    //Toast.makeText(ClientLaundryDetails.this, " " +name, Toast.LENGTH_LONG).show();
                     arrname.add(name);
                     arrid.add(id);
                     LaundryDetailList laundryDetailList = new LaundryDetailList();
