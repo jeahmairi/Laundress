@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 public class ChooseLaundryShop extends AppCompatActivity {
     TextView name, location;
+    String isname, islocation;
     Button btnviewclients, btnviewlocation, btnbookrequest;
     final Context context = this;
     @Override
@@ -22,8 +23,8 @@ public class ChooseLaundryShop extends AppCompatActivity {
         btnviewclients = findViewById(R.id.btnviewclients);
         btnviewlocation = findViewById(R.id.btnlocation);
         btnbookrequest = findViewById(R.id.btnbookrequest);
-        String isname = getIntent().getStringExtra("name");
-        String islocation = getIntent().getStringExtra("location");
+        isname = getIntent().getStringExtra("name");
+        islocation = getIntent().getStringExtra("location");
 
         name.setText(isname);
         location.setText(islocation);
@@ -31,7 +32,11 @@ public class ChooseLaundryShop extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
+                Bundle extras = new Bundle();
+                extras.putString("shop_name",isname);
+                extras.putString("shop_location", islocation);
                 Intent intent = new Intent(context, LaundryShopLocation.class);
+                intent.putExtras(extras);
                 startActivity(intent);
             }
         });

@@ -1,5 +1,6 @@
 package com.example.user.laundress2;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -9,48 +10,144 @@ import android.view.ViewGroup;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.widget.Button;
+import android.widget.ListView;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 public class ClientPost extends Fragment {
-    String clientName;
-    int clientId;
+    private String client_name;
+    private int client_id;
+    float time;
+    ListView listView;
+    ArrayList<String> arrname = new ArrayList<>();
+    ArrayList<Integer> arrtime = new ArrayList<>();
+    ArrayList<String> arrmeter = new ArrayList<>();
+    ArrayList<String> arrmessage = new ArrayList<>();
+    private Context context;
+   // private static final String URL_ALL ="http://192.168.254.117/laundress/allclientpost.php";
+    private static final String URL_ALLHW ="http://192.168.254.117/laundress/allhandwasherpost.php";
+    //private static final String URL_ALLHW ="http://192.168.254.100/laundress/allhandwasherpost.php";
+    // private static final String URL_ALL ="http://192.168.1.2/laundress/alllaundryshop.php";
+    ArrayList<ClientPostList> clientPostLists = new ArrayList<ClientPostList>();
+    ClientPostAdapter clientPostAdapter;
 
-    public String getClientName() {
-        return clientName;
+    // newInstance constructor for creating fragment with arguments
+    public static ClientPost newInstance(int client_id, String client_name) {
+        ClientPost clientPost = new ClientPost();
+        Bundle args = new Bundle();
+        args.putInt("client_id", client_id);
+        args.putString("client_name", client_name);
+        clientPost.setArguments(args);
+        return clientPost;
     }
 
-    public void setClientName(String clientName) {
-        this.clientName = clientName;
+    // Store instance variables based on arguments passed
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        client_id = getArguments().getInt("client_id", 0);
+        client_name = getArguments().getString("client_name");
     }
-
-    public int getClientId() {
-        return clientId;
-    }
-
-    public void setClientId(int clientId) {
-        this.clientId = clientId;
-    }
-
-
-
-
-
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.client_post, container, false);
+        listView = rootView.findViewById(R.id.lvpost);
+        context = getActivity();
+        try {
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_ALLHW,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            getJsonResponse(response);
+                            System.out.println("RESPONSEesponse");
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(getActivity(), error.toString(), Toast.LENGTH_LONG).show();
+                        }
+                    });
+
+            RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+            requestQueue.add(stringRequest);
+        }
+        catch (Exception e)
+        {
+            Toast.makeText(getActivity(), "error" +e.toString(), Toast.LENGTH_SHORT).show();
+        }
+        /*clientPostAdapter = new ClientPostAdapter(context,clientPostLists);
+        listView.setAdapter(clientPostAdapter);*/
+
         Button post = rootView.findViewById(R.id.post);
         post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), MakePost.class);
-                intent.putExtra("client_name", getClientName());
-                intent.putExtra("client_id", getClientId());
+                Bundle extras = new Bundle();
+                extras.putString("client_name",client_name);
+                extras.putInt("client_id", client_id);
+                Intent intent = new Intent(getActivity(), ClientMakePost.class);
+                intent.putExtras(extras);
                 startActivity(intent);
             }
         });
         return rootView;
+    }
+
+    private void getJsonResponse(String response) {
+        try {
+            JSONObject jsonObject = new JSONObject(response);
+            String success = jsonObject.getString("success");
+            //JSONArray jArray = json.getJSONArray("platform");
+            //JSONArray jsonArray = new JSONArray(response);
+            JSONArray jsonArray2 = jsonObject.getJSONArray("allhandwasherpost");
+            if (success.equals("1")){
+                for (int i =0;i<jsonArray2.length();i++)
+                {
+                    String poster_name=jsonArray2.getJSONObject(i).getString("poster_name").toString();
+                    String post_message = jsonArray2.getJSONObject(i).getString("post_message").toString();
+                    int post_datetime = Integer.parseInt(jsonArray2.getJSONObject(i).getString("post_datetime").toString());;
+                    if(post_datetime >= 60)
+                    {
+                        time = post_datetime / 60;
+                    } else if(post_datetime < 60) {
+                        time = post_datetime;
+                    }
+                    float hour = post_datetime / 60;
+                    String post_showAddress = jsonArray2.getJSONObject(i).getString("post_showAddress").toString();;
+                    arrname.add(poster_name);
+                    arrmeter.add(post_showAddress);
+                    arrmessage.add(post_message);
+                    arrtime.add(post_datetime);
+                    ClientPostList clientPostList = new ClientPostList();
+                    clientPostList.setPost_message(post_message);
+                    clientPostList.setPost_datetime((int) time);
+                    clientPostList.setPost_name(poster_name);
+                    clientPostList.setPost_showAddress(post_showAddress);
+                    clientPostLists.add(clientPostList);
+                }
+                clientPostAdapter = new ClientPostAdapter(context,clientPostLists);
+                listView.setAdapter(clientPostAdapter);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Toast.makeText(getActivity(), "failedddd" +e.toString(), Toast.LENGTH_SHORT).show();
+        }
     }
 
 }

@@ -5,9 +5,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -41,22 +44,51 @@ public class ClientLaundryDetails extends AppCompatActivity {
     //  ListView listview;
     private Context context;
     private static final String URL_ALL ="http://192.168.254.117/laundress/detailscategory.php";
+    //private static final String URL_ALL ="http://192.168.254.100/laundress/detailscategory.php";
     //private static final String URL_ALL ="http://192.168.1.2/laundress/detailscategory.php";
     ArrayList<LaundryDetailList> laundryDetailLists = new ArrayList<LaundryDetailList>();
     LaundryDetailsAdapter laundryDetailsAdapter;
 
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    public void onBackPressed() {
+
+        // Write your code here
+
+        super.onBackPressed();
+    }
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.clientlaundrydet);
         androidGridView = findViewById(R.id.gridview);
+        //Toolbar toolbar = findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         client_name = extras.getString("client_name");
         client_id = extras.getInt("client_id");
-        /*client_name = "Sample";
-        client_id = 11;*/
-       // Toast.makeText(ClientLaundryDetails.this, " " +client_name+"ID" +client_id, Toast.LENGTH_LONG).show();
+
+/*
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                finish();
+            }
+        });
+*/
+
 
         androidGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

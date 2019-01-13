@@ -31,6 +31,8 @@ public class Login extends AppCompatActivity {
     private Button login;
     private ProgressBar load;
     private static String URL_LOGIN = "http://192.168.254.117/laundress/login.php";
+    //private static String URL_LOGIN = "http://192.168.254.100/laundress/login.php";
+
     //private static String URL_LOGIN = "http://192.168.1.2/laundress/login.php";
     //private static String URL_LOGIN = "http://192.168.1.5/laundress/login.php";
    // private static String URL_LOGIN = "http://192.168.1.7/laundress/login.php";

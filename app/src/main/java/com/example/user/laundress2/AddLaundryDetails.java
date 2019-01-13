@@ -42,9 +42,11 @@ public class AddLaundryDetails extends AppCompatActivity {
     private Context context;*/
     ViewHolder viewHolder;
     private static final String URL_ALL ="http://192.168.254.117/laundress/alllaundrydetails.php";
+   // private static final String URL_ALL ="http://192.168.254.100/laundress/alllaundrydetails.php";
     //private static final String URL_ALL ="http://192.168.1.2/laundress/alllaundrydetails.php";
    // private static final String URl_ADD_LAUNDRY_DETAILS ="http://192.168.1.2/laundress/addlaundrydetails.php";
-    private static final String URl_ADD_LAUNDRY_DETAILS ="http://192.168.254.117/laundress/addlaundrydetails.php";
+    //private static final String URl_ADD_LAUNDRY_DETAILS ="http://192.168.254.117/laundress/addlaundrydetails.php";
+    private static final String URl_ADD_LAUNDRY_DETAILS ="http://192.168.254.100/laundress/addlaundrydetails.php";
 
     /*ArrayList<AddLaundryDetailList> addLaundryDetailLists = new ArrayList<AddLaundryDetailList>();*/
     EditText itemtag, itembrand, itemcolor, itemnoofpieces;

@@ -54,7 +54,7 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/textArea_information"
+            android:id="@+id/message"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -106,7 +106,7 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/post"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"

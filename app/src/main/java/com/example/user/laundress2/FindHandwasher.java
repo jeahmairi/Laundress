@@ -31,6 +31,7 @@ public class FindHandwasher extends Fragment {
     //  ListView listview;
     private Context context;
    private static final String URL_ALL ="http://192.168.254.117/laundress/allhandwasher.php";
+   //private static final String URL_ALL ="http://192.168.254.100/laundress/allhandwasher.php";
    // private static final String URL_ALL ="http://192.168.1.2/laundress/allhandwasher.php";
     ArrayList<HandwasherList> handwasherLists = new ArrayList<HandwasherList>();
     HandwasherAdapter handwasherAdapter;
