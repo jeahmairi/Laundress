@@ -57,13 +57,29 @@
             android:label="Book New Request" />
         <activity
             android:name=".HandwasherHomepage"
-            android:label="@string/app_name" />
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".ChooseHandwasher"
             android:label="Book New Request" />
         <activity
             android:name=".ClientMakePost"
             android:label="Make Post" />
+        <activity
+            android:name=".ClientRate"
+            android:label="Ratings" />
+        <activity
+            android:name=".ClientHistory"
+            android:label="History" />
+        <activity
+            android:name=".ClientLogout"
+            android:label="Logout" />
+        <activity
+            android:name=".ClientAccountDetails"
+            android:label="Account Details" />
+        <activity
+            android:name=".ClientLaundryInventory"
+            android:label="Laundry Inventory" />
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.

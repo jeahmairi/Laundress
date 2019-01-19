@@ -46,7 +46,7 @@ public class AddLaundryDetails extends AppCompatActivity {
     //private static final String URL_ALL ="http://192.168.1.2/laundress/alllaundrydetails.php";
    // private static final String URl_ADD_LAUNDRY_DETAILS ="http://192.168.1.2/laundress/addlaundrydetails.php";
     //private static final String URl_ADD_LAUNDRY_DETAILS ="http://192.168.254.117/laundress/addlaundrydetails.php";
-    private static final String URl_ADD_LAUNDRY_DETAILS ="http://192.168.254.100/laundress/addlaundrydetails.php";
+    private static final String URl_ADD_LAUNDRY_DETAILS ="http://192.168.254.117 /laundress/addlaundrydetails.php";
 
     /*ArrayList<AddLaundryDetailList> addLaundryDetailLists = new ArrayList<AddLaundryDetailList>();*/
     EditText itemtag, itembrand, itemcolor, itemnoofpieces;
@@ -83,24 +83,12 @@ public class AddLaundryDetails extends AppCompatActivity {
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 finish();
                 startActivity(intent);
-                /*LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                View rowView = inflater.inflate(R.layout.addclientlaundrydet3, null);*/
-/*
-                viewHolder = new ViewHolder();
-                        viewHolder.itemtagstore = rowView.findViewById(R.id.tag);
-                        viewHolder.itembrandstore = rowView.findViewById(R.id.brand);
-                        viewHolder.itemcolorstore = rowView.findViewById(R.id.color);
-                        viewHolder.itemnoofpiecesstore = rowView.findViewById(R.id.noofpieces);*/
                         final String itemTag = viewHolder.itemtagstore.getText().toString().trim();
                         final String itemBrand = viewHolder.itembrandstore.getText().toString().trim();
                         final String itemColor = viewHolder.itemcolorstore.getText().toString().trim();
                         final int itemNoofPieces = Integer.parseInt(String.valueOf(viewHolder.itemnoofpiecesstore.getText()));
                         addInputtedLaundryDetails(itemTag, itemBrand, itemColor, itemNoofPieces);
-                        /*final String itemTag = viewHolder.itemtagstore.getText().toString().trim();*/
-                        //Toast.makeText(AddLaundryDetails.this, "" +itemTag, Toast.LENGTH_SHORT ).show();
-                //parent.addView(rowView, parent.getChildCount()-2);
-                count++;
-                    //Toast.makeText(AddLaundryDetails.this, "" +count, Toast.LENGTH_SHORT).show();
+
             }
         });
         done.setOnClickListener(new View.OnClickListener() {
@@ -118,24 +106,6 @@ public class AddLaundryDetails extends AppCompatActivity {
 
                 }
 
-                /*Intent intent = new Intent(AddLaundryDetails.this, ClientMyLaundry.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                finish();
-                startActivity(intent);*/
-              /*  LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                View view = inflater.inflate(R.layout.addclientlaundrydet3, null);
-                *//*itemtagstore = view.findViewById(R.id.tag);
-                itembrandstore = view.findViewById(R.id.brand);
-                itemcolorstore = view.findViewById(R.id.color);*//*
-                *//*for(int j = 0; j < count; j++){
-                    final String itemTag = viewHolder.itemtagstore.getText().toString().trim();
-                    final String itemBrand = viewHolder.itembrandstore.getText().toString().trim();
-                    final String itemColor = viewHolder.itemcolorstore.getText().toString().trim();
-                    addInputtedLaundryDetails(itemTag, itemBrand, itemColor);
-                   // Toast.makeText(AddLaundryDetails.this,"" +count, Toast.LENGTH_SHORT).show();
-                }*//*
-                *//*Intent intent = new Intent(AddLaundryDetails.this, ClientLaundryDetails.class);
-                startActivity(intent);*/
             }
         });
 
@@ -185,11 +155,6 @@ public class AddLaundryDetails extends AppCompatActivity {
     // add laundry details -- start --
     private void addInputtedLaundryDetails(final String itemTag, final String itemBrand, final String itemColor, final int itemNoofPieces) {
         final Context context = this;
-       /* final String itemTag = this.itemtagstore.getText().toString().trim();
-        final String itemBrand = this.itembrandstore.getText().toString().trim();
-        final String itemColor = this.itemcolorstore.getText().toString().trim();*/
-        //final int itemNoofPieces = Integer.parseInt(itemnoofpiecesstore.getText().toString());
-        //Toast.makeText(AddLaundryDetails.this, "Added Successfully " +itemTag+ ""+itemBrand+""+itemColor, Toast.LENGTH_SHORT).show();
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URl_ADD_LAUNDRY_DETAILS,
                 new Response.Listener<String>() {
                     @Override
@@ -239,8 +204,6 @@ public class AddLaundryDetails extends AppCompatActivity {
         try {
             JSONObject jsonObject = new JSONObject(response);
             String success = jsonObject.getString("success");
-            //JSONArray jArray = json.getJSONArray("platform");
-            //JSONArray jsonArray = new JSONArray(response);
             JSONArray jsonArray = jsonObject.getJSONArray("alllaundrydetails");
             LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             if (success.equals("1")){
@@ -275,7 +238,6 @@ public class AddLaundryDetails extends AppCompatActivity {
                     itembrand.setText(cinv_itemBrand);
                     itemcolor.setText(cinv_itemColor);
                     itemnoofpieces.setText(Integer.toString(cinv_noOfPieces));
-                    //itemnoofpieces.setText(cinv_noOfPieces);
                     parent.addView(view,  parent.getChildCount() - 2);
                 }
             } else if(success.equals("0")) {

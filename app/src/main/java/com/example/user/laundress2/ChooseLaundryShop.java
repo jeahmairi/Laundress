@@ -40,6 +40,12 @@ public class ChooseLaundryShop extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        btnbookrequest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
 }

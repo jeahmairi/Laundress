@@ -59,9 +59,13 @@ public class ClientMyLaundry extends Fragment {
         findlsp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Bundle extras = new Bundle();
+                extras.putString("client_name",client_name);
+                extras.putInt("client_id", client_id);
                 Intent intent = new Intent(getContext(), FindLaundryServiceProv.class);
                /* intent.putExtra("client_name", getClientName());
                 intent.putExtra("client_id", getClientId());*/
+                intent.putExtras(extras);
                 startActivity(intent);
             }
         });

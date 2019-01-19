@@ -128,6 +128,7 @@ public class ClientLaundryDetails extends AppCompatActivity {
         androidGridView.setAdapter(laundryDetailsAdapter);*/
     }
 
+
     private void getJsonResponse(String response)
     {
         try {

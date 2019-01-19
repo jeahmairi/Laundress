@@ -92,7 +92,9 @@ public class ClientHomepage extends AppCompatActivity implements NavigationView.
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.chat) {
+            return true;
+        } else if(id == R.id.notification){
             return true;
         }
 
@@ -101,6 +103,34 @@ public class ClientHomepage extends AppCompatActivity implements NavigationView.
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        int id = menuItem.getItemId();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+
+        if (id == R.id.rating) {
+            Bundle extras = new Bundle();
+            extras.putString("client_name",client_name);
+            extras.putInt("client_id", client_id);
+            Intent intent = new Intent(ClientHomepage.this, ClientRate.class);
+            intent.putExtras(extras);
+            startActivity(intent);
+        } else if (id == R.id.laundryinventory) {
+            Intent intent = new Intent(ClientHomepage.this, ClientLaundryInventory.class);
+            startActivity(intent);
+        } else if (id == R.id.account) {
+            Bundle extras = new Bundle();
+            extras.putString("client_name",client_name);
+            extras.putInt("client_id", client_id);
+            Intent intent = new Intent(ClientHomepage.this, ClientAccountDetails.class);
+            intent.putExtras(extras);
+            startActivity(intent);
+        } else if (id == R.id.history) {
+            Intent intent = new Intent(ClientHomepage.this, ClientHistory.class);
+            startActivity(intent);
+        } else if (id == R.id.logout) {
+            Intent intent = new Intent(ClientHomepage.this, ClientLogout.class);
+            startActivity(intent);
+        }
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

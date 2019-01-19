@@ -94,11 +94,11 @@ public class RegisterLc extends AppCompatActivity {
         switch(view.getId()) {
             case R.id.radioMale:
                 if(checked)
-                    genders = "Male";
+                    genders = "M";
                 break;
             case R.id.radioFemale:
                 if(checked)
-                    genders = "Female";
+                    genders = "F";
                 break;
         }
     }
