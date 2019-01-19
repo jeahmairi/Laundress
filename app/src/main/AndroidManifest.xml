@@ -80,6 +80,9 @@
         <activity
             android:name=".ClientLaundryInventory"
             android:label="Laundry Inventory" />
+        <activity
+            android:name=".HandwasherLaundryServices"
+            android:label="Laundry Services" />
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.

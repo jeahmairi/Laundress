@@ -1,5 +1,6 @@
 package com.example.user.laundress2;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -81,6 +82,34 @@ public class HandwasherHomepage extends AppCompatActivity implements NavigationV
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        int id = menuItem.getItemId();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+
+        if (id == R.id.rating) {
+           /* Bundle extras = new Bundle();
+            extras.putString("client_name",client_name);
+            extras.putInt("client_id", client_id);*/
+            Intent intent = new Intent(HandwasherHomepage.this, HandwasherRate.class);
+            //intent.putExtras(extras);
+            startActivity(intent);
+        } else if (id == R.id.laundryservices) {
+            Intent intent = new Intent(HandwasherHomepage.this, HandwasherLaundryServices.class);
+            startActivity(intent);
+        } else if (id == R.id.account) {
+            //Bundle extras = new Bundle();
+            //extras.putString("client_name",client_name);
+            //extras.putInt("client_id", client_id);
+            Intent intent = new Intent(HandwasherHomepage.this, HandwasherAccount.class);
+            //intent.putExtras(extras);
+            startActivity(intent);
+        } else if (id == R.id.history) {
+            Intent intent = new Intent(HandwasherHomepage.this, HandwasherHistory.class);
+            startActivity(intent);
+        } else if (id == R.id.logout) {
+            Intent intent = new Intent(HandwasherHomepage.this, HandwasherLogout.class);
+            startActivity(intent);
+        }
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
