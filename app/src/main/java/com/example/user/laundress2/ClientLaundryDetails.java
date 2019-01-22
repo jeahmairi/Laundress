@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -41,9 +42,11 @@ public class ClientLaundryDetails extends AppCompatActivity {
     ArrayList<Integer> arrid = new ArrayList<>();
     String client_name; int client_id;
     GridView androidGridView;
+    Button btnaddcategory;
     //  ListView listview;
     private Context context;
-    private static final String URL_ALL ="http://192.168.254.117/laundress/detailscategory.php";
+    //private static final String URL_ALL ="http://192.168.254.117/laundress/detailscategory.php";
+    private static final String URL_ALL ="http://192.168.1.12/laundress/detailscategory.php";
     //private static final String URL_ALL ="http://192.168.254.100/laundress/detailscategory.php";
     //private static final String URL_ALL ="http://192.168.1.2/laundress/detailscategory.php";
     ArrayList<LaundryDetailList> laundryDetailLists = new ArrayList<LaundryDetailList>();
@@ -68,6 +71,7 @@ public class ClientLaundryDetails extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.clientlaundrydet);
+        btnaddcategory = findViewById(R.id.btnaddcategory);
         androidGridView = findViewById(R.id.gridview);
         //Toolbar toolbar = findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
@@ -88,7 +92,12 @@ public class ClientLaundryDetails extends AppCompatActivity {
             }
         });
 */
+        btnaddcategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
 
         androidGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

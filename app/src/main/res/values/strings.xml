@@ -3,6 +3,15 @@
     <string name="radiomale">Male</string>
     <string name="radiofemale">Female</string>
 
+    <string name="servicetype_pickupdeliv">Pick up and Delivery</string>
+    <string name="servicetype_homeservice">Home Service</string>
+
+    <string name="chb_servoff_laund">Laundry</string>
+    <string name="chb_servoff_laundry">Laundry and Drying</string>
+
+    <string name="chb_extra_iron">Ironing</string>
+    <string name="chb_extra_fold">Folding</string>
+
     <string-array name="civilstatus">
         <item>Single</item>
         <item>Married</item>

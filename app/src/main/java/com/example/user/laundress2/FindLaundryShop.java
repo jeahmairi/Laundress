@@ -32,7 +32,8 @@ public class FindLaundryShop extends Fragment{
     ArrayList<String> arrmeter = new ArrayList<>();
     ArrayList<String> arrcontact = new ArrayList<>();
     private Context context;
-    private static final String URL_ALL ="http://192.168.254.117/laundress/alllaundryshop.php";
+    //private static final String URL_ALL ="http://192.168.254.117/laundress/alllaundryshop.php";
+    private static final String URL_ALL ="http://192.168.1.12/laundress/alllaundryshop.php";
    // private static final String URL_ALL ="http://192.168.254.100/laundress/alllaundryshop.php";
    // private static final String URL_ALL ="http://192.168.1.2/laundress/alllaundryshop.php";
     ArrayList<LaundryShopList> laundryShopLists = new ArrayList<LaundryShopList>();

@@ -30,7 +30,8 @@ public class ClientMakePost extends AppCompatActivity {
     int client_id;
     EditText message;
     Button post;
-    private static String URL_ADDPOST = "http://192.168.254.117/laundress/addpostclient.php";
+    //private static String URL_ADDPOST = "http://192.168.254.117/laundress/addpostclient.php";
+    private static String URL_ADDPOST = "http://192.168.1.12/laundress/addpostclient.php";
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button

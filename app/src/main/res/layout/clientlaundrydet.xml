@@ -5,11 +5,26 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.user.laundress2.ClientHomepage">
+
+    <Button
+        android:id="@+id/btnaddcategory"
+        android:layout_width="match_parent"
+        android:layout_height="108dp"
+        android:layout_gravity="center"
+        android:layout_margin="5dp"
+        android:background="@color/darkBlue"
+        android:drawableStart="@drawable/ic_add_white_24dp"
+        android:drawableLeft="@drawable/ic_add_white_24dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:text="ADD CATEGORY"
+        android:textColor="@android:color/background_light" />
+
     <GridView
         android:id="@+id/gridview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="3dp"
+        android:layout_margin="5dp"
         android:background="@color/darkBlue"
         android:columnWidth="100dp"
         android:horizontalSpacing="10dp"
