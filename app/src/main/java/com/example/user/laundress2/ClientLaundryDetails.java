@@ -45,8 +45,8 @@ public class ClientLaundryDetails extends AppCompatActivity {
     Button btnaddcategory;
     //  ListView listview;
     private Context context;
-    //private static final String URL_ALL ="http://192.168.254.117/laundress/detailscategory.php";
-    private static final String URL_ALL ="http://192.168.1.12/laundress/detailscategory.php";
+    private static final String URL_ALL ="http://192.168.254.117/laundress/detailscategory.php";
+    //private static final String URL_ALL ="http://192.168.1.12/laundress/detailscategory.php";
     //private static final String URL_ALL ="http://192.168.254.100/laundress/detailscategory.php";
     //private static final String URL_ALL ="http://192.168.1.2/laundress/detailscategory.php";
     ArrayList<LaundryDetailList> laundryDetailLists = new ArrayList<LaundryDetailList>();
