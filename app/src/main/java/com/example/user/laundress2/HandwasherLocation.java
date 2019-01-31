@@ -3,8 +3,8 @@ package com.example.user.laundress2;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,33 +15,34 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.io.IOException;
 import java.util.List;
 
-public class LaundryShopLocation extends FragmentActivity implements OnMapReadyCallback {
+public class HandwasherLocation extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     String location, name, contact;
-    TextView lsname, lscontact, lslocation;
     double lat, lng;
+    TextView handwashername, handwashercpnum, handwasherlocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.laundryshoplocation);
-        lsname = findViewById(R.id.lsname);
-        lscontact = findViewById(R.id.lscpnum);
-        lslocation = findViewById(R.id.lslocation);
+        setContentView(R.layout.handwasherlocation);
+
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
-        location = extras.getString("shop_location");
-        name = extras.getString("shop_name");
-        contact = extras.getString("shop_contact");
-        lsname.setText(name);
-        lscontact.setText(contact);
-        lslocation.setText(location);
+        location = extras.getString("handwasher_location");
+        name = extras.getString("handwasher_name");
+        contact = extras.getString("handwasher_contact");
+        handwashername = findViewById(R.id.handwashername);
+        handwashercpnum = findViewById(R.id.handwashercpnum);
+        handwasherlocation = findViewById(R.id.handwasherlocation);
+        handwashercpnum = findViewById(R.id.handwashercpnum);
+        handwashername.setText(name);
+        handwasherlocation.setText(location);
+        handwashercpnum.setText(contact);
         getLocationFromAddress(location);
-        Toast.makeText(LaundryShopLocation.this, " " +getLocationFromAddress(location),Toast.LENGTH_SHORT).show();
+        Toast.makeText(HandwasherLocation.this, " " +getLocationFromAddress(location),Toast.LENGTH_SHORT).show();
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -63,15 +64,15 @@ public class LaundryShopLocation extends FragmentActivity implements OnMapReadyC
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng shop_location = new LatLng(lat, lng);
-        mMap.addMarker(new MarkerOptions().position(shop_location).title(location));
+        LatLng handwasher_location = new LatLng(lat, lng);
+        mMap.addMarker(new MarkerOptions().position(handwasher_location).title(location));
         float zoomLevel = 17.0f; //This goes up to 21
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(shop_location, zoomLevel));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(handwasher_location, zoomLevel));
 
     }
     public String getLocationFromAddress(String strAddress) {
 
-        Geocoder coder = new Geocoder(LaundryShopLocation.this);
+        Geocoder coder = new Geocoder(HandwasherLocation.this);
         List<Address> address;
 
         try {

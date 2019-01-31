@@ -1,6 +1,5 @@
 package com.example.user.laundress2;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -20,20 +19,19 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class ClientMakePost extends AppCompatActivity {
-    int client_id;
+public class HandwasherMakePost extends AppCompatActivity {
+    int handwasher_id;
     EditText message;
     Button post;
     String showlocation;
-    private static String URL_ADDPOST = "http://192.168.254.117/laundress/addpostclient.php";
-   // private static String URL_ADDPOST = "http://192.168.1.12/laundress/addpostclient.php";
+    private static String URL_ADDPOST = "http://192.168.254.117/laundress/addposthandwasher.php";
+    // private static String URL_ADDPOST = "http://192.168.1.12/laundress/addpostclient.php";
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
@@ -59,10 +57,10 @@ public class ClientMakePost extends AppCompatActivity {
         name = findViewById(R.id.name);
         message = findViewById(R.id.message);
         post = findViewById(R.id.post);
-        String isname = getIntent().getStringExtra("client_name");
-        client_id = getIntent().getIntExtra("client_id", 0);
+        String isname = getIntent().getStringExtra("handwasher_name");
+        handwasher_id = getIntent().getIntExtra("handwasher_id", 0);
         name.setText(isname);
-        Toast.makeText(ClientMakePost.this, "client id:" +client_id, Toast.LENGTH_SHORT).show();
+        Toast.makeText(HandwasherMakePost.this, "handwasher id:" +handwasher_id, Toast.LENGTH_SHORT).show();
         post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,7 +87,7 @@ public class ClientMakePost extends AppCompatActivity {
 
     private void addPost() {
         final String messages = this.message.getText().toString().trim();
-        final int id = this.client_id;
+        final int id = this.handwasher_id;
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_ADDPOST,
                 new Response.Listener<String>() {
                     @Override
@@ -99,19 +97,19 @@ public class ClientMakePost extends AppCompatActivity {
                             String success = jsonObject.getString("success");
 
                             if(success.equals("1")){
-                                Toast.makeText(ClientMakePost.this, "Added Successfully ", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(HandwasherMakePost.this, "Added Successfully ", Toast.LENGTH_SHORT).show();
 
                             }
                         } catch (JSONException e){
                             e.printStackTrace();;
-                            Toast.makeText(ClientMakePost.this, "Add Failed " + e.toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(HandwasherMakePost.this, "Add Failed " + e.toString(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(ClientMakePost.this, "Login failed. No connection." +error.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(HandwasherMakePost.this, "Add Failed. No connection." +error.toString(), Toast.LENGTH_SHORT).show();
                        /* load.setVisibility(View.GONE);
                         login.setVisibility(View.VISIBLE);*/
                     }

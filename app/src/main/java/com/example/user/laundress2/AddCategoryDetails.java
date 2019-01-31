@@ -1,5 +1,6 @@
 package com.example.user.laundress2;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,8 +9,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -27,13 +26,12 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ClientMakePost extends AppCompatActivity {
+public class AddCategoryDetails extends AppCompatActivity {
     int client_id;
-    EditText message;
-    Button post;
-    String showlocation;
-    private static String URL_ADDPOST = "http://192.168.254.117/laundress/addpostclient.php";
-   // private static String URL_ADDPOST = "http://192.168.1.12/laundress/addpostclient.php";
+    EditText categoryname;
+    Button addcategory;
+    private static String URL_ADD_CATEGORY = "http://192.168.254.117/laundress/addcategory.php";
+
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
@@ -44,76 +42,60 @@ public class ClientMakePost extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
     public void onBackPressed() {
-
-        // Write your code here
-
         super.onBackPressed();
     }
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.clientmakepost);
+        setContentView(R.layout.handwasheraddcategory);
+        categoryname = findViewById(R.id.categoryname);
+        addcategory = findViewById(R.id.addcategory);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        TextView name;
-        name = findViewById(R.id.name);
-        message = findViewById(R.id.message);
-        post = findViewById(R.id.post);
-        String isname = getIntent().getStringExtra("client_name");
-        client_id = getIntent().getIntExtra("client_id", 0);
-        name.setText(isname);
-        Toast.makeText(ClientMakePost.this, "client id:" +client_id, Toast.LENGTH_SHORT).show();
-        post.setOnClickListener(new View.OnClickListener() {
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
+        client_id = extras.getInt("client_id");
+
+        addcategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addPost();
+                String name = categoryname.getText().toString().trim();
+                if(!name.isEmpty()){
+                    addCategory(name);
+                    categoryname.getText().clear();
+                } else {
+                    categoryname.setError("Please Add Category Name");
+                }
             }
         });
+
+        Toast.makeText(AddCategoryDetails.this, "client id: "+client_id, Toast.LENGTH_SHORT).show();
     }
 
-    public void onRadioButtonClicked(View view) {
-        boolean checked = ((RadioButton) view).isChecked();
+    private void addCategory(final String name) {
+        final Context context = this;
 
-        // Check which radio button was clicked
-        switch(view.getId()) {
-            case R.id.yes:
-                if(checked)
-                    showlocation = "Yes";
-                break;
-            case R.id.no:
-                if(checked)
-                    showlocation = "No";
-                break;
-        }
-    }
-
-    private void addPost() {
-        final String messages = this.message.getText().toString().trim();
-        final int id = this.client_id;
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_ADDPOST,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_ADD_CATEGORY,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        try{
+                        try {
                             JSONObject jsonObject = new JSONObject(response);
                             String success = jsonObject.getString("success");
-
                             if(success.equals("1")){
-                                Toast.makeText(ClientMakePost.this, "Added Successfully ", Toast.LENGTH_SHORT).show();
-
+                                Toast.makeText(AddCategoryDetails.this, "Category Added Successfully", Toast.LENGTH_SHORT).show();
                             }
-                        } catch (JSONException e){
-                            e.printStackTrace();;
-                            Toast.makeText(ClientMakePost.this, "Add Failed " + e.toString(), Toast.LENGTH_SHORT).show();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(AddCategoryDetails.this, "Category Add failed " +e.toString(), Toast.LENGTH_SHORT).show();
                         }
+
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(ClientMakePost.this, "Login failed. No connection." +error.toString(), Toast.LENGTH_SHORT).show();
-                       /* load.setVisibility(View.GONE);
-                        login.setVisibility(View.VISIBLE);*/
+                        Toast.makeText(AddCategoryDetails.this, "Category Add failed. No connection." +error.toString(), Toast.LENGTH_SHORT).show();
                     }
                 }
         )
@@ -121,9 +103,8 @@ public class ClientMakePost extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> params = new HashMap<>();
-                params.put("messages", messages);
-                params.put("showlocation", showlocation);
-                params.put("id", String.valueOf(id));
+                params.put("category_name", name);
+                params.put("client_id", String.valueOf(client_id));
                 return params;
             }
         };

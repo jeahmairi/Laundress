@@ -22,6 +22,8 @@ public class HandwasherHomepage extends AppCompatActivity implements NavigationV
     private HandwasherHomepage.SectionsPagerAdapter mSectionsPagerAdapter;
 
     private ViewPager mViewPager;
+    String handwasher_name;
+    int handwasher_id, handwasher_lspid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +51,9 @@ public class HandwasherHomepage extends AppCompatActivity implements NavigationV
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
-
+        handwasher_name = getIntent().getStringExtra("name");
+        handwasher_id = getIntent().getIntExtra("id", 0);
+        handwasher_lspid = getIntent().getIntExtra("lspid", 0);
     }
     @Override
     public void onBackPressed() {
@@ -93,8 +97,14 @@ public class HandwasherHomepage extends AppCompatActivity implements NavigationV
             //intent.putExtras(extras);
             startActivity(intent);
         } else if (id == R.id.laundryservices) {
+            Bundle extras = new Bundle();
+            extras.putString("handwasher_name",handwasher_name);
+            extras.putInt("handwasher_id", handwasher_id);
+            extras.putInt("handwasher_lspid", handwasher_lspid);
             Intent intent = new Intent(HandwasherHomepage.this, HandwasherLaundryServices.class);
+            intent.putExtras(extras);
             startActivity(intent);
+
         } else if (id == R.id.account) {
             //Bundle extras = new Bundle();
             //extras.putString("client_name",client_name);
@@ -131,8 +141,7 @@ public class HandwasherHomepage extends AppCompatActivity implements NavigationV
                     HandwasherBookings handwasherBookings = new HandwasherBookings();
                     return handwasherBookings;
                 case 2:
-                    HandwasherPosts handwasherPosts = new HandwasherPosts();
-                    return handwasherPosts;
+                    return HandwasherPosts.newInstance(handwasher_id, handwasher_name);
                 default:
                     return null;
             }

@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
     <TextView
         android:id="@+id/textView10"
         android:layout_width="match_parent"
@@ -15,31 +18,66 @@
         android:textSize="18sp"
         android:textStyle="bold" />
 
-    <RadioGroup
-        android:id="@+id/radioservicetype"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:checkedButton="@+id/pickup"
-        android:layout_marginLeft="20dp">
+        android:orientation="horizontal">
 
-        <RadioButton
-            android:id="@+id/pickup"
+        <CheckBox
+            android:id="@+id/pickupdeliv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:checked="true"
-            android:onClick="onRadioButtonClicked"
             android:text="@string/servicetype_pickupdeliv" />
 
-        <RadioButton
-            android:id="@+id/homeservice"
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/pricepickdeliv"
+            android:layout_width="72dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="onRadioButtonClicked"
+            android:layout_marginLeft="10dp"
+            android:ems="10"
+            android:hint="Price"
+            android:inputType="number" />
+
+        <Spinner
+            android:id="@+id/unitofmeasurepick"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:entries="@array/unitofmeasure" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/homeservice"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
             android:text="@string/servicetype_homeservice" />
 
-    </RadioGroup>
+        <EditText
+            android:id="@+id/pricehome"
+            android:layout_width="72dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:ems="10"
+            android:hint="Price"
+            android:inputType="number" />
+
+        <Spinner
+            android:id="@+id/unitofmeasurehome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:entries="@array/unitofmeasure" />
+
+    </LinearLayout>
+
+
+
 
     <TextView
         android:id="@+id/textView36"
@@ -172,5 +210,5 @@
         android:text="Edit Services"
         android:textColor="@android:color/background_light"
         android:visibility="gone" />
-
-</LinearLayout>
+    </LinearLayout>
+</ScrollView>

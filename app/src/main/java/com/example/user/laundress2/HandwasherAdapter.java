@@ -3,6 +3,7 @@ package com.example.user.laundress2;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,9 +53,13 @@ public class HandwasherAdapter extends BaseAdapter {
             itemHolder.choose.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Bundle extras = new Bundle();
+                    extras.putString("name", handwasherList.getHandwasherName());
+                    extras.putString("contact", handwasherList.getContact());
+                    extras.putString("location", handwasherList.getHwmeter());
+                    extras.putInt("lsp_id", handwasherList.getLsp_id());
                     Intent intent = new Intent(context, ChooseHandwasher.class);
-                    intent.putExtra("name", handwasherList.getHandwasherName());
-                    intent.putExtra("contact", handwasherList.getContact());
+                    intent.putExtras(extras);
                     context.startActivity(intent);
                 }
             });

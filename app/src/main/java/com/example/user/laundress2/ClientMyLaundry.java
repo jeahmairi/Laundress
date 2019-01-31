@@ -50,7 +50,7 @@ public class ClientMyLaundry extends Fragment {
                 extras.putString("client_name",client_name);
                 extras.putInt("client_id", client_id);
 
-                Intent intent = new Intent(getActivity(), ClientLaundryDetails.class);
+                Intent intent = new Intent(getActivity(), ClientLaundryInventory.class);
                 intent.putExtras(extras);
                 startActivity(intent);
             }

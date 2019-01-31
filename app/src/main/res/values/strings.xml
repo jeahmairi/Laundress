@@ -7,15 +7,58 @@
     <string name="servicetype_homeservice">Home Service</string>
 
     <string name="chb_servoff_laund">Laundry</string>
-    <string name="chb_servoff_laundry">Laundry and Drying</string>
+    <string name="chb_servoff_laundry">Drying</string>
 
     <string name="chb_extra_iron">Ironing</string>
     <string name="chb_extra_fold">Folding</string>
+
+    <string-array name="itemtag">
+        <item>Polo</item>
+        <item>Tshirt</item>
+        <item>Sleeveless</item>
+        <item>Long Sleeve</item>
+        <item>Dress</item>
+        <item>Skirt</item>
+        <item>Pants</item>
+        <item>Shorts</item>
+        <item>Sports Wear</item>
+        <item>Towel</item>
+        <item>Blanket</item>
+        <item>Towel</item>
+        <item>Socks</item>
+        <item>Others</item>
+    </string-array>
+
+    <string-array name="itembrand">
+        <item>Bench</item>
+        <item>Penshoppe</item>
+        <item>Levis</item>
+        <item>Adidas</item>
+        <item>Nike</item>
+    </string-array>
+
+    <string-array name="itemcolor">
+        <item>White</item>
+        <item>Black</item>
+        <item>Gray</item>
+        <item>Pink</item>
+        <item>Red</item>
+        <item>Blue</item>
+        <item>Green</item>
+        <item>Orange</item>
+        <item>Yellow</item>
+        <item>Brown</item>
+        <item>Violet</item>
+    </string-array>
 
     <string-array name="civilstatus">
         <item>Single</item>
         <item>Married</item>
         <item>Divorced</item>
+    </string-array>
+    <string-array name="unitofmeasure">
+        <item>per Kilo</item>
+        <item>per Bundle</item>
     </string-array>
     <string name="title_activity_client_homepage">ClientHomepage</string>
     <string name="mylaundry">My Laundries</string>

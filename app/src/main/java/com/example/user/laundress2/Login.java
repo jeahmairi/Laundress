@@ -84,6 +84,7 @@ public class Login extends AppCompatActivity {
                                 for (int i = 0; i < jsonArray.length(); i++) {
                                     JSONObject object = jsonArray.getJSONObject(i);
                                     int id = object.getInt("id");
+
                                     String user = object.getString("user").trim();
                                     String name = object.getString("name").trim();
                                     //String email = object.getString("email").trim();
@@ -97,9 +98,11 @@ public class Login extends AppCompatActivity {
                                         startActivity(intent);
                                     }
                                     else if(user.equals("Laundry Handwasher")) {
+                                        int lspid = object.getInt("lspid");
                                         Intent intent = new Intent(context, HandwasherHomepage.class);
                                         intent.putExtra("id", id);
                                         intent.putExtra("name", name);
+                                        intent.putExtra("lspid", lspid);
                                         startActivity(intent);
                                     }
                                 }

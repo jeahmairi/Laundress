@@ -82,7 +82,8 @@ public class FindHandwasher extends Fragment {
 
                     String name=jsonArray.getJSONObject(i).getString("name").toString();
                     String meter = jsonArray.getJSONObject(i).getString("address").toString();
-                    String contact = jsonArray.getJSONObject(i).getString("contact").toString();;
+                    String contact = jsonArray.getJSONObject(i).getString("contact").toString();
+                    int lsp_id = Integer.parseInt(jsonArray.getJSONObject(i).getString("lspid").toString());
                     arrname.add(name);
                     arrmeter.add(meter);
                     arrcontact.add(contact);
@@ -90,6 +91,7 @@ public class FindHandwasher extends Fragment {
                     handwasherList.setHandwasherName(name);
                     handwasherList.setHwmeter(meter);
                     handwasherList.setContact(contact);
+                    handwasherList.setLsp_id(lsp_id);
                     handwasherLists.add(handwasherList);
                 }
             }

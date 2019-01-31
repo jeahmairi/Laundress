@@ -17,6 +17,7 @@ public class LaundryDetailsAdapter extends BaseAdapter {
     private final Context context;
     ItemHolder itemHolder;
     ArrayList<LaundryDetailList> laundryDetailLists;
+    LaundryDetailList laundryDetailList;
 
     public LaundryDetailsAdapter(Context context, ArrayList<LaundryDetailList> laundryDetailLists) {
         this.context = context;
@@ -46,7 +47,7 @@ public class LaundryDetailsAdapter extends BaseAdapter {
             convertView = layoutInflater.inflate(R.layout.clntlaundrydet_layout, parent, false);
             itemHolder.name = (TextView) convertView.findViewById(R.id.android_gridview_text);
             itemHolder.name.setText(laundryDetailLists.get(position).getName());
-
+            //notifyDataSetChanged();
         //}
 
         return convertView;
@@ -54,4 +55,5 @@ public class LaundryDetailsAdapter extends BaseAdapter {
     private class ItemHolder {
         TextView name;
     }
+
 }

@@ -87,12 +87,14 @@
                 android:id="@+id/yes"
                 android:layout_width="112dp"
                 android:layout_height="wrap_content"
+                android:onClick="onRadioButtonClicked"
                 android:text="Yes" />
 
             <RadioButton
                 android:id="@+id/no"
                 android:layout_width="111dp"
                 android:layout_height="wrap_content"
+                android:onClick="onRadioButtonClicked"
                 android:text="No"
 
                 />

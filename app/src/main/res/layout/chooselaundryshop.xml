@@ -48,12 +48,6 @@
                         android:text="Location" />
 
                     <TextView
-                        android:id="@+id/lstelnum"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Telephone Number" />
-
-                    <TextView
                         android:id="@+id/lscpnum"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -118,13 +112,11 @@
                 android:text="Services Offered"
                 android:textSize="12sp" />
 
-            <ListView
-                android:id="@+id/lvservicesoffered"
+            <LinearLayout
+                android:id="@+id/servicesoffered"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:padding="5dp">
-
-            </ListView>
+                android:layout_height="match_parent"
+                android:orientation="vertical"></LinearLayout>
 
             <TextView
                 android:id="@+id/textView34"
@@ -168,8 +160,9 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/linear_req_det"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="@android:color/background_light"
             android:orientation="vertical">
@@ -184,7 +177,7 @@
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/textView17"
+                android:id="@+id/services"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
@@ -192,12 +185,15 @@
                 android:textColor="@android:color/background_dark"
                 android:textStyle="bold" />
 
-            <RadioGroup
+
+            <LinearLayout
+                android:id="@+id/linearlayoutservices"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:orientation="vertical"></LinearLayout>
 
             <TextView
-                android:id="@+id/textView19"
+                android:id="@+id/extraservice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
@@ -205,11 +201,13 @@
                 android:textColor="@android:color/background_dark"
                 android:textStyle="bold" />
 
-            <CheckBox
-                android:id="@+id/checkBox"
+            <LinearLayout
+                android:id="@+id/linearlayoutextra"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="CheckBox" />
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/textView20"
@@ -221,8 +219,9 @@
                 android:textStyle="bold" />
 
             <RadioGroup
+                android:id="@+id/servicetyperadio"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="wrap_content" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -259,6 +258,15 @@
                 android:textColor="@android:color/background_dark"
                 android:textStyle="bold" />
 
+            <EditText
+                android:id="@+id/estdateandtime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Date and Time"
+                android:inputType="textPersonName"
+                android:padding="5dp" />
+
             <Button
                 android:id="@+id/btnbookrequest"
                 android:layout_width="match_parent"
@@ -268,6 +276,7 @@
                 android:text="Book Request"
                 android:textColor="@android:color/background_light" />
         </LinearLayout>
+
 
 
     </LinearLayout>

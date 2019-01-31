@@ -31,6 +31,10 @@ public class FindLaundryShop extends Fragment{
     ArrayList<String> arrname = new ArrayList<>();
     ArrayList<String> arrmeter = new ArrayList<>();
     ArrayList<String> arrcontact = new ArrayList<>();
+    ArrayList<String> arropenhour = new ArrayList<>();
+    ArrayList<String> arrclosehour = new ArrayList<>();
+    ArrayList<Integer> arrid = new ArrayList<>();
+    ArrayList<Integer> arrlspid = new ArrayList<>();
     private Context context;
     private static final String URL_ALL ="http://192.168.254.117/laundress/alllaundryshop.php";
     //private static final String URL_ALL ="http://192.168.1.12/laundress/alllaundryshop.php";
@@ -81,17 +85,28 @@ public class FindLaundryShop extends Fragment{
             if (success.equals("1")){
                 for (int i =0;i<jsonArray.length();i++)
                 {
-
+                    int id = Integer.parseInt(jsonArray.getJSONObject(i).getString("id").toString());
+                    int lspid = Integer.parseInt(jsonArray.getJSONObject(i).getString("lsp_ID").toString());
                     String name=jsonArray.getJSONObject(i).getString("name").toString();
                     String meter = jsonArray.getJSONObject(i).getString("address").toString();
-                    String contact = jsonArray.getJSONObject(i).getString("contact").toString();;
+                    String contact = jsonArray.getJSONObject(i).getString("contact").toString();
+                    String openhours = jsonArray.getJSONObject(i).getString("openhours").toString();
+                    String closehours = jsonArray.getJSONObject(i).getString("closehours").toString();
+                    arrid.add(id);
+                    arrlspid.add(lspid);
                     arrname.add(name);
                     arrmeter.add(meter);
                     arrcontact.add(contact);
+                    arropenhour.add(openhours);
+                    arrclosehour.add(closehours);
                     LaundryShopList laundryShopList = new LaundryShopList();
+                    laundryShopList.setId(id);
+                    laundryShopList.setLsp_id(lspid);
                     laundryShopList.setName(name);
                     laundryShopList.setLocation(meter);
-                    laundryShopList.setMeter(contact);
+                    laundryShopList.setContact(contact);
+                    laundryShopList.setOpenhours(openhours);
+                    laundryShopList.setClosehours(closehours);
                     laundryShopLists.add(laundryShopList);
                 }
             }

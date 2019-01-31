@@ -414,9 +414,9 @@ public class ClientAccountDetails extends AppCompatActivity {
                     String client_gender=jsonArray.getJSONObject(i).getString("client_gender").toString();
                     String client_email=jsonArray.getJSONObject(i).getString("client_email").toString();
 
-                    if(client_gender.equals("Male")) {
+                    if(client_gender.equals("M")) {
                         radiogender.check(R.id.radioMale);
-                    } else if(client_gender.equals("Female")) {
+                    } else if(client_gender.equals("F")) {
                     radiogender.check(R.id.radioFemale);
                     }
                     fname.setText(client_fname);

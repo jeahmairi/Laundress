@@ -3,10 +3,24 @@ package com.example.user.laundress2;
 public class AddLaundryDetailList {
     private  String itemTag;
     private  String itemBrand;
+    private  String itemDescription;
     private  String itemColor;
+    private  String categoryname;
+    private  String allNameDet;
     private  int itemNoofPieces;
+    private  int selectitemNoofPieces;
     private  int clientId;
     private  int categoryId;
+    private  int cinv_no;
+    private boolean selected;
+
+    public String getAllNameDet() {
+        return allNameDet;
+    }
+
+    public void setAllNameDet(String allNameDet) {
+        this.allNameDet = allNameDet;
+    }
 
     public String getItemTag() {
         return itemTag;
@@ -57,4 +71,43 @@ public class AddLaundryDetailList {
     }
 
 
+    public String getItemDescription() {
+        return itemDescription;
+    }
+
+    public void setItemDescription(String itemDescription) {
+        this.itemDescription = itemDescription;
+    }
+
+    public int getCinv_no() {
+        return cinv_no;
+    }
+
+    public void setCinv_no(int cinv_no) {
+        this.cinv_no = cinv_no;
+    }
+
+    public String getCategoryname() {
+        return categoryname;
+    }
+
+    public void setCategoryname(String categoryname) {
+        this.categoryname = categoryname;
+    }
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
+
+    public int getSelectitemNoofPieces() {
+        return selectitemNoofPieces;
+    }
+
+    public void setSelectitemNoofPieces(int selectitemNoofPieces) {
+        this.selectitemNoofPieces = selectitemNoofPieces;
+    }
 }

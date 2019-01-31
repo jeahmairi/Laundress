@@ -3,6 +3,7 @@ package com.example.user.laundress2;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,16 +51,24 @@ public class LaundryShopAdapter extends BaseAdapter {
             itemHolder.choose.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Bundle extras = new Bundle();
+
+                    extras.putString("name", laundryShopList.getName());
+                    extras.putString("location", laundryShopList.getLocation());
+                    extras.putString("contact", laundryShopList.getContact());
+                    extras.putInt("id", laundryShopList.getId());
+                    extras.putInt("lspid", laundryShopList.getLsp_id());
+                    extras.putString("openhours", laundryShopList.getOpenhours());
+                    extras.putString("closehours", laundryShopList.getClosehours());
                     Intent intent = new Intent(context, ChooseLaundryShop.class);
-                    intent.putExtra("name", laundryShopList.getName());
-                    intent.putExtra("location", laundryShopList.getLocation());
+                    intent.putExtras(extras);
                     context.startActivity(intent);
                 }
             });
 
             itemHolder.name.setText(laundryShopLists.get(position).getName());
             itemHolder.location.setText(laundryShopLists.get(position).getLocation());
-            itemHolder.meters.setText(laundryShopLists.get(position).getMeter());
+            itemHolder.meters.setText(laundryShopLists.get(position).getContact());
         //}
 
         return convertView;
