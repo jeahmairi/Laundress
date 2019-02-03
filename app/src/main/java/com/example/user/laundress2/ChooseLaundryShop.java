@@ -1,18 +1,23 @@
 package com.example.user.laundress2;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -28,6 +33,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,11 +42,16 @@ public class ChooseLaundryShop extends AppCompatActivity {
     ArrayList<String> allServiceOffered = new ArrayList<>();
     ArrayList<String> allExtraServices = new ArrayList<>();
     TextView name, location, lscpnum, lsopenhours, lsserviceprice;
-    String isname, islocation, iscontact, isopenhours, isclosehours;
-    EditText estdateandtime;
-    int isid, lsp_id;
+    String isname, islocation, iscontact, isopenhours, isclosehours, client_name;
+    EditText estdateandtime, lsweight;
+    int isid, lsp_id, client_id;
+    private DatePickerDialog datepicker;
+    private TimePickerDialog timepicker;
     Button btnviewclients, btnviewlocation, btnbookrequest;
     LinearLayout llextras, llservice, llserviceoff;
+    String estdate, esttime, service, estdatetime, weight;
+    String allservice ="";
+    String allxtraservice ="";
     RadioGroup servicetyperadio;
     final Context context = this;
     private static final String URL_ALL_SERVICE_TYPE="http://192.168.254.117/laundress/allhandwasherservtype.php";
@@ -48,6 +59,7 @@ public class ChooseLaundryShop extends AppCompatActivity {
     //private static final String URL_ALL_HANDWASHER="http://192.168.254.117/laundress/allhandwasherLSP.php";
     private static final String URL_ALL_SERVICE_OFFERED ="http://192.168.254.117/laundress/allhandwasherservoff.php";
     private static final String URL_ALL_EXTRA_SERVICES ="http://192.168.254.117/laundress/allhandwasherextserv.php";
+    private static final String URL_ADD_LAUND_TRANS ="http://192.168.254.117/laundress/addlaundrytransaction.php";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,18 +77,21 @@ public class ChooseLaundryShop extends AppCompatActivity {
         llservice = findViewById(R.id.linearlayoutservices);
         llserviceoff= findViewById(R.id.servicesoffered);
         servicetyperadio = findViewById(R.id.servicetyperadio);
+        lsweight = findViewById(R.id.lsweight);
 
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         isname =  extras.getString("name");
+        client_name =  extras.getString("client_name");
         islocation =  extras.getString("location");
         iscontact =  extras.getString("contact");
         isid = extras.getInt("id", 0);
         lsp_id = extras.getInt("lspid", 0);
+        client_id = extras.getInt("client_id", 0);
         isopenhours = extras.getString("openhours");
         isclosehours = extras.getString("closehours");
 
-        Toast.makeText(ChooseLaundryShop.this, "lsip: "+lsp_id, Toast.LENGTH_SHORT).show();
+        Toast.makeText(ChooseLaundryShop.this, "lsip: "+lsp_id+" client_id: "+client_id, Toast.LENGTH_SHORT).show();
 
         name.setText(isname);
         location.setText(islocation);
@@ -99,12 +114,64 @@ public class ChooseLaundryShop extends AppCompatActivity {
         btnbookrequest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                weight = lsweight.getText().toString();
+
                 for(int i = 0; i<allServiceOffered.size(); i++){
-                    Toast.makeText(ChooseLaundryShop.this, "services offered checked  " +allServiceOffered.get(i),Toast.LENGTH_SHORT).show();
+
+                    allservice = allServiceOffered.get(i)+","+allservice;
+                   // Toast.makeText(ChooseLaundryShop.this, "services offered checked  " +allServiceOffered.get(i),Toast.LENGTH_SHORT).show();
                 }
+                //Toast.makeText(ChooseLaundryShop.this, "all services checked  " +allservice,Toast.LENGTH_SHORT).show();
                 for(int i = 0; i<allExtraServices.size(); i++){
-                    Toast.makeText(ChooseLaundryShop.this, "all services checked  " +allExtraServices.get(i),Toast.LENGTH_SHORT).show();
+                    allxtraservice = allExtraServices.get(i)+","+allxtraservice;
+
                 }
+                //Toast.makeText(ChooseLaundryShop.this, "all services checked  " +allxtraservice,Toast.LENGTH_SHORT).show();
+                //Toast.makeText(ChooseLaundryShop.this, "weight  " +weight,Toast.LENGTH_SHORT).show();
+                /*Toast.makeText(ChooseLaundryShop.this, "service  " +service,Toast.LENGTH_SHORT).show();
+                Toast.makeText(ChooseLaundryShop.this, "estdatetime  " +estdatetime,Toast.LENGTH_SHORT).show();*/
+                addLaundryTransaction(allservice, allxtraservice);
+                Intent intent = new Intent(ChooseLaundryShop.this, ClientHomepage.class);
+                intent.putExtra("id", client_id);
+                intent.putExtra("name", client_name);
+                //ClientMyLaundry.newInstance(client_id, client_name);
+                startActivity(intent);
+
+            }
+        });
+        estdateandtime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar cldr = Calendar.getInstance();
+                int day = cldr.get(Calendar.DAY_OF_MONTH);
+                int month = cldr.get(Calendar.MONTH);
+                int year = cldr.get(Calendar.YEAR);
+                // date picker dialog
+                datepicker = new DatePickerDialog(ChooseLaundryShop.this,
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                                estdate = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
+                                //estdateandtime.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+                            }
+                        }, year, month, day);
+
+
+                final Calendar cldr1 = Calendar.getInstance();
+                int hour = cldr1.get(Calendar.HOUR_OF_DAY);
+                int minute = cldr1.get(Calendar.MINUTE);
+                // date picker dialog
+                timepicker = new TimePickerDialog(ChooseLaundryShop.this,
+                        new TimePickerDialog.OnTimeSetListener() {
+                            @Override
+                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                                esttime = String.valueOf(hourOfDay) + " : " + String.valueOf(minute);
+                                estdatetime = estdate+" "+esttime;
+                                estdateandtime.setText(estdatetime);
+                            }
+                        }, hour, minute, DateFormat.is24HourFormat(ChooseLaundryShop.this));
+                timepicker.show();
+                datepicker.show();
 
             }
         });
@@ -259,6 +326,15 @@ public class ChooseLaundryShop extends AppCompatActivity {
                                     final RadioButton button = new RadioButton(ChooseLaundryShop.this);
                                     button.setId(i);
                                     button.setText(name);
+                                    button.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                                        @Override
+                                        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                                                if(isChecked){
+                                                    service = buttonView.getText().toString();
+                                                }
+                                        }
+                                    });
+
                                     servicetyperadio.addView(button);
                                     //Toast.makeText(ChooseLaundryShop.this, "service offered" + name,  Toast.LENGTH_SHORT).show();
 
@@ -357,4 +433,53 @@ public class ChooseLaundryShop extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
     }
+
+    private void addLaundryTransaction(final String allservice, final String allxtraservice) {
+        // final JSONObject all = new JSONObject();
+        final Context context = this;
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_ADD_LAUND_TRANS,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try{
+                            JSONObject jsonObject = new JSONObject(response);
+                            String success = jsonObject.getString("success");
+
+                            if(success.equals("1")){
+                                Toast.makeText(ChooseLaundryShop.this, "Please wait for the approval of your chosen laundry service provider ", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(ChooseLaundryShop.this, "Failed", Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e){
+                            e.printStackTrace();;
+                            Toast.makeText(ChooseLaundryShop.this, "Failed" + e.toString(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(ChooseLaundryShop.this, "Failed " + error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                })
+
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params = new HashMap<>();
+                params.put("serviceoff", ChooseLaundryShop.this.allservice);
+                params.put("extraservice", ChooseLaundryShop.this.allxtraservice);
+                params.put("service", service);
+                params.put("estdatetime", estdatetime);
+                params.put("weight", weight);
+                params.put("lsp_id", String.valueOf(lsp_id));
+                params.put("client_id", String.valueOf(client_id));
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
+
 }

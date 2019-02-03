@@ -144,31 +144,7 @@ public class ClientLaundryDetails extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        try {
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_ALL,
-                    new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-                            getJsonResponse(response);
-                            System.out.println("RESPONSEesponse");
-                        }
-                    },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
-                        }
-                    });
-
-            RequestQueue requestQueue = Volley.newRequestQueue(ClientLaundryDetails.this);
-            requestQueue.add(stringRequest);
-        }
-        catch (Exception e)
-        {
-
-        }
-        /*laundryDetailsAdapter = new LaundryDetailsAdapter(ClientLaundryDetails.this,laundryDetailLists);
-        androidGridView.setAdapter(laundryDetailsAdapter);*/
+        allCategory();
     }
     @Override
 
@@ -321,36 +297,58 @@ public class ClientLaundryDetails extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
-    private void getJsonResponse(String response)
-    {
-        try {
-            JSONObject jsonObject = new JSONObject(response);
-            String success = jsonObject.getString("success");
-            //JSONArray jArray = json.getJSONArray("platform");
-            //JSONArray jsonArray = new JSONArray(response);
-            JSONArray jsonArray = jsonObject.getJSONArray("category");
-            if (success.equals("1")){
-                for (int i =0;i<jsonArray.length();i++)
-                {
-                    String name=jsonArray.getJSONObject(i).getString("name").toString();
-                    int id= Integer.parseInt(jsonArray.getJSONObject(i).getString("id").toString());
-                    //Toast.makeText(ClientLaundryDetails.this, " " +name, Toast.LENGTH_LONG).show();
-                    arrname.add(name);
-                    arrid.add(id);
-                    LaundryDetailList laundryDetailList = new LaundryDetailList();
-                    laundryDetailList.setName(name);
-                    laundryDetailList.setId(id);
-                    laundryDetailLists.add(laundryDetailList);
-                }
-                laundryDetailsAdapter = new LaundryDetailsAdapter(ClientLaundryDetails.this,laundryDetailLists);
-                androidGridView.setAdapter(laundryDetailsAdapter);
+    private void allCategory() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_ALL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String success = jsonObject.getString("success");
+                            //JSONArray jArray = json.getJSONArray("platform");
+                            //JSONArray jsonArray = new JSONArray(response);
+                            JSONArray jsonArray = jsonObject.getJSONArray("category");
+                            if (success.equals("1")){
+                                for (int i =0;i<jsonArray.length();i++)
+                                {
+                                    String name=jsonArray.getJSONObject(i).getString("name").toString();
+                                    int id= Integer.parseInt(jsonArray.getJSONObject(i).getString("id").toString());
+                                    //Toast.makeText(ClientLaundryDetails.this, " " +name, Toast.LENGTH_LONG).show();
+                                    arrname.add(name);
+                                    arrid.add(id);
+                                    LaundryDetailList laundryDetailList = new LaundryDetailList();
+                                    laundryDetailList.setName(name);
+                                    laundryDetailList.setId(id);
+                                    laundryDetailLists.add(laundryDetailList);
+                                }
+                                laundryDetailsAdapter = new LaundryDetailsAdapter(ClientLaundryDetails.this,laundryDetailLists);
+                                androidGridView.setAdapter(laundryDetailsAdapter);
+                            }
+                            laundryDetailsAdapter.notifyDataSetChanged();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(ClientLaundryDetails.this, "failedddd" +e.toString(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(ClientLaundryDetails.this, "Failed. No Connection. " + error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                })
 
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params = new HashMap<>();
+                params.put("client_id", String.valueOf(client_id));
+                return params;
             }
-            laundryDetailsAdapter.notifyDataSetChanged();
-        } catch (JSONException e) {
-            e.printStackTrace();
-            Toast.makeText(ClientLaundryDetails.this, "failedddd" +e.toString(), Toast.LENGTH_SHORT).show();
-        }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
     }
 
 }

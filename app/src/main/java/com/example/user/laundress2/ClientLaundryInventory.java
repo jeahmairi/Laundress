@@ -92,12 +92,11 @@ public class ClientLaundryInventory extends AppCompatActivity {
                     }
                 }
                 addLaundryDetail();
-                /*Bundle extras = new Bundle();
-                extras.putString("handwasher_name",isname);
-                extras.putString("handwasher_location", location);
-                extras.putString("handwasher_contact", iscontact);*/
+                Bundle extras = new Bundle();
+                extras.putString("client_name",client_name);
+                extras.putInt("client_id", client_id);
                 Intent intent = new Intent(ClientLaundryInventory.this, FindLaundryServiceProv.class);
-               // intent.putExtras(extras);
+                intent.putExtras(extras);
                 startActivity(intent);
             }
         });

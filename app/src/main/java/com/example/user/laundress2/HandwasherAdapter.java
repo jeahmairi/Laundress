@@ -58,6 +58,7 @@ public class HandwasherAdapter extends BaseAdapter {
                     extras.putString("contact", handwasherList.getContact());
                     extras.putString("location", handwasherList.getHwmeter());
                     extras.putInt("lsp_id", handwasherList.getLsp_id());
+                    extras.putInt("client_id", handwasherList.getClient_id());
                     Intent intent = new Intent(context, ChooseHandwasher.class);
                     intent.putExtras(extras);
                     context.startActivity(intent);

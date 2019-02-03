@@ -36,6 +36,28 @@ public class FindHandwasher extends Fragment {
    // private static final String URL_ALL ="http://192.168.1.2/laundress/allhandwasher.php";
     ArrayList<HandwasherList> handwasherLists = new ArrayList<HandwasherList>();
     HandwasherAdapter handwasherAdapter;
+
+    private String client_name;
+    private int client_id;
+
+    // newInstance constructor for creating fragment with arguments
+    public static FindHandwasher newInstance(int client_id, String client_name) {
+        FindHandwasher findHandwasher = new FindHandwasher();
+        Bundle args = new Bundle();
+        args.putInt("client_id", client_id);
+        args.putString("client_name", client_name);
+        findHandwasher.setArguments(args);
+        return findHandwasher;
+    }
+
+    // Store instance variables based on arguments passed
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        client_id = getArguments().getInt("client_id", 0);
+        client_name = getArguments().getString("client_name");
+    }
+
     public View onCreateView(@NonNull LayoutInflater inflater,  ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.findhandwasher, container, false);
         ListView listView = rootView.findViewById(R.id.lvhandwashers);
@@ -88,6 +110,7 @@ public class FindHandwasher extends Fragment {
                     arrmeter.add(meter);
                     arrcontact.add(contact);
                     HandwasherList handwasherList = new HandwasherList();
+                    handwasherList.setClient_id(client_id);
                     handwasherList.setHandwasherName(name);
                     handwasherList.setHwmeter(meter);
                     handwasherList.setContact(contact);

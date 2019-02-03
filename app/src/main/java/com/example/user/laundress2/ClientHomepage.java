@@ -95,7 +95,12 @@ public class ClientHomepage extends AppCompatActivity implements NavigationView.
         if (id == R.id.chat) {
             return true;
         } else if(id == R.id.notification){
-            return true;
+            Bundle extras = new Bundle();
+            extras.putString("client_name",client_name);
+            extras.putInt("client_id", client_id);
+            Intent intent = new Intent(ClientHomepage.this, ClientNotification.class);
+            intent.putExtras(extras);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);

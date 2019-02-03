@@ -3,7 +3,9 @@ package com.example.user.laundress2;
 public class LaundryShopList {
     private  int id;
     private  int lsp_id;
+    private  int client_id;
     private  String name;
+    private  String client_name;
     private  String location;
     private  String meter;
     private  String openhours;
@@ -72,5 +74,21 @@ public class LaundryShopList {
 
     public void setLsp_id(int lsp_id) {
         this.lsp_id = lsp_id;
+    }
+
+    public int getClient_id() {
+        return client_id;
+    }
+
+    public void setClient_id(int client_id) {
+        this.client_id = client_id;
+    }
+
+    public String getClient_name() {
+        return client_name;
+    }
+
+    public void setClient_name(String client_name) {
+        this.client_name = client_name;
     }
 }

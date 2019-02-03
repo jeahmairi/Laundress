@@ -91,7 +91,15 @@
         <activity
             android:name=".HandwasherMakePost"
             android:label="Post" />
-
+        <activity
+            android:name=".HandwasherNotification"
+            android:label="Notifications" />
+        <activity
+            android:name=".NotificationOnClick"
+            android:label="Request Details" />
+        <activity
+            android:name=".ClientNotification"
+            android:label="Notifications" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

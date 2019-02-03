@@ -5,6 +5,8 @@ public class HandwasherList {
     private  String hwmeter;
     private  String contact;
     private  int lsp_id;
+    private  int client_id;
+
   /*  private  String photo;
     private  int handwasherid;*/
 
@@ -38,6 +40,14 @@ public class HandwasherList {
 
     public void setLsp_id(int lsp_id) {
         this.lsp_id = lsp_id;
+    }
+
+    public int getClient_id() {
+        return client_id;
+    }
+
+    public void setClient_id(int client_id) {
+        this.client_id = client_id;
     }
 /*
     public String getPhoto() {

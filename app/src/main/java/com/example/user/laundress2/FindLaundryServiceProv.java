@@ -1,5 +1,6 @@
 package com.example.user.laundress2;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,8 @@ import android.view.MenuItem;
 
 public class FindLaundryServiceProv extends AppCompatActivity {
     private FindLaundryServiceProv.SectionsPagerAdapter mSectionsPagerAdapter;
+    String client_name;
+    int client_id;
 
     private ViewPager mViewPager;
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -46,6 +49,10 @@ public class FindLaundryServiceProv extends AppCompatActivity {
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
+        client_name = extras.getString("client_name");
+        client_id = extras.getInt("client_id");
 
     }
 
@@ -59,11 +66,9 @@ public class FindLaundryServiceProv extends AppCompatActivity {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    FindLaundryShop findLaundryShop = new FindLaundryShop();
-                    return findLaundryShop;
+                    return FindLaundryShop.newInstance(client_id, client_name);
                 case 1:
-                    FindHandwasher findHandwasher = new FindHandwasher();
-                    return findHandwasher;
+                    return FindHandwasher.newInstance(client_id, client_name);
                 default:
                     return null;
             }

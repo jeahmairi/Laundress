@@ -38,14 +38,38 @@ public class FindLaundryShop extends Fragment{
     private Context context;
     private static final String URL_ALL ="http://192.168.254.117/laundress/alllaundryshop.php";
     //private static final String URL_ALL ="http://192.168.1.12/laundress/alllaundryshop.php";
-   // private static final String URL_ALL ="http://192.168.254.100/laundress/alllaundryshop.php";
-   // private static final String URL_ALL ="http://192.168.1.2/laundress/alllaundryshop.php";
+    // private static final String URL_ALL ="http://192.168.254.100/laundress/alllaundryshop.php";
+    // private static final String URL_ALL ="http://192.168.1.2/laundress/alllaundryshop.php";
     ArrayList<LaundryShopList> laundryShopLists = new ArrayList<LaundryShopList>();
     LaundryShopAdapter laundryShopAdapter;
+    private String client_name;
+    private int client_id;
+
+    // newInstance constructor for creating fragment with arguments
+    public static FindLaundryShop newInstance(int client_id, String client_name) {
+        FindLaundryShop findLaundryShop = new FindLaundryShop();
+        Bundle args = new Bundle();
+        args.putInt("client_id", client_id);
+        args.putString("client_name", client_name);
+        findLaundryShop.setArguments(args);
+        return findLaundryShop;
+    }
+
+    // Store instance variables based on arguments passed
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        client_id = getArguments().getInt("client_id", 0);
+        client_name = getArguments().getString("client_name");
+    }
+
+
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.findlaundryshop, container, false);
         ListView listView = rootView.findViewById(R.id.lvlaundryshop);
+        Toast.makeText(getContext(),"Name MyLaundry" +client_name+ "ID " +client_id, Toast.LENGTH_SHORT).show();
         context = getActivity();
+
         try {
             StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_ALL,
                     new Response.Listener<String>() {
@@ -100,9 +124,11 @@ public class FindLaundryShop extends Fragment{
                     arropenhour.add(openhours);
                     arrclosehour.add(closehours);
                     LaundryShopList laundryShopList = new LaundryShopList();
+                    laundryShopList.setClient_id(client_id);
                     laundryShopList.setId(id);
                     laundryShopList.setLsp_id(lspid);
                     laundryShopList.setName(name);
+                    laundryShopList.setClient_name(client_name);
                     laundryShopList.setLocation(meter);
                     laundryShopList.setContact(contact);
                     laundryShopList.setOpenhours(openhours);

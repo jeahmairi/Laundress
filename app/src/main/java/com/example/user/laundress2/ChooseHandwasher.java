@@ -1,19 +1,25 @@
 package com.example.user.laundress2;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -29,6 +35,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,18 +44,23 @@ public class ChooseHandwasher extends AppCompatActivity {
     ArrayList<String> allExtraServices = new ArrayList<>();
     String names, address, contacts, age, civilstatus;
     String isname, iscontact, location;
+    EditText estdateandtime, lsweight;
     TextView name, contact, ageval, civilstat, lsserviceprice;
     RatingBar setRatingBar;
-    LinearLayout llextras, llservice, llserviceoff;
     RadioGroup servicetyperadio;
-    Button btnLocation;
-    int lsp_id;
+    Button btnLocation , btnbookrequest;
+    private DatePickerDialog datepicker;
+    private TimePickerDialog timepicker;
+    LinearLayout llextras, llservice, llserviceoff;
+    String estdate, esttime, service,estdatetime, allservice, allxtraservice, weight;
+    int lsp_id, client_id ;
     final Context context = this;
     private static final String URL_ALL_SERVICE_TYPE="http://192.168.254.117/laundress/allhandwasherservtype.php";
     private static final String URL_ALL_SERVICES="http://192.168.254.117/laundress/allhandwasherservices.php";
     private static final String URL_ALL_HANDWASHER="http://192.168.254.117/laundress/allhandwasherLSP.php";
     private static final String URL_ALL_SERVICE_OFFERED ="http://192.168.254.117/laundress/allhandwasherservoff.php";
     private static final String URL_ALL_EXTRA_SERVICES ="http://192.168.254.117/laundress/allhandwasherextserv.php";
+    private static final String URL_ADD_LAUND_TRANS ="http://192.168.254.117/laundress/addlaundrytransaction.php";
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +74,10 @@ public class ChooseHandwasher extends AppCompatActivity {
         servicetyperadio = findViewById(R.id.servicetyperadio);
         lsserviceprice = findViewById(R.id.lsserviceprice);
         ageval = findViewById(R.id.ageval);
+        btnbookrequest = findViewById(R.id.btnbookrequest);
+        estdateandtime = findViewById(R.id.estdateandtime);
         civilstat = findViewById(R.id.civilstat);
+        lsweight = findViewById(R.id.lsweight);
         btnLocation = findViewById(R.id.btnlocation);
         btnLocation.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,6 +89,61 @@ public class ChooseHandwasher extends AppCompatActivity {
                 Intent intent = new Intent(context, HandwasherLocation.class);
                 intent.putExtras(extras);
                 startActivity(intent);
+            }
+        });
+        btnbookrequest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                weight = lsweight.getText().toString();
+
+                for(int i = 0; i<allServiceOffered.size(); i++){
+
+                    allservice = allServiceOffered.get(i)+","+allservice;
+                    // Toast.makeText(ChooseLaundryShop.this, "services offered checked  " +allServiceOffered.get(i),Toast.LENGTH_SHORT).show();
+                }
+                //Toast.makeText(ChooseLaundryShop.this, "all services checked  " +allservice,Toast.LENGTH_SHORT).show();
+                for(int i = 0; i<allExtraServices.size(); i++){
+                    allxtraservice = allExtraServices.get(i)+","+allxtraservice;
+
+                }
+                addLaundryTransaction(allservice,allxtraservice);
+
+            }
+        });
+        estdateandtime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar cldr = Calendar.getInstance();
+                int day = cldr.get(Calendar.DAY_OF_MONTH);
+                int month = cldr.get(Calendar.MONTH);
+                int year = cldr.get(Calendar.YEAR);
+                // date picker dialog
+                datepicker = new DatePickerDialog(ChooseHandwasher.this,
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                                estdate = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
+                                //estdateandtime.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+                            }
+                        }, year, month, day);
+
+
+                final Calendar cldr1 = Calendar.getInstance();
+                int hour = cldr1.get(Calendar.HOUR_OF_DAY);
+                int minute = cldr1.get(Calendar.MINUTE);
+                // date picker dialog
+                timepicker = new TimePickerDialog(ChooseHandwasher.this,
+                        new TimePickerDialog.OnTimeSetListener() {
+                            @Override
+                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                                esttime = String.valueOf(hourOfDay) + " : " + String.valueOf(minute);
+                                estdatetime = estdate+" "+esttime;
+                                estdateandtime.setText(estdatetime);
+                            }
+                        }, hour, minute, DateFormat.is24HourFormat(ChooseHandwasher.this));
+                timepicker.show();
+                datepicker.show();
+
             }
         });
         /*CheckBox cb = new CheckBox(this);
@@ -90,6 +160,7 @@ public class ChooseHandwasher extends AppCompatActivity {
         iscontact = extras.getString("contact");
         location = extras.getString("location");
         lsp_id = extras.getInt("lsp_id");
+        client_id = extras.getInt("client_id");
         /*CheckBox cb = new CheckBox(ChooseHandwasher.this);
         cb.setText(isname);
         cb.setChecked(false);
@@ -97,7 +168,7 @@ public class ChooseHandwasher extends AppCompatActivity {
         name.setText(isname);
         contact.setText(iscontact);
         setRatingBar.setRating((float) 2.5);
-        Toast.makeText(ChooseHandwasher.this, "lsp_id: "+lsp_id, Toast.LENGTH_SHORT).show();
+        Toast.makeText(ChooseHandwasher.this, "lsp_id: "+lsp_id+"  client_id "+client_id, Toast.LENGTH_SHORT).show();
         allhandwasher();
        allServices();
        allServiceOffered();
@@ -225,6 +296,14 @@ public class ChooseHandwasher extends AppCompatActivity {
                                     RadioButton button = new RadioButton(ChooseHandwasher.this);
                                     button.setId(i);
                                     button.setText(name);
+                                    button.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                                        @Override
+                                        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                                            if(isChecked){
+                                                service = buttonView.getText().toString();
+                                            }
+                                        }
+                                    });
                                     servicetyperadio.addView(button);
                                     //Toast.makeText(ChooseHandwasher.this, "service offered" + name,  Toast.LENGTH_SHORT).show();
 
@@ -384,6 +463,54 @@ public class ChooseHandwasher extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> params = new HashMap<>();
                 params.put("lsp_id", String.valueOf(lsp_id));
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
+
+    private void addLaundryTransaction(final String allservice, final String allxtraservice) {
+        // final JSONObject all = new JSONObject();
+        final Context context = this;
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_ADD_LAUND_TRANS,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try{
+                            JSONObject jsonObject = new JSONObject(response);
+                            String success = jsonObject.getString("success");
+
+                            if(success.equals("1")){
+                                Toast.makeText(ChooseHandwasher.this, "Please wait for the approval of your chosen laundry service provider ", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(ChooseHandwasher.this, "Failed", Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e){
+                            e.printStackTrace();;
+                            Toast.makeText(ChooseHandwasher.this, "Failed" + e.toString(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(ChooseHandwasher.this, "Failed " + error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                })
+
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params = new HashMap<>();
+                params.put("serviceoff", ChooseHandwasher.this.allservice);
+                params.put("extraservice", ChooseHandwasher.this.allxtraservice);
+                params.put("service", service);
+                params.put("estdatetime", estdatetime);
+                params.put("weight", weight);
+                params.put("lsp_id", String.valueOf(lsp_id));
+                params.put("client_id", String.valueOf(client_id));
                 return params;
             }
         };

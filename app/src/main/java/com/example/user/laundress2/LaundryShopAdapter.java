@@ -54,10 +54,12 @@ public class LaundryShopAdapter extends BaseAdapter {
                     Bundle extras = new Bundle();
 
                     extras.putString("name", laundryShopList.getName());
+                    extras.putString("client_name", laundryShopList.getClient_name());
                     extras.putString("location", laundryShopList.getLocation());
                     extras.putString("contact", laundryShopList.getContact());
                     extras.putInt("id", laundryShopList.getId());
                     extras.putInt("lspid", laundryShopList.getLsp_id());
+                    extras.putInt("client_id", laundryShopList.getClient_id());
                     extras.putString("openhours", laundryShopList.getOpenhours());
                     extras.putString("closehours", laundryShopList.getClosehours());
                     Intent intent = new Intent(context, ChooseLaundryShop.class);

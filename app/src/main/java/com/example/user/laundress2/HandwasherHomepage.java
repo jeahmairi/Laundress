@@ -78,7 +78,13 @@ public class HandwasherHomepage extends AppCompatActivity implements NavigationV
         if (id == R.id.chat) {
             return true;
         } else if(id == R.id.notification){
-            return true;
+            Bundle extras = new Bundle();
+            extras.putString("handwasher_name",handwasher_name);
+            extras.putInt("handwasher_id", handwasher_id);
+            extras.putInt("handwasher_lspid", handwasher_lspid);
+            Intent intent = new Intent(HandwasherHomepage.this, HandwasherNotification.class);
+            intent.putExtras(extras);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);
