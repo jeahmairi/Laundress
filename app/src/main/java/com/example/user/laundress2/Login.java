@@ -99,10 +99,12 @@ public class Login extends AppCompatActivity {
                                     }
                                     else if(user.equals("Laundry Handwasher")) {
                                         int lspid = object.getInt("lspid");
+                                        Bundle extras = new Bundle();
+                                        extras.putInt("id", id);
+                                        extras.putString("name", name);
+                                        extras.putInt("lspid", lspid);
                                         Intent intent = new Intent(context, HandwasherHomepage.class);
-                                        intent.putExtra("id", id);
-                                        intent.putExtra("name", name);
-                                        intent.putExtra("lspid", lspid);
+                                        intent.putExtras(extras);
                                         startActivity(intent);
                                     }
                                 }

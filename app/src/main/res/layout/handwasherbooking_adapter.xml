@@ -152,14 +152,14 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/textView26"
+        android:id="@+id/datetime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="5dp"
         android:text="Date and Time" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnviewlaundry"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
@@ -171,7 +171,7 @@
         android:textColor="@android:color/background_light" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnconfirmreq"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"

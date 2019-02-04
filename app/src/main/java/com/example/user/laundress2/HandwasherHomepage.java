@@ -51,9 +51,14 @@ public class HandwasherHomepage extends AppCompatActivity implements NavigationV
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
-        handwasher_name = getIntent().getStringExtra("name");
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
+        handwasher_name = extras.getString("name");
+        handwasher_id = extras.getInt("id");
+        handwasher_lspid = extras.getInt("lspid");
+/*        handwasher_name = getIntent().getStringExtra("name");
         handwasher_id = getIntent().getIntExtra("id", 0);
-        handwasher_lspid = getIntent().getIntExtra("lspid", 0);
+        handwasher_lspid = getIntent().getIntExtra("lspid", 0);*/
     }
     @Override
     public void onBackPressed() {
@@ -112,11 +117,7 @@ public class HandwasherHomepage extends AppCompatActivity implements NavigationV
             startActivity(intent);
 
         } else if (id == R.id.account) {
-            //Bundle extras = new Bundle();
-            //extras.putString("client_name",client_name);
-            //extras.putInt("client_id", client_id);
             Intent intent = new Intent(HandwasherHomepage.this, HandwasherAccount.class);
-            //intent.putExtras(extras);
             startActivity(intent);
         } else if (id == R.id.history) {
             Intent intent = new Intent(HandwasherHomepage.this, HandwasherHistory.class);
@@ -144,8 +145,7 @@ public class HandwasherHomepage extends AppCompatActivity implements NavigationV
                     HandwasherMyLaundry handwasherMyLaundry = new HandwasherMyLaundry();
                     return handwasherMyLaundry;
                 case 1:
-                    HandwasherBookings handwasherBookings = new HandwasherBookings();
-                    return handwasherBookings;
+                    return HandwasherBookings.newInstance(handwasher_id, handwasher_name, handwasher_lspid);
                 case 2:
                     return HandwasherPosts.newInstance(handwasher_id, handwasher_name);
                 default:
