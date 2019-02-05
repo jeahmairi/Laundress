@@ -36,6 +36,7 @@ public class HandwasherNotification extends AppCompatActivity {
     private static final String URL_ALL ="http://192.168.254.117/laundress/allnotification.php";
     ListView lvnotif;
     String handwasher_name, client_name;
+    String notification_Message;
     int handwasher_id, handwasher_lspid;
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -99,7 +100,7 @@ public class HandwasherNotification extends AppCompatActivity {
                             if (success.equals("1")){
                                 for (int i =0;i<jsonArray.length();i++)
                                 {
-                                    String notification_Message=jsonArray.getJSONObject(i).getString("notification_Message").toString();
+                                    notification_Message=jsonArray.getJSONObject(i).getString("notification_Message").toString();
                                     int lsp_ID= Integer.parseInt(jsonArray.getJSONObject(i).getString("lsp_ID").toString());
                                     int client_ID= Integer.parseInt(jsonArray.getJSONObject(i).getString("client_ID").toString());
                                     int trans_No= Integer.parseInt(jsonArray.getJSONObject(i).getString("trans_No").toString());
@@ -114,10 +115,13 @@ public class HandwasherNotification extends AppCompatActivity {
                                     handwasherNotifList.setTable(table);
                                     handwasherNotifLists.add(handwasherNotifList);
                                 }
-                                handwasherNotifAdapter = new HandwasherNotifAdapter(HandwasherNotification.this,handwasherNotifLists);
-                                lvnotif.setAdapter(handwasherNotifAdapter);
+                                if(notification_Message.equals("Pending")){
+                                    handwasherNotifAdapter = new HandwasherNotifAdapter(HandwasherNotification.this,handwasherNotifLists);
+                                    lvnotif.setAdapter(handwasherNotifAdapter);
+                                    handwasherNotifAdapter.notifyDataSetChanged();
+                                }
                             }
-                            handwasherNotifAdapter.notifyDataSetChanged();
+                          //
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Toast.makeText(HandwasherNotification.this, "failedddd" +e.toString(), Toast.LENGTH_SHORT).show();

@@ -103,6 +103,12 @@
         <activity
             android:name=".ConfirmBooking"
             android:label="Confirm" />
+        <activity
+            android:name=".ClientMyPost"
+            android:label="My Post" />
+        <activity
+            android:name=".HandwasherMyPost"
+            android:label="My Post" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

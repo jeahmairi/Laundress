@@ -417,7 +417,7 @@ public class ClientAccountDetails extends AppCompatActivity {
                     if(client_gender.equals("M")) {
                         radiogender.check(R.id.radioMale);
                     } else if(client_gender.equals("F")) {
-                    radiogender.check(R.id.radioFemale);
+                        radiogender.check(R.id.radioFemale);
                     }
                     fname.setText(client_fname);
                     fname.setEnabled(false);

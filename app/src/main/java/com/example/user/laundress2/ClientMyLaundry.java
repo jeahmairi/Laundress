@@ -81,15 +81,6 @@ public class ClientMyLaundry extends Fragment {
         btnviewreq = rootView.findViewById(R.id.btnviewreq);
 
         Toast.makeText(getContext(),"Name MyLaundry" +client_name+ "ID " +client_id, Toast.LENGTH_SHORT).show();
-        /*if(trans_Status.equals("Pending")){
-            section_label.setVisibility(View.GONE);
-            section_label2.setVisibility(View.GONE);
-            section_label3.setVisibility(View.GONE);
-            laundrydetails.setVisibility(View.GONE);
-            findlsp.setVisibility(View.GONE);
-
-            picture.setVisibility(View.VISIBLE);
-        }else {*/
             laundrydetails.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -116,7 +107,26 @@ public class ClientMyLaundry extends Fragment {
                     startActivity(intent);
                 }
             });
-        /*}*/
+            //Pending buttons
+            btncancelreq.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
+            btnvielaunddetails.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
+            btnviewreqdet.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
+            //End pending buttons
         return rootView;
     }
     private void allbooking(){
@@ -183,26 +193,6 @@ public class ClientMyLaundry extends Fragment {
 
 
                                     }
-
-                                   /* if(shop_id.isEmpty()){
-                                        handwasher_Name = object.getString("handwasher_LName").trim();
-                                        handwasher_Address = object.getString("handwasher_Address").trim();
-                                        handwasher_Contact = object.getString("handwasher_Contact").trim();
-                                        aname.setText(handwasher_Name);
-                                        address.setText(handwasher_Address);
-                                        number.setText(handwasher_Contact);
-                                        time.setText(trans_Status);
-                                        Toast.makeText(getActivity(), "Sud ", Toast.LENGTH_SHORT).show();
-                                    } else if(handwasher_id.isEmpty()){
-                                        shop_Name = object.getString("shop_Name").trim();
-                                        shop_Address = object.getString("shop_Address").trim();
-                                        shop_Contact = object.getString("shop_ContactNo1").trim();
-                                        aname.setText(shop_Name);
-                                        address.setText(shop_Address);
-                                        number.setText(shop_Contact);
-                                        time.setText(trans_Status);
-                                        Toast.makeText(getActivity(), "Sud ", Toast.LENGTH_SHORT).show();
-                                    }*/
                                     if(trans_Status.equals("Pending")){
                                         section_label.setVisibility(View.GONE);
                                         section_label2.setVisibility(View.GONE);
@@ -223,6 +213,28 @@ public class ClientMyLaundry extends Fragment {
                                         time.setText(trans_Status);
 
                                     } else if(trans_Status.equals("Accepted")){
+                                        btnvielaunddetails.setVisibility(View.GONE);
+                                        btnviewreqdet.setVisibility(View.GONE);
+                                        btncancelreq.setVisibility(View.GONE);
+
+                                        section_label.setVisibility(View.GONE);
+                                        section_label2.setVisibility(View.GONE);
+                                        section_label3.setVisibility(View.GONE);
+                                        laundrydetails.setVisibility(View.GONE);
+                                        findlsp.setVisibility(View.GONE);
+
+                                        picture.setVisibility(View.VISIBLE);
+                                        aname.setVisibility(View.VISIBLE);
+                                        address.setVisibility(View.VISIBLE);
+                                        number.setVisibility(View.VISIBLE);
+                                        textView31.setVisibility(View.VISIBLE);
+                                        bgtime.setVisibility(View.VISIBLE);
+                                        time.setVisibility(View.VISIBLE);
+
+                                        btnviewdet.setVisibility(View.VISIBLE);
+                                        btnviewreq.setVisibility(View.VISIBLE);
+                                        time.setText(trans_Status);
+                                    } else if(trans_Status.equals("Confirmed")){
                                         btnvielaunddetails.setVisibility(View.GONE);
                                         btnviewreqdet.setVisibility(View.GONE);
                                         btncancelreq.setVisibility(View.GONE);

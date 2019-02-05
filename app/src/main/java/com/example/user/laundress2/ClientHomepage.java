@@ -132,6 +132,13 @@ public class ClientHomepage extends AppCompatActivity implements NavigationView.
             Intent intent = new Intent(ClientHomepage.this, ClientAccountDetails.class);
             intent.putExtras(extras);
             startActivity(intent);
+        } else if (id == R.id.mypost) {
+            Bundle extras = new Bundle();
+            extras.putString("client_name",client_name);
+            extras.putInt("client_id", client_id);
+            Intent intent = new Intent(ClientHomepage.this, ClientMyPost.class);
+            intent.putExtras(extras);
+            startActivity(intent);
         } else if (id == R.id.history) {
             Intent intent = new Intent(ClientHomepage.this, ClientHistory.class);
             startActivity(intent);

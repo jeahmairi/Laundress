@@ -324,7 +324,7 @@ public class ClientLaundryDetails extends AppCompatActivity {
                                 laundryDetailsAdapter = new LaundryDetailsAdapter(ClientLaundryDetails.this,laundryDetailLists);
                                 androidGridView.setAdapter(laundryDetailsAdapter);
                             }
-                            laundryDetailsAdapter.notifyDataSetChanged();
+                       //    laundryDetailsAdapter.notifyDataSetChanged();
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Toast.makeText(ClientLaundryDetails.this, "failedddd" +e.toString(), Toast.LENGTH_SHORT).show();

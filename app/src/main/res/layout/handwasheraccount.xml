@@ -1,31 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg"
     android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="5dp"
-            android:text="Registration"
-            android:textColor="@color/lightBlue"
-            android:textSize="18sp" />
 
         <ImageView
-            android:id="@+id/imageView4"
-            android:layout_width="81dp"
-            android:layout_height="89dp"
+            android:id="@+id/photo"
+            android:layout_width="140dp"
+            android:layout_height="128dp"
             android:layout_gravity="center"
-            app:srcCompat="@drawable/laundryclient" />
+            app:srcCompat="@mipmap/ic_launcher" />
 
         <EditText
             android:id="@+id/fname"
@@ -86,6 +77,7 @@
             android:textColor="@android:color/background_light"
             android:textSize="18sp" />
 
+
         <LinearLayout
             android:layout_width="133dp"
             android:layout_height="wrap_content"
@@ -102,8 +94,9 @@
                     android:id="@+id/radioMale"
                     android:layout_width="112dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/radiomale"
+                    android:checked="true"
                     android:onClick="onRadioButtonClicked"
+                    android:text="@string/radiomale"
                     />
 
                 <RadioButton
@@ -117,13 +110,29 @@
             </RadioGroup>
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="Civil Status"
+            android:textColor="@android:color/background_light"
+            android:textSize="18sp" />
+
+        <Spinner
+            android:id="@+id/civilstatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:entries="@array/civilstatus" />
+
         <EditText
             android:id="@+id/phonenumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Phone Number"
-            android:inputType="number"
+            android:inputType="phone"
             android:textColor="@color/lightBlue"
             android:textColorHint="@android:color/background_light" />
 
@@ -133,7 +142,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Email"
-            android:inputType="textEmailAddress"
+            android:inputType="textPersonName"
             android:textColor="@color/lightBlue"
             android:textColorHint="@android:color/background_light" />
 
@@ -162,7 +171,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:background="@color/lightBlue"
-            android:text="Register"
+            android:text="Update Account"
             android:textColor="@color/darkBlue" />
     </LinearLayout>
+
 </ScrollView>
