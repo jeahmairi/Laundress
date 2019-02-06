@@ -47,7 +47,7 @@ public class ConfirmBooking extends AppCompatActivity {
                             JSONObject jsonObject = new JSONObject(response);
                             String success = jsonObject.getString("success");
                             if(success.equals("1")){
-                                Toast.makeText(ConfirmBooking.this, "Updated Successfully ", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ConfirmBooking.this, "Laundry Details Confirmed ", Toast.LENGTH_SHORT).show();
                                 Bundle extras = new Bundle();
                                 extras.putString("name",name);
                                 extras.putInt("id", handwasher_id);

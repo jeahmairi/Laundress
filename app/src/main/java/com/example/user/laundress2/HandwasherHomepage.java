@@ -101,11 +101,12 @@ public class HandwasherHomepage extends AppCompatActivity implements NavigationV
         FragmentManager fragmentManager = getSupportFragmentManager();
 
         if (id == R.id.rating) {
-           /* Bundle extras = new Bundle();
-            extras.putString("client_name",client_name);
-            extras.putInt("client_id", client_id);*/
+            Bundle extras = new Bundle();
+            extras.putString("handwasher_name",handwasher_name);
+            extras.putInt("handwasher_id", handwasher_id);
+            extras.putInt("handwasher_lspid", handwasher_lspid);
             Intent intent = new Intent(HandwasherHomepage.this, HandwasherRate.class);
-            //intent.putExtras(extras);
+            intent.putExtras(extras);
             startActivity(intent);
         } else if (id == R.id.laundryservices) {
             Bundle extras = new Bundle();
@@ -156,8 +157,7 @@ public class HandwasherHomepage extends AppCompatActivity implements NavigationV
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    HandwasherMyLaundry handwasherMyLaundry = new HandwasherMyLaundry();
-                    return handwasherMyLaundry;
+                    return HandwasherMyLaundry.newInstance(handwasher_id, handwasher_name, handwasher_lspid);
                 case 1:
                     return HandwasherBookings.newInstance(handwasher_id, handwasher_name, handwasher_lspid);
                 case 2:

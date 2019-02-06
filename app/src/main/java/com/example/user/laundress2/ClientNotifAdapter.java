@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -42,6 +43,7 @@ public class ClientNotifAdapter extends BaseAdapter {
         convertView = layoutInflater.inflate(R.layout.clientnotif_adapter, parent, false);
         itemHolder.name = (TextView) convertView.findViewById(R.id.name);
         itemHolder.status = (TextView) convertView.findViewById(R.id.status);
+        itemHolder.ratings = convertView.findViewById(R.id.ratings);
         //final ClientPostList clientPostList=clientPostLists.get(position);
         //}
 
@@ -50,6 +52,14 @@ public class ClientNotifAdapter extends BaseAdapter {
         if(message.equals("Approved")){
             itemHolder.name.setText(clientNotifLists.get(position).getClient_name());
             itemHolder.status.setText("Approved your service. Please wait for laundry Details confirmation.");
+        }else if(message.equals("Declined")){
+            itemHolder.name.setText(clientNotifLists.get(position).getClient_name());
+            itemHolder.status.setText("Your Request has been declined");
+        }else if(message.equals("Finished")){
+            itemHolder.name.setText(clientNotifLists.get(position).getClient_name());
+            itemHolder.status.setText("Laundry Service is finished. \n" +clientNotifLists.get(position).getClient_name()+" has rated you");
+            itemHolder.ratings.setVisibility(View.VISIBLE);
+            itemHolder.ratings.setRating(clientNotifLists.get(position).getRate());
         }
 
         return convertView;
@@ -57,5 +67,6 @@ public class ClientNotifAdapter extends BaseAdapter {
 
     private class ItemHolder {
         TextView name, status;
+        RatingBar ratings;
     }
 }

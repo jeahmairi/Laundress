@@ -52,7 +52,7 @@ public class ChooseHandwasher extends AppCompatActivity {
     private DatePickerDialog datepicker;
     private TimePickerDialog timepicker;
     LinearLayout llextras, llservice, llserviceoff;
-    String estdate, esttime, service,estdatetime, allservice, allxtraservice, weight;
+    String client_name, estdate, esttime, service,estdatetime, allservice, allxtraservice, weight;
     int lsp_id, client_id ;
     final Context context = this;
     private static final String URL_ALL_SERVICE_TYPE="http://192.168.254.117/laundress/allhandwasherservtype.php";
@@ -106,7 +106,13 @@ public class ChooseHandwasher extends AppCompatActivity {
                     allxtraservice = allExtraServices.get(i)+","+allxtraservice;
 
                 }
-                addLaundryTransaction(allservice,allxtraservice);
+                addLaundryTransaction(allservice, allxtraservice);
+                Intent intent = new Intent(ChooseHandwasher.this, ClientHomepage.class);
+                intent.putExtra("id", client_id);
+                intent.putExtra("name", isname);
+                //ClientMyLaundry.newInstance(client_id, client_name);
+                startActivity(intent);
+
 
             }
         });

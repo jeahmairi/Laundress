@@ -37,7 +37,9 @@ public class HandwasherNotification extends AppCompatActivity {
     ListView lvnotif;
     String handwasher_name, client_name;
     String notification_Message;
-    int handwasher_id, handwasher_lspid;
+    int handwasher_id, handwasher_lspid, rate_NO;
+    String rating_Date, rating_Comment, comments;
+    float rating_Score;
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
@@ -72,7 +74,11 @@ public class HandwasherNotification extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if(handwasherNotifLists.get(position).getTable().equals("Notification")) {
                     Bundle extras = new Bundle();
+                    extras.putString("handwasher_name",handwasher_name);
+                    extras.putInt("handwasher_id", handwasher_id);
+                    extras.putInt("handwasher_lspid", handwasher_lspid);
                     extras.putString("client_name", handwasherNotifLists.get(position).getClient_name());
+                    extras.putString("notif_message", handwasherNotifLists.get(position).getNotification_message());
                     extras.putInt("trans_no", handwasherNotifLists.get(position).getTrans_no());
                     extras.putInt("client_id", handwasherNotifLists.get(position).getClient_id());
                     //extras.putString("client_name", client_name);
@@ -98,30 +104,56 @@ public class HandwasherNotification extends AppCompatActivity {
                             //JSONArray jsonArray = new JSONArray(response);
                             JSONArray jsonArray = jsonObject.getJSONArray("allnotif");
                             if (success.equals("1")){
+
                                 for (int i =0;i<jsonArray.length();i++)
                                 {
                                     notification_Message=jsonArray.getJSONObject(i).getString("notification_Message").toString();
+
                                     int lsp_ID= Integer.parseInt(jsonArray.getJSONObject(i).getString("lsp_ID").toString());
                                     int client_ID= Integer.parseInt(jsonArray.getJSONObject(i).getString("client_ID").toString());
                                     int trans_No= Integer.parseInt(jsonArray.getJSONObject(i).getString("trans_No").toString());
                                     client_name = jsonArray.getJSONObject(i).getString("client_name");
                                     String table = jsonArray.getJSONObject(i).getString("fromtable");
-                                    HandwasherNotifList handwasherNotifList = new HandwasherNotifList();
-                                    handwasherNotifList.setClient_id(client_ID);
-                                    handwasherNotifList.setLsp_id(lsp_ID);
-                                    handwasherNotifList.setTrans_no(trans_No);
-                                    handwasherNotifList.setNotification_message(notification_Message);
-                                    handwasherNotifList.setClient_name(client_name);
-                                    handwasherNotifList.setTable(table);
-                                    handwasherNotifLists.add(handwasherNotifList);
+                                    if(notification_Message.equals("Pending") || notification_Message.equals("Missed") || notification_Message.equals("Finished")){
+                                        Toast.makeText(HandwasherNotification.this, "sud " + notification_Message, Toast.LENGTH_SHORT).show();
+
+                                        HandwasherNotifList handwasherNotifList = new HandwasherNotifList();
+                                        handwasherNotifList.setClient_id(client_ID);
+                                        handwasherNotifList.setLsp_id(lsp_ID);
+                                        if(notification_Message.equals("Finished")){
+                                            rating_Score = Float.parseFloat(jsonArray.getJSONObject(i).getString("rating_Score"));
+                                            rating_Comment = jsonArray.getJSONObject(i).getString("rating_Comment");
+                                            rating_Date = jsonArray.getJSONObject(i).getString("rating_Date");
+                                            rate_NO = Integer.parseInt(jsonArray.getJSONObject(i).getString("rating_No"));
+
+                                            handwasherNotifList.setRate(rating_Score);
+                                            handwasherNotifList.setComment(rating_Comment);
+                                            handwasherNotifList.setDatecomment(rating_Date);
+                                            handwasherNotifList.setRate_no(rate_NO);
+                                            lvnotif.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                                @Override
+                                                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                                    /*transno = clientNotifLists.get(position).getTrans_no();
+                                                    showChangeLangDialog();*/
+                                                     Toast.makeText(HandwasherNotification.this, "sud " +position, Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+                                        }
+                                        handwasherNotifList.setTrans_no(trans_No);
+                                        handwasherNotifList.setNotification_message(notification_Message);
+                                        handwasherNotifList.setClient_name(client_name);
+                                        handwasherNotifList.setTable(table);
+                                        handwasherNotifLists.add(handwasherNotifList);
+                                    }
                                 }
-                                if(notification_Message.equals("Pending")){
+                                //if(notification_Message.equals("Pending") || notification_Message.equals("Missed")){
                                     handwasherNotifAdapter = new HandwasherNotifAdapter(HandwasherNotification.this,handwasherNotifLists);
                                     lvnotif.setAdapter(handwasherNotifAdapter);
-                                    handwasherNotifAdapter.notifyDataSetChanged();
-                                }
+
+                                //}
+                                handwasherNotifAdapter.notifyDataSetChanged();
                             }
-                          //
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Toast.makeText(HandwasherNotification.this, "failedddd" +e.toString(), Toast.LENGTH_SHORT).show();

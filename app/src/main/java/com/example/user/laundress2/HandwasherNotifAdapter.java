@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -42,6 +43,7 @@ public class HandwasherNotifAdapter extends BaseAdapter {
         convertView = layoutInflater.inflate(R.layout.handwashernotif_adapter, parent, false);
         itemHolder.name = (TextView) convertView.findViewById(R.id.name);
         itemHolder.status = (TextView) convertView.findViewById(R.id.status);
+        itemHolder.ratings = convertView.findViewById(R.id.ratings);
         //final ClientPostList clientPostList=clientPostLists.get(position);
         //}
         itemHolder.name.setText(handwasherNotifLists.get(position).getClient_name());
@@ -49,12 +51,21 @@ public class HandwasherNotifAdapter extends BaseAdapter {
         String message = handwasherNotifLists.get(position).getNotification_message();
         if(message.equals("Pending")){
             itemHolder.status.setText("Requested your service.");
+        }else if(message.equals("Missed")){
+            itemHolder.status.setText("You Missed the Service.");
+        }else if(message.equals("Finished")){
+            itemHolder.name.setText(handwasherNotifLists.get(position).getClient_name());
+            itemHolder.status.setText("Laundry Service is finished. \n" +handwasherNotifLists.get(position).getClient_name()+" has rated you");
+            itemHolder.ratings.setVisibility(View.VISIBLE);
+            itemHolder.ratings.setRating(handwasherNotifLists.get(position).getRate());
         }
+
 
         return convertView;
     }
 
     private class ItemHolder {
         TextView name, status;
+        RatingBar ratings;
     }
 }

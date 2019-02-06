@@ -32,11 +32,12 @@ import java.util.Map;
 public class ClientMyLaundry extends Fragment {
     Button laundrydetails, findlsp, btnvielaunddetails, btnviewreqdet, btncancelreq, btnviewdet, btnviewreq;
     private String client_name, trans_Status, handwasher_Name, handwasher_Address, handwasher_Contact, shop_Name, shop_Address, shop_Contact;
-    private int client_id;
-    private static final String URL_ALL ="http://192.168.254.117/laundress/allbooking.php";
+    private int client_id, trans_No;
     TextView section_label, section_label2, section_label3, aname, number, address, textView31, statusname, timeleft, time, timename;
     ImageView picture, bgtime;
 
+    private static final String URL_ALL ="http://192.168.254.117/laundress/allbooking.php";
+    private static final String URL_UPDATE ="http://192.168.254.117/laundress/updatetranscancel.php";
     // newInstance constructor for creating fragment with arguments
     public static ClientMyLaundry newInstance(int client_id, String client_name) {
         ClientMyLaundry clientMyLaundry = new ClientMyLaundry();
@@ -111,7 +112,7 @@ public class ClientMyLaundry extends Fragment {
             btncancelreq.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    updateTransaction();
                 }
             });
             btnvielaunddetails.setOnClickListener(new View.OnClickListener() {
@@ -129,6 +130,45 @@ public class ClientMyLaundry extends Fragment {
             //End pending buttons
         return rootView;
     }
+
+    private void updateTransaction() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_UPDATE,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String success = jsonObject.getString("success");
+                            if(success.equals("1")){
+                               // Toast.makeText(ClientM.this, "Post Updated Successfully", Toast.LENGTH_SHORT).show();
+                                getActivity().recreate();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(getActivity(), "Failed " +e.toString(), Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getActivity(), "Failed. No connection." +error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+        )
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params = new HashMap<>();
+                params.put("trans_No", String.valueOf(trans_No));
+                return params;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        requestQueue.add(stringRequest);
+    }
+
     private void allbooking(){
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_ALL,
                 new Response.Listener<String>() {
@@ -144,6 +184,7 @@ public class ClientMyLaundry extends Fragment {
                                 for (int i = 0; i < jsonArray.length(); i++) {
                                     JSONObject object = jsonArray.getJSONObject(i);
                                     trans_Status = object.getString("trans_Status").trim();
+                                    trans_No = Integer.parseInt(object.getString("trans_No").trim());
                                     String shop_id = object.getString("shop_ID");
                                     String handwasher_id = object.getString("handwasher_ID");
                                     Toast.makeText(getActivity(), "shop_id " +shop_id, Toast.LENGTH_SHORT).show();

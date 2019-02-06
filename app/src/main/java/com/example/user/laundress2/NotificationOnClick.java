@@ -28,11 +28,14 @@ import java.util.Map;
 public class NotificationOnClick extends AppCompatActivity {
     TextView status, name, extraservice, servicereq, servicetype, weight;
     EditText estdatetime;
-    String client_name;
-    Button accept, decline;
+    String client_name,notif_message;
+    Button accept, decline, btnviewdet;
     int trans_no, client_id;
+    String handwasher_name;
+    int handwasher_id, handwasher_lspid;
     private static final String URL_ALL ="http://192.168.254.117/laundress/alltrans.php";
     private static final String URL_ALL_UPDATE ="http://192.168.254.117/laundress/updatetrans.php";
+    private static final String URL_ALL_UPDATE_DECLINE ="http://192.168.254.117/laundress/updatetransdecline.php";
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,13 +49,23 @@ public class NotificationOnClick extends AppCompatActivity {
         estdatetime = findViewById(R.id.estdatetime);
         accept = findViewById(R.id.accept);
         decline = findViewById(R.id.decline);
+        btnviewdet = findViewById(R.id.btnviewdet);
 
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         client_name = extras.getString("client_name");
+        notif_message = extras.getString("notif_message");
         trans_no = extras.getInt("trans_no");
         client_id = extras.getInt("client_id");
+        handwasher_name = extras.getString("handwasher_name");
+        handwasher_id = extras.getInt("handwasher_id");
+        handwasher_lspid = extras.getInt("handwasher_lspid");
         name.setText(client_name);
+        if(notif_message.equals("Missed")){
+            accept.setVisibility(View.GONE);
+            decline.setVisibility(View.GONE);
+            btnviewdet.setVisibility(View.GONE);
+        }
         accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,10 +75,54 @@ public class NotificationOnClick extends AppCompatActivity {
         decline.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                updateTransactionDecline();
             }
         });
         allCategory();
+    }
+
+    private void updateTransactionDecline() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_ALL_UPDATE_DECLINE,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String success = jsonObject.getString("success");
+                            if (success.equals("1")){
+                                Bundle extras = new Bundle();
+                                extras.putString("name",handwasher_name);
+                                extras.putInt("id", handwasher_id);
+                                extras.putInt("lspid", handwasher_lspid);
+                                Intent intent = new Intent(NotificationOnClick.this, HandwasherHomepage.class);
+                                intent.putExtras(extras);
+                                startActivity(intent);
+                                Toast.makeText(NotificationOnClick.this, "Laundry Client Declined", Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(NotificationOnClick.this, "Failed" +e.toString(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(NotificationOnClick.this, "Failed. No Connection. " + error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                })
+
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params = new HashMap<>();
+                params.put("trans_no", String.valueOf(trans_no));
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
     }
 
     private void updateTransaction() {
@@ -77,7 +134,14 @@ public class NotificationOnClick extends AppCompatActivity {
                             JSONObject jsonObject = new JSONObject(response);
                             String success = jsonObject.getString("success");
                             if (success.equals("1")){
-
+                                Bundle extras = new Bundle();
+                                extras.putString("name",handwasher_name);
+                                extras.putInt("id", handwasher_id);
+                                extras.putInt("lspid", handwasher_lspid);
+                                Intent intent = new Intent(NotificationOnClick.this, HandwasherHomepage.class);
+                                intent.putExtras(extras);
+                                startActivity(intent);
+                                Toast.makeText(NotificationOnClick.this, "Laundry Client Accepted", Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
