@@ -135,7 +135,12 @@ public class HandwasherHomepage extends AppCompatActivity implements NavigationV
             intent.putExtras(extras);
             startActivity(intent);
         } else if (id == R.id.history) {
+            Bundle extras = new Bundle();
+            extras.putString("handwasher_name",handwasher_name);
+            extras.putInt("handwasher_id", handwasher_id);
+            extras.putInt("handwasher_lspid", handwasher_lspid);
             Intent intent = new Intent(HandwasherHomepage.this, HandwasherHistory.class);
+            intent.putExtras(extras);
             startActivity(intent);
         } else if (id == R.id.logout) {
             Intent intent = new Intent(HandwasherHomepage.this, HandwasherLogout.class);

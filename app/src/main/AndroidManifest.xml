@@ -112,6 +112,9 @@
         <activity
             android:name=".HandwasherRate"
             android:label="My Rate" />
+        <activity
+            android:name=".HandwasherHistory"
+            android:label="History" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

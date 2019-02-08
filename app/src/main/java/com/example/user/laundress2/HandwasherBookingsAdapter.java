@@ -72,6 +72,12 @@ public class HandwasherBookingsAdapter extends BaseAdapter {
                 context.startActivity(intent);
             }
         });
+        itemHolder.btnviewlaundry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
         /*String message = handwasherBookingsLists.get(position).getNotification_message();
         if(message.equals("Pending")){
             itemHolder.status.setText("Requested your service.");

@@ -69,7 +69,7 @@ public class HandwasherNotification extends AppCompatActivity {
         handwasher_lspid = extras.getInt("handwasher_lspid");
         allCategory();
 
-        lvnotif.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        /*lvnotif.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if(handwasherNotifLists.get(position).getTable().equals("Notification")) {
@@ -89,7 +89,7 @@ public class HandwasherNotification extends AppCompatActivity {
 
                 }
             }
-        });
+        });*/
     }
 
     private void allCategory() {
@@ -130,15 +130,39 @@ public class HandwasherNotification extends AppCompatActivity {
                                             handwasherNotifList.setComment(rating_Comment);
                                             handwasherNotifList.setDatecomment(rating_Date);
                                             handwasherNotifList.setRate_no(rate_NO);
-                                            lvnotif.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                            /*lvnotif.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                                 @Override
                                                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                                    /*transno = clientNotifLists.get(position).getTrans_no();
-                                                    showChangeLangDialog();*/
-                                                     Toast.makeText(HandwasherNotification.this, "sud " +position, Toast.LENGTH_SHORT).show();
+                                                    //transno = clientNotifLists.get(position).getTrans_no();
+                                                    showChangeLangDialog();
+                                                     //Toast.makeText(HandwasherNotification.this, "sud " +position, Toast.LENGTH_SHORT).show();
+                                                }
+                                            });*/
+                                        }
+                                        //if(notification_Message.equals("Pending") || notification_Message.equals("Missed")){
+                                             lvnotif.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                                @Override
+                                                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                                   // transno = handwasherNotifLists.get(position).getTrans_no();
+                                                   // showChangeLangDialog();
+                                                    if((handwasherNotifLists.get(position).getNotification_message().equals("Pending"))||(handwasherNotifLists.get(position).getNotification_message().equals("Missed"))){
+                                                        Bundle extras = new Bundle();
+                                                        extras.putString("handwasher_name",handwasher_name);
+                                                        extras.putInt("handwasher_id", handwasher_id);
+                                                        extras.putInt("handwasher_lspid", handwasher_lspid);
+                                                        extras.putString("client_name", handwasherNotifLists.get(position).getClient_name());
+                                                        extras.putString("notif_message", handwasherNotifLists.get(position).getNotification_message());
+                                                        extras.putInt("trans_no", handwasherNotifLists.get(position).getTrans_no());
+                                                        extras.putInt("client_id", handwasherNotifLists.get(position).getClient_id());
+                                                        //extras.putString("client_name", client_name);
+                                                        Intent intent = new Intent(HandwasherNotification.this, NotificationOnClick.class);
+                                                        intent.putExtras(extras);
+                                                        startActivity(intent);
+                                                    }
+                                                     Toast.makeText(HandwasherNotification.this, "sud " +position+"Message "+handwasherNotifLists.get(position).getNotification_message(), Toast.LENGTH_SHORT).show();
                                                 }
                                             });
-                                        }
+                                        //}
                                         handwasherNotifList.setTrans_no(trans_No);
                                         handwasherNotifList.setNotification_message(notification_Message);
                                         handwasherNotifList.setClient_name(client_name);
