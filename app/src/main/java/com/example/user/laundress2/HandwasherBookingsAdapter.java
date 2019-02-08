@@ -64,7 +64,6 @@ public class HandwasherBookingsAdapter extends BaseAdapter {
                 Bundle extras = new Bundle();
                 extras.putString("name", handwasherBookingsList.getName());
                 extras.putInt("trans_No", handwasherBookingsList.getTrans_no());
-                //extras.putString("location", handwasherBookingsList.getHwmeter());
                 extras.putInt("lsp_id", handwasherBookingsList.getLsp_id());
                 extras.putInt("handwasher_id", handwasherBookingsList.getHandwasher_id());
                 Intent intent = new Intent(context, ConfirmBooking.class);

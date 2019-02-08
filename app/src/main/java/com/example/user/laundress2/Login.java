@@ -106,7 +106,16 @@ public class Login extends AppCompatActivity {
                                         Intent intent = new Intent(context, HandwasherHomepage.class);
                                         intent.putExtras(extras);
                                         startActivity(intent);
-                                    }
+                                    }/*else if(user.equals("Laundry Shop")) {
+                                        int lspid = object.getInt("lspid");
+                                        Bundle extras = new Bundle();
+                                        extras.putInt("id", id);
+                                        extras.putString("name", name);
+                                        extras.putInt("lspid", lspid);
+                                        Intent intent = new Intent(context, HandwasherHomepage.class);
+                                        intent.putExtras(extras);
+                                        startActivity(intent);
+                                    }*/
                                 }
                             } else if (success.equals("0")) {
 
