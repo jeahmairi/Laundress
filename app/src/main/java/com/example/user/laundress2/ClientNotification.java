@@ -122,8 +122,10 @@ public class ClientNotification extends AppCompatActivity {
                                             lvnotif.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                                 @Override
                                                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                                    transno = clientNotifLists.get(position).getTrans_no();
-                                                    showChangeLangDialog();
+                                                    if(clientNotifLists.get(position).getNotification_message().equals("Finished")){
+                                                        transno = clientNotifLists.get(position).getTrans_no();
+                                                        showChangeLangDialog();
+                                                    }
                                                    // Toast.makeText(ClientNotification.this, "sud " +position, Toast.LENGTH_SHORT).show();
                                                 }
                                             });

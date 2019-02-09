@@ -78,6 +78,19 @@ public class NotificationOnClick extends AppCompatActivity {
                 updateTransactionDecline();
             }
         });
+        btnviewdet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle extras = new Bundle();
+                extras.putString("name", client_name);
+                extras.putInt("trans_No", trans_no);
+                extras.putInt("lsp_id", handwasher_id);
+                extras.putInt("handwasher_id", handwasher_lspid);
+                Intent intent = new Intent(NotificationOnClick.this, ViewLaundryDetails.class);
+                intent.putExtras(extras);
+                startActivity(intent);
+            }
+        });
         allCategory();
     }
 

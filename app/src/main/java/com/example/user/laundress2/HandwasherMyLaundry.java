@@ -119,7 +119,7 @@ public class HandwasherMyLaundry extends Fragment {
         });
         dialogBuilder.setNegativeButton("Skip", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
-                //pass
+                updateTransactionFinish();
             }
         });
         AlertDialog b = dialogBuilder.create();

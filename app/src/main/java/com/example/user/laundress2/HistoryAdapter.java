@@ -2,6 +2,8 @@ package com.example.user.laundress2;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +40,7 @@ public class HistoryAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         LayoutInflater layoutInflater = ((Activity) context).getLayoutInflater();
         itemHolder = new HistoryAdapter.ItemHolder();
         convertView = layoutInflater.inflate(R.layout.clienthistory_adapter, parent, false);
@@ -50,7 +52,11 @@ public class HistoryAdapter extends BaseAdapter {
         itemHolder.btnviewlaundrydet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Bundle extras = new Bundle();
+                extras.putInt("trans_No",historyLists.get(position).getTrans_No());
+                Intent intent = new Intent(context, ViewLaundryDetails.class);
+                intent.putExtras(extras);
+                context.startActivity(intent);
             }
         });
         itemHolder.date.setText(historyLists.get(position).getDate());

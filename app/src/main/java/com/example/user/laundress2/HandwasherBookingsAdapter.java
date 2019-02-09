@@ -74,6 +74,11 @@ public class HandwasherBookingsAdapter extends BaseAdapter {
         itemHolder.btnviewlaundry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Bundle extras = new Bundle();
+                extras.putInt("trans_No", handwasherBookingsList.getTrans_no());
+                Intent intent = new Intent(context, ViewLaundryDetails.class);
+                intent.putExtras(extras);
+                context.startActivity(intent);
 
             }
         });

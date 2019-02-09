@@ -4,6 +4,8 @@
         android:title="My Ratings"/>
     <item android:id="@+id/laundryservices"
         android:title="My Laundry Services"/>
+    <item android:id="@+id/myclient"
+        android:title="My Clients"/>
     <item android:id="@+id/mypost"
         android:title="My Post"/>
     <item android:id="@+id/account"

@@ -101,7 +101,7 @@ public class ClientMyLaundry extends Fragment {
                     Bundle extras = new Bundle();
                     extras.putString("client_name", client_name);
                     extras.putInt("client_id", client_id);
-                    Intent intent = new Intent(getContext(), FindLaundryServiceProv.class);
+                    Intent intent = new Intent(getActivity(), FindLaundryServiceProv.class);
                    /* intent.putExtra("client_name", getClientName());
                     intent.putExtra("client_id", getClientId());*/
                     intent.putExtras(extras);
@@ -118,16 +118,46 @@ public class ClientMyLaundry extends Fragment {
             btnvielaunddetails.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Bundle extras = new Bundle();
+                    extras.putInt("trans_No",trans_No);
+                    Intent intent = new Intent(getActivity(), ViewLaundryDetails.class);
+                    intent.putExtras(extras);
+                    startActivity(intent);
 
                 }
             });
             btnviewreqdet.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    Bundle extras = new Bundle();
+                    extras.putInt("trans_No",trans_No);
+                    Intent intent = new Intent(getActivity(), ViewRequestDetails.class);
+                    intent.putExtras(extras);
+                    startActivity(intent);
                 }
             });
             //End pending buttons
+        btnviewdet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle extras = new Bundle();
+                extras.putInt("trans_No",trans_No);
+                Intent intent = new Intent(getActivity(), ViewLaundryDetails.class);
+                intent.putExtras(extras);
+                startActivity(intent);
+
+            }
+        });
+        btnviewreq.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle extras = new Bundle();
+                extras.putInt("trans_No",trans_No);
+                Intent intent = new Intent(getActivity(), ViewRequestDetails.class);
+                intent.putExtras(extras);
+                startActivity(intent);
+            }
+        });
         return rootView;
     }
 

@@ -55,7 +55,7 @@ public class HandwasherNotifAdapter extends BaseAdapter {
             itemHolder.status.setText("You Missed the Service.");
         }else if(message.equals("Finished")){
             itemHolder.name.setText(handwasherNotifLists.get(position).getClient_name());
-            itemHolder.status.setText("Laundry Service is finished. \n" +handwasherNotifLists.get(position).getClient_name()+" has rated you");
+            itemHolder.status.setText(handwasherNotifLists.get(position).getClient_name()+" has rated you");
             itemHolder.ratings.setVisibility(View.VISIBLE);
             itemHolder.ratings.setRating(handwasherNotifLists.get(position).getRate());
         }
