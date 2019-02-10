@@ -64,12 +64,6 @@ public class ViewLaundryDetails extends AppCompatActivity {
                                     llhori.setOrientation(LinearLayout.HORIZONTAL);
                                     llhori.setPadding(5, 5, 5, 5);
 
-                                    TextView tv = new TextView(ViewLaundryDetails.this);
-                                    tv.setText(detail_Count);
-                                    tv.setLayoutParams(params);
-                                    tv.setGravity(Gravity.CENTER);
-                                    llhori.addView(tv);
-
                                     TextView tv1 = new TextView(ViewLaundryDetails.this);
                                     tv1.setText(cinv_ItemTag);
                                     tv1.setLayoutParams(params);
@@ -79,9 +73,17 @@ public class ViewLaundryDetails extends AppCompatActivity {
                                     TextView tv2 = new TextView(ViewLaundryDetails.this);
                                     tv2.setText(description);
                                     tv2.setLayoutParams(params);
-                                    tv1.setGravity(Gravity.CENTER);
+                                    tv2.setGravity(Gravity.CENTER);
                                     llhori.addView(tv2);
                                     llverti.addView(llhori);
+
+                                    TextView tv = new TextView(ViewLaundryDetails.this);
+                                    tv.setText(detail_Count);
+                                    tv.setLayoutParams(params);
+                                    tv.setGravity(Gravity.CENTER);
+                                    llhori.addView(tv);
+
+
 
                                    // Toast.makeText(ViewLaundryDetails.this, "detail_Count " + detail_Count+" cinv_ItemTag "+cinv_ItemTag+" description" +description,  Toast.LENGTH_SHORT).show();
                                 }

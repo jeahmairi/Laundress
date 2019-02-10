@@ -61,7 +61,18 @@
             <ListView
                 android:id="@+id/lvlaundryshop"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:visibility="gone"/>
+            <ListView
+                android:id="@+id/lvcheap"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"></ListView>
+            <ListView
+                android:id="@+id/lvrecommended"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"></ListView>
         </LinearLayout>
 
     </LinearLayout>

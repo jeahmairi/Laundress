@@ -79,12 +79,13 @@ public class HandwasherBookings extends Fragment {
                             if (success.equals("1")){
                                 for (int i =0;i<jsonArray2.length();i++)
                                 {
-                                    String name=jsonArray2.getJSONObject(i).getString("handwasher_LName").toString();
+                                    String name=jsonArray2.getJSONObject(i).getString("name").toString();
                                     String services = jsonArray2.getJSONObject(i).getString("trans_Service").toString();
                                     String extraservices = jsonArray2.getJSONObject(i).getString("trans_ExtService").toString();
                                     String servicetype = jsonArray2.getJSONObject(i).getString("trans_ServiceType").toString();
                                     String weight = jsonArray2.getJSONObject(i).getString("trans_EstWeight").toString();
                                     String datetime = jsonArray2.getJSONObject(i).getString("trans_EstDateTime").toString();
+                                    String client_Photo = jsonArray2.getJSONObject(i).getString("client_Photo").toString();
                                     int trans_No = Integer.parseInt(jsonArray2.getJSONObject(i).getString("trans_No").toString());
                                     int lsp_id = Integer.parseInt(jsonArray2.getJSONObject(i).getString("lsp_ID").toString());
                                     int handwasher_id = Integer.parseInt(jsonArray2.getJSONObject(i).getString("handwasher_ID").toString());
@@ -98,6 +99,7 @@ public class HandwasherBookings extends Fragment {
                                     handwasherBookingsList.setServicetype(servicetype);
                                     handwasherBookingsList.setWeight(weight);
                                     handwasherBookingsList.setDatetime(datetime);
+                                    handwasherBookingsList.setImage(client_Photo);
                                     handwasherBookingsLists.add(handwasherBookingsList);
                                 }
                                 handwasherBookingsAdapter = new HandwasherBookingsAdapter(context,handwasherBookingsLists);

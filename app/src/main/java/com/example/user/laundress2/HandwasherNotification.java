@@ -114,6 +114,7 @@ public class HandwasherNotification extends AppCompatActivity {
                                     int trans_No= Integer.parseInt(jsonArray.getJSONObject(i).getString("trans_No").toString());
                                     client_name = jsonArray.getJSONObject(i).getString("client_name");
                                     String table = jsonArray.getJSONObject(i).getString("fromtable");
+                                    String client_Photo = jsonArray.getJSONObject(i).getString("client_Photo");
                                     if(notification_Message.equals("Pending") || notification_Message.equals("Missed") || notification_Message.equals("Finished")){
                                         Toast.makeText(HandwasherNotification.this, "sud " + notification_Message, Toast.LENGTH_SHORT).show();
 
@@ -152,6 +153,7 @@ public class HandwasherNotification extends AppCompatActivity {
                                                         extras.putInt("handwasher_lspid", handwasher_lspid);
                                                         extras.putString("client_name", handwasherNotifLists.get(position).getClient_name());
                                                         extras.putString("notif_message", handwasherNotifLists.get(position).getNotification_message());
+                                                        extras.putString("image", handwasherNotifLists.get(position).getImage());
                                                         extras.putInt("trans_no", handwasherNotifLists.get(position).getTrans_no());
                                                         extras.putInt("client_id", handwasherNotifLists.get(position).getClient_id());
                                                         //extras.putString("client_name", client_name);
@@ -167,6 +169,7 @@ public class HandwasherNotification extends AppCompatActivity {
                                         handwasherNotifList.setNotification_message(notification_Message);
                                         handwasherNotifList.setClient_name(client_name);
                                         handwasherNotifList.setTable(table);
+                                        handwasherNotifList.setImage(client_Photo);
                                         handwasherNotifLists.add(handwasherNotifList);
                                     }
                                 }

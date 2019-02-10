@@ -81,7 +81,7 @@ public class ClientMyLaundry extends Fragment {
         btnviewdet = rootView.findViewById(R.id.btnviewdet);
         btnviewreq = rootView.findViewById(R.id.btnviewreq);
 
-        Toast.makeText(getContext(),"Name MyLaundry" +client_name+ "ID " +client_id, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getContext(),"Name MyLaundry" +client_name+ "ID " +client_id, Toast.LENGTH_SHORT).show();
             laundrydetails.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -217,8 +217,8 @@ public class ClientMyLaundry extends Fragment {
                                     trans_No = Integer.parseInt(object.getString("trans_No").trim());
                                     String shop_id = object.getString("shop_ID");
                                     String handwasher_id = object.getString("handwasher_ID");
-                                    Toast.makeText(getActivity(), "shop_id " +shop_id, Toast.LENGTH_SHORT).show();
-                                    Toast.makeText(getActivity(), "handwasher_id " +handwasher_id, Toast.LENGTH_SHORT).show();
+                                    //Toast.makeText(getActivity(), "shop_id " +shop_id, Toast.LENGTH_SHORT).show();
+                                    //Toast.makeText(getActivity(), "handwasher_id " +handwasher_id, Toast.LENGTH_SHORT).show();
                                     if(!handwasher_id.isEmpty()){
                                          handwasher_Name = object.getString("handwasher_LName").trim();
                                          handwasher_Address = object.getString("handwasher_Address").trim();
@@ -328,10 +328,10 @@ public class ClientMyLaundry extends Fragment {
                                         btnviewreq.setVisibility(View.VISIBLE);
                                         time.setText(trans_Status);
                                     }
-                                        Toast.makeText(getActivity(), "trans_Status " + trans_Status, Toast.LENGTH_SHORT).show();
+                                        //Toast.makeText(getActivity(), "trans_Status " + trans_Status, Toast.LENGTH_SHORT).show();
                                 }
                             } else if (success.equals("0")) {
-                                Toast.makeText(getActivity(), "failed: ", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), "No Boookings", Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

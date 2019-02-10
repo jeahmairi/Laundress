@@ -6,8 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -41,6 +44,7 @@ public class HandwasherNotifAdapter extends BaseAdapter {
         LayoutInflater layoutInflater = ((Activity) context).getLayoutInflater();
         itemHolder = new HandwasherNotifAdapter.ItemHolder();
         convertView = layoutInflater.inflate(R.layout.handwashernotif_adapter, parent, false);
+        itemHolder.photo = convertView.findViewById(R.id.photo);
         itemHolder.name = (TextView) convertView.findViewById(R.id.name);
         itemHolder.status = (TextView) convertView.findViewById(R.id.status);
         itemHolder.ratings = convertView.findViewById(R.id.ratings);
@@ -49,6 +53,7 @@ public class HandwasherNotifAdapter extends BaseAdapter {
         itemHolder.name.setText(handwasherNotifLists.get(position).getClient_name());
        // itemHolder.status.setText(handwasherNotifLists.get(position).getNotification_message());
         String message = handwasherNotifLists.get(position).getNotification_message();
+        Picasso.get().load(handwasherNotifLists.get(position).getImage()).into(itemHolder.photo);
         if(message.equals("Pending")){
             itemHolder.status.setText("Requested your service.");
         }else if(message.equals("Missed")){
@@ -65,6 +70,7 @@ public class HandwasherNotifAdapter extends BaseAdapter {
     }
 
     private class ItemHolder {
+        ImageView photo;
         TextView name, status;
         RatingBar ratings;
     }

@@ -7,6 +7,7 @@ public class HandwasherBookingsList {
     private String servicetype;
     private String datetime;
     private String weight;
+    private String image;
     private int client_id;
     private int trans_no;
     private int lsp_id;
@@ -90,5 +91,13 @@ public class HandwasherBookingsList {
 
     public void setHandwasher_id(int handwasher_id) {
         this.handwasher_id = handwasher_id;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class HandwasherAdapter extends BaseAdapter {
@@ -49,6 +51,7 @@ public class HandwasherAdapter extends BaseAdapter {
             itemHolder.contact = (TextView) convertView.findViewById(R.id.hwcont);
             itemHolder.meters = (TextView) convertView.findViewById(R.id.hwmeters);
             itemHolder.choose = convertView.findViewById(R.id.btnchoose);
+
             final HandwasherList handwasherList = handwasherLists.get(position);
             itemHolder.choose.setOnClickListener(new View.OnClickListener() {
                 @Override

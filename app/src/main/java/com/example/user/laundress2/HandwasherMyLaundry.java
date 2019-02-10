@@ -26,6 +26,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -228,12 +229,14 @@ public class HandwasherMyLaundry extends Fragment {
                                     String caddress = object.getString("client_Address").trim();
                                     String cnumber = object.getString("client_Contact").trim();
                                     String cdatetime = object.getString("trans_EstDateTime").trim();
+                                    String client_Photo = object.getString("client_Photo").trim();
                                     trans_Status = object.getString("trans_Status").trim();
                                     trans_No = Integer.parseInt(object.getString("trans_No"));
                                     client_ID = Integer.parseInt(object.getString("client_ID"));
 
                                     //Toast.makeText(getActivity(), "sud" + trans_Status, Toast.LENGTH_SHORT).show();
                                     if(trans_Status.equals("Confirmed")){
+                                        Picasso.get().load(client_Photo).into(picture);
                                         aname.setText(name);
                                         address.setText(caddress);
                                         number.setText(cnumber);
@@ -263,7 +266,7 @@ public class HandwasherMyLaundry extends Fragment {
                                         datetime.setVisibility(View.GONE);
                                         time.setVisibility(View.GONE);
                                         finish.setVisibility(View.GONE);
-                                        Toast.makeText(getActivity(), "sud" + trans_Status, Toast.LENGTH_SHORT).show();
+                                        //Toast.makeText(getActivity(), "sud" + trans_Status, Toast.LENGTH_SHORT).show();
                                         section_label.setVisibility(View.VISIBLE);
                                         section_label2.setVisibility(View.VISIBLE);
                                     }

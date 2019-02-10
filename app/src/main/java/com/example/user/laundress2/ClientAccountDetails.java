@@ -3,16 +3,21 @@ package com.example.user.laundress2;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.TokenWatcher;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -26,11 +31,14 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -46,11 +54,15 @@ public class ClientAccountDetails extends AppCompatActivity {
     RadioGroup radiogender;
     LinearLayout layoutgender;
     DatePickerDialog picker;
+    ImageView profilepic;
     private static final String URL_ALL ="http://192.168.254.117/laundress/laundryclientdetails.php";
     //private static final String URL_ALL ="http://192.168.1.12/laundress/laundryclientdetails.php";
     private static final String URL_UPDATE_PROFILE ="http://192.168.254.117/laundress/laundryclientupdateprofile.php";
     //private static final String URL_UPDATE_PROFILE ="http://192.168.1.12/laundress/laundryclientupdateprofile.php";
     private static final String URL_UPDATE_ACCOUNT ="http://192.168.254.117/laundress/laundryclientupdateaccount.php";
+    private Uri imagePath;
+    private Bitmap bitmap;
+
     //private static final String URL_UPDATE_ACCOUNT ="http://192.168.1.12/laundress/laundryclientupdateaccount.php";
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -77,8 +89,8 @@ public class ClientAccountDetails extends AppCompatActivity {
         Bundle extras = intent.getExtras();
         client_name = extras.getString("client_name");
         client_id = extras.getInt("client_id");
-         layoutgender = findViewById(R.id.linearLayout1);
-
+        layoutgender = findViewById(R.id.linearLayout1);
+        profilepic = findViewById(R.id.profilepic);
         fname = findViewById(R.id.firstname);
         midname = findViewById(R.id.middlename);
         lname = findViewById(R.id.lastname);
@@ -105,6 +117,15 @@ public class ClientAccountDetails extends AppCompatActivity {
         btnsaveupdate = findViewById(R.id.saveprofile);
         btnupdateaccount = findViewById(R.id.updateaccount);
         btnsaveaccount = findViewById(R.id.saveaccount);
+        profilepic.setEnabled(false);
+        profilepic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent photoIntent = new Intent(Intent.ACTION_GET_CONTENT);
+                photoIntent.setType("image/*");
+                startActivityForResult(photoIntent, 1);
+            }
+        });
 
         bdate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -138,6 +159,7 @@ public class ClientAccountDetails extends AppCompatActivity {
                 btnupdate.setVisibility(View.GONE);
                 btnupdateaccount.setVisibility(View.GONE);
                 btnsaveupdate.setVisibility(View.VISIBLE);
+                profilepic.setEnabled(true);
 
             }
         });
@@ -189,6 +211,7 @@ public class ClientAccountDetails extends AppCompatActivity {
                 btnupdateaccount.setVisibility(View.GONE);
                 btnsaveupdate.setVisibility(View.GONE);
                 btnsaveaccount.setVisibility(View.VISIBLE);
+
 
             }
         });
@@ -339,10 +362,11 @@ public class ClientAccountDetails extends AppCompatActivity {
         final String bdate = this.bdate.getText().toString().trim();
         final String phonenumber = this.contact.getText().toString().trim();
         final String gender = this.genders.trim();
+        final String profile = imageToString(bitmap);
         //final String gender = this.radioButton.getText().toString().trim();
         //final String email = this.email.getText().toString().trim();
         //final String password = this.password.getText().toString().trim();
-      //  Toast.makeText(ClientAccountDetails.this, "bdate" +bdate, Toast.LENGTH_SHORT).show();
+        //  Toast.makeText(ClientAccountDetails.this, "bdate" +bdate, Toast.LENGTH_SHORT).show();
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_UPDATE_PROFILE,
                 new Response.Listener<String>() {
                     @Override
@@ -383,6 +407,7 @@ public class ClientAccountDetails extends AppCompatActivity {
                 params.put("bdate", bdate);
                 params.put("gender", gender);
                 params.put("phonenumber", phonenumber);
+                params.put("profilepic", profile);
                 params.put("client_id", String.valueOf(client_id));
                 return params;
             }
@@ -413,6 +438,7 @@ public class ClientAccountDetails extends AppCompatActivity {
                     String client_bdate=jsonArray.getJSONObject(i).getString("client_bdate").toString();
                     String client_gender=jsonArray.getJSONObject(i).getString("client_gender").toString();
                     String client_email=jsonArray.getJSONObject(i).getString("client_email").toString();
+                    String client_Photo=jsonArray.getJSONObject(i).getString("client_Photo").toString();
 
                     if(client_gender.equals("M")) {
                         radiogender.check(R.id.radioMale);
@@ -432,6 +458,7 @@ public class ClientAccountDetails extends AppCompatActivity {
                     contact.setText(client_contact);
                     contact.setEnabled(false);
                     email.setText(client_email);
+                    Picasso.get().load(client_Photo).into(profilepic);
 
                 }
             } else if(success.equals("0")) {
@@ -443,5 +470,23 @@ public class ClientAccountDetails extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1 && resultCode == RESULT_OK && data != null) {
+            try {
+                imagePath = data.getData();
+                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imagePath);
+                profilepic.setImageBitmap(bitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
+    public String imageToString(Bitmap bitmap) {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+        byte[] imgBytes = byteArrayOutputStream.toByteArray();
+        return Base64.encodeToString(imgBytes, Base64.DEFAULT);
+    }
 }

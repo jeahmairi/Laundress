@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +18,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,6 +29,7 @@ import java.util.Map;
 
 public class NotificationOnClick extends AppCompatActivity {
     TextView status, name, extraservice, servicereq, servicetype, weight;
+    ImageView photo;
     EditText estdatetime;
     String client_name,notif_message;
     Button accept, decline, btnviewdet;
@@ -36,6 +39,8 @@ public class NotificationOnClick extends AppCompatActivity {
     private static final String URL_ALL ="http://192.168.254.117/laundress/alltrans.php";
     private static final String URL_ALL_UPDATE ="http://192.168.254.117/laundress/updatetrans.php";
     private static final String URL_ALL_UPDATE_DECLINE ="http://192.168.254.117/laundress/updatetransdecline.php";
+    private String image;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,17 +55,20 @@ public class NotificationOnClick extends AppCompatActivity {
         accept = findViewById(R.id.accept);
         decline = findViewById(R.id.decline);
         btnviewdet = findViewById(R.id.btnviewdet);
+        photo = findViewById(R.id.photo);
 
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         client_name = extras.getString("client_name");
         notif_message = extras.getString("notif_message");
+        image = extras.getString("image");
         trans_no = extras.getInt("trans_no");
         client_id = extras.getInt("client_id");
         handwasher_name = extras.getString("handwasher_name");
         handwasher_id = extras.getInt("handwasher_id");
         handwasher_lspid = extras.getInt("handwasher_lspid");
         name.setText(client_name);
+        Picasso.get().load(image).into(photo);
         if(notif_message.equals("Missed")){
             accept.setVisibility(View.GONE);
             decline.setVisibility(View.GONE);

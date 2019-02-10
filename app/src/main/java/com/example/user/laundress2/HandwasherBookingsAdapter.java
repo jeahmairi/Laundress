@@ -9,7 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -43,6 +46,7 @@ public class HandwasherBookingsAdapter extends BaseAdapter {
         LayoutInflater layoutInflater = ((Activity) context).getLayoutInflater();
         itemHolder = new HandwasherBookingsAdapter.ItemHolder();
         convertView = layoutInflater.inflate(R.layout.handwasherbooking_adapter, parent, false);
+        itemHolder.photo = (ImageView) convertView.findViewById(R.id.photo);
         itemHolder.name = (TextView) convertView.findViewById(R.id.name);
         itemHolder.servicereq = (TextView) convertView.findViewById(R.id.servicereq);
         itemHolder.extraservice = (TextView) convertView.findViewById(R.id.extraservice);
@@ -58,6 +62,7 @@ public class HandwasherBookingsAdapter extends BaseAdapter {
         itemHolder.weight.setText(handwasherBookingsLists.get(position).getWeight());
         itemHolder.datetime.setText(handwasherBookingsLists.get(position).getDatetime());
         final HandwasherBookingsList handwasherBookingsList = handwasherBookingsLists.get(position);
+        Picasso.get().load(handwasherBookingsList.getImage()).into(itemHolder.photo );
         itemHolder.btnconfirmreq.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,6 +95,7 @@ public class HandwasherBookingsAdapter extends BaseAdapter {
         return convertView;
     }
     private class ItemHolder {
+        ImageView photo;
         TextView name, servicereq, extraservice, servicetype, weight, datetime;
         Button btnviewlaundry, btnconfirmreq;
 

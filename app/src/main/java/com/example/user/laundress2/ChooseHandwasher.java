@@ -39,6 +39,8 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.json.JSONObject.NULL;
+
 public class ChooseHandwasher extends AppCompatActivity {
     ArrayList<String> allServiceOffered = new ArrayList<>();
     ArrayList<String> allExtraServices = new ArrayList<>();
@@ -48,12 +50,13 @@ public class ChooseHandwasher extends AppCompatActivity {
     TextView name, contact, ageval, civilstat, lsserviceprice;
     RatingBar setRatingBar;
     RadioGroup servicetyperadio;
-    Button btnLocation , btnbookrequest;
+    Button btnLocation , btnbookrequest, btnviewclients;
     private DatePickerDialog datepicker;
     private TimePickerDialog timepicker;
     LinearLayout llextras, llservice, llserviceoff;
     String client_name, estdate, esttime, service,estdatetime, allservice, allxtraservice, weight;
     int lsp_id, client_id ;
+    float average = 0;
     final Context context = this;
     private static final String URL_ALL_SERVICE_TYPE="http://192.168.254.117/laundress/allhandwasherservtype.php";
     private static final String URL_ALL_SERVICES="http://192.168.254.117/laundress/allhandwasherservices.php";
@@ -78,7 +81,28 @@ public class ChooseHandwasher extends AppCompatActivity {
         estdateandtime = findViewById(R.id.estdateandtime);
         civilstat = findViewById(R.id.civilstat);
         lsweight = findViewById(R.id.lsweight);
+        btnviewclients = findViewById(R.id.btnviewclients);
         btnLocation = findViewById(R.id.btnlocation);
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
+        isname = extras.getString("name");
+        iscontact = extras.getString("contact");
+        location = extras.getString("location");
+        lsp_id = extras.getInt("lsp_id");
+        client_id = extras.getInt("client_id");
+        btnviewclients.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle extras = new Bundle();
+                extras.putString("handwasher_name",isname);
+                extras.putString("handwasher_location", location);
+                extras.putString("handwasher_contact", iscontact);
+                extras.putInt("lsp_id", lsp_id);
+                Intent intent = new Intent(context, ViewClients.class);
+                intent.putExtras(extras);
+                startActivity(intent);
+            }
+        });
         btnLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -160,28 +184,23 @@ public class ChooseHandwasher extends AppCompatActivity {
         cb2.setText("Tutlane2");
         cb2.setChecked(true);
         llextras.addView(cb2);*/
-        Intent intent = getIntent();
-        Bundle extras = intent.getExtras();
-        isname = extras.getString("name");
-        iscontact = extras.getString("contact");
-        location = extras.getString("location");
-        lsp_id = extras.getInt("lsp_id");
-        client_id = extras.getInt("client_id");
+
         /*CheckBox cb = new CheckBox(ChooseHandwasher.this);
         cb.setText(isname);
         cb.setChecked(false);
         llservice.addView(cb);*/
         name.setText(isname);
         contact.setText(iscontact);
-        setRatingBar.setRating((float) 2.5);
-        Toast.makeText(ChooseHandwasher.this, "lsp_id: "+lsp_id+"  client_id "+client_id, Toast.LENGTH_SHORT).show();
-        allhandwasher();
-       allServices();
-       allServiceOffered();
-       allServiceType();
-       allExtraService();
-    }
 
+        //Toast.makeText(ChooseHandwasher.this, "lsp_id: "+lsp_id+"  client_id "+client_id, Toast.LENGTH_SHORT).show();
+
+        allhandwasher();
+        allServices();
+        allServiceOffered();
+        allServiceType();
+        allExtraService();
+
+    }
     private void allServices() {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_ALL_SERVICES,
                 new Response.Listener<String>() {
@@ -202,7 +221,7 @@ public class ChooseHandwasher extends AppCompatActivity {
                                     //Toast.makeText(ChooseHandwasher.this, "service offered" + name,  Toast.LENGTH_SHORT).show();
                                 }
                             } else if(success.equals("0")){
-                                Toast.makeText(ChooseHandwasher.this, "No data",  Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(ChooseHandwasher.this, "No data",  Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e){
                             e.printStackTrace();;
@@ -248,15 +267,17 @@ public class ChooseHandwasher extends AppCompatActivity {
                                     contacts=jsonArray2.getJSONObject(i).getString("contact").toString();
                                     age=jsonArray2.getJSONObject(i).getString("age").toString();
                                     civilstatus=jsonArray2.getJSONObject(i).getString("civilstat").toString();
+                                    average= Float.parseFloat(jsonArray2.getJSONObject(i).getString("rate").toString());
                                     name.setText(names);
                                     contact.setText(contacts);
                                     ageval.setText(age);
                                     civilstat.setText(civilstatus);
+                                    setRatingBar.setRating(Float.parseFloat(String.format("%.2f", new Float(average).floatValue())));
                                     //Toast.makeText(ChooseHandwasher.this, "service offered" + name,  Toast.LENGTH_SHORT).show();
 
                                 }
                             } else if(success.equals("0")){
-                                Toast.makeText(ChooseHandwasher.this, "No data",  Toast.LENGTH_SHORT).show();
+                               // Toast.makeText(ChooseHandwasher.this, "No data",  Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e){
                             e.printStackTrace();;
@@ -315,7 +336,7 @@ public class ChooseHandwasher extends AppCompatActivity {
 
                                 }
                             } else if(success.equals("0")){
-                                Toast.makeText(ChooseHandwasher.this, "No data",  Toast.LENGTH_SHORT).show();
+                               // Toast.makeText(ChooseHandwasher.this, "No data",  Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e){
                             e.printStackTrace();;
@@ -381,7 +402,7 @@ public class ChooseHandwasher extends AppCompatActivity {
 
                                 }
                             } else if(success.equals("0")){
-                                Toast.makeText(ChooseHandwasher.this, "No data",  Toast.LENGTH_SHORT).show();
+                               // Toast.makeText(ChooseHandwasher.this, "No data",  Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e){
                             e.printStackTrace();;
@@ -449,7 +470,7 @@ public class ChooseHandwasher extends AppCompatActivity {
 
                                 }
                             } else if(success.equals("0")){
-                                Toast.makeText(ChooseHandwasher.this, "No data",  Toast.LENGTH_SHORT).show();
+                               // Toast.makeText(ChooseHandwasher.this, "No data",  Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e){
                             e.printStackTrace();;
