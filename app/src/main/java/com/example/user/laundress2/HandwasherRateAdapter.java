@@ -6,18 +6,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class ClientRateAdapter extends BaseAdapter {
+public class HandwasherRateAdapter extends BaseAdapter {
     Context context;
-    ClientRateAdapter.ItemHolder itemHolder;
+    HandwasherRateAdapter.ItemHolder itemHolder;
     ArrayList<RateList> rateLists = new ArrayList<RateList>();
 
-    public ClientRateAdapter(Context context, ArrayList<RateList> rateLists) {
+    public HandwasherRateAdapter(Context context, ArrayList<RateList> rateLists) {
         this.context = context;
         this.rateLists = rateLists;
     }
@@ -40,7 +39,7 @@ public class ClientRateAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater layoutInflater = ((Activity) context).getLayoutInflater();
-        itemHolder = new ClientRateAdapter.ItemHolder();
+        itemHolder = new HandwasherRateAdapter.ItemHolder();
         convertView = layoutInflater.inflate(R.layout.clientrate_adapter, parent, false);
         itemHolder.name = (TextView) convertView.findViewById(R.id.name);
         itemHolder.postdate = (TextView) convertView.findViewById(R.id.postdate);
@@ -50,7 +49,7 @@ public class ClientRateAdapter extends BaseAdapter {
 
         itemHolder.name.setText(rateLists.get(position).getName());
         itemHolder.postdate.setText(rateLists.get(position).getDate());
-        itemHolder.ratings.setRating(rateLists.get(position).getOverall());
+        itemHolder.ratings.setRating(rateLists.get(position).getRating());
         itemHolder.comment.setText(rateLists.get(position).getComment());
 
         return convertView;

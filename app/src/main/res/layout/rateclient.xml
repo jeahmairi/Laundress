@@ -65,7 +65,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="Overall Reting"
+            android:text="Overall Rating"
             android:textSize="20sp"
             android:textStyle="bold" />
 

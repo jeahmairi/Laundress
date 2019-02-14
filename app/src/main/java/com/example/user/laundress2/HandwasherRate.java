@@ -45,7 +45,7 @@ public class HandwasherRate extends AppCompatActivity {
     float rating;
     int pos, rate_no;
     int handwasher_id, handwasher_lspid;
-    ClientRateAdapter clientRateAdapter;
+    HandwasherRateAdapter clientRateAdapter;
     ArrayList<RateList> rateLists = new ArrayList<RateList>();
     private static final String URL_ALL ="http://192.168.254.117/laundress/allratehandwasher.php";
     private static final String URL_UPDATE ="http://192.168.254.117/laundress/updateratehandwasher.php";
@@ -133,7 +133,7 @@ public class HandwasherRate extends AppCompatActivity {
                                 ratings.setRating(average);
                                 String ave = String.valueOf(average);
                                 rateval.setText(ave);
-                                clientRateAdapter = new ClientRateAdapter(HandwasherRate.this,rateLists);
+                                clientRateAdapter = new HandwasherRateAdapter(HandwasherRate.this,rateLists);
                                 allratings.setAdapter(clientRateAdapter);
                                 //Toast.makeText(ClientRate.this, "trans_Status " + trans_Status, Toast.LENGTH_SHORT).show();
 
