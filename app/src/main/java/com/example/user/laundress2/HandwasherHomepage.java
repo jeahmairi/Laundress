@@ -80,9 +80,7 @@ public class HandwasherHomepage extends AppCompatActivity implements NavigationV
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.chat) {
-            return true;
-        } else if(id == R.id.notification){
+        if(id == R.id.notification){
             Bundle extras = new Bundle();
             extras.putString("handwasher_name",handwasher_name);
             extras.putInt("handwasher_id", handwasher_id);

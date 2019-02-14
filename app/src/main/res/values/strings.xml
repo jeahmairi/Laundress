@@ -8,6 +8,7 @@
 
     <string name="chb_servoff_laund">Laundry</string>
     <string name="chb_servoff_laundry">Drying</string>
+    <string name="chb_servoff_laundry_and_dry">Laundry and Drying</string>
 
     <string name="chb_extra_iron">Ironing</string>
     <string name="chb_extra_fold">Folding</string>
@@ -59,6 +60,10 @@
     <string-array name="unitofmeasure">
         <item>per Kilo</item>
         <item>per Bundle</item>
+    </string-array>
+    <string-array name="unitofmeasureadd">
+        <item>Additional</item>
+        <item>Additional per Kilo</item>
     </string-array>
     <string name="title_activity_client_homepage">ClientHomepage</string>
     <string name="mylaundry">My Laundries</string>

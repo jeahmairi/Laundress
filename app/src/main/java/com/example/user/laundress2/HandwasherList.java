@@ -3,7 +3,9 @@ package com.example.user.laundress2;
 public class HandwasherList {
     private  String HandwasherName;
     private  String hwmeter;
+    private  String hwlocation;
     private  String contact;
+    private  String photo;
     private  int lsp_id;
     private  int client_id;
     private  double hwmeterdouble;
@@ -57,6 +59,22 @@ public class HandwasherList {
 
     public void setHwmeterdouble(double hwmeterdouble) {
         this.hwmeterdouble = hwmeterdouble;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
+    public String getHwlocation() {
+        return hwlocation;
+    }
+
+    public void setHwlocation(String hwlocation) {
+        this.hwlocation = hwlocation;
     }
 /*
     public String getPhoto() {

@@ -36,6 +36,9 @@ public class HandwasherBookings extends Fragment {
     ArrayList<HandwasherBookingsList> handwasherBookingsLists = new ArrayList<HandwasherBookingsList>();
     HandwasherBookingsAdapter handwasherBookingsAdapter;
     private static final String URL_ALL ="http://192.168.254.117/laundress/allbookingapprove.php";
+    private String name, services, extraservices, servicetype, weight, datetime, client_Photo ;
+    private int trans_No;
+    private String xtraserve, serve;
 
     public static HandwasherBookings newInstance(int handwasher_id, String handwasher_name, int handwasher_lspid) {
         HandwasherBookings handwasherBookings = new HandwasherBookings();
@@ -79,29 +82,31 @@ public class HandwasherBookings extends Fragment {
                             if (success.equals("1")){
                                 for (int i =0;i<jsonArray2.length();i++)
                                 {
-                                    String name=jsonArray2.getJSONObject(i).getString("name").toString();
-                                    String services = jsonArray2.getJSONObject(i).getString("trans_Service").toString();
-                                    String extraservices = jsonArray2.getJSONObject(i).getString("trans_ExtService").toString();
-                                    String servicetype = jsonArray2.getJSONObject(i).getString("trans_ServiceType").toString();
-                                    String weight = jsonArray2.getJSONObject(i).getString("trans_EstWeight").toString();
-                                    String datetime = jsonArray2.getJSONObject(i).getString("trans_EstDateTime").toString();
-                                    String client_Photo = jsonArray2.getJSONObject(i).getString("client_Photo").toString();
-                                    int trans_No = Integer.parseInt(jsonArray2.getJSONObject(i).getString("trans_No").toString());
+                                     name=jsonArray2.getJSONObject(i).getString("name").toString();
+                                     services = jsonArray2.getJSONObject(i).getString("trans_Service").toString();
+                                     extraservices = jsonArray2.getJSONObject(i).getString("trans_ExtService").toString();
+                                     servicetype = jsonArray2.getJSONObject(i).getString("trans_ServiceType").toString();
+                                     weight = jsonArray2.getJSONObject(i).getString("trans_EstWeight").toString();
+                                     datetime = jsonArray2.getJSONObject(i).getString("trans_EstDateTime").toString();
+                                     client_Photo = jsonArray2.getJSONObject(i).getString("client_Photo").toString();
+                                     trans_No = Integer.parseInt(jsonArray2.getJSONObject(i).getString("trans_No").toString());
                                     int lsp_id = Integer.parseInt(jsonArray2.getJSONObject(i).getString("lsp_ID").toString());
                                     int handwasher_id = Integer.parseInt(jsonArray2.getJSONObject(i).getString("handwasher_ID").toString());
-                                    HandwasherBookingsList handwasherBookingsList = new HandwasherBookingsList();
-                                    handwasherBookingsList.setName(name);
-                                    handwasherBookingsList.setLsp_id(lsp_id);
-                                    handwasherBookingsList.setHandwasher_id(handwasher_id);
-                                    handwasherBookingsList.setTrans_no(trans_No);
-                                    handwasherBookingsList.setServices(services);
-                                    handwasherBookingsList.setExtraservices(extraservices);
-                                    handwasherBookingsList.setServicetype(servicetype);
-                                    handwasherBookingsList.setWeight(weight);
-                                    handwasherBookingsList.setDatetime(datetime);
-                                    handwasherBookingsList.setImage(client_Photo);
-                                    handwasherBookingsLists.add(handwasherBookingsList);
+                                    xtraserve = xtraserve + " " +extraservices;
+                                    serve = serve + " " +services;
                                 }
+                                HandwasherBookingsList handwasherBookingsList = new HandwasherBookingsList();
+                                handwasherBookingsList.setName(name);
+                                handwasherBookingsList.setLsp_id(handwasher_lspid);
+                                handwasherBookingsList.setHandwasher_id(handwasher_id);
+                                handwasherBookingsList.setTrans_no(trans_No);
+                                handwasherBookingsList.setServices(serve);
+                                handwasherBookingsList.setExtraservices(xtraserve);
+                                handwasherBookingsList.setServicetype(servicetype);
+                                handwasherBookingsList.setWeight(weight);
+                                handwasherBookingsList.setDatetime(datetime);
+                                handwasherBookingsList.setImage(client_Photo);
+                                handwasherBookingsLists.add(handwasherBookingsList);
                                 handwasherBookingsAdapter = new HandwasherBookingsAdapter(context,handwasherBookingsLists);
                                 lvallbookings.setAdapter(handwasherBookingsAdapter);
                             }

@@ -95,7 +95,7 @@ public class HandwasherMyLaundry extends Fragment {
     public void showChangeLangDialog() {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = this.getLayoutInflater();
-        final View dialogView = inflater.inflate(R.layout.rateclient, null);
+        final View dialogView = inflater.inflate(R.layout.rate, null);
         final RatingBar rate = dialogView.findViewById(R.id.ratings);
         final EditText comment = dialogView.findViewById(R.id.comment);
         rate.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {

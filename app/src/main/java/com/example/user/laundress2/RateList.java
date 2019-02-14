@@ -3,9 +3,45 @@ package com.example.user.laundress2;
 public class RateList {
     private int rate_no;
     private String name;
-    private float rate;
+    private float accommodation;
+    private float qualityofservice;
+    private float ontime;
+    private float overall;
+    private float rating;
     private String comment;
     private String date;
+
+    public float getAccommodation() {
+        return accommodation;
+    }
+
+    public void setAccommodation(float accommodation) {
+        this.accommodation = accommodation;
+    }
+
+    public float getQualityofservice() {
+        return qualityofservice;
+    }
+
+    public void setQualityofservice(float qualityofservice) {
+        this.qualityofservice = qualityofservice;
+    }
+
+    public float getOntime() {
+        return ontime;
+    }
+
+    public void setOntime(float ontime) {
+        this.ontime = ontime;
+    }
+
+    public float getOverall() {
+        return overall;
+    }
+
+    public void setOverall(float overall) {
+        this.overall = overall;
+    }
 
     public int getRate_no() {
         return rate_no;
@@ -23,14 +59,6 @@ public class RateList {
         this.name = name;
     }
 
-    public float getRate() {
-        return rate;
-    }
-
-    public void setRate(float rate) {
-        this.rate = rate;
-    }
-
     public String getComment() {
         return comment;
     }
@@ -45,5 +73,13 @@ public class RateList {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public float getRating() {
+        return rating;
+    }
+
+    public void setRating(float rating) {
+        this.rating = rating;
     }
 }

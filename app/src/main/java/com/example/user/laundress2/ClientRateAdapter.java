@@ -50,7 +50,7 @@ public class ClientRateAdapter extends BaseAdapter {
 
         itemHolder.name.setText(rateLists.get(position).getName());
         itemHolder.postdate.setText(rateLists.get(position).getDate());
-        itemHolder.ratings.setRating(rateLists.get(position).getRate());
+        itemHolder.ratings.setRating(rateLists.get(position).getRating());
         itemHolder.comment.setText(rateLists.get(position).getComment());
 
         return convertView;

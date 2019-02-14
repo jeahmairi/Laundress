@@ -52,7 +52,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:orientation="vertical"></LinearLayout>
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/servicetype"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+    </LinearLayout>
     <TextView
         android:id="@+id/textView50"
         android:layout_width="match_parent"
@@ -68,16 +75,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:orientation="vertical"></LinearLayout>
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/estiweight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+    </LinearLayout>
+
     <TextView
         android:id="@+id/textView51"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Estimated weight"
         android:layout_marginLeft="10dp"
         android:padding="10dp"
+        android:text="Estimated Date Finished"
         android:textSize="18sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/estdatetime"

@@ -176,7 +176,7 @@ public class ClientAccountDetails extends AppCompatActivity {
                 btnupdate.setVisibility(View.VISIBLE);
                 btnupdateaccount.setVisibility(View.VISIBLE);
                 btnsaveupdate.setVisibility(View.GONE);
-
+                profilepic.setEnabled(false);
                 updateProfile();
             }
         });

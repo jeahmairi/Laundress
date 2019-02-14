@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -29,22 +30,6 @@
             android:layout_height="wrap_content"
             android:text="@string/servicetype_pickupdeliv" />
 
-        <EditText
-            android:id="@+id/pricepickdeliv"
-            android:layout_width="72dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:ems="10"
-            android:hint="Price"
-            android:inputType="number" />
-
-        <Spinner
-            android:id="@+id/unitofmeasurepick"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:entries="@array/unitofmeasure" />
-
     </LinearLayout>
 
     <LinearLayout
@@ -58,26 +43,7 @@
             android:layout_height="wrap_content"
             android:text="@string/servicetype_homeservice" />
 
-        <EditText
-            android:id="@+id/pricehome"
-            android:layout_width="72dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:ems="10"
-            android:hint="Price"
-            android:inputType="number" />
-
-        <Spinner
-            android:id="@+id/unitofmeasurehome"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:entries="@array/unitofmeasure" />
-
     </LinearLayout>
-
-
-
 
     <TextView
         android:id="@+id/textView36"
@@ -98,110 +64,160 @@
 
         <CheckBox
             android:id="@+id/laundry"
-            android:layout_width="wrap_content"
+            android:layout_width="90dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:text="@string/chb_servoff_laund" />
 
-        <CheckBox
-            android:id="@+id/laundryanddry"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/chb_servoff_laundry" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/textView38"
-            android:layout_width="173dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:padding="5dp"
-            android:text="Others : "
-            android:textColor="@android:color/black"
-            android:textStyle="bold" />
-
         <EditText
-            android:id="@+id/othersoffered"
+            android:id="@+id/pricelaundry"
+            android:layout_width="72dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:ems="10"
+            android:hint="Price"
+            android:inputType="numberDecimal" />
+
+        <Spinner
+            android:id="@+id/unitofmeasurelaundry"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="textPersonName" />
+            android:layout_marginLeft="10dp"
+            android:entries="@array/unitofmeasure" />
+
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/textView37"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:padding="10dp"
-        android:text="Extra Services"
-        android:textColor="@android:color/background_dark"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:padding="10dp">
 
-    <LinearLayout
+            <CheckBox
+                android:id="@+id/dry"
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:text="@string/chb_servoff_laundry" />
+
+            <EditText
+                android:id="@+id/pricedry"
+                android:layout_width="72dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:ems="10"
+                android:hint="Price"
+                android:inputType="numberDecimal" />
+
+            <Spinner
+                android:id="@+id/unitofmeasuredry"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:entries="@array/unitofmeasure" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <CheckBox
+                android:id="@+id/laundryanddry"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:text="@string/chb_servoff_laundry_and_dry" />
+
+            <EditText
+                android:id="@+id/pricelaundryanddry"
+                android:layout_width="51dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:ems="10"
+                android:hint="Price"
+                android:inputType="numberDecimal" />
+
+            <Spinner
+                android:id="@+id/unitofmeasurelaundryanddry"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:entries="@array/unitofmeasure" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView37"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="10dp"
+            android:text="Extra Services"
+            android:textColor="@android:color/background_dark"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <CheckBox
+                android:id="@+id/iron"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/chb_extra_iron" />
+
+            <EditText
+                android:id="@+id/priceironing"
+                android:layout_width="67dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:ems="10"
+                android:hint="Price"
+                android:inputType="numberDecimal" />
+
+            <Spinner
+                android:id="@+id/unitofmeasureiron"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:entries="@array/unitofmeasureadd" />
+        </LinearLayout>
+
+        <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="10dp">
 
-        <CheckBox
-            android:id="@+id/iron"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/chb_extra_iron" />
+            <CheckBox
+                android:id="@+id/fold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/chb_extra_fold" />
 
-        <CheckBox
-            android:id="@+id/fold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/chb_extra_fold" />
-    </LinearLayout>
+            <EditText
+                android:id="@+id/pricefolding"
+                android:layout_width="62dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:ems="10"
+                android:hint="Price"
+                android:inputType="numberDecimal" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+            <Spinner
+                android:id="@+id/unitofmeasurefold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:entries="@array/unitofmeasureadd" />
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/textView39"
-            android:layout_width="173dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:padding="5dp"
-            android:text="Others : "
-            android:textColor="@android:color/black"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/othersextra"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="textPersonName" />
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/btnset"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@color/darkBlue"
-        android:text="Set Services"
-        android:textColor="@android:color/background_light" />
-
-    <Button
+        <Button
         android:id="@+id/btnedit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -210,5 +226,14 @@
         android:text="Edit Services"
         android:textColor="@android:color/background_light"
         android:visibility="gone" />
+
+        <Button
+            android:id="@+id/btnset"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@color/darkBlue"
+            android:text="Set Services"
+            android:textColor="@android:color/background_light" />
     </LinearLayout>
 </ScrollView>

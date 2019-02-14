@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateFormat;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -45,9 +46,9 @@ public class ChooseHandwasher extends AppCompatActivity {
     ArrayList<String> allServiceOffered = new ArrayList<>();
     ArrayList<String> allExtraServices = new ArrayList<>();
     String names, address, contacts, age, civilstatus;
-    String isname, iscontact, location;
+    String isname, iscontact, locations, location;
     EditText estdateandtime, lsweight;
-    TextView name, contact, ageval, civilstat, lsserviceprice;
+    TextView name, contact, ageval, civilstat, hwmetersaway;
     RatingBar setRatingBar;
     RadioGroup servicetyperadio;
     Button btnLocation , btnbookrequest, btnviewclients;
@@ -75,11 +76,12 @@ public class ChooseHandwasher extends AppCompatActivity {
         llservice = findViewById(R.id.linearlayoutservices);
         llserviceoff= findViewById(R.id.servicesoffered);
         servicetyperadio = findViewById(R.id.servicetyperadio);
-        lsserviceprice = findViewById(R.id.lsserviceprice);
+        //lsserviceprice = findViewById(R.id.lsserviceprice);
         ageval = findViewById(R.id.ageval);
         btnbookrequest = findViewById(R.id.btnbookrequest);
         estdateandtime = findViewById(R.id.estdateandtime);
         civilstat = findViewById(R.id.civilstat);
+        hwmetersaway = findViewById(R.id.hwmetersaway);
         lsweight = findViewById(R.id.lsweight);
         btnviewclients = findViewById(R.id.btnviewclients);
         btnLocation = findViewById(R.id.btnlocation);
@@ -87,9 +89,12 @@ public class ChooseHandwasher extends AppCompatActivity {
         Bundle extras = intent.getExtras();
         isname = extras.getString("name");
         iscontact = extras.getString("contact");
+        locations = extras.getString("locations");
         location = extras.getString("location");
         lsp_id = extras.getInt("lsp_id");
         client_id = extras.getInt("client_id");
+
+        hwmetersaway.setText(location);
         btnviewclients.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,7 +113,7 @@ public class ChooseHandwasher extends AppCompatActivity {
             public void onClick(View v) {
                 Bundle extras = new Bundle();
                 extras.putString("handwasher_name",isname);
-                extras.putString("handwasher_location", location);
+                extras.putString("handwasher_location", locations);
                 extras.putString("handwasher_contact", iscontact);
                 Intent intent = new Intent(context, HandwasherLocation.class);
                 intent.putExtras(extras);
@@ -119,18 +124,23 @@ public class ChooseHandwasher extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 weight = lsweight.getText().toString();
+               // Toast.makeText(ChooseHandwasher.this, "services " +service,Toast.LENGTH_SHORT).show();
+                /*for(int i = 0; i<allServiceOffered.size(); i++){
 
-                for(int i = 0; i<allServiceOffered.size(); i++){
-
-                    allservice = allServiceOffered.get(i)+","+allservice;
-                    // Toast.makeText(ChooseLaundryShop.this, "services offered checked  " +allServiceOffered.get(i),Toast.LENGTH_SHORT).show();
+                    allservice = allServiceOffered.get(i);
+                    Toast.makeText(ChooseHandwasher.this, "services offered checked  " +allservice,Toast.LENGTH_SHORT).show();
                 }
-                //Toast.makeText(ChooseLaundryShop.this, "all services checked  " +allservice,Toast.LENGTH_SHORT).show();
+                for(int i = 0; i<allExtraServices.size(); i++){
+
+                    allxtraservice = allExtraServices.get(i);
+                    Toast.makeText(ChooseHandwasher.this, "extra services checked  " +allxtraservice,Toast.LENGTH_SHORT).show();
+                }*/
+              /*  //Toast.makeText(ChooseLaundryShop.this, "all services checked  " +allservice,Toast.LENGTH_SHORT).show();
                 for(int i = 0; i<allExtraServices.size(); i++){
                     allxtraservice = allExtraServices.get(i)+","+allxtraservice;
 
-                }
-                addLaundryTransaction(allservice, allxtraservice);
+                }*/
+                addLaundryTransaction();
                 Intent intent = new Intent(ChooseHandwasher.this, ClientHomepage.class);
                 intent.putExtra("id", client_id);
                 intent.putExtra("name", isname);
@@ -317,17 +327,19 @@ public class ChooseHandwasher extends AppCompatActivity {
                                 //CheckBox[] cbserviceoffered = new CheckBox[jsonArray2.length()];
                                 for (int i =0;i<jsonArray2.length();i++)
                                 {
+                                    int service_No= Integer.parseInt(jsonArray2.getJSONObject(i).getString("service_No").toString());
                                     String name=jsonArray2.getJSONObject(i).getString("service_Type").toString();
-                                    String price=jsonArray2.getJSONObject(i).getString("service_Price").toString();
-                                    lsserviceprice.setText(price);
+                                    //String price=jsonArray2.getJSONObject(i).getString("service_Price").toString();
+                                    //lsserviceprice.setText(price);
                                     RadioButton button = new RadioButton(ChooseHandwasher.this);
                                     button.setId(i);
                                     button.setText(name);
+                                    button.setTag(service_No);
                                     button.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                                         @Override
                                         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                                             if(isChecked){
-                                                service = buttonView.getText().toString();
+                                                service = buttonView.getTag().toString();
                                             }
                                         }
                                     });
@@ -376,28 +388,42 @@ public class ChooseHandwasher extends AppCompatActivity {
                                 //CheckBox[] cbserviceoffered = new CheckBox[jsonArray2.length()];
                                 for (int i =0;i<jsonArray2.length();i++)
                                 {
+                                    int extraserv_ID= Integer.parseInt(jsonArray2.getJSONObject(i).getString("id").toString());
                                     String name=jsonArray2.getJSONObject(i).getString("extra_service_name").toString();
+                                    String price=jsonArray2.getJSONObject(i).getString("extra_service_price").toString();
+                                    String uom=jsonArray2.getJSONObject(i).getString("extra_service_uom").toString();
+                                    LinearLayout llhori = new LinearLayout(ChooseHandwasher.this);
+                                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1);
+                                    llhori.setOrientation(LinearLayout.HORIZONTAL);
+                                    llhori.setPadding(5, 5, 5, 5);
                                     CheckBox cb = new CheckBox(ChooseHandwasher.this);
                                     cb.setText(name);
                                     cb.setChecked(false);
+                                    cb.setTag(extraserv_ID);
                                     cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                                         @Override
                                         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                                             if(isChecked){
-                                                String extraservices = buttonView.getText().toString();
+                                                int extraid = Integer.parseInt(buttonView.getTag().toString());
                                                 //Toast.makeText(ChooseLaundryShop.this, "service offered" + servicesOffered,  Toast.LENGTH_SHORT).show();
-                                                if(allExtraServices.indexOf(extraservices)< 0 ){
-                                                    allExtraServices.add(extraservices);
+                                                if(allExtraServices.indexOf(extraid)< 0 ){
+                                                    allExtraServices.add(String.valueOf(extraid));
                                                 }
                                             } else{
-                                                String extraservices = buttonView.getText().toString();
-                                                allExtraServices.remove(extraservices);
+                                                int extraid = Integer.parseInt(buttonView.getTag().toString());
+                                                allExtraServices.remove(extraid);
                                             }
                                             /*String msg = "You have " + (isChecked ? "checked" : "unchecked") + " this Check it Checkbox.";
                                             Toast.makeText(ChooseLaundryShop.this, msg, Toast.LENGTH_SHORT).show();*/
                                         }
                                     });
-                                    llextras.addView(cb);
+                                    llhori.addView(cb);
+                                    TextView tv2 = new TextView(ChooseHandwasher.this);
+                                    tv2.setText(price+" "+uom);
+                                    tv2.setLayoutParams(params);
+                                    tv2.setGravity(Gravity.CENTER);
+                                    llhori.addView(tv2);
+                                    llextras.addView(llhori);
                                     //Toast.makeText(ChooseHandwasher.this, "service offered" + name,  Toast.LENGTH_SHORT).show();
 
                                 }
@@ -444,18 +470,26 @@ public class ChooseHandwasher extends AppCompatActivity {
                                 //CheckBox[] cbserviceoffered = new CheckBox[jsonArray2.length()];
                                 for (int i =0;i<jsonArray2.length();i++)
                                 {
+                                    int seroffer_ID= Integer.parseInt(jsonArray2.getJSONObject(i).getString("id").toString());
                                     String name=jsonArray2.getJSONObject(i).getString("service_offered_name").toString();
+                                    String price=jsonArray2.getJSONObject(i).getString("service_offered_price").toString();
+                                    String uom=jsonArray2.getJSONObject(i).getString("service_offered_uom").toString();
+                                    LinearLayout llhori = new LinearLayout(ChooseHandwasher.this);
+                                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1);
+                                    llhori.setOrientation(LinearLayout.HORIZONTAL);
+                                    llhori.setPadding(5, 5, 5, 5);
                                     CheckBox cb = new CheckBox(ChooseHandwasher.this);
                                     cb.setText(name);
                                     cb.setChecked(false);
+                                    cb.setTag(seroffer_ID);
                                     cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                                         @Override
                                         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                                             if(isChecked){
-                                                String servicesOffered = buttonView.getText().toString();
+                                                int servicesOffered = Integer.parseInt(buttonView.getTag().toString());
                                                 //Toast.makeText(ChooseLaundryShop.this, "service offered" + servicesOffered,  Toast.LENGTH_SHORT).show();
                                                 if(allServiceOffered.indexOf(servicesOffered)< 0 ){
-                                                    allServiceOffered.add(servicesOffered);
+                                                    allServiceOffered.add(String.valueOf(servicesOffered));
                                                 }
                                             } else{
                                                 String servicesOffered = buttonView.getText().toString();
@@ -465,7 +499,13 @@ public class ChooseHandwasher extends AppCompatActivity {
                                             Toast.makeText(ChooseLaundryShop.this, msg, Toast.LENGTH_SHORT).show();*/
                                         }
                                     });
-                                    llservice.addView(cb);
+                                    llhori.addView(cb);
+                                    TextView tv2 = new TextView(ChooseHandwasher.this);
+                                    tv2.setText(price+" "+uom);
+                                    tv2.setLayoutParams(params);
+                                    tv2.setGravity(Gravity.CENTER);
+                                    llhori.addView(tv2);
+                                    llservice.addView(llhori);;
                                     //Toast.makeText(ChooseHandwasher.this, "service offered" + name,  Toast.LENGTH_SHORT).show();
 
                                 }
@@ -498,8 +538,30 @@ public class ChooseHandwasher extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
-    private void addLaundryTransaction(final String allservice, final String allxtraservice) {
-        // final JSONObject all = new JSONObject();
+    private void addLaundryTransaction() {
+        final JSONArray allservice = new JSONArray();
+        final JSONArray allxtraservice = new JSONArray();
+        for(int i = 0; i < allServiceOffered.size(); i++)
+        {
+            JSONObject servoffered = new JSONObject();
+            try {
+                servoffered.put("serviceoffered", allServiceOffered.get(i).toString());
+                allservice.put(servoffered);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        for(int i = 0; i < allExtraServices.size(); i++)
+        {
+            JSONObject xtraserve = new JSONObject();
+            try {
+                xtraserve.put("xtraserve", allExtraServices.get(i).toString());
+                allxtraservice.put(xtraserve);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
         final Context context = this;
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_ADD_LAUND_TRANS,
                 new Response.Listener<String>() {
@@ -531,8 +593,8 @@ public class ChooseHandwasher extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> params = new HashMap<>();
-                params.put("serviceoff", ChooseHandwasher.this.allservice);
-                params.put("extraservice", ChooseHandwasher.this.allxtraservice);
+                params.put("serviceoff", allservice.toString());
+                params.put("extraserve", allxtraservice.toString());
                 params.put("service", service);
                 params.put("estdatetime", estdatetime);
                 params.put("weight", weight);

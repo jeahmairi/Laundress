@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg"
     android:orientation="vertical">
 
     <LinearLayout
@@ -25,8 +24,8 @@
             android:ems="10"
             android:hint="First Name"
             android:inputType="textPersonName"
-            android:textColor="@color/lightBlue"
-            android:textColorHint="@android:color/background_light" />
+            android:textColor="@color/darkBlue"
+            android:textColorHint="@color/darkBlue" />
 
         <EditText
             android:id="@+id/midname"
@@ -35,8 +34,8 @@
             android:ems="10"
             android:hint="Middle Name"
             android:inputType="textPersonName"
-            android:textColor="@color/lightBlue"
-            android:textColorHint="@android:color/background_light" />
+            android:textColor="@color/darkBlue"
+            android:textColorHint="@color/darkBlue" />
 
         <EditText
             android:id="@+id/lname"
@@ -45,8 +44,8 @@
             android:ems="10"
             android:hint="Last Name"
             android:inputType="textPersonName"
-            android:textColor="@color/lightBlue"
-            android:textColorHint="@android:color/background_light" />
+            android:textColor="@color/darkBlue"
+            android:textColorHint="@color/darkBlue" />
 
         <EditText
             android:id="@+id/address"
@@ -55,8 +54,8 @@
             android:ems="10"
             android:hint="Address"
             android:inputType="textPersonName"
-            android:textColor="@color/lightBlue"
-            android:textColorHint="@android:color/background_light" />
+            android:textColor="@color/darkBlue"
+            android:textColorHint="@color/darkBlue" />
 
         <EditText
             android:id="@+id/bdate"
@@ -65,16 +64,16 @@
             android:ems="10"
             android:hint="Birthdate"
             android:inputType="date"
-            android:textColor="@color/lightBlue"
-            android:textColorHint="@android:color/background_light" />
+            android:textColor="@color/darkBlue"
+            android:textColorHint="@color/darkBlue" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/tvgender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="5dp"
             android:text="Gender"
-            android:textColor="@android:color/background_light"
+            android:textColor="@color/darkBlue"
             android:textSize="18sp" />
 
 
@@ -97,26 +96,26 @@
                     android:checked="true"
                     android:onClick="onRadioButtonClicked"
                     android:text="@string/radiomale"
-                    />
+                    android:textColor="@color/darkBlue" />
 
                 <RadioButton
                     android:id="@+id/radioFemale"
                     android:layout_width="111dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/radiofemale"
                     android:onClick="onRadioButtonClicked"
-                    />
+                    android:text="@string/radiofemale"
+                    android:textColor="@color/darkBlue" />
 
             </RadioGroup>
         </LinearLayout>
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/tvcvstat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="5dp"
             android:text="Civil Status"
-            android:textColor="@android:color/background_light"
+            android:textColor="@color/darkBlue"
             android:textSize="18sp" />
 
         <Spinner
@@ -133,46 +132,100 @@
             android:ems="10"
             android:hint="Phone Number"
             android:inputType="phone"
-            android:textColor="@color/lightBlue"
-            android:textColorHint="@android:color/background_light" />
+            android:textColor="@color/darkBlue"
+            android:textColorHint="@color/darkBlue" />
+
+        <TextView
+            android:id="@+id/tvemail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Email"
+            android:textColor="@android:color/background_dark"
+            android:visibility="gone" />
 
         <EditText
-            android:id="@+id/email"
+            android:id="@+id/emailadd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Email"
             android:inputType="textPersonName"
-            android:textColor="@color/lightBlue"
-            android:textColorHint="@android:color/background_light" />
+            android:textColor="@color/darkBlue"
+            android:textColorHint="@color/darkBlue"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tvoldpass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Old Password"
+            android:textColor="@color/darkBlue"
+            android:visibility="gone" />
 
         <EditText
-            android:id="@+id/password"
+            android:id="@+id/oldpassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Password"
             android:inputType="textPassword"
-            android:textColor="@color/lightBlue"
-            android:textColorHint="@android:color/background_light" />
+            android:textColor="@color/darkBlue"
+            android:textColorHint="@color/darkBlue"
+            android:visibility="gone" />
 
-        <ProgressBar
-            android:id="@+id/loading"
-            style="?android:attr/progressBarStyle"
-            android:visibility="gone"
+        <TextView
+            android:id="@+id/tvnewpass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:background="@android:color/transparent" />
+            android:text="New Password"
+            android:textColor="@color/darkBlue"
+            android:visibility="gone" />
+
+        <EditText
+            android:id="@+id/newpassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:textColor="@color/darkBlue"
+            android:textColorHint="@color/darkBlue"
+            android:visibility="gone" />
 
         <Button
-            android:id="@+id/register"
+            android:id="@+id/updateprofile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:background="@color/lightBlue"
-            android:text="Update Account"
+            android:text="Update Profile"
             android:textColor="@color/darkBlue" />
+
+        <Button
+            android:id="@+id/updateaccount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@color/darkBlue"
+            android:text="Update Account"
+            android:textColor="@android:color/background_light" />
+
+        <Button
+            android:id="@+id/saveprofile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@color/lightBlue"
+            android:text="Save Profile"
+            android:textColor="@color/darkBlue"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/saveaccount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@color/darkBlue"
+            android:text="Save Account"
+            android:textColor="@android:color/background_light"
+            android:visibility="gone" />
     </LinearLayout>
 
 </ScrollView>

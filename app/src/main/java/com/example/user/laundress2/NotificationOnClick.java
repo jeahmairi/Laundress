@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +36,7 @@ public class NotificationOnClick extends AppCompatActivity {
     Button accept, decline, btnviewdet;
     int trans_no, client_id;
     String handwasher_name;
+    LinearLayout llservoff, llextra;
     int handwasher_id, handwasher_lspid;
     private static final String URL_ALL ="http://192.168.254.117/laundress/alltrans.php";
     private static final String URL_ALL_UPDATE ="http://192.168.254.117/laundress/updatetrans.php";
@@ -47,8 +49,8 @@ public class NotificationOnClick extends AppCompatActivity {
         setContentView(R.layout.choosehandwashernotif);
         status = findViewById(R.id.status);
         name = findViewById(R.id.name);
-        extraservice = findViewById(R.id.extraservice);
-        servicereq = findViewById(R.id.servicereq);
+        llextra = findViewById(R.id.llextra);
+        llservoff = findViewById(R.id.llservoff);
         servicetype = findViewById(R.id.servicetype);
         weight = findViewById(R.id.weight);
         estdatetime = findViewById(R.id.estdatetime);
@@ -213,8 +215,14 @@ public class NotificationOnClick extends AppCompatActivity {
                                     if(trans_Status.equals("Pending")){
                                         status.setText("Request your service.");
                                     }
-                                    extraservice.setText(trans_ExtService);
-                                    servicereq.setText(trans_Service);
+                                    TextView tv = new TextView(NotificationOnClick.this);
+                                    tv.setText(trans_Service);
+                                    tv.setPadding(10, 10, 10, 10);
+                                    llservoff.addView(tv);
+                                    TextView tv1 = new TextView(NotificationOnClick.this);
+                                    tv1.setText(trans_ExtService);
+                                    tv1.setPadding(10, 10, 10, 10);
+                                    llextra.addView(tv1);
                                     servicetype.setText(trans_ServiceType);
                                     weight.setText(trans_EstWeight);
                                     estdatetime.setText(trans_EstDateTime);

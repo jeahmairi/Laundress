@@ -3,6 +3,7 @@ package com.example.user.laundress2;
 public class ClientPostList {
     private String post_message;
     private String post_showAddress;
+    private String contact;
     private String date;
     private int post_datetime;
 
@@ -55,5 +56,13 @@ public class ClientPostList {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
     }
 }

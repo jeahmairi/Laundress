@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -28,16 +29,38 @@ import java.util.Map;
 public class ViewRequestDetails extends AppCompatActivity {
     LinearLayout llreqserv,llxtrserv,servtype,estweight;
     EditText estdatetime;
+    TextView servicetype, estiweight;
     int trans_No;
     private static final String URL_ALL="http://192.168.254.117/laundress/viewrequestdetails.php";
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    public void onBackPressed() {
+
+        // Write your code here
+
+        super.onBackPressed();
+    }
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.viewrequestdetails);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         llreqserv = findViewById(R.id.llreqserv);
         llxtrserv = findViewById(R.id.llxtrserv);
         servtype = findViewById(R.id.servtype);
         estweight = findViewById(R.id.estweight);
+        servicetype = findViewById(R.id.servicetype);
+        estiweight = findViewById(R.id.estiweight);
         estdatetime = findViewById(R.id.estdatetime);
 
         Intent intent = getIntent();
@@ -74,14 +97,8 @@ public class ViewRequestDetails extends AppCompatActivity {
                                     tv1.setText(trans_ExtService);
                                     tv1.setPadding(10, 10, 10, 10);
                                     llxtrserv.addView(tv1);
-                                    TextView tv2 = new TextView(ViewRequestDetails.this);
-                                    tv2.setText(trans_ServiceType);
-                                    tv2.setPadding(10, 10, 10, 10);
-                                    servtype.addView(tv2);
-                                    TextView tv3 = new TextView(ViewRequestDetails.this);
-                                    tv3.setText(trans_EstWeight);
-                                    tv3.setPadding(10, 10, 10, 10);
-                                    estweight.addView(tv3);
+                                    servicetype.setText(trans_ServiceType);
+                                    estiweight.setText(trans_EstWeight);
                                     estdatetime.setText(trans_EstDateTime);
                                     estdatetime.setEnabled(false);
 

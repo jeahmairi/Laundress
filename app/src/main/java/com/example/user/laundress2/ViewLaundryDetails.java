@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -32,10 +33,29 @@ public class ViewLaundryDetails extends AppCompatActivity {
     int trans_No, lsp_id, handwasher_id;
     private static final String URL_ALL="http://192.168.254.117/laundress/viewlaundrydetails.php";
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    public void onBackPressed() {
+
+        // Write your code here
+
+        super.onBackPressed();
+    }
+    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.viewlaundrydetails);
         //llhori = findViewById(R.id.llhori);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         llverti = findViewById(R.id.llverti);
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
@@ -75,14 +95,14 @@ public class ViewLaundryDetails extends AppCompatActivity {
                                     tv2.setLayoutParams(params);
                                     tv2.setGravity(Gravity.CENTER);
                                     llhori.addView(tv2);
-                                    llverti.addView(llhori);
+
 
                                     TextView tv = new TextView(ViewLaundryDetails.this);
                                     tv.setText(detail_Count);
                                     tv.setLayoutParams(params);
                                     tv.setGravity(Gravity.CENTER);
                                     llhori.addView(tv);
-
+                                    llverti.addView(llhori);
 
 
                                    // Toast.makeText(ViewLaundryDetails.this, "detail_Count " + detail_Count+" cinv_ItemTag "+cinv_ItemTag+" description" +description,  Toast.LENGTH_SHORT).show();

@@ -43,12 +43,13 @@ public class ClientNotification extends AppCompatActivity {
     ListView lvnotif;
     String client_name, name;
     String notification_Message;
-    float rating;
     String rating_Date, rating_Comment, comments;
     float rating_Score;
     int trans_No, transno, rate_No;
     int lsp_ID;
     int client_id, handwasher_lspid;
+    float accommodation, qualityofservice, ontime, overall;
+
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
@@ -173,20 +174,44 @@ public class ClientNotification extends AppCompatActivity {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(ClientNotification.this);
         LayoutInflater inflater = this.getLayoutInflater();
         final View dialogView = inflater.inflate(R.layout.rateclient, null);
-        final RatingBar rate = dialogView.findViewById(R.id.ratings);
+        final RatingBar ratingaccom = dialogView.findViewById(R.id.ratingaccom);
+        final RatingBar ratingqualityofservice = dialogView.findViewById(R.id.ratingqualityofservice);
+        final RatingBar ratingontime = dialogView.findViewById(R.id.ratingontime);
+        final RatingBar ratingoverall = dialogView.findViewById(R.id.ratingoverall);
         final EditText comment = dialogView.findViewById(R.id.comment);
-        rate.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+        ratingaccom.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                rate.setRating(rating);
+                ratingaccom.setRating(rating);
+            }
+        });
+        ratingqualityofservice.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                ratingqualityofservice.setRating(rating);
+            }
+        });
+        ratingontime.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                ratingontime.setRating(rating);
+            }
+        });
+        ratingoverall.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                ratingoverall.setRating(rating);
             }
         });
         dialogBuilder.setView(dialogView);
         dialogBuilder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
-                rating = rate.getRating();
+                accommodation = ratingaccom.getRating();
+                qualityofservice = ratingqualityofservice.getRating();
+                ontime = ratingontime.getRating();
+                overall = ratingoverall.getRating();
                 comments = comment.getText().toString().trim();
-                addRating(client_id, lsp_ID, trans_No, rating, comments);
+                addRating(client_id, lsp_ID, trans_No, accommodation, qualityofservice, ontime, overall, comments);
                 // Toast.makeText(getActivity(), "rating " + rating+" comments "+comments+ " client_ID "+client_ID+ " handwasher_lspid "+handwasher_lspid + " trans_No "+trans_No , Toast.LENGTH_LONG).show();
 /*                String updatemessage = message.getText().toString().trim();
                 String location = showlocation.toString().trim();
@@ -204,7 +229,7 @@ public class ClientNotification extends AppCompatActivity {
         b.show();
     }
 
-    private void addRating(final int client_ID, final int handwasher_lspid, final int trans_No, final float rating, final String comments) {
+    private void addRating(final int client_ID, final int handwasher_lspid, final int trans_No, float accommodation, float qualityofservice, float ontime, final float rating, final String comments) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_ADDPOST,
                 new Response.Listener<String>() {
                     @Override
@@ -240,7 +265,10 @@ public class ClientNotification extends AppCompatActivity {
                 params.put("client_ID", String.valueOf(ClientNotification.this.client_id));
                 params.put("handwasher_lspid", String.valueOf(ClientNotification.this.lsp_ID));
                 params.put("trans_No", String.valueOf(ClientNotification.this.transno));
-                params.put("rating", String.valueOf(ClientNotification.this.rating));
+                params.put("accommodation", String.valueOf(ClientNotification.this.accommodation));
+                params.put("qualityofservice", String.valueOf(ClientNotification.this.qualityofservice));
+                params.put("ontime", String.valueOf(ClientNotification.this.ontime));
+                params.put("overall", String.valueOf(ClientNotification.this.overall));
                 params.put("comments", ClientNotification.this.comments);
                 return params;
             }

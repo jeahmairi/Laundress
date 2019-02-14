@@ -10,7 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -48,6 +51,7 @@ public class HandwasherAdapter extends BaseAdapter {
             itemHolder = new ItemHolder();
             convertView = layoutInflater.inflate(R.layout.handwasheradapter, parent, false);
             itemHolder.name = (TextView) convertView.findViewById(R.id.hwname);
+            itemHolder.handwasherpic = (ImageView) convertView.findViewById(R.id.handwasherpic);
             itemHolder.contact = (TextView) convertView.findViewById(R.id.hwcont);
             itemHolder.meters = (TextView) convertView.findViewById(R.id.hwmeters);
             itemHolder.choose = convertView.findViewById(R.id.btnchoose);
@@ -60,6 +64,7 @@ public class HandwasherAdapter extends BaseAdapter {
                     extras.putString("name", handwasherList.getHandwasherName());
                     extras.putString("contact", handwasherList.getContact());
                     extras.putString("location", handwasherList.getHwmeter());
+                    extras.putString("locations", String.valueOf(handwasherList.getHwlocation()));
                     extras.putInt("lsp_id", handwasherList.getLsp_id());
                     extras.putInt("client_id", handwasherList.getClient_id());
                     Intent intent = new Intent(context, ChooseHandwasher.class);
@@ -68,6 +73,7 @@ public class HandwasherAdapter extends BaseAdapter {
                 }
             });
 
+            //Picasso.get().load(handwasherLists.get(position).getPhoto()).into(itemHolder.handwasherpic);
             itemHolder.name.setText(handwasherLists.get(position).getHandwasherName());
             itemHolder.contact.setText(handwasherLists.get(position).getContact());
             itemHolder.meters.setText(handwasherLists.get(position).getHwmeter());
@@ -80,5 +86,6 @@ public class HandwasherAdapter extends BaseAdapter {
         TextView contact;
         TextView meters;
         Button choose;
+        ImageView handwasherpic;
     }
 }

@@ -181,44 +181,19 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical"></LinearLayout>
 
-            <TextView
-                android:id="@+id/textView34"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:text="Services Charged"
-                android:textSize="12sp" />
-
-            <TextView
-                android:id="@+id/lsserviceprice"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:padding="5dp"
-                android:text="Price" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/btnchatnow"
-                    android:layout_width="178dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:background="@color/darkBlue"
-                    android:text="Chat Now"
-                    android:textColor="@android:color/background_light" />
-
-                <Button
                     android:id="@+id/btnlocation"
                     android:layout_width="180dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:background="@android:color/transparent"
+                    android:background="@color/lightBlue"
                     android:text="Home Location"
-                    android:textColor="@color/gray" />
+                    android:textColor="@color/darkBlue" />
             </LinearLayout>
         </LinearLayout>
 

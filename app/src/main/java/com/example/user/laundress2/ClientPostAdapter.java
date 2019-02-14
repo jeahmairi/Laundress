@@ -42,29 +42,29 @@ public class ClientPostAdapter extends BaseAdapter {
         LayoutInflater layoutInflater = ((Activity) context).getLayoutInflater();
         itemHolder = new ItemHolder();
         convertView = layoutInflater.inflate(R.layout.clientpostadapter, parent, false);
-        itemHolder.time = (TextView) convertView.findViewById(R.id.time);
         itemHolder.name = (TextView) convertView.findViewById(R.id.name);
         itemHolder.meters = (TextView) convertView.findViewById(R.id.meters);
         itemHolder.message = convertView.findViewById(R.id.message);
+        itemHolder.contact1 = convertView.findViewById(R.id.contact1);
         //final ClientPostList clientPostList=clientPostLists.get(position);
 
 
-        itemHolder.time.setText(String.valueOf(clientPostLists.get(position).getPost_datetime()));
+
         itemHolder.name.setText(clientPostLists.get(position).getPost_name());
         itemHolder.meters.setText(clientPostLists.get(position).getPost_showAddress());
         itemHolder.message.setText(clientPostLists.get(position).getPost_message());
+        itemHolder.contact1.setText(clientPostLists.get(position).getContact());
         //}
 
         return convertView;
     }
 
     private class ItemHolder {
-        TextView time;
         TextView name;
         TextView meters;
         TextView message;
         TextView contact1;
-        TextView contact2;
+
 
     }
 }

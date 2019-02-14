@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -48,21 +49,29 @@ public class HandwasherBookingsAdapter extends BaseAdapter {
         convertView = layoutInflater.inflate(R.layout.handwasherbooking_adapter, parent, false);
         itemHolder.photo = (ImageView) convertView.findViewById(R.id.photo);
         itemHolder.name = (TextView) convertView.findViewById(R.id.name);
-        itemHolder.servicereq = (TextView) convertView.findViewById(R.id.servicereq);
-        itemHolder.extraservice = (TextView) convertView.findViewById(R.id.extraservice);
+        itemHolder.llservoff = (LinearLayout) convertView.findViewById(R.id.llservoff);
+        itemHolder.llextra = (LinearLayout) convertView.findViewById(R.id.llextra);
         itemHolder.servicetype = (TextView) convertView.findViewById(R.id.servicetype);
         itemHolder.weight = (TextView) convertView.findViewById(R.id.weight);
         itemHolder.datetime = (TextView) convertView.findViewById(R.id.datetime);
         itemHolder.btnconfirmreq = convertView.findViewById(R.id.btnconfirmreq);
         itemHolder.btnviewlaundry = convertView.findViewById(R.id.btnviewlaundry);
         itemHolder.name.setText(handwasherBookingsLists.get(position).getName());
-        itemHolder.servicereq.setText(handwasherBookingsLists.get(position).getServices());
-        itemHolder.extraservice.setText(handwasherBookingsLists.get(position).getExtraservices());
+       // itemHolder.servicereq.setText(handwasherBookingsLists.get(position).getServices());
+       // itemHolder.extraservice.setText(handwasherBookingsLists.get(position).getExtraservices());
         itemHolder.servicetype.setText(handwasherBookingsLists.get(position).getServicetype());
         itemHolder.weight.setText(handwasherBookingsLists.get(position).getWeight());
         itemHolder.datetime.setText(handwasherBookingsLists.get(position).getDatetime());
         final HandwasherBookingsList handwasherBookingsList = handwasherBookingsLists.get(position);
         Picasso.get().load(handwasherBookingsList.getImage()).into(itemHolder.photo );
+        TextView tv = new TextView(context);
+        tv.setText(handwasherBookingsLists.get(position).getServices());
+        tv.setPadding(10, 10, 10, 10);
+        itemHolder.llservoff .addView(tv);
+        TextView tv1 = new TextView(context);
+        tv1.setText(handwasherBookingsLists.get(position).getExtraservices());
+        tv1.setPadding(10, 10, 10, 10);
+        itemHolder.llextra.addView(tv1);
         itemHolder.btnconfirmreq.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,6 +105,7 @@ public class HandwasherBookingsAdapter extends BaseAdapter {
     }
     private class ItemHolder {
         ImageView photo;
+        LinearLayout llextra, llservoff;
         TextView name, servicereq, extraservice, servicetype, weight, datetime;
         Button btnviewlaundry, btnconfirmreq;
 

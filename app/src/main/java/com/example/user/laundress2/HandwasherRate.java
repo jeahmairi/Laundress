@@ -26,6 +26,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -48,6 +49,7 @@ public class HandwasherRate extends AppCompatActivity {
     ArrayList<RateList> rateLists = new ArrayList<RateList>();
     private static final String URL_ALL ="http://192.168.254.117/laundress/allratehandwasher.php";
     private static final String URL_UPDATE ="http://192.168.254.117/laundress/updateratehandwasher.php";
+    float average;
 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -104,19 +106,33 @@ public class HandwasherRate extends AppCompatActivity {
                                     JSONObject object = jsonArray.getJSONObject(i);
 
                                     int rating_No = Integer.parseInt(object.getString("rating_No"));
-                                    float rating_Score = Float.parseFloat(object.getString("rating_Score"));
+                                    float rating_Accommodation = Float.parseFloat(object.getString("rating_Accommodation"));
+                                    float rating = Float.parseFloat(object.getString("rating_Score"));
+                                    float rating_QualityService = Float.parseFloat(object.getString("rating_QualityService"));
+                                    float rating_Ontime = Float.parseFloat(object.getString("rating_Ontime"));
+                                    float rating_Overall = Float.parseFloat(object.getString("rating_Overall"));
+                                    String client_Photo = object.getString("handwasher_Photo");
+                                    average = Float.parseFloat(object.getString("rating_Overall"));
+                                    Picasso.get().load(client_Photo).into(picture);
                                     String rating_Comment = object.getString("rating_Comment");
                                     String rating_Date= object.getString("rating_Date");
                                     String name = object.getString("name");
 
                                     RateList rateList = new RateList();
                                     rateList.setRate_no(rating_No);
-                                    rateList.setRate(rating_Score);
+                                    rateList.setRating(rating);
+                                    rateList.setAccommodation(rating_Accommodation);
+                                    rateList.setQualityofservice(rating_QualityService);
+                                    rateList.setOntime(rating_Ontime);
+                                    rateList.setOverall(rating_Overall);
                                     rateList.setComment(rating_Comment);
                                     rateList.setDate(rating_Date);
                                     rateList.setName(name);
                                     rateLists.add(rateList);
                                 }
+                                ratings.setRating(average);
+                                String ave = String.valueOf(average);
+                                rateval.setText(ave);
                                 clientRateAdapter = new ClientRateAdapter(HandwasherRate.this,rateLists);
                                 allratings.setAdapter(clientRateAdapter);
                                 //Toast.makeText(ClientRate.this, "trans_Status " + trans_Status, Toast.LENGTH_SHORT).show();
@@ -153,11 +169,11 @@ public class HandwasherRate extends AppCompatActivity {
     public void showChangeLangDialog() {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(HandwasherRate.this);
         LayoutInflater inflater = this.getLayoutInflater();
-        final View dialogView = inflater.inflate(R.layout.rateclient, null);
+        final View dialogView = inflater.inflate(R.layout.rate, null);
         final RatingBar rate = dialogView.findViewById(R.id.ratings);
         final EditText comment = dialogView.findViewById(R.id.comment);
         comment.setText(rateLists.get(pos).getComment());
-        rate.setRating(rateLists.get(pos).getRate());
+        rate.setRating(rateLists.get(pos).getRating());
         rate.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
@@ -192,6 +208,7 @@ public class HandwasherRate extends AppCompatActivity {
                             String success = jsonObject.getString("success");
                             if(success.equals("1")){
                                 Toast.makeText(HandwasherRate.this, "Rate Updated Successfully", Toast.LENGTH_SHORT).show();
+                                HandwasherRate.this.recreate();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

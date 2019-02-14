@@ -92,9 +92,7 @@ public class ClientHomepage extends AppCompatActivity implements NavigationView.
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.chat) {
-            return true;
-        } else if(id == R.id.notification){
+        if(id == R.id.notification){
             Bundle extras = new Bundle();
             extras.putString("client_name",client_name);
             extras.putInt("client_id", client_id);

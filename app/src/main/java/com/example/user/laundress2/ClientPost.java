@@ -119,9 +119,10 @@ public class ClientPost extends Fragment {
             JSONArray jsonArray2 = jsonObject.getJSONArray("allhandwasherpost");
             if (success.equals("1")){
                 for (int i =0;i<jsonArray2.length();i++)
-                {
+                {   String address;
                     String poster_name=jsonArray2.getJSONObject(i).getString("poster_name").toString();
                     String post_message = jsonArray2.getJSONObject(i).getString("post_message").toString();
+                    String handwasher_Contact = jsonArray2.getJSONObject(i).getString("handwasher_Contact").toString();
                     int post_datetime = Integer.parseInt(jsonArray2.getJSONObject(i).getString("post_datetime").toString());;
                     if(post_datetime >= 60)
                     {
@@ -130,7 +131,12 @@ public class ClientPost extends Fragment {
                         time = post_datetime;
                     }
                     float hour = post_datetime / 60;
-                    String post_showAddress = jsonArray2.getJSONObject(i).getString("post_showAddress").toString();;
+                    String post_showAddress = jsonArray2.getJSONObject(i).getString("post_showAddress").toString();
+                    if(post_showAddress.equals("Yes")){
+                        address = jsonArray2.getJSONObject(i).getString("address").toString();
+                    } else {
+                        address =" ";
+                    }
                     arrname.add(poster_name);
                     arrmeter.add(post_showAddress);
                     arrmessage.add(post_message);
@@ -138,8 +144,9 @@ public class ClientPost extends Fragment {
                     ClientPostList clientPostList = new ClientPostList();
                     clientPostList.setPost_message(post_message);
                     clientPostList.setPost_datetime((int) time);
+                    clientPostList.setContact(handwasher_Contact);
                     clientPostList.setPost_name(poster_name);
-                    clientPostList.setPost_showAddress(post_showAddress);
+                    clientPostList.setPost_showAddress(address);
                     clientPostLists.add(clientPostList);
                 }
                 clientPostAdapter = new ClientPostAdapter(context,clientPostLists);
