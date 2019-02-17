@@ -46,6 +46,7 @@ public class HandwasherAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        Collections.sort(handwasherLists, new CustomComparator());
        // if (convertView == null) {
             LayoutInflater layoutInflater = ((Activity) context).getLayoutInflater();
             itemHolder = new ItemHolder();
@@ -87,5 +88,11 @@ public class HandwasherAdapter extends BaseAdapter {
         TextView meters;
         Button choose;
         ImageView handwasherpic;
+    }
+    public class CustomComparator implements Comparator<HandwasherList> {
+        @Override
+        public int compare(HandwasherList list1, HandwasherList list2) {
+            return list1.getHwmeter().compareTo(list2.getHwmeter());
+        }
     }
 }

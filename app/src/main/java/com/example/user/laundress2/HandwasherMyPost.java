@@ -44,9 +44,9 @@ public class HandwasherMyPost extends AppCompatActivity {
     int handwasher_id, handwasher_lspid;
     int pos =0;
 
-    private static final String URL_ALL ="http://192.168.254.117/laundress/allhandwashermypost.php";
-    private static final String URL_UPDATE ="http://192.168.254.117/laundress/updatehandwashermypost.php";
-    private static final String URL_DELETE ="http://192.168.254.117/laundress/deletehandwashermypost.php";
+    private static final String URL_ALL ="http://192.168.254.113/laundress/allhandwashermypost.php";
+    private static final String URL_UPDATE ="http://192.168.254.113/laundress/updatehandwashermypost.php";
+    private static final String URL_DELETE ="http://192.168.254.113/laundress/deletehandwashermypost.php";
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);

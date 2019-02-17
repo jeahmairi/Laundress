@@ -30,7 +30,7 @@ public class ClientHistory extends AppCompatActivity {
     HistoryAdapter historyAdapter;
     ArrayList<HistoryList> historyLists = new ArrayList<HistoryList>();
     private Context context;
-    private static final String URL_ALL ="http://192.168.254.117/laundress/clienthistory.php";
+    private static final String URL_ALL ="http://192.168.254.113/laundress/clienthistory.php";
     String client_name;
     int client_id;
 

@@ -11,8 +11,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RatingBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -38,8 +40,9 @@ public class ClientNotification extends AppCompatActivity {
     ArrayList<String> arrnotifmes= new ArrayList<>();
     ArrayList<ClientNotifList> clientNotifLists = new ArrayList<ClientNotifList>();
     ClientNotifAdapter clientNotifAdapter;
-    private static final String URL_ALL ="http://192.168.254.117/laundress/allnotificationclient.php";
-    private static String URL_ADDPOST = "http://192.168.254.117/laundress/addratehandwasher.php";
+    private static final String URL_ALL ="http://192.168.254.113/laundress/allnotificationclient.php";
+    private static final String URL_ALL_RECEIPT ="http://192.168.254.113/laundress/allclientreceipt.php";
+    private static String URL_ADDPOST = "http://192.168.254.113/laundress/addratehandwasher.php";
     ListView lvnotif;
     String client_name, name;
     String notification_Message;
@@ -49,6 +52,8 @@ public class ClientNotification extends AppCompatActivity {
     int lsp_ID;
     int client_id, handwasher_lspid;
     float accommodation, qualityofservice, ontime, overall;
+    private String washer_name;
+    private float prices;
 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -77,6 +82,7 @@ public class ClientNotification extends AppCompatActivity {
         client_name = extras.getString("client_name");
         client_id = extras.getInt("client_id");
         allCategory();
+
         /*if(notification_Message.equals("Finished")){
             lvnotif.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
@@ -125,7 +131,11 @@ public class ClientNotification extends AppCompatActivity {
                                                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                                     if(clientNotifLists.get(position).getNotification_message().equals("Finished")){
                                                         transno = clientNotifLists.get(position).getTrans_no();
+                                                        allReceipt(transno);
                                                         showChangeLangDialog();
+                                                       // showChangeLangDialogReceipt();
+
+
                                                     }
                                                    // Toast.makeText(ClientNotification.this, "sud " +position, Toast.LENGTH_SHORT).show();
                                                 }
@@ -169,6 +179,87 @@ public class ClientNotification extends AppCompatActivity {
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
+    }
+
+    private void allReceipt(int transno) {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_ALL_RECEIPT,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String success = jsonObject.getString("success");
+                            JSONArray jsonArray = jsonObject.getJSONArray("allreceipt");
+                            if (success.equals("1")){
+                                for (int i =0;i<jsonArray.length();i++)
+                                {
+                                    name=jsonArray.getJSONObject(i).getString("name");
+                                    washer_name=jsonArray.getJSONObject(i).getString("washer_name");
+                                    prices= Float.parseFloat(jsonArray.getJSONObject(i).getString("prices"));
+                                    Toast.makeText(ClientNotification.this, "name" +name+" washer_name "+washer_name+" prices "+prices, Toast.LENGTH_SHORT).show();
+
+                                }
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(ClientNotification.this, "failedddd" +e.toString(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(ClientNotification.this, "Failed. No Connection. " + error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                })
+
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params = new HashMap<>();
+                params.put("trans_No", String.valueOf(ClientNotification.this.transno));
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
+
+    public void showChangeLangDialogReceipt() {
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(ClientNotification.this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.receipttransaction, null);
+        final TextView transnos = dialogView.findViewById(R.id.transno);
+        final TextView dateissued = dialogView.findViewById(R.id.dateissued);
+        final TextView WasherName = dialogView.findViewById(R.id.WasherName);
+        final TextView clientName = dialogView.findViewById(R.id.clientName);
+        final LinearLayout llservices = dialogView.findViewById(R.id.llservices);
+        final TextView total = dialogView.findViewById(R.id.total);
+        transnos.setText(" "+transno);
+        WasherName.setText(washer_name);
+        clientName.setText(name);
+        total.setText(" "+prices);
+        dialogBuilder.setView(dialogView);
+        dialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                /*accommodation = ratingaccom.getRating();
+                qualityofservice = ratingqualityofservice.getRating();
+                ontime = ratingontime.getRating();
+                overall = ratingoverall.getRating();
+                comments = comment.getText().toString().trim();
+                addRating(client_id, lsp_ID, trans_No, accommodation, qualityofservice, ontime, overall, comments);
+                // Toast.makeText(getActivity(), "rating " + rating+" comments "+comments+ " client_ID "+client_ID+ " handwasher_lspid "+handwasher_lspid + " trans_No "+trans_No , Toast.LENGTH_LONG).show();
+*//*                String updatemessage = message.getText().toString().trim();
+                String location = showlocation.toString().trim();
+                int post_no = clientPostLists.get(pos).getPost_no();
+                updatePost(updatemessage, location, post_no);
+                ClientMyPost.this.recreate();*/
+            }
+        });
+        AlertDialog b = dialogBuilder.create();
+        b.show();
     }
     public void showChangeLangDialog() {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(ClientNotification.this);
@@ -222,7 +313,7 @@ public class ClientNotification extends AppCompatActivity {
         });
         dialogBuilder.setNegativeButton("Skip", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
-                //pass
+                showChangeLangDialogReceipt();
             }
         });
         AlertDialog b = dialogBuilder.create();

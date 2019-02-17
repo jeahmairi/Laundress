@@ -35,7 +35,7 @@ public class HandwasherBookings extends Fragment {
     private Context context;
     ArrayList<HandwasherBookingsList> handwasherBookingsLists = new ArrayList<HandwasherBookingsList>();
     HandwasherBookingsAdapter handwasherBookingsAdapter;
-    private static final String URL_ALL ="http://192.168.254.117/laundress/allbookingapprove.php";
+    private static final String URL_ALL ="http://192.168.254.113/laundress/allbookingapprove.php";
     private String name, services, extraservices, servicetype, weight, datetime, client_Photo ;
     private int trans_No;
     private String xtraserve, serve;
@@ -94,19 +94,20 @@ public class HandwasherBookings extends Fragment {
                                     int handwasher_id = Integer.parseInt(jsonArray2.getJSONObject(i).getString("handwasher_ID").toString());
                                     xtraserve = xtraserve + " " +extraservices;
                                     serve = serve + " " +services;
+                                    HandwasherBookingsList handwasherBookingsList = new HandwasherBookingsList();
+                                    handwasherBookingsList.setName(name);
+                                    handwasherBookingsList.setLsp_id(handwasher_lspid);
+                                    handwasherBookingsList.setHandwasher_id(handwasher_id);
+                                    handwasherBookingsList.setTrans_no(trans_No);
+                                    handwasherBookingsList.setServices(serve);
+                                    handwasherBookingsList.setExtraservices(xtraserve);
+                                    handwasherBookingsList.setServicetype(servicetype);
+                                    handwasherBookingsList.setWeight(weight);
+                                    handwasherBookingsList.setDatetime(datetime);
+                                    handwasherBookingsList.setImage(client_Photo);
+                                    handwasherBookingsLists.add(handwasherBookingsList);
                                 }
-                                HandwasherBookingsList handwasherBookingsList = new HandwasherBookingsList();
-                                handwasherBookingsList.setName(name);
-                                handwasherBookingsList.setLsp_id(handwasher_lspid);
-                                handwasherBookingsList.setHandwasher_id(handwasher_id);
-                                handwasherBookingsList.setTrans_no(trans_No);
-                                handwasherBookingsList.setServices(serve);
-                                handwasherBookingsList.setExtraservices(xtraserve);
-                                handwasherBookingsList.setServicetype(servicetype);
-                                handwasherBookingsList.setWeight(weight);
-                                handwasherBookingsList.setDatetime(datetime);
-                                handwasherBookingsList.setImage(client_Photo);
-                                handwasherBookingsLists.add(handwasherBookingsList);
+
                                 handwasherBookingsAdapter = new HandwasherBookingsAdapter(context,handwasherBookingsLists);
                                 lvallbookings.setAdapter(handwasherBookingsAdapter);
                             }

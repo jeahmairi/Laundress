@@ -30,13 +30,26 @@ public class Login extends AppCompatActivity {
     private EditText email, password;
     private Button login;
     private ProgressBar load;
-    private static String URL_LOGIN = "http://192.168.254.117/laundress/login.php";
+    private int backButton = 1;
+    private static String URL_LOGIN = "http://192.168.254.113/laundress/login.php";
     //private static String URL_LOGIN = "http://192.168.1.15/laundress/login.php";
     //private static String URL_LOGIN = "http://192.168.254.100/laundress/login.php";
 
     //private static String URL_LOGIN = "http://192.168.1.2/laundress/login.php";
     //private static String URL_LOGIN = "http://192.168.1.5/laundress/login.php";
    // private static String URL_LOGIN = "http://192.168.1.7/laundress/login.php";
+    @Override
+    public void onBackPressed() {
+        if(backButton == 1) {
+            Intent intent = new Intent(Login.this, MainActivity.class);
+            startActivity(intent);
+        } else {
+            // Toast.makeText(this, "Press the back button once again", Toast.LENGTH_SHORT).show();
+            backButton++;
+            return;
+        }
+        super.onBackPressed();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,16 +119,16 @@ public class Login extends AppCompatActivity {
                                         Intent intent = new Intent(context, HandwasherHomepage.class);
                                         intent.putExtras(extras);
                                         startActivity(intent);
-                                    }/*else if(user.equals("Laundry Shop")) {
+                                    }else if(user.equals("Laundry Shop")) {
                                         int lspid = object.getInt("lspid");
                                         Bundle extras = new Bundle();
                                         extras.putInt("id", id);
                                         extras.putString("name", name);
                                         extras.putInt("lspid", lspid);
-                                        Intent intent = new Intent(context, HandwasherHomepage.class);
+                                        Intent intent = new Intent(context, ShopHomepage.class);
                                         intent.putExtras(extras);
                                         startActivity(intent);
-                                    }*/
+                                    }
                                 }
                             } else if (success.equals("0")) {
 

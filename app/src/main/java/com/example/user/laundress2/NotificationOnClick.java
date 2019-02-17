@@ -38,9 +38,9 @@ public class NotificationOnClick extends AppCompatActivity {
     String handwasher_name;
     LinearLayout llservoff, llextra;
     int handwasher_id, handwasher_lspid;
-    private static final String URL_ALL ="http://192.168.254.117/laundress/alltrans.php";
-    private static final String URL_ALL_UPDATE ="http://192.168.254.117/laundress/updatetrans.php";
-    private static final String URL_ALL_UPDATE_DECLINE ="http://192.168.254.117/laundress/updatetransdecline.php";
+    private static final String URL_ALL ="http://192.168.254.113/laundress/alltrans.php";
+    private static final String URL_ALL_UPDATE ="http://192.168.254.113/laundress/updatetrans.php";
+    private static final String URL_ALL_UPDATE_DECLINE ="http://192.168.254.113/laundress/updatetransdecline.php";
     private String image;
 
     @Override

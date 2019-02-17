@@ -55,11 +55,11 @@ public class ClientAccountDetails extends AppCompatActivity {
     LinearLayout layoutgender;
     DatePickerDialog picker;
     ImageView profilepic;
-    private static final String URL_ALL ="http://192.168.254.117/laundress/laundryclientdetails.php";
+    private static final String URL_ALL ="http://192.168.254.113/laundress/laundryclientdetails.php";
     //private static final String URL_ALL ="http://192.168.1.12/laundress/laundryclientdetails.php";
-    private static final String URL_UPDATE_PROFILE ="http://192.168.254.117/laundress/laundryclientupdateprofile.php";
+    private static final String URL_UPDATE_PROFILE ="http://192.168.254.113/laundress/laundryclientupdateprofile.php";
     //private static final String URL_UPDATE_PROFILE ="http://192.168.1.12/laundress/laundryclientupdateprofile.php";
-    private static final String URL_UPDATE_ACCOUNT ="http://192.168.254.117/laundress/laundryclientupdateaccount.php";
+    private static final String URL_UPDATE_ACCOUNT ="http://192.168.254.113/laundress/laundryclientupdateaccount.php";
     private Uri imagePath;
     private Bitmap bitmap;
 

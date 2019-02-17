@@ -41,7 +41,7 @@ public class RegisterLc extends AppCompatActivity {
     private DatePickerDialog picker;
     private Button reg;
     private ProgressBar load;
-    private static String URL_REGISTER = "http://192.168.254.117/laundress/lcregister.php";
+    private static String URL_REGISTER = "http://192.168.254.113/laundress/lcregister.php";
     //private static String URL_REGISTER = "http://192.168.1.5/laundress/lcregister.php";
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

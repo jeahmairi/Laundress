@@ -37,17 +37,22 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class HandwasherMyLaundry extends Fragment {
-    private String handwasher_name, comments;
-    private int handwasher_id;
-    private int handwasher_lspid, trans_No, client_ID;
+    String handwasher_name, comments;
+    int handwasher_id;
+    int handwasher_lspid, trans_No, client_ID;
     TextView section_label, section_label2, aname, number, address, textView31, datetime, statusname, timeleft, time, timename;
     ImageView picture, bgtime;
     Button finish;
     String trans_Status;
     float rating;
-    private static final String URL_ALL ="http://192.168.254.117/laundress/allbookinghandwasher.php";
-    private static final String URL_UPDATE ="http://192.168.254.117/laundress/updatetransactionfinish.php";
-    private static String URL_ADDPOST = "http://192.168.254.117/laundress/addrateclient.php";
+    float prices;
+    private static final String URL_ALL ="http://192.168.254.113/laundress/allbookinghandwasher.php";
+    private static final String URL_UPDATE ="http://192.168.254.113/laundress/updatetransactionfinish.php";
+    private static String URL_ADDPOST = "http://192.168.254.113/laundress/addrateclient.php";
+    private static String URL_ADDRECEIPT = "http://192.168.254.113/laundress/addreceipt.php";
+    private static String URL_RECEIPT = "http://192.168.254.113/laundress/receipttransaction.php";
+
+
     public static HandwasherMyLaundry newInstance(int handwasher_id, String handwasher_name, int handwasher_lspid) {
         HandwasherMyLaundry handwasherMyLaundry = new HandwasherMyLaundry();
         Bundle args = new Bundle();
@@ -81,6 +86,9 @@ public class HandwasherMyLaundry extends Fragment {
         datetime = rootView.findViewById(R.id.datetime);
         finish = rootView.findViewById(R.id.finish);
         allbooking();
+
+
+        //Toast.makeText(getActivity(),  " trans_No "+trans_No+" price "+prices , Toast.LENGTH_LONG).show();
         finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,9 +115,12 @@ public class HandwasherMyLaundry extends Fragment {
         dialogBuilder.setView(dialogView);
         dialogBuilder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
+
                 rating = rate.getRating();
                 comments = comment.getText().toString().trim();
+                //Toast.makeText(getActivity(), "rating " + rating+" comments "+comments+ " client_ID "+client_ID+ " handwasher_lspid "+handwasher_lspid + " trans_No "+trans_No+" price "+prices , Toast.LENGTH_LONG).show();
                 addRating(client_ID, handwasher_lspid, trans_No, rating, comments);
+                addReceipt(client_ID, handwasher_lspid, trans_No, prices);
                // Toast.makeText(getActivity(), "rating " + rating+" comments "+comments+ " client_ID "+client_ID+ " handwasher_lspid "+handwasher_lspid + " trans_No "+trans_No , Toast.LENGTH_LONG).show();
 /*                String updatemessage = message.getText().toString().trim();
                 String location = showlocation.toString().trim();
@@ -120,13 +131,101 @@ public class HandwasherMyLaundry extends Fragment {
         });
         dialogBuilder.setNegativeButton("Skip", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
-                updateTransactionFinish();
+               // updateTransactionFinish();
+                //addReceipt(trans_No, handwasher_lspid, client_ID, prices);
             }
         });
         AlertDialog b = dialogBuilder.create();
         b.show();
     }
 
+    private void addReceipt(final int client_ID, final int handwasher_lspid, final int trans_No, final float prices) {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_ADDRECEIPT,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try{
+                            JSONObject jsonObject = new JSONObject(response);
+                            String success = jsonObject.getString("success");
+
+                            if(success.equals("1")){
+
+                            }
+                        } catch (JSONException e){
+                            e.printStackTrace();;
+                            Toast.makeText(getActivity(), "Add Failed " + e.toString(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getActivity(), "Add Failed. No connection." +error.toString(), Toast.LENGTH_SHORT).show();
+                       /* load.setVisibility(View.GONE);
+                        login.setVisibility(View.VISIBLE);*/
+                    }
+                }
+        )
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params = new HashMap<>();
+                params.put("client_ID", String.valueOf(HandwasherMyLaundry.this.client_ID));
+                params.put("handwasher_lspid", String.valueOf(HandwasherMyLaundry.this.handwasher_lspid));
+                params.put("trans_No", String.valueOf(HandwasherMyLaundry.this.trans_No));
+                params.put("price", String.valueOf(HandwasherMyLaundry.this.prices));
+                return params;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        requestQueue.add(stringRequest);
+    }
+    private void allprice(int trans_No){
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_RECEIPT,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String success = jsonObject.getString("success");
+                            JSONArray jsonArray = jsonObject.getJSONArray("allreceipt");
+
+                            if (success.equals("1")) {
+                                //Toast.makeText(getActivity(), "sud" + success, Toast.LENGTH_SHORT).show();
+                                for (int i = 0; i < jsonArray.length(); i++) {
+                                    JSONObject object = jsonArray.getJSONObject(i);
+                                    prices = Float.parseFloat(object.getString("prices"));
+                                    //Toast.makeText(getActivity(), "sud" + prices, Toast.LENGTH_SHORT).show();
+                                }
+                            } else if (success.equals("0")) {
+                                Toast.makeText(getActivity(), "failed: 1", Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(getActivity(), "failed " +e.toString(), Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getActivity(), "Login failed. No connection." +error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+        )
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params = new HashMap<>();
+                params.put("trans_No", String.valueOf(HandwasherMyLaundry.this.trans_No));
+                return params;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        requestQueue.add(stringRequest);
+
+    }
     private void addRating(final int client_ID, final int handwasher_lspid, final int trans_No, final float rating, final String comments) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_ADDPOST,
                 new Response.Listener<String>() {
@@ -211,6 +310,7 @@ public class HandwasherMyLaundry extends Fragment {
         requestQueue.add(stringRequest);
     }
 
+
     private void allbooking(){
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_ALL,
                 new Response.Listener<String>() {
@@ -233,8 +333,8 @@ public class HandwasherMyLaundry extends Fragment {
                                     trans_Status = object.getString("trans_Status").trim();
                                     trans_No = Integer.parseInt(object.getString("trans_No"));
                                     client_ID = Integer.parseInt(object.getString("client_ID"));
-
-                                    //Toast.makeText(getActivity(), "sud" + trans_Status, Toast.LENGTH_SHORT).show();
+                                    allprice(trans_No);
+                                    //Toast.makeText(getActivity(), "trans_No " + trans_No, Toast.LENGTH_SHORT).show();
                                     if(trans_Status.equals("Confirmed")){
                                         Picasso.get().load(client_Photo).into(picture);
                                         aname.setText(name);

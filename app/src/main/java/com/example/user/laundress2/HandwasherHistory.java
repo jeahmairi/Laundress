@@ -30,7 +30,7 @@ public class HandwasherHistory extends AppCompatActivity {
     HistoryAdapter historyAdapter;
     ArrayList<HistoryList> historyLists = new ArrayList<HistoryList>();
     private Context context;
-    private static final String URL_ALL ="http://192.168.254.117/laundress/handwasherhistory.php";
+    private static final String URL_ALL ="http://192.168.254.113/laundress/handwasherhistory.php";
     String handwasher_name;
     int handwasher_id, handwasher_lspid;
 

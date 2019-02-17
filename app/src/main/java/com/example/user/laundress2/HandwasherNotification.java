@@ -33,7 +33,7 @@ public class HandwasherNotification extends AppCompatActivity {
     ArrayList<String> arrnotifmes= new ArrayList<>();
     ArrayList<HandwasherNotifList> handwasherNotifLists = new ArrayList<HandwasherNotifList>();
     HandwasherNotifAdapter handwasherNotifAdapter;
-    private static final String URL_ALL ="http://192.168.254.117/laundress/allnotification.php";
+    private static final String URL_ALL ="http://192.168.254.113/laundress/allnotification.php";
     ListView lvnotif;
     String handwasher_name, client_name;
     String notification_Message;
@@ -122,7 +122,12 @@ public class HandwasherNotification extends AppCompatActivity {
                                         handwasherNotifList.setClient_id(client_ID);
                                         handwasherNotifList.setLsp_id(lsp_ID);
                                         if(notification_Message.equals("Finished")){
-                                            rating_Score = Float.parseFloat(jsonArray.getJSONObject(i).getString("rating_Score"));
+                                            String rating_Scores = jsonArray.getJSONObject(i).getString("rating_Score");
+                                            if(rating_Scores.equals(null)){
+                                                rating_Score = (float) 0.00;
+                                            } else {
+                                                rating_Score = Float.parseFloat(rating_Scores);
+                                            }
                                             rating_Comment = jsonArray.getJSONObject(i).getString("rating_Comment");
                                             rating_Date = jsonArray.getJSONObject(i).getString("rating_Date");
                                             rate_NO = Integer.parseInt(jsonArray.getJSONObject(i).getString("rating_No"));

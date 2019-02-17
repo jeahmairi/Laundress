@@ -40,10 +40,10 @@ public class FindHandwasher extends Fragment {
     ArrayList<String> arrcontact = new ArrayList<>();
     //  ListView listview;
     private Context context;
-   private static final String URL_ALL ="http://192.168.254.117/laundress/allhandwasher.php";
-   private static final String URL_ALL_CLIENT ="http://192.168.254.117/laundress/client.php";
-   private static final String URL_ALL_CHEAP ="http://192.168.254.117/laundress/allhandwashercheap.php";
-   private static final String URL_ALL_REC ="http://192.168.254.117/laundress/allhandwasherrecom.php";
+   private static final String URL_ALL ="http://192.168.254.113/laundress/allhandwasher.php";
+   private static final String URL_ALL_CLIENT ="http://192.168.254.113/laundress/client.php";
+   private static final String URL_ALL_CHEAP ="http://192.168.254.113/laundress/allhandwashercheap.php";
+   private static final String URL_ALL_REC ="http://192.168.254.113/laundress/allhandwasherrecom.php";
    //private static final String URL_ALL ="http://192.168.1.12/laundress/allhandwasher.php";
    //private static final String URL_ALL ="http://192.168.254.100/laundress/allhandwasher.php";
    // private static final String URL_ALL ="http://192.168.1.2/laundress/allhandwasher.php";

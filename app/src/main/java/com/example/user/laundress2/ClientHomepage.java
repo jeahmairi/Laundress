@@ -19,6 +19,7 @@ import android.telephony.mbms.MbmsErrors;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ClientHomepage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -28,6 +29,7 @@ public class ClientHomepage extends AppCompatActivity implements NavigationView.
     TextView name;
     String client_name;
     int client_id;
+    private int backButton = 2;
     //ClientMyLaundry.LaundryDetList laundryDetList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,12 +71,17 @@ public class ClientHomepage extends AppCompatActivity implements NavigationView.
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
+        if(backButton < 1) {
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
         } else {
-            super.onBackPressed();
+           // Toast.makeText(this, "Press the back button once again", Toast.LENGTH_SHORT).show();
+            backButton++;
+            return;
         }
+        super.onBackPressed();
     }
 
     @Override

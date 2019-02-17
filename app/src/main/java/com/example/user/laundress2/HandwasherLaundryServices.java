@@ -44,20 +44,20 @@ public class HandwasherLaundryServices extends AppCompatActivity {
     private boolean selected;
     private boolean selected2;
     private String servicetype;
-    CheckBox servofferedlaundry, servofferedlaundryanddry,servoffereddry, extrairon, extrafold, pickdeliv, homeserv;
+    CheckBox servofferedlaundry, extrairon, extrafold, pickdeliv, homeserv;
     //RadioButton homeservice, pickup;
-    Spinner unitofmeasurelaundry, unitofmeasuredry, unitofmeasurelaundryanddry, unitofmeasureiron, unitofmeasurefold;
-    EditText pricelaundry, pricedry, pricelaundryanddry, priceironing, pricefolding;
+    Spinner unitofmeasurelaundry, unitofmeasureiron, unitofmeasurefold;
+    EditText pricelaundry, priceironing, pricefolding;
     Button btnset, btnedit;
     String handwasher_name;
     String pickdel;
     String home;
     int pricelaund, price_dry, pricelaundanddry, priceiron, pricefold;
     int handwasher_id, handwasher_lspid;
-    private static String URL_HANDWASHER_SERVICES = "http://192.168.254.117/laundress/addhandwasherextraservices.php";
-    private static String URL_HANDWASHER_SERVICESTYPE = "http://192.168.254.117/laundress/addhandwasherservicetype.php";
-    private static String URL_HANDWASHER_SERVICEOFFERED = "http://192.168.254.117/laundress/addhandwasherserviceoffered.php";
-    private static String URL_ALL_HANDWASHER_SERVICES = "http://192.168.254.117/laundress/allhandwasherservices.php";
+    private static String URL_HANDWASHER_SERVICES = "http://192.168.254.113/laundress/addhandwasherextraservices.php";
+    private static String URL_HANDWASHER_SERVICESTYPE = "http://192.168.254.113/laundress/addhandwasherservicetype.php";
+    private static String URL_HANDWASHER_SERVICEOFFERED = "http://192.168.254.113/laundress/addhandwasherserviceoffered.php";
+    private static String URL_ALL_HANDWASHER_SERVICES = "http://192.168.254.113/laundress/allhandwasherservices.php";
     String uomlaundry;
     String uomdry;
     String uomdryanddry;
@@ -86,22 +86,16 @@ public class HandwasherLaundryServices extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.handwasher_laundry_services);
         servofferedlaundry = findViewById(R.id.laundry);
-        servoffereddry = findViewById(R.id.dry);
-        servofferedlaundryanddry = findViewById(R.id.laundryanddry);
         extrairon = findViewById(R.id.iron);
         extrafold = findViewById(R.id.fold);
         pickdeliv = findViewById(R.id.pickupdeliv);
         homeserv = findViewById(R.id.homeservice);
 
         unitofmeasurelaundry = findViewById(R.id.unitofmeasurelaundry);
-        unitofmeasuredry = findViewById(R.id.unitofmeasuredry);
-        unitofmeasurelaundryanddry = findViewById(R.id.unitofmeasurelaundryanddry);
         unitofmeasureiron = findViewById(R.id.unitofmeasureiron);
         unitofmeasurefold = findViewById(R.id.unitofmeasurefold);
 
         pricelaundry = findViewById(R.id.pricelaundry);
-        pricedry = findViewById(R.id.pricedry);
-        pricelaundryanddry = findViewById(R.id.pricelaundryanddry);
         priceironing = findViewById(R.id.priceironing);
         pricefolding = findViewById(R.id.pricefolding);
 
@@ -122,32 +116,6 @@ public class HandwasherLaundryServices extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 uomlaundry = parent.getItemAtPosition(position).toString();
                 umitofmeasureoff.add(uomlaundry);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-        unitofmeasuredry.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                uomdry = parent.getItemAtPosition(position).toString();
-                umitofmeasureoff.add(uomdry);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-        unitofmeasurelaundryanddry.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                uomdryanddry = parent.getItemAtPosition(position).toString();
-                umitofmeasureoff.add(uomdryanddry);
             }
 
             @Override
@@ -222,38 +190,7 @@ public class HandwasherLaundryServices extends AppCompatActivity {
                     String laundry = servofferedlaundry.getText().toString();
                     serviceoffered.remove(laundry);
                 }
-                if(servoffereddry.isChecked()){
-                    String laundry = servoffereddry.getText().toString();
-                    price_dry = Integer.parseInt(String.valueOf(pricedry.getText()));
-                    if(serviceoffered.indexOf(laundry)< 0 ){
-                        serviceoffered.add(laundry);
-                    }
-                    if(priceserviceoff.indexOf(price_dry)<0){
-                        priceserviceoff.add(price_dry);
-                    }
-                    if(umitofmeasureoff.indexOf(uomdry)<0){
-                        umitofmeasureoff.add(uomdry);
-                    }
-                } else {
-                    String laundry = servoffereddry.getText().toString();
-                    serviceoffered.remove(laundry);
-                }
-                if(servofferedlaundryanddry.isChecked()){
-                    String laundryanddry = servofferedlaundryanddry.getText().toString();
-                    pricelaundanddry = Integer.parseInt(String.valueOf(pricelaundryanddry.getText()));
-                    if(serviceoffered.indexOf(laundryanddry)< 0 ){
-                        serviceoffered.add(laundryanddry);
-                    }
-                    if(priceserviceoff.indexOf(pricelaundanddry)<0){
-                        priceserviceoff.add(pricelaundanddry);
-                    }
-                    if(umitofmeasureoff.indexOf(uomdryanddry)<0){
-                        umitofmeasureoff.add(uomdryanddry);
-                    }
-                }else {
-                    String laundryanddry = servofferedlaundryanddry.getText().toString();
-                    serviceoffered.remove(laundryanddry);
-                }
+
                 //end of service offered
 
                 //start of extra service
@@ -377,28 +314,6 @@ public class HandwasherLaundryServices extends AppCompatActivity {
                                             if(unitofmeasurelaundry.getAdapter().getItem(j).toString().equals(uom))
                                             {
                                                 unitofmeasurelaundry.setSelection(j);
-                                            }
-                                        }
-                                    }
-                                    if(name.equals(servoffereddry.getText().toString())){
-                                        servoffereddry.setChecked(true);
-                                        pricedry.setText(price);
-                                        for(int j= 0; j < unitofmeasuredry.getAdapter().getCount(); j++)
-                                        {
-                                            if(unitofmeasuredry.getAdapter().getItem(j).toString().equals(uom))
-                                            {
-                                                unitofmeasuredry.setSelection(j);
-                                            }
-                                        }
-                                    }
-                                    if(name.equals(servofferedlaundryanddry.getText().toString())){
-                                        servofferedlaundryanddry.setChecked(true);
-                                        pricelaundryanddry.setText(price);
-                                        for(int j= 0; j < unitofmeasurelaundryanddry.getAdapter().getCount(); j++)
-                                        {
-                                            if(unitofmeasurelaundryanddry.getAdapter().getItem(j).toString().equals(uom))
-                                            {
-                                                unitofmeasurelaundryanddry.setSelection(j);
                                             }
                                         }
                                     }

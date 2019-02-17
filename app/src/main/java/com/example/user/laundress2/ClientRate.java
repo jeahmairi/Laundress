@@ -49,8 +49,8 @@ public class ClientRate extends AppCompatActivity {
     float accommodation, qualityofservice, ontime, overall;
     ClientRateAdapter clientRateAdapter;
     ArrayList<RateList> rateLists = new ArrayList<RateList>();
-    private static final String URL_ALL ="http://192.168.254.117/laundress/allrateclient.php";
-    private static final String URL_UPDATE ="http://192.168.254.117/laundress/updaterateclient.php";
+    private static final String URL_ALL ="http://192.168.254.113/laundress/allrateclient.php";
+    private static final String URL_UPDATE ="http://192.168.254.113/laundress/updaterateclient.php";
     private float average;
     // private static final String URL_DELETE ="http://192.168.254.117/laundress/deleterateclient.php";
 

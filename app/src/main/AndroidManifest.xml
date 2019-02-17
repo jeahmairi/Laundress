@@ -127,6 +127,41 @@
         <activity
             android:name=".ViewClients"
             android:label="Clients" />
+        <activity
+            android:name=".ShopHomepage"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".ShopRate"
+            android:label="My Ratings"/>
+        <activity
+            android:name=".ShopConfirmBooking"
+            android:label="Bookings"/>
+        <activity
+            android:name=".ShopNotification"
+            android:label="Notifications"/>
+        <activity
+            android:name=".ShopHistory"
+            android:label="History"/>
+        <activity
+            android:name=".ShopFinishLaundry"
+            android:label="Finish Laundry"/>
+        <activity
+            android:name=".ShopViewLaundryDetails"
+            android:label="View Laundry Details"/>
+        <activity
+            android:name=".ShopVIewRequestDetails"
+            android:label="View Laundry Details"/>
+        <activity
+            android:name=".ShopRateClient"
+            android:label="Rate Client"/>
+        <activity
+            android:name=".ShopRegularClients"
+            android:label="My Regular Clients"/>
+        <activity
+            android:name=".ShopNotificationOnClick"
+            android:label="Notification"/>
+
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

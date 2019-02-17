@@ -31,7 +31,7 @@ public class HandwasherMyClients extends AppCompatActivity {
     ArrayList<ViewClientsList> viewClientsLists = new ArrayList<ViewClientsList>();
     private String location, name, contact;
     private int lsp_id;
-    private static final String URL_ALL_ClIENTS ="http://192.168.254.117/laundress/viewallclients.php";
+    private static final String URL_ALL_ClIENTS ="http://192.168.254.113/laundress/viewallclients.php";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

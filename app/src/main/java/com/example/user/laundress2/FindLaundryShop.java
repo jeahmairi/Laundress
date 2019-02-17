@@ -46,10 +46,10 @@ public class FindLaundryShop extends Fragment{
     ArrayList<Integer> arrid = new ArrayList<>();
     ArrayList<Integer> arrlspid = new ArrayList<>();
     private Context context;
-    private static final String URL_ALL ="http://192.168.254.117/laundress/alllaundryshop.php";
-    private static final String URL_ALL_CLIENT ="http://192.168.254.117/laundress/client.php";
-    private static final String URL_ALL_CHEAPEST="http://192.168.254.117/laundress/alllaundryshopcheap.php";
-    private static final String URL_ALL_RECOMMENDED="http://192.168.254.117/laundress/alllaundryshoprecom.php";
+    private static final String URL_ALL ="http://192.168.254.113/laundress/alllaundryshop.php";
+    private static final String URL_ALL_CLIENT ="http://192.168.254.113/laundress/client.php";
+    private static final String URL_ALL_CHEAPEST="http://192.168.254.113/laundress/alllaundryshopcheap.php";
+    private static final String URL_ALL_RECOMMENDED="http://192.168.254.113/laundress/alllaundryshoprecom.php";
     //private static final String URL_ALL ="http://192.168.1.12/laundress/alllaundryshop.php";
     // private static final String URL_ALL ="http://192.168.254.100/laundress/alllaundryshop.php";
     // private static final String URL_ALL ="http://192.168.1.2/laundress/alllaundryshop.php";
