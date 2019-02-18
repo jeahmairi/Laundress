@@ -34,9 +34,9 @@ public class LaundryShopLocation extends FragmentActivity implements OnMapReadyC
         lslocation = findViewById(R.id.lslocation);
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
-        location = extras.getString("shop_location");
-        name = extras.getString("shop_name");
-        contact = extras.getString("shop_contact");
+        location = extras.getString("handwasher_name");
+        name = extras.getString("handwasher_location");
+        contact = extras.getString("handwasher_contact");
         lsname.setText(name);
         lscontact.setText(contact);
         lslocation.setText(location);

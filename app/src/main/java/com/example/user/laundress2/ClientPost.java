@@ -37,8 +37,8 @@ public class ClientPost extends Fragment {
     ArrayList<String> arrmessage = new ArrayList<>();
     private Context context;
 
-    //private static final String URL_ALLHW ="http://192.168.254.113/laundress/allhandwasherpost.php";
-    private static final String URL_ALLHW ="http://192.168.254.117/laundress/allhandwasherpost.php";
+    private static final String URL_ALLHW ="http://192.168.254.113/laundress/allhandwasherpost.php";
+    //private static final String URL_ALLHW ="http://192.168.254.117/laundress/allhandwasherpost.php";
 
     ArrayList<ClientPostList> clientPostLists = new ArrayList<ClientPostList>();
     ClientPostAdapter clientPostAdapter;

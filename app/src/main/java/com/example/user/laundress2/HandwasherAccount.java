@@ -55,13 +55,13 @@ public class HandwasherAccount extends AppCompatActivity {
     TextView tvgender, tvcvstat, tvemail, tvoldpass, tvnewpass;
     Button btnupdate, btnsaveupdate, btnupdateaccount, btnsaveaccount;
 
-    /*private static final String URL_ALL ="http://192.168.254.113/laundress/handwasheraccount.php";
+    private static final String URL_ALL ="http://192.168.254.113/laundress/handwasheraccount.php";
     private static final String URL_UPDATE_PROFILE ="http://192.168.254.113/laundress/handwasherupdateprofile.php";
-    private static final String URL_UPDATE_ACCOUNT ="http://192.168.254.113/laundress/handwasherupdateaccount.php";*/
+    private static final String URL_UPDATE_ACCOUNT ="http://192.168.254.113/laundress/handwasherupdateaccount.php";
 
-    private static final String URL_ALL ="http://192.168.254.117/laundress/handwasheraccount.php";
+    /*private static final String URL_ALL ="http://192.168.254.117/laundress/handwasheraccount.php";
     private static final String URL_UPDATE_PROFILE ="http://192.168.254.117/laundress/handwasherupdateprofile.php";
-    private static final String URL_UPDATE_ACCOUNT ="http://192.168.254.117/laundress/handwasherupdateaccount.php";
+    private static final String URL_UPDATE_ACCOUNT ="http://192.168.254.117/laundress/handwasherupdateaccount.php";*/
     private String genders;
     private Uri imagePath;
     private Bitmap bitmap;

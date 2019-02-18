@@ -40,15 +40,15 @@ public class ClientNotification extends AppCompatActivity {
     ArrayList<String> arrnotifmes= new ArrayList<>();
     ArrayList<ClientNotifList> clientNotifLists = new ArrayList<ClientNotifList>();
     ClientNotifAdapter clientNotifAdapter;
-    /*private static final String URL_ALL ="http://192.168.254.113/laundress/allnotificationclient.php";
+    private static final String URL_ALL ="http://192.168.254.113/laundress/allnotificationclient.php";
     private static final String URL_ALL_RECEIPT ="http://192.168.254.113/laundress/allclientreceipt.php";
     private static String URL_ADDPOST = "http://192.168.254.113/laundress/addratehandwasher.php";
-    private static String URL_ADDPOSTSHOP = "http://192.168.254.113/laundress/addrateshop.php";*/
+    private static String URL_ADDPOSTSHOP = "http://192.168.254.113/laundress/addrateshop.php";
 
-    private static final String URL_ALL ="http://192.168.254.117/laundress/allnotificationclient.php";
+    /*private static final String URL_ALL ="http://192.168.254.117/laundress/allnotificationclient.php";
     private static final String URL_ALL_RECEIPT ="http://192.168.254.117/laundress/allclientreceipt.php";
     private static String URL_ADDPOST = "http://192.168.254.117/laundress/addratehandwasher.php";
-    private static String URL_ADDPOSTSHOP = "http://192.168.254.117/laundress/addrateshop.php";
+    private static String URL_ADDPOSTSHOP = "http://192.168.254.117/laundress/addrateshop.php";*/
 
     ListView lvnotif;
     String client_name, name;

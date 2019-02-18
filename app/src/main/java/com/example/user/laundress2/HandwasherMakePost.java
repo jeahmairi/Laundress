@@ -30,8 +30,8 @@ public class HandwasherMakePost extends AppCompatActivity {
     EditText message;
     Button post;
     String showlocation;
-    //private static String URL_ADDPOST = "http://192.168.254.113/laundress/addposthandwasher.php";
-    private static String URL_ADDPOST = "http://192.168.254.117/laundress/addposthandwasher.php";
+    private static String URL_ADDPOST = "http://192.168.254.113/laundress/addposthandwasher.php";
+    //private static String URL_ADDPOST = "http://192.168.254.117/laundress/addposthandwasher.php";
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button

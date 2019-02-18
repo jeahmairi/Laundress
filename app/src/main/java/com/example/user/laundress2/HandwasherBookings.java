@@ -35,8 +35,8 @@ public class HandwasherBookings extends Fragment {
     private Context context;
     ArrayList<HandwasherBookingsList> handwasherBookingsLists = new ArrayList<HandwasherBookingsList>();
     HandwasherBookingsAdapter handwasherBookingsAdapter;
-    //private static final String URL_ALL ="http://192.168.254.113/laundress/allbookingapprove.php";
-    private static final String URL_ALL ="http://192.168.254.117/laundress/allbookingapprove.php";
+    private static final String URL_ALL ="http://192.168.254.113/laundress/allbookingapprove.php";
+   // private static final String URL_ALL ="http://192.168.254.117/laundress/allbookingapprove.php";
     private String name, services, extraservices, servicetype, weight, datetime, client_Photo ;
     private int trans_No;
     private String xtraserve, serve;

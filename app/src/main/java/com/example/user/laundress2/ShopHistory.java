@@ -30,8 +30,8 @@ public class ShopHistory extends AppCompatActivity {
     ShopHistoryAdapter shopHistoryAdapter;
     ArrayList<ShopHistoryList> shopHistoryLists = new ArrayList<>();
     private Context context;
-    //private static final String URL_ALL ="http://192.168.254.113/laundress/shop_history.php";
-    private static final String URL_ALL ="http://192.168.254.117/laundress/shop_history.php";
+    private static final String URL_ALL ="http://192.168.254.113/laundress/shop_history.php";
+    //private static final String URL_ALL ="http://192.168.254.117/laundress/shop_history.php";
     String shop_name;
     int shop_id;
 

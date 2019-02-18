@@ -33,12 +33,12 @@ public class ShopRateClient extends AppCompatActivity {
     int clientID, trans_No, shop_id, lsp_ID;
     String shop_name, comments;
     float rating;
-    /*private static final String URL_UPDATE ="http://192.168.254.113/laundress/shop_rateclient.php";
+    private static final String URL_UPDATE ="http://192.168.254.113/laundress/shop_rateclient.php";
     private static String URL_ADDRECEIPT = "http://192.168.254.113/laundress/addreceipt.php";
-    private static String URL_RECEIPT = "http://192.168.254.113/laundress/receipttransaction.php";*/
-    private static final String URL_UPDATE ="http://192.168.254.117/laundress/shop_rateclient.php";
+    private static String URL_RECEIPT = "http://192.168.254.113/laundress/receipttransaction.php";
+    /*private static final String URL_UPDATE ="http://192.168.254.117/laundress/shop_rateclient.php";
     private static String URL_ADDRECEIPT = "http://192.168.254.117/laundress/addreceipt.php";
-    private static String URL_RECEIPT = "http://192.168.254.117/laundress/receipttransaction.php";
+    private static String URL_RECEIPT = "http://192.168.254.117/laundress/receipttransaction.php";*/
 
     private float prices;
 
@@ -80,6 +80,7 @@ public class ShopRateClient extends AppCompatActivity {
         });
         dialogBuilder.setNegativeButton("Don't Rate", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
+                addReceipt();
                 Bundle extras = new Bundle();
                 extras.putInt("clientID", clientID);
                 extras.putInt("trans_No", trans_No);
@@ -106,7 +107,7 @@ public class ShopRateClient extends AppCompatActivity {
                             String success = jsonObject.getString("success");
 
                             if(success.equals("1")){
-                                Toast.makeText(ShopRateClient.this, "sud " , Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(ShopRateClient.this, "sud " , Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e){
                             e.printStackTrace();;

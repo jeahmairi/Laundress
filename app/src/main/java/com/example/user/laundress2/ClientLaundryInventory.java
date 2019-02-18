@@ -31,11 +31,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ClientLaundryInventory extends AppCompatActivity {
-    /*private static final String URL_ALL ="http://192.168.254.113/laundress/allinventory.php";
-    private static final String URl_ADD_LAUNDRY_DETAILS ="http://192.168.254.113/laundress/addlaunddetails.php";*/
+    private static final String URL_ALL ="http://192.168.254.113/laundress/allinventory.php";
+    private static final String URl_ADD_LAUNDRY_DETAILS ="http://192.168.254.113/laundress/addlaunddetails.php";
 
-    private static final String URL_ALL ="http://192.168.254.117/laundress/allinventory.php";
-    private static final String URl_ADD_LAUNDRY_DETAILS ="http://192.168.254.117/laundress/addlaunddetails.php";
+    /*private static final String URL_ALL ="http://192.168.254.117/laundress/allinventory.php";
+    private static final String URl_ADD_LAUNDRY_DETAILS ="http://192.168.254.117/laundress/addlaunddetails.php";*/
 
     String client_name;
     Button btnselect, btnskip;

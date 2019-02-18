@@ -46,17 +46,17 @@ public class HandwasherMyLaundry extends Fragment {
     String trans_Status;
     float rating;
     float prices;
-    /*private static final String URL_ALL ="http://192.168.254.113/laundress/allbookinghandwasher.php";
+    private static final String URL_ALL ="http://192.168.254.113/laundress/allbookinghandwasher.php";
     private static final String URL_UPDATE ="http://192.168.254.113/laundress/updatetransactionfinish.php";
     private static String URL_ADDPOST = "http://192.168.254.113/laundress/addrateclient.php";
     private static String URL_ADDRECEIPT = "http://192.168.254.113/laundress/addreceipt.php";
-    private static String URL_RECEIPT = "http://192.168.254.113/laundress/receipttransaction.php";*/
+    private static String URL_RECEIPT = "http://192.168.254.113/laundress/receipttransaction.php";
 
-    private static final String URL_ALL ="http://192.168.254.117/laundress/allbookinghandwasher.php";
+    /*private static final String URL_ALL ="http://192.168.254.117/laundress/allbookinghandwasher.php";
         private static final String URL_UPDATE ="http://192.168.254.117/laundress/updatetransactionfinish.php";
         private static String URL_ADDPOST = "http://192.168.254.117/laundress/addrateclient.php";
         private static String URL_ADDRECEIPT = "http://192.168.254.117/laundress/addreceipt.php";
-        private static String URL_RECEIPT = "http://192.168.254.117/laundress/receipttransaction.php";
+        private static String URL_RECEIPT = "http://192.168.254.117/laundress/receipttransaction.php";*/
 
 
     public static HandwasherMyLaundry newInstance(int handwasher_id, String handwasher_name, int handwasher_lspid) {
@@ -137,8 +137,8 @@ public class HandwasherMyLaundry extends Fragment {
         });
         dialogBuilder.setNegativeButton("Skip", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
-               // updateTransactionFinish();
-                //addReceipt(trans_No, handwasher_lspid, client_ID, prices);
+               updateTransactionFinish();
+                addReceipt(client_ID, handwasher_lspid, trans_No, prices);
             }
         });
         AlertDialog b = dialogBuilder.create();

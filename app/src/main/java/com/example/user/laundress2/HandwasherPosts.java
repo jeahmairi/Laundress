@@ -38,8 +38,8 @@ public class HandwasherPosts extends Fragment {
     ClientPostAdapter clientPostAdapter;
     float time;
     ListView posts;
-    //private static final String URL_ALLHW ="http://192.168.254.113/laundress/allclientpost.php";
-    private static final String URL_ALLHW ="http://192.168.254.117/laundress/allclientpost.php";
+    private static final String URL_ALLHW ="http://192.168.254.113/laundress/allclientpost.php";
+    //private static final String URL_ALLHW ="http://192.168.254.117/laundress/allclientpost.php";
     // newInstance constructor for creating fragment with arguments
     public static HandwasherPosts newInstance(int handwasher_id, String handwasher_name) {
         HandwasherPosts handwasherPosts = new HandwasherPosts();

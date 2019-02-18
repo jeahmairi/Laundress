@@ -24,8 +24,8 @@ import java.util.Map;
 public class ConfirmBooking extends AppCompatActivity {
     String name;
     int trans_No, lsp_id, handwasher_id;
-    //private static final String URL_TRANS ="http://192.168.254.113/laundress/updatetransaction.php";
-    private static final String URL_TRANS ="http://192.168.254.117/laundress/updatetransaction.php";
+    private static final String URL_TRANS ="http://192.168.254.113/laundress/updatetransaction.php";
+    //private static final String URL_TRANS ="http://192.168.254.117/laundress/updatetransaction.php";
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -33,8 +33,8 @@ public class HandwasherMyClients extends AppCompatActivity {
     private String location, name, contact;
     private int lsp_id;
 
-   // private static final String URL_ALL_ClIENTS ="http://192.168.254.113/laundress/viewallclients.php";
-    private static final String URL_ALL_ClIENTS ="http://192.168.254.117/laundress/viewallclients.php";
+    private static final String URL_ALL_ClIENTS ="http://192.168.254.113/laundress/viewallclients.php";
+    //private static final String URL_ALL_ClIENTS ="http://192.168.254.117/laundress/viewallclients.php";
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
@@ -77,13 +77,13 @@ public class HandwasherMyClients extends AppCompatActivity {
                                 for (int i =0;i<jsonArray.length();i++)
                                 {
                                     String name=jsonArray.getJSONObject(i).getString("name").toString();
-                                    String bookings=jsonArray.getJSONObject(i).getString("bookings").toString();
-                                    float rate= Float.parseFloat(jsonArray.getJSONObject(i).getString("rate").toString());
+                                   /* String bookings=jsonArray.getJSONObject(i).getString("bookings").toString();
+                                    float rate= Float.parseFloat(jsonArray.getJSONObject(i).getString("rate").toString());*/
 
                                     ViewClientsList viewClientsList = new ViewClientsList();
                                     viewClientsList.setName(name);
-                                    viewClientsList.setBookings(bookings+" bookings");
-                                    viewClientsList.setRate(rate);
+                                    /*viewClientsList.setBookings(bookings+" bookings");
+                                    viewClientsList.setRate(rate);*/
                                     viewClientsLists.add(viewClientsList);
                                 }
                                 viewClientsAdapter = new ViewClientsAdapter(HandwasherMyClients.this,viewClientsLists);

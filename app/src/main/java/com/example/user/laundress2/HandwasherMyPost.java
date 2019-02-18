@@ -44,12 +44,12 @@ public class HandwasherMyPost extends AppCompatActivity {
     int handwasher_id, handwasher_lspid;
     int pos =0;
 
-    /*private static final String URL_ALL ="http://192.168.254.113/laundress/allhandwashermypost.php";
+    private static final String URL_ALL ="http://192.168.254.113/laundress/allhandwashermypost.php";
     private static final String URL_UPDATE ="http://192.168.254.113/laundress/updatehandwashermypost.php";
-    private static final String URL_DELETE ="http://192.168.254.113/laundress/deletehandwashermypost.php";*/
-    private static final String URL_ALL ="http://192.168.254.117/laundress/allhandwashermypost.php";
+    private static final String URL_DELETE ="http://192.168.254.113/laundress/deletehandwashermypost.php";
+    /*private static final String URL_ALL ="http://192.168.254.117/laundress/allhandwashermypost.php";
     private static final String URL_UPDATE ="http://192.168.254.117/laundress/updatehandwashermypost.php";
-    private static final String URL_DELETE ="http://192.168.254.117/laundress/deletehandwashermypost.php";
+    private static final String URL_DELETE ="http://192.168.254.117/laundress/deletehandwashermypost.php";*/
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button

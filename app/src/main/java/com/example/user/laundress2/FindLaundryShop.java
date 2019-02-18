@@ -48,15 +48,15 @@ public class FindLaundryShop extends Fragment implements SearchView.OnQueryTextL
     ArrayList<Integer> arrlspid = new ArrayList<>();
     private Context context;
 
-    /*private static final String URL_ALL ="http://192.168.254.113/laundress/alllaundryshop.php";
+    private static final String URL_ALL ="http://192.168.254.113/laundress/alllaundryshop.php";
     private static final String URL_ALL_CLIENT ="http://192.168.254.113/laundress/client.php";
     private static final String URL_ALL_CHEAPEST="http://192.168.254.113/laundress/alllaundryshopcheap.php";
-    private static final String URL_ALL_RECOMMENDED="http://192.168.254.113/laundress/alllaundryshoprecom.php";*/
+    private static final String URL_ALL_RECOMMENDED="http://192.168.254.113/laundress/alllaundryshoprecom.php";
 
-    private static final String URL_ALL ="http://192.168.254.117/laundress/alllaundryshop.php";
+    /*private static final String URL_ALL ="http://192.168.254.117/laundress/alllaundryshop.php";
     private static final String URL_ALL_CLIENT ="http://192.168.254.117/laundress/client.php";
     private static final String URL_ALL_CHEAPEST="http://192.168.254.117/laundress/alllaundryshopcheap.php";
-    private static final String URL_ALL_RECOMMENDED="http://192.168.254.117/laundress/alllaundryshoprecom.php";
+    private static final String URL_ALL_RECOMMENDED="http://192.168.254.117/laundress/alllaundryshoprecom.php";*/
 
     ArrayList<LaundryShopList> laundryShopLists = new ArrayList<LaundryShopList>();
     LaundryShopAdapter laundryShopAdapter;
@@ -146,6 +146,7 @@ public class FindLaundryShop extends Fragment implements SearchView.OnQueryTextL
                                 for (int i =0;i<jsonArray.length();i++)
                                 {
                                     client_Address=jsonArray.getJSONObject(i).getString("client_Address").toString();
+                                    getLocationFromAddress(client_Address);
                                     //Toast.makeText(getActivity(), "client_Address " +client_Address, Toast.LENGTH_SHORT).show();
                                 }
                             }

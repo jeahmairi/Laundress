@@ -48,15 +48,15 @@ public class AddLaundryDetails extends AppCompatActivity {
     ArrayList<Integer> arrclientid = new ArrayList<>();
     ArrayList<Integer> arrcategid = new ArrayList<>();
     ArrayList<Integer> arrcinvno = new ArrayList<>();
-    /*private static final String URl_ADD_LAUNDRY_DETAILS ="http://192.168.254.113/laundress/addlaundrydetails.php";
+    private static final String URl_ADD_LAUNDRY_DETAILS ="http://192.168.254.113/laundress/addlaundrydetails.php";
     private static final String URL_ALL ="http://192.168.254.113/laundress/alllaundrydetails.php";
     private static final String URL_DELETE ="http://192.168.254.113/laundress/deletelaundrydetails.php";
-    private static final String URL_UPDATE ="http://192.168.254.113/laundress/updatelaundrydetails.php";*/
+    private static final String URL_UPDATE ="http://192.168.254.113/laundress/updatelaundrydetails.php";
 
-    private static final String URl_ADD_LAUNDRY_DETAILS ="http://192.168.254.117/laundress/addlaundrydetails.php";
+    /*private static final String URl_ADD_LAUNDRY_DETAILS ="http://192.168.254.117/laundress/addlaundrydetails.php";
     private static final String URL_ALL ="http://192.168.254.117/laundress/alllaundrydetails.php";
     private static final String URL_DELETE ="http://192.168.254.117/laundress/deletelaundrydetails.php";
-    private static final String URL_UPDATE ="http://1192.168.254.117/laundress/updatelaundrydetails.php";
+    private static final String URL_UPDATE ="http://1192.168.254.117/laundress/updatelaundrydetails.php";*/
     ArrayList<AddLaundryDetailList> addLaundryDetailLists = new ArrayList<AddLaundryDetailList>();
     AddLaundryDetailsAdapter addLaundryDetailsAdapter;
     Button btnaddclientinvent;

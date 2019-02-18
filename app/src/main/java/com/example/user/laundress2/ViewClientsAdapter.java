@@ -46,14 +46,11 @@ public class ViewClientsAdapter extends BaseAdapter {
         convertView = layoutInflater.inflate(R.layout.viewclients_adapter, parent, false);
         itemHolder.name = (TextView) convertView.findViewById(R.id.name);
         itemHolder.imagephoto = (ImageView) convertView.findViewById(R.id.imagephoto);
-        itemHolder.bookings = (TextView) convertView.findViewById(R.id.bookings);
-        itemHolder.rate = (RatingBar) convertView.findViewById(R.id.rate);
+
         //final ClientPostList clientPostList=clientPostLists.get(position);
 
 
         itemHolder.name.setText(viewClientsLists.get(position).getName());
-        itemHolder.bookings.setText(viewClientsLists.get(position).getBookings());
-        itemHolder.rate.setRating(viewClientsLists.get(position).getRate());
         Picasso.get().load(viewClientsLists.get(position).getImage()).into(itemHolder.imagephoto);
         return convertView;
     }

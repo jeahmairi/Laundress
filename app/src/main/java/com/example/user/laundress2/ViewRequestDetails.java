@@ -31,8 +31,8 @@ public class ViewRequestDetails extends AppCompatActivity {
     EditText estdatetime;
     TextView servicetype, estiweight;
     int trans_No;
-    //private static final String URL_ALL="http://192.168.254.113/laundress/viewrequestdetails.php";
-    private static final String URL_ALL="http://192.168.254.117/laundress/viewrequestdetails.php";
+    private static final String URL_ALL="http://192.168.254.113/laundress/viewrequestdetails.php";
+    //private static final String URL_ALL="http://192.168.254.117/laundress/viewrequestdetails.php";
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

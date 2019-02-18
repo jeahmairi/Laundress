@@ -33,8 +33,8 @@ public class HandwasherNotification extends AppCompatActivity {
     ArrayList<String> arrnotifmes= new ArrayList<>();
     ArrayList<HandwasherNotifList> handwasherNotifLists = new ArrayList<HandwasherNotifList>();
     HandwasherNotifAdapter handwasherNotifAdapter;
-    //private static final String URL_ALL ="http://192.168.254.113/laundress/allnotification.php";
-    private static final String URL_ALL ="http://192.168.254.117/laundress/allnotification.php";
+    private static final String URL_ALL ="http://192.168.254.113/laundress/allnotification.php";
+    //private static final String URL_ALL ="http://192.168.254.117/laundress/allnotification.php";
     ListView lvnotif;
     String handwasher_name, client_name;
     String notification_Message;

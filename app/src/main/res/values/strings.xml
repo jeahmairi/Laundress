@@ -36,6 +36,8 @@
         <item>Levis</item>
         <item>Adidas</item>
         <item>Nike</item>
+        <item>Grandsler</item>
+        <item>Others</item>
     </string-array>
 
     <string-array name="itemcolor">
@@ -50,6 +52,7 @@
         <item>Yellow</item>
         <item>Brown</item>
         <item>Violet</item>
+        <item>Others</item>
     </string-array>
 
     <string-array name="civilstatus">

@@ -36,10 +36,10 @@ public class ClientMyLaundry extends Fragment {
     TextView section_label, section_label2, section_label3, aname, number, address, textView31, statusname, timeleft, time, timename;
     ImageView picture, bgtime;
 
-    /*private static final String URL_ALL ="http://192.168.254.113/laundress/allbooking.php";
-    private static final String URL_UPDATE ="http://192.168.254.113/laundress/updatetranscancel.php";*/
-    private static final String URL_ALL ="http://192.168.254.117/laundress/allbooking.php";
-    private static final String URL_UPDATE ="http://192.168.254.117/laundress/updatetranscancel.php";
+    private static final String URL_ALL ="http://192.168.254.113/laundress/allbooking.php";
+    private static final String URL_UPDATE ="http://192.168.254.113/laundress/updatetranscancel.php";
+    /*private static final String URL_ALL ="http://192.168.254.117/laundress/allbooking.php";
+    private static final String URL_UPDATE ="http://192.168.254.117/laundress/updatetranscancel.php";*/
     // newInstance constructor for creating fragment with arguments
     public static ClientMyLaundry newInstance(int client_id, String client_name) {
         ClientMyLaundry clientMyLaundry = new ClientMyLaundry();

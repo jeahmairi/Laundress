@@ -47,14 +47,14 @@ public class FindHandwasher extends Fragment implements SearchView.OnQueryTextLi
     //  ListView listview;
     private Context context;
 
-  /* private static final String URL_ALL ="http://192.168.254.113/laundress/allhandwasher.php";
+   private static final String URL_ALL ="http://192.168.254.113/laundress/allhandwasher.php";
    private static final String URL_ALL_CLIENT ="http://192.168.254.113/laundress/client.php";
    private static final String URL_ALL_CHEAP ="http://192.168.254.113/laundress/allhandwashercheap.php";
-   private static final String URL_ALL_REC ="http://192.168.254.113/laundress/allhandwasherrecom.php"; */
-   private static final String URL_ALL ="http://192.168.254.117/laundress/allhandwasher.php";
+   private static final String URL_ALL_REC ="http://192.168.254.113/laundress/allhandwasherrecom.php";
+   /*private static final String URL_ALL ="http://192.168.254.117/laundress/allhandwasher.php";
    private static final String URL_ALL_CLIENT ="http://192.168.254.117/laundress/client.php";
    private static final String URL_ALL_CHEAP ="http://192.168.254.117/laundress/allhandwashercheap.php";
-   private static final String URL_ALL_REC ="http://192.168.254.117/laundress/allhandwasherrecom.php";
+   private static final String URL_ALL_REC ="http://192.168.254.117/laundress/allhandwasherrecom.php";*/
 
     ArrayList<HandwasherList> handwasherLists = new ArrayList<HandwasherList>();
     HandwasherAdapter handwasherAdapter;

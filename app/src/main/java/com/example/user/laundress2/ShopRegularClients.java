@@ -32,8 +32,8 @@ public class ShopRegularClients extends AppCompatActivity {
     ArrayList<ShopRegularClientsList> shopRegularClientsLists = new ArrayList<ShopRegularClientsList>();
     private String location, name, contact;
     private int lsp_id;
-    //private static final String URL_ALL_ClIENTS ="http://192.168.254.113/laundress/shop_regularclients.php";
-    private static final String URL_ALL_ClIENTS ="http://192.168.254.117/laundress/shop_regularclients.php";
+    private static final String URL_ALL_ClIENTS ="http://192.168.254.113/laundress/shop_regularclients.php";
+    //private static final String URL_ALL_ClIENTS ="http://192.168.254.117/laundress/shop_regularclients.php";
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
@@ -78,16 +78,16 @@ public class ShopRegularClients extends AppCompatActivity {
                                 for (int i =0;i<jsonArray.length();i++)
                                 {
                                     String name=jsonArray.getJSONObject(i).getString("name").toString();
-                                    String bookings=jsonArray.getJSONObject(i).getString("bookings").toString();
+                                    //String bookings=jsonArray.getJSONObject(i).getString("bookings").toString();
                                     String photo=jsonArray.getJSONObject(i).getString("photo").toString();
-                                    float rate= Float.parseFloat(jsonArray.getJSONObject(i).getString("rate").toString());
+                                    //float rate= Float.parseFloat(jsonArray.getJSONObject(i).getString("rate").toString());
                                     //Toast.makeText(ShopRegularClients.this, "" +bookings, Toast.LENGTH_SHORT).show();
 
                                     ShopRegularClientsList shopRegularClientsList = new ShopRegularClientsList();
                                     shopRegularClientsList.setName(name);
                                     shopRegularClientsList.setImage(photo);
-                                    shopRegularClientsList.setBookings(bookings+" bookings");
-                                    shopRegularClientsList.setRate(rate);
+                                   // shopRegularClientsList.setBookings(bookings+" bookings");
+                                  //  shopRegularClientsList.setRate(rate);
                                     shopRegularClientsLists.add(shopRegularClientsList);
                                 }
                                 shopRegularClientsAdapter = new ShopRegularClientsAdapter(ShopRegularClients.this, shopRegularClientsLists);
