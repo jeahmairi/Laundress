@@ -7,11 +7,17 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.EditText;
+import android.widget.Filter;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -34,19 +40,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class FindHandwasher extends Fragment {
+public class FindHandwasher extends Fragment implements SearchView.OnQueryTextListener {
     ArrayList<String> arrname = new ArrayList<>();
     ArrayList<String> arrmeter = new ArrayList<>();
     ArrayList<String> arrcontact = new ArrayList<>();
     //  ListView listview;
     private Context context;
-   private static final String URL_ALL ="http://192.168.254.113/laundress/allhandwasher.php";
+
+  /* private static final String URL_ALL ="http://192.168.254.113/laundress/allhandwasher.php";
    private static final String URL_ALL_CLIENT ="http://192.168.254.113/laundress/client.php";
    private static final String URL_ALL_CHEAP ="http://192.168.254.113/laundress/allhandwashercheap.php";
-   private static final String URL_ALL_REC ="http://192.168.254.113/laundress/allhandwasherrecom.php";
-   //private static final String URL_ALL ="http://192.168.1.12/laundress/allhandwasher.php";
-   //private static final String URL_ALL ="http://192.168.254.100/laundress/allhandwasher.php";
-   // private static final String URL_ALL ="http://192.168.1.2/laundress/allhandwasher.php";
+   private static final String URL_ALL_REC ="http://192.168.254.113/laundress/allhandwasherrecom.php"; */
+   private static final String URL_ALL ="http://192.168.254.117/laundress/allhandwasher.php";
+   private static final String URL_ALL_CLIENT ="http://192.168.254.117/laundress/client.php";
+   private static final String URL_ALL_CHEAP ="http://192.168.254.117/laundress/allhandwashercheap.php";
+   private static final String URL_ALL_REC ="http://192.168.254.117/laundress/allhandwasherrecom.php";
+
     ArrayList<HandwasherList> handwasherLists = new ArrayList<HandwasherList>();
     HandwasherAdapter handwasherAdapter;
 
@@ -54,11 +63,13 @@ public class FindHandwasher extends Fragment {
     private int client_id;
     Spinner spinner;
     String client_Address;
+    SearchView editsearch;
     ListView listView, lvcheap, lvrecommended;
     double lat;
     double lng;
     double lat2;
     double lng2;
+    private int search;
     //private double client_latlang;
 
     // newInstance constructor for creating fragment with arguments
@@ -82,12 +93,14 @@ public class FindHandwasher extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,  ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.findhandwasher, container, false);
          listView = rootView.findViewById(R.id.lvhandwashers);
+
          lvcheap = rootView.findViewById(R.id.lvcheap);
+        editsearch = rootView.findViewById(R.id.search);
          lvrecommended = rootView.findViewById(R.id.lvrecommended);
          spinner = rootView.findViewById(R.id.spinner);
         context = getActivity();
-
         allClient();
+        editsearch.setOnQueryTextListener(this);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -116,6 +129,17 @@ public class FindHandwasher extends Fragment {
 
         //allHandwasher();
         return rootView;
+    }
+    public boolean onQueryTextSubmit(String query) {
+
+        return false;
+    }
+
+
+    public boolean onQueryTextChange(String newText) {
+        String text = newText;
+        handwasherAdapter.filter(text);
+        return false;
     }
     private void allClient() {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_ALL_CLIENT,
@@ -165,6 +189,9 @@ public class FindHandwasher extends Fragment {
     private void allHandwasher() {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_ALL,
                 new Response.Listener<String>() {
+                    private String meter, name, contact;
+                    private int lsp_id;
+
                     @Override
                     public void onResponse(String response) {
                         try {
@@ -175,15 +202,16 @@ public class FindHandwasher extends Fragment {
                             JSONArray jsonArray = jsonObject.getJSONArray("allhandwasher");
                             if (success.equals("1")){
                                 handwasherLists.clear();
+
                                 for (int i =0;i<jsonArray.length();i++)
                                 {
 
-                                    String name=jsonArray.getJSONObject(i).getString("name").toString();
-                                    String meter = jsonArray.getJSONObject(i).getString("address").toString();
-                                    String contact = jsonArray.getJSONObject(i).getString("contact").toString();
-                                    int lsp_id = Integer.parseInt(jsonArray.getJSONObject(i).getString("lspid").toString());
+                                    name=jsonArray.getJSONObject(i).getString("name").toString();
+                                    meter = jsonArray.getJSONObject(i).getString("address").toString();
+                                    contact = jsonArray.getJSONObject(i).getString("contact").toString();
+                                    lsp_id = Integer.parseInt(jsonArray.getJSONObject(i).getString("lspid").toString());
                                     arrname.add(name);
-                                    arrmeter.add(getDistance(lat, lng, lat2, lng2));
+                                    arrmeter.add(meter);
                                     arrcontact.add(contact);
                                     //Collections.sort(arrmeter);
                                     //System.out.println(arrmeter);
@@ -192,14 +220,18 @@ public class FindHandwasher extends Fragment {
                                     handwasherList.setHandwasherName(name);
                                     handwasherList.setContact(contact);
                                     handwasherList.setLsp_id(lsp_id);
+                                    handwasherList.setHwlocation(meter);
+                                    handwasherList.setSort("Nearest");
                                     getLocationToAddress(meter);
                                     handwasherList.setHwmeter(getDistance(lat, lng, lat2, lng2));
                                     handwasherLists.add(handwasherList);
+
 
                                    // Toast.makeText(getActivity(), " " + getDistance(lat, lng, lat2, lng2),Toast.LENGTH_SHORT).show();
                                 }
                                 handwasherAdapter = new HandwasherAdapter(context,handwasherLists);
                                 listView.setAdapter(handwasherAdapter);
+
                             }
 
                         } catch (JSONException e) {
@@ -240,6 +272,7 @@ public class FindHandwasher extends Fragment {
                                     String meter = jsonArray.getJSONObject(i).getString("address").toString();
                                     String contact = jsonArray.getJSONObject(i).getString("contact").toString();
                                     int lsp_id = Integer.parseInt(jsonArray.getJSONObject(i).getString("lspid").toString());
+                                    String price = jsonArray.getJSONObject(i).getString("price").toString();
                                     arrname.add(name);
                                     arrmeter.add(meter);
                                     arrcontact.add(contact);
@@ -248,6 +281,9 @@ public class FindHandwasher extends Fragment {
                                     handwasherList.setHandwasherName(name);
                                     handwasherList.setContact(contact);
                                     handwasherList.setLsp_id(lsp_id);
+                                    handwasherList.setSort("Cheapest");
+                                    handwasherList.setHwlocation(meter);
+                                    handwasherList.setPrice(price);
                                     getLocationToAddress(meter);
                                     handwasherList.setHwmeter(getDistance(lat, lng, lat2, lng2));
                                     handwasherList.setHwmeterdouble(getDistanceDouble(lat, lng, lat2, lng2));
@@ -293,7 +329,8 @@ public class FindHandwasher extends Fragment {
                                     String name=jsonArray.getJSONObject(i).getString("name").toString();
                                     String meter = jsonArray.getJSONObject(i).getString("address").toString();
                                     String contact = jsonArray.getJSONObject(i).getString("contact").toString();
-                                    String photo = jsonArray.getJSONObject(i).getString("photo").toString();
+                                    //String photo = jsonArray.getJSONObject(i).getString("photo").toString();
+                                    String average = jsonArray.getJSONObject(i).getString("average").toString();
                                     int lsp_id = Integer.parseInt(jsonArray.getJSONObject(i).getString("lspid").toString());
                                     arrname.add(name);
                                     arrmeter.add(meter);
@@ -302,9 +339,11 @@ public class FindHandwasher extends Fragment {
                                     handwasherList.setClient_id(client_id);
                                     handwasherList.setHandwasherName(name);
                                     handwasherList.setContact(contact);
+                                    handwasherList.setSort("Recommended");
                                     handwasherList.setLsp_id(lsp_id);
-                                    handwasherList.setPhoto(photo);
+                                    //handwasherList.setPhoto(photo);
                                     handwasherList.setHwlocation(meter);
+                                    handwasherList.setReccom(average);
                                     getLocationToAddress(meter);
                                     handwasherList.setHwmeter(getDistance(lat, lng, lat2, lng2));
                                     handwasherList.setHwmeterdouble(getDistanceDouble(lat, lng, lat2, lng2));

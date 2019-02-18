@@ -33,7 +33,8 @@ public class HandwasherNotification extends AppCompatActivity {
     ArrayList<String> arrnotifmes= new ArrayList<>();
     ArrayList<HandwasherNotifList> handwasherNotifLists = new ArrayList<HandwasherNotifList>();
     HandwasherNotifAdapter handwasherNotifAdapter;
-    private static final String URL_ALL ="http://192.168.254.113/laundress/allnotification.php";
+    //private static final String URL_ALL ="http://192.168.254.113/laundress/allnotification.php";
+    private static final String URL_ALL ="http://192.168.254.117/laundress/allnotification.php";
     ListView lvnotif;
     String handwasher_name, client_name;
     String notification_Message;
@@ -116,7 +117,7 @@ public class HandwasherNotification extends AppCompatActivity {
                                     String table = jsonArray.getJSONObject(i).getString("fromtable");
                                     String client_Photo = jsonArray.getJSONObject(i).getString("client_Photo");
                                     if(notification_Message.equals("Pending") || notification_Message.equals("Missed") || notification_Message.equals("Finished")){
-                                        Toast.makeText(HandwasherNotification.this, "sud " + notification_Message, Toast.LENGTH_SHORT).show();
+                                        //Toast.makeText(HandwasherNotification.this, "sud " + notification_Message, Toast.LENGTH_SHORT).show();
 
                                         HandwasherNotifList handwasherNotifList = new HandwasherNotifList();
                                         handwasherNotifList.setClient_id(client_ID);
@@ -166,7 +167,7 @@ public class HandwasherNotification extends AppCompatActivity {
                                                         intent.putExtras(extras);
                                                         startActivity(intent);
                                                     }
-                                                     Toast.makeText(HandwasherNotification.this, "sud " +position+"Message "+handwasherNotifLists.get(position).getNotification_message(), Toast.LENGTH_SHORT).show();
+                                                     //Toast.makeText(HandwasherNotification.this, "sud " +position+"Message "+handwasherNotifLists.get(position).getNotification_message(), Toast.LENGTH_SHORT).show();
                                                 }
                                             });
                                         //}

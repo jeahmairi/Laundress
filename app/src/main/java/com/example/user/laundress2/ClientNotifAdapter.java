@@ -6,8 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -44,11 +47,18 @@ public class ClientNotifAdapter extends BaseAdapter {
         itemHolder.name = (TextView) convertView.findViewById(R.id.name);
         itemHolder.status = (TextView) convertView.findViewById(R.id.status);
         itemHolder.ratings = convertView.findViewById(R.id.ratings);
+        itemHolder.photo = (ImageView) convertView.findViewById(R.id.photo);
         //final ClientPostList clientPostList=clientPostLists.get(position);
         //}
 
         // itemHolder.status.setText(handwasherNotifLists.get(position).getNotification_message());
         String message = clientNotifLists.get(position).getNotification_message();
+        if(!clientNotifLists.get(position).getImage().isEmpty()){
+            Picasso.get().load(clientNotifLists.get(position).getImage()).into(itemHolder.photo);
+        } else {
+            //itemHolder.photo.set(@mipmap/ic_launcher_round);
+        }
+
         if(message.equals("Approved")){
             itemHolder.name.setText(clientNotifLists.get(position).getClient_name());
             itemHolder.status.setText("Approved your service. Please wait for laundry Details confirmation.");
@@ -67,6 +77,7 @@ public class ClientNotifAdapter extends BaseAdapter {
 
     private class ItemHolder {
         TextView name, status;
+        ImageView photo;
         RatingBar ratings;
     }
 }

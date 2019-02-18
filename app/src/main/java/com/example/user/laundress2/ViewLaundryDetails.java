@@ -31,7 +31,9 @@ public class ViewLaundryDetails extends AppCompatActivity {
     LinearLayout llhori, llverti;
     String name;
     int trans_No, lsp_id, handwasher_id;
-    private static final String URL_ALL="http://192.168.254.113/laundress/viewlaundrydetails.php";
+
+    //private static final String URL_ALL="http://192.168.254.113/laundress/viewlaundrydetails.php";
+    private static final String URL_ALL="http://192.168.254.117/laundress/viewlaundrydetails.php";
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

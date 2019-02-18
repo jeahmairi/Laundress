@@ -4,30 +4,33 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
+import java.util.Locale;
 
 public class HandwasherAdapter extends BaseAdapter {
     Context context;
     ItemHolder itemHolder;
     ArrayList<HandwasherList> handwasherLists;
+    private ArrayList<HandwasherList> arraylist;
+
 
     public HandwasherAdapter(Context context,  ArrayList<HandwasherList> handwasherLists) {
         this.context = context;
         this.handwasherLists = handwasherLists;
+        this.arraylist = new ArrayList<HandwasherList>();
+        this.arraylist.addAll(handwasherLists);
     }
     @Override
     public int getCount() {
@@ -46,7 +49,7 @@ public class HandwasherAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Collections.sort(handwasherLists, new CustomComparator());
+
        // if (convertView == null) {
             LayoutInflater layoutInflater = ((Activity) context).getLayoutInflater();
             itemHolder = new ItemHolder();
@@ -58,6 +61,13 @@ public class HandwasherAdapter extends BaseAdapter {
             itemHolder.choose = convertView.findViewById(R.id.btnchoose);
 
             final HandwasherList handwasherList = handwasherLists.get(position);
+            if(handwasherList.getSort().equals("Nearest")){
+                Collections.sort(handwasherLists, new CustomComparator());
+            } else if(handwasherList.getSort().equals("Cheapest")) {
+                Collections.sort(handwasherLists, new CustomComparator2());
+            } else if(handwasherList.getSort().equals("Recommended")) {
+                Collections.sort(handwasherLists, new CustomComparator3());
+            }
             itemHolder.choose.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -82,6 +92,8 @@ public class HandwasherAdapter extends BaseAdapter {
 
         return convertView;
     }
+
+
     private class ItemHolder {
         TextView name;
         TextView contact;
@@ -95,4 +107,32 @@ public class HandwasherAdapter extends BaseAdapter {
             return list1.getHwmeter().compareTo(list2.getHwmeter());
         }
     }
+
+    public class CustomComparator2 implements Comparator<HandwasherList> {
+        @Override
+        public int compare(HandwasherList list1, HandwasherList list2) {
+            return list1.getPrice().compareTo(list2.getPrice());
+        }
+    }
+    public class CustomComparator3 implements Comparator<HandwasherList> {
+        @Override
+        public int compare(HandwasherList list1, HandwasherList list2) {
+            return list1.getReccom().compareTo(list2.getReccom());
+        }
+    }
+    public void filter(String charText) {
+        charText = charText.toLowerCase(Locale.getDefault());
+        handwasherLists.clear();
+        if (charText.length() == 0) {
+            handwasherLists.addAll(arraylist);
+        } else {
+            for (HandwasherList wp : arraylist) {
+                if (wp.getHwlocation().toLowerCase(Locale.getDefault()).contains(charText)) {
+                    handwasherLists.add(wp);
+                }
+            }
+        }
+        notifyDataSetChanged();
+    }
+
 }

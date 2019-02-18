@@ -35,7 +35,8 @@ public class HandwasherBookings extends Fragment {
     private Context context;
     ArrayList<HandwasherBookingsList> handwasherBookingsLists = new ArrayList<HandwasherBookingsList>();
     HandwasherBookingsAdapter handwasherBookingsAdapter;
-    private static final String URL_ALL ="http://192.168.254.113/laundress/allbookingapprove.php";
+    //private static final String URL_ALL ="http://192.168.254.113/laundress/allbookingapprove.php";
+    private static final String URL_ALL ="http://192.168.254.117/laundress/allbookingapprove.php";
     private String name, services, extraservices, servicetype, weight, datetime, client_Photo ;
     private int trans_No;
     private String xtraserve, serve;
@@ -92,15 +93,15 @@ public class HandwasherBookings extends Fragment {
                                      trans_No = Integer.parseInt(jsonArray2.getJSONObject(i).getString("trans_No").toString());
                                     int lsp_id = Integer.parseInt(jsonArray2.getJSONObject(i).getString("lsp_ID").toString());
                                     int handwasher_id = Integer.parseInt(jsonArray2.getJSONObject(i).getString("handwasher_ID").toString());
-                                    xtraserve = xtraserve + " " +extraservices;
-                                    serve = serve + " " +services;
+                                    //xtraserve = xtraserve + " " +extraservices;
+                                    //serve = serve + " " +services;
                                     HandwasherBookingsList handwasherBookingsList = new HandwasherBookingsList();
                                     handwasherBookingsList.setName(name);
                                     handwasherBookingsList.setLsp_id(handwasher_lspid);
                                     handwasherBookingsList.setHandwasher_id(handwasher_id);
                                     handwasherBookingsList.setTrans_no(trans_No);
-                                    handwasherBookingsList.setServices(serve);
-                                    handwasherBookingsList.setExtraservices(xtraserve);
+                                    handwasherBookingsList.setServices(services);
+                                    handwasherBookingsList.setExtraservices(extraservices);
                                     handwasherBookingsList.setServicetype(servicetype);
                                     handwasherBookingsList.setWeight(weight);
                                     handwasherBookingsList.setDatetime(datetime);
@@ -113,7 +114,7 @@ public class HandwasherBookings extends Fragment {
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(getActivity(), "failedddd" +e.toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "Failed" +e.toString(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 },

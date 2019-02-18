@@ -44,9 +44,27 @@ public class HandwasherMyPost extends AppCompatActivity {
     int handwasher_id, handwasher_lspid;
     int pos =0;
 
-    private static final String URL_ALL ="http://192.168.254.113/laundress/allhandwashermypost.php";
+    /*private static final String URL_ALL ="http://192.168.254.113/laundress/allhandwashermypost.php";
     private static final String URL_UPDATE ="http://192.168.254.113/laundress/updatehandwashermypost.php";
-    private static final String URL_DELETE ="http://192.168.254.113/laundress/deletehandwashermypost.php";
+    private static final String URL_DELETE ="http://192.168.254.113/laundress/deletehandwashermypost.php";*/
+    private static final String URL_ALL ="http://192.168.254.117/laundress/allhandwashermypost.php";
+    private static final String URL_UPDATE ="http://192.168.254.117/laundress/updatehandwashermypost.php";
+    private static final String URL_DELETE ="http://192.168.254.117/laundress/deletehandwashermypost.php";
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    public void onBackPressed() {
+
+        // Write your code here
+
+        super.onBackPressed();
+    }
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
@@ -56,6 +74,8 @@ public class HandwasherMyPost extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         setContentView(R.layout.mypost);
         clientpost = findViewById(R.id.clientpost);
         Intent intent = getIntent();

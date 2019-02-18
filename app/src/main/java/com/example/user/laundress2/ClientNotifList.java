@@ -10,6 +10,7 @@ public class ClientNotifList {
     private String table;
     private String comment;
     private String datecomment;
+    private String image;
     private float rate;
 
     public String getComment() {
@@ -90,5 +91,13 @@ public class ClientNotifList {
 
     public void setRate_no(int rate_no) {
         this.rate_no = rate_no;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

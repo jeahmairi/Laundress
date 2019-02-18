@@ -54,10 +54,15 @@ public class HandwasherLaundryServices extends AppCompatActivity {
     String home;
     int pricelaund, price_dry, pricelaundanddry, priceiron, pricefold;
     int handwasher_id, handwasher_lspid;
-    private static String URL_HANDWASHER_SERVICES = "http://192.168.254.113/laundress/addhandwasherextraservices.php";
+    /*private static String URL_HANDWASHER_SERVICES = "http://192.168.254.113/laundress/addhandwasherextraservices.php";
     private static String URL_HANDWASHER_SERVICESTYPE = "http://192.168.254.113/laundress/addhandwasherservicetype.php";
     private static String URL_HANDWASHER_SERVICEOFFERED = "http://192.168.254.113/laundress/addhandwasherserviceoffered.php";
-    private static String URL_ALL_HANDWASHER_SERVICES = "http://192.168.254.113/laundress/allhandwasherservices.php";
+    private static String URL_ALL_HANDWASHER_SERVICES = "http://192.168.254.113/laundress/allhandwasherservices.php";*/
+    private static String URL_HANDWASHER_SERVICES = "http://192.168.254.117/laundress/addhandwasherextraservices.php";
+    private static String URL_HANDWASHER_SERVICESTYPE = "http://192.168.254.117/laundress/addhandwasherservicetype.php";
+    private static String URL_HANDWASHER_SERVICEOFFERED = "http://192.168.254.117/laundress/addhandwasherserviceoffered.php";
+    private static String URL_ALL_HANDWASHER_SERVICES = "http://192.168.254.117/laundress/allhandwasherservices.php";
+
     String uomlaundry;
     String uomdry;
     String uomdryanddry;
@@ -99,7 +104,6 @@ public class HandwasherLaundryServices extends AppCompatActivity {
         priceironing = findViewById(R.id.priceironing);
         pricefolding = findViewById(R.id.pricefolding);
 
-        btnedit = findViewById(R.id.btnedit);
         btnset = findViewById(R.id.btnset);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -248,9 +252,9 @@ public class HandwasherLaundryServices extends AppCompatActivity {
                             String success = jsonObject.getString("success");
 
                             if(success.equals("1")){
-                                Toast.makeText(HandwasherLaundryServices.this, "Added Successfully ", Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(HandwasherLaundryServices.this, "Added Successfully ", Toast.LENGTH_SHORT).show();
                             } else {
-                                Toast.makeText(HandwasherLaundryServices.this, "Failed", Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(HandwasherLaundryServices.this, "Failed", Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e){
                             e.printStackTrace();;
@@ -292,7 +296,6 @@ public class HandwasherLaundryServices extends AppCompatActivity {
                             //JSONArray jsonArray = new JSONArray(response);
                             JSONArray jsonArray2 = jsonObject.getJSONArray("allhandwasherservice");
                             if (success.equals("1")){
-                                btnedit.setVisibility(View.VISIBLE);
                                 btnset.setVisibility(View.GONE);
                                 for (int i =0;i<jsonArray2.length();i++)
                                 {
@@ -415,7 +418,7 @@ public class HandwasherLaundryServices extends AppCompatActivity {
                             String success = jsonObject.getString("success");
 
                             if(success.equals("1")){
-                                Toast.makeText(HandwasherLaundryServices.this, "Added Successfully ", Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(HandwasherLaundryServices.this, "Added Successfully ", Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e){
                             e.printStackTrace();;
@@ -492,6 +495,7 @@ public class HandwasherLaundryServices extends AppCompatActivity {
 
                             if(success.equals("1")){
                                 Toast.makeText(HandwasherLaundryServices.this, "Added Successfully ", Toast.LENGTH_SHORT).show();
+                                HandwasherLaundryServices.this.recreate();
                             }
                         } catch (JSONException e){
                             e.printStackTrace();;

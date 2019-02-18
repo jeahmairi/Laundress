@@ -158,16 +158,6 @@
         </LinearLayout>
 
         <Button
-        android:id="@+id/btnedit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@color/darkBlue"
-        android:text="Edit Services"
-        android:textColor="@android:color/background_light"
-        android:visibility="gone" />
-
-        <Button
             android:id="@+id/btnset"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

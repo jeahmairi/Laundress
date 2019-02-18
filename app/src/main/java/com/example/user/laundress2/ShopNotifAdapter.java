@@ -6,8 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -42,6 +45,7 @@ public class ShopNotifAdapter extends BaseAdapter {
         itemHolder = new ItemHolder();
         convertView = layoutInflater.inflate(R.layout.shop_notification_adapter, parent, false);
         itemHolder.name = (TextView) convertView.findViewById(R.id.name);
+        itemHolder.photo = (ImageView) convertView.findViewById(R.id.photo);
         itemHolder.status = (TextView) convertView.findViewById(R.id.status);
         itemHolder.ratingOverall = convertView.findViewById(R.id.rateOverall);
         //final ClientPostList clientPostList=clientPostLists.get(position);
@@ -49,6 +53,9 @@ public class ShopNotifAdapter extends BaseAdapter {
         itemHolder.name.setText(shopNotificationLists.get(position).getClientName());
         // itemHolder.status.setText(handwasherNotifLists.get(position).getNotification_message());
         String message = shopNotificationLists.get(position).getMessage();
+        if(!shopNotificationLists.get(position).getImage().isEmpty()){
+            Picasso.get().load(shopNotificationLists.get(position).getImage()).into(itemHolder.photo);
+        }
         if(message.equals("Pending")){
             itemHolder.status.setText("Requested your service.");
         }else if(message.equals("Missed")){
@@ -71,5 +78,6 @@ public class ShopNotifAdapter extends BaseAdapter {
     private class ItemHolder {
         TextView name, status;
         RatingBar ratingOverall;
+        ImageView photo;
     }
 }

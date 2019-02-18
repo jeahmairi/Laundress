@@ -58,12 +58,10 @@
         <item>Divorced</item>
     </string-array>
     <string-array name="unitofmeasure">
-        <item>per Kilo</item>
         <item>per Bundle</item>
     </string-array>
     <string-array name="unitofmeasureadd">
         <item>Additional</item>
-        <item>Additional per Kilo</item>
     </string-array>
     <string name="title_activity_client_homepage">ClientHomepage</string>
     <string name="mylaundry">My Laundries</string>

@@ -6,6 +6,7 @@ public class ShopPostsList {
     private String postDate;
     private String message;
     private String Contact;
+    private String image;
 
     public String getName() {
         return name;
@@ -45,5 +46,13 @@ public class ShopPostsList {
 
     public void setContact(String contact) {
         Contact = contact;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

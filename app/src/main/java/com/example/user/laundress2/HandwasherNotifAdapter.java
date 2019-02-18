@@ -53,7 +53,8 @@ public class HandwasherNotifAdapter extends BaseAdapter {
         itemHolder.name.setText(handwasherNotifLists.get(position).getClient_name());
        // itemHolder.status.setText(handwasherNotifLists.get(position).getNotification_message());
         String message = handwasherNotifLists.get(position).getNotification_message();
-        Picasso.get().load(handwasherNotifLists.get(position).getImage()).into(itemHolder.photo);
+        if(!handwasherNotifLists.get(position).getImage().isEmpty()){
+        Picasso.get().load(handwasherNotifLists.get(position).getImage()).into(itemHolder.photo);}
         if(message.equals("Pending")){
             itemHolder.status.setText("Requested your service.");
         }else if(message.equals("Missed")){

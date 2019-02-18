@@ -45,11 +45,13 @@ public class ClientHomepage extends AppCompatActivity implements NavigationView.
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nv);
+        name = navigationView.getHeaderView(0).findViewById(R.id.namenavbar);
         navigationView.setNavigationItemSelectedListener(this);
 
 
         client_name = getIntent().getStringExtra("name");
         client_id = getIntent().getIntExtra("id", 0);
+        name.setText(client_name);
        // name.setText(client_name);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.

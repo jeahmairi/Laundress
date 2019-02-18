@@ -54,7 +54,7 @@ public class ShopHistoryAdapter extends BaseAdapter {
             public void onClick(View v) {
                 Bundle extras = new Bundle();
                 extras.putInt("trans_No",shopHistoryLists.get(position).getTrans_No());
-                Intent intent = new Intent(context, ShopViewLaundryDetails.class);
+                Intent intent = new Intent(context, ViewLaundryDetails.class);
                 intent.putExtras(extras);
                 context.startActivity(intent);
             }

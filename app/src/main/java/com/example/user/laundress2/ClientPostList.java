@@ -4,6 +4,7 @@ public class ClientPostList {
     private String post_message;
     private String post_showAddress;
     private String contact;
+    private String image;
     private String date;
     private int post_datetime;
 
@@ -64,5 +65,13 @@ public class ClientPostList {
 
     public void setContact(String contact) {
         this.contact = contact;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

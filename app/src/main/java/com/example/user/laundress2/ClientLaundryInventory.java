@@ -31,8 +31,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ClientLaundryInventory extends AppCompatActivity {
-    private static final String URL_ALL ="http://192.168.254.113/laundress/allinventory.php";
-    private static final String URl_ADD_LAUNDRY_DETAILS ="http://192.168.254.113/laundress/addlaunddetails.php";
+    /*private static final String URL_ALL ="http://192.168.254.113/laundress/allinventory.php";
+    private static final String URl_ADD_LAUNDRY_DETAILS ="http://192.168.254.113/laundress/addlaunddetails.php";*/
+
+    private static final String URL_ALL ="http://192.168.254.117/laundress/allinventory.php";
+    private static final String URl_ADD_LAUNDRY_DETAILS ="http://192.168.254.117/laundress/addlaunddetails.php";
+
     String client_name;
     Button btnselect, btnskip;
     int client_id;
@@ -234,11 +238,11 @@ public class ClientLaundryInventory extends AppCompatActivity {
                                 llall.setAdapter(laundryInventoryAdapter);
 
                             } else if(success.equals("0")) {
-                                Toast.makeText(ClientLaundryInventory.this, "error " , Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ClientLaundryInventory.this, "No data " , Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(ClientLaundryInventory.this, "failedddd" +e.toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ClientLaundryInventory.this, "Failed" +e.toString(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 },

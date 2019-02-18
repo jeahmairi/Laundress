@@ -151,7 +151,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Email"
+            android:hint="Username"
             android:inputType="textPersonName"
             android:textColor="@color/lightBlue"
             android:textColorHint="@android:color/background_light" />

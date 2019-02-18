@@ -6,9 +6,13 @@ public class HandwasherList {
     private  String hwlocation;
     private  String contact;
     private  String photo;
+    private  String sort;
     private  int lsp_id;
     private  int client_id;
     private  double hwmeterdouble;
+    private String price;
+    private String reccom;
+
 
   /*  private  String photo;
     private  int handwasherid;*/
@@ -75,6 +79,30 @@ public class HandwasherList {
 
     public void setHwlocation(String hwlocation) {
         this.hwlocation = hwlocation;
+    }
+
+    public String getSort() {
+        return sort;
+    }
+
+    public void setSort(String sort) {
+        this.sort = sort;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public String getReccom() {
+        return reccom;
+    }
+
+    public void setReccom(String reccom) {
+        this.reccom = reccom;
     }
 /*
     public String getPhoto() {

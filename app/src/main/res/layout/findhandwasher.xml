@@ -49,14 +49,14 @@
                 android:textColor="@android:color/background_light"
                 android:textSize="18sp" />
 
-            <EditText
-                android:id="@+id/editText"
-                android:layout_width="match_parent"
+            <SearchView
+                android:id="@+id/search"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Your location"
-                android:inputType="textPersonName"
-                android:textColorHint="@color/gray" />
+                android:iconifiedByDefault="false">
+
+                <requestFocus />
+            </SearchView>
 
             <ListView
                 android:id="@+id/lvhandwashers"

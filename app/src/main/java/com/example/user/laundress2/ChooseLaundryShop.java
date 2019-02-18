@@ -60,12 +60,19 @@ public class ChooseLaundryShop extends AppCompatActivity {
     final Context context = this;
     private int servicesOffered;
 
-    private static final String URL_ALL_SERVICE_TYPE="http://192.168.254.113/laundress/allhandwasherservtype.php";
+    /*private static final String URL_ALL_SERVICE_TYPE="http://192.168.254.113/laundress/allhandwasherservtype.php";
     private static final String URL_ALL_SERVICES="http://192.168.254.113/laundress/allhandwasherservices.php";
     private static final String URL_ALL_HANDWASHER="http://192.168.254.113/laundress/allshoplsp.php";
     private static final String URL_ALL_SERVICE_OFFERED ="http://192.168.254.113/laundress/allhandwasherservoff.php";
     private static final String URL_ALL_EXTRA_SERVICES ="http://192.168.254.113/laundress/allhandwasherextserv.php";
-    private static final String URL_ADD_LAUND_TRANS ="http://192.168.254.113/laundress/addtransactionshop.php";
+    private static final String URL_ADD_LAUND_TRANS ="http://192.168.254.113/laundress/addtransactionshop.php";*/
+    //
+    private static final String URL_ALL_SERVICE_TYPE="http://192.168.254.117/laundress/allhandwasherservtype.php";
+    private static final String URL_ALL_SERVICES="http://192.168.254.117/laundress/allhandwasherservices.php";
+    private static final String URL_ALL_HANDWASHER="http://192.168.254.117/laundress/allshoplsp.php";
+    private static final String URL_ALL_SERVICE_OFFERED ="http://192.168.254.117/laundress/allhandwasherservoff.php";
+    private static final String URL_ALL_EXTRA_SERVICES ="http://192.168.254.117/laundress/allhandwasherextserv.php";
+    private static final String URL_ADD_LAUND_TRANS ="http://192.168.254.117/laundress/addtransactionshop.php";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,7 +104,7 @@ public class ChooseLaundryShop extends AppCompatActivity {
         isopenhours = extras.getString("openhours");
         isclosehours = extras.getString("closehours");
 
-        Toast.makeText(ChooseLaundryShop.this, "lsip: "+lsp_id+" client_id: "+client_id, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(ChooseLaundryShop.this, "lsip: "+lsp_id+" client_id: "+client_id, Toast.LENGTH_SHORT).show();
         allhandwasher();
         name.setText(isname);
         location.setText(islocation);
@@ -344,7 +351,7 @@ public class ChooseLaundryShop extends AppCompatActivity {
                                     llservice.addView(llhori);
                                 }
                             } else if(success.equals("0")){
-                                Toast.makeText(ChooseLaundryShop.this, "No data",  Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(ChooseLaundryShop.this, "No data",  Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e){
                             e.printStackTrace();;
@@ -406,7 +413,7 @@ public class ChooseLaundryShop extends AppCompatActivity {
 
                                 }
                             } else if(success.equals("0")){
-                                Toast.makeText(ChooseLaundryShop.this, "No data",  Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(ChooseLaundryShop.this, "No data",  Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e){
                             e.printStackTrace();;
@@ -486,7 +493,7 @@ public class ChooseLaundryShop extends AppCompatActivity {
 
                                 }
                             } else if(success.equals("0")){
-                                Toast.makeText(ChooseLaundryShop.this, "No data",  Toast.LENGTH_SHORT).show();
+                               // Toast.makeText(ChooseLaundryShop.this, "No data",  Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e){
                             e.printStackTrace();;

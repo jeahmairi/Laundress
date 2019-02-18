@@ -33,7 +33,8 @@ public class ShopPosts extends Fragment {
     ArrayList<String> arrContact = new ArrayList<>();
     private Context context;
     ListView listView;
-    private static final String URL_ALL = "http://192.168.254.113/laundress/shop_posts.php";
+    //private static final String URL_ALL = "http://192.168.254.113/laundress/shop_posts.php";
+    private static final String URL_ALL = "http://192.168.254.117/laundress/shop_posts.php";
     ArrayList<ShopPostsList> shopPostsLists = new ArrayList<>();
     ShopPostsAdapter shopPostsAdapter;
     private RequestQueue requestQueue;
@@ -94,6 +95,7 @@ public class ShopPosts extends Fragment {
                     String postDate = jsonArray.getJSONObject(i).getString("postDate");
                     String message = jsonArray.getJSONObject(i).getString("postMessage");
                     String contact = jsonArray.getJSONObject(i).getString("postContact");
+                    String client_Photo = jsonArray.getJSONObject(i).getString("client_Photo");
                     arrName.add(name);
                     arrMeters.add(meters);
                     arrMessage.add(message);
@@ -101,6 +103,7 @@ public class ShopPosts extends Fragment {
                     arrContact.add(contact);
                     ShopPostsList shopPostsList = new ShopPostsList();
                     shopPostsList.setName(name);
+                    shopPostsList.setImage(client_Photo);
                     shopPostsList.setMeters(meters);
                     shopPostsList.setMessage(message);
                     shopPostsList.setPostDate(postDate);

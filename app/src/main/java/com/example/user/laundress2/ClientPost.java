@@ -36,11 +36,10 @@ public class ClientPost extends Fragment {
     ArrayList<String> arrmeter = new ArrayList<>();
     ArrayList<String> arrmessage = new ArrayList<>();
     private Context context;
-   // private static final String URL_ALL ="http://192.168.254.117/laundress/allclientpost.php";
-    private static final String URL_ALLHW ="http://192.168.254.113/laundress/allhandwasherpost.php";
-    //private static final String URL_ALLHW ="http://192.168.1.12/laundress/allhandwasherpost.php";
-    //private static final String URL_ALLHW ="http://192.168.254.100/laundress/allhandwasherpost.php";
-    // private static final String URL_ALL ="http://192.168.1.2/laundress/alllaundryshop.php";
+
+    //private static final String URL_ALLHW ="http://192.168.254.113/laundress/allhandwasherpost.php";
+    private static final String URL_ALLHW ="http://192.168.254.117/laundress/allhandwasherpost.php";
+
     ArrayList<ClientPostList> clientPostLists = new ArrayList<ClientPostList>();
     ClientPostAdapter clientPostAdapter;
 
@@ -122,15 +121,16 @@ public class ClientPost extends Fragment {
                 {   String address;
                     String poster_name=jsonArray2.getJSONObject(i).getString("poster_name").toString();
                     String post_message = jsonArray2.getJSONObject(i).getString("post_message").toString();
+                    String handwasher_Photo = jsonArray2.getJSONObject(i).getString("handwasher_Photo").toString();
                     String handwasher_Contact = jsonArray2.getJSONObject(i).getString("handwasher_Contact").toString();
-                    int post_datetime = Integer.parseInt(jsonArray2.getJSONObject(i).getString("post_datetime").toString());;
-                    if(post_datetime >= 60)
+                    //int post_datetime = Integer.parseInt(jsonArray2.getJSONObject(i).getString("post_datetime").toString());;
+                   /* if(post_datetime >= 60)
                     {
                         time = post_datetime / 60;
                     } else if(post_datetime < 60) {
                         time = post_datetime;
                     }
-                    float hour = post_datetime / 60;
+                    float hour = post_datetime / 60;*/
                     String post_showAddress = jsonArray2.getJSONObject(i).getString("post_showAddress").toString();
                     if(post_showAddress.equals("Yes")){
                         address = jsonArray2.getJSONObject(i).getString("address").toString();
@@ -140,11 +140,12 @@ public class ClientPost extends Fragment {
                     arrname.add(poster_name);
                     arrmeter.add(post_showAddress);
                     arrmessage.add(post_message);
-                    arrtime.add(post_datetime);
+                    //arrtime.add(post_datetime);
                     ClientPostList clientPostList = new ClientPostList();
                     clientPostList.setPost_message(post_message);
-                    clientPostList.setPost_datetime((int) time);
+                    //clientPostList.setPost_datetime((int) time);
                     clientPostList.setContact(handwasher_Contact);
+                    clientPostList.setImage(handwasher_Photo);
                     clientPostList.setPost_name(poster_name);
                     clientPostList.setPost_showAddress(address);
                     clientPostLists.add(clientPostList);

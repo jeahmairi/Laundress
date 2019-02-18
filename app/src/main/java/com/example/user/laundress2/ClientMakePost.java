@@ -32,7 +32,8 @@ public class ClientMakePost extends AppCompatActivity {
     EditText message;
     Button post;
     String showlocation;
-    private static String URL_ADDPOST = "http://192.168.254.113/laundress/addpostclient.php";
+    //private static String URL_ADDPOST = "http://192.168.254.113/laundress/addpostclient.php";
+    private static String URL_ADDPOST = "http://192.168.254.117/laundress/addpostclient.php";
    // private static String URL_ADDPOST = "http://192.168.1.12/laundress/addpostclient.php";
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -62,7 +63,7 @@ public class ClientMakePost extends AppCompatActivity {
         String isname = getIntent().getStringExtra("client_name");
         client_id = getIntent().getIntExtra("client_id", 0);
         name.setText(isname);
-        Toast.makeText(ClientMakePost.this, "client id:" +client_id, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(ClientMakePost.this, "client id:" +client_id, Toast.LENGTH_SHORT).show();
         post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

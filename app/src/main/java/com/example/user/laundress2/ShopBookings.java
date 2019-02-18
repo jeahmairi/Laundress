@@ -41,7 +41,8 @@ public class ShopBookings extends Fragment {
     ArrayList<Integer> arrShopID = new ArrayList<>();
     private Context context;
     ListView listView;
-    private static final String URL_ALL = "http://192.168.254.113/laundress/shop_bookings.php";
+    //private static final String URL_ALL = "http://192.168.254.113/laundress/shop_bookings.php";
+    private static final String URL_ALL = "http://192.168.254.117/laundress/shop_bookings.php";
     ArrayList<ShopBookingsList> shopBookingsLists = new ArrayList<>();
     ShopBookingsAdapter shopBookingsAdapter;
     private RequestQueue requestQueue;

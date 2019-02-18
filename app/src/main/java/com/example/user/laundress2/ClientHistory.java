@@ -30,7 +30,8 @@ public class ClientHistory extends AppCompatActivity {
     HistoryAdapter historyAdapter;
     ArrayList<HistoryList> historyLists = new ArrayList<HistoryList>();
     private Context context;
-    private static final String URL_ALL ="http://192.168.254.113/laundress/clienthistory.php";
+   // private static final String URL_ALL ="http://192.168.254.113/laundress/clienthistory.php";
+    private static final String URL_ALL ="http://192.168.254.117/laundress/clienthistory.php";
     String client_name;
     int client_id;
 
@@ -76,7 +77,7 @@ public class ClientHistory extends AppCompatActivity {
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(ClientHistory.this, "failedddd" +e.toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ClientHistory.this, "Failed" +e.toString(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 },

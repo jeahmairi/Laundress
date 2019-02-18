@@ -31,13 +31,9 @@ public class Login extends AppCompatActivity {
     private Button login;
     private ProgressBar load;
     private int backButton = 1;
-    private static String URL_LOGIN = "http://192.168.254.113/laundress/login.php";
-    //private static String URL_LOGIN = "http://192.168.1.15/laundress/login.php";
-    //private static String URL_LOGIN = "http://192.168.254.100/laundress/login.php";
+    //private static String URL_LOGIN = "http://192.168.254.113/laundress/login.php";
+    private static String URL_LOGIN = "http://192.168.254.117/laundress/login.php";
 
-    //private static String URL_LOGIN = "http://192.168.1.2/laundress/login.php";
-    //private static String URL_LOGIN = "http://192.168.1.5/laundress/login.php";
-   // private static String URL_LOGIN = "http://192.168.1.7/laundress/login.php";
     @Override
     public void onBackPressed() {
         if(backButton == 1) {
@@ -101,7 +97,7 @@ public class Login extends AppCompatActivity {
                                     String user = object.getString("user").trim();
                                     String name = object.getString("name").trim();
                                     //String email = object.getString("email").trim();
-                                    Toast.makeText(Login.this, "name " + name, Toast.LENGTH_SHORT).show();
+                                    //Toast.makeText(Login.this, "name " + name, Toast.LENGTH_SHORT).show();
                                     load.setVisibility(View.GONE);
                                     login.setVisibility(View.VISIBLE);
                                     if(user.equals("laundryclient")) {

@@ -29,13 +29,16 @@ import java.util.Map;
 public class ShopNotification extends AppCompatActivity {
     ArrayList<ShopNotificationList> shopNotificationLists = new ArrayList<>();
     ShopNotifAdapter shopNotifAdapter;
-    private static final String URL_ALL ="http://192.168.254.113/laundress/shop_notification.php";
+    //private static final String URL_ALL ="http://192.168.254.113/laundress/shop_notification.php";
+    private static final String URL_ALL ="http://192.168.254.117/laundress/shop_notification.php";
     ListView lvnotif;
     String shop_name, client_name;
     String notification_Message;
     int shop_id, handwasher_lspid, rate_NO;
     String rating_Date, rating_Comment, comments;
     float rating_Cust_Service, rating_QualityService, rating_Overall, rating_Ontime;
+    private String client_Photo;
+
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
@@ -83,12 +86,14 @@ public class ShopNotification extends AppCompatActivity {
                                     int client_ID= Integer.parseInt(jsonArray.getJSONObject(i).getString("client_ID"));
                                     int trans_No= Integer.parseInt(jsonArray.getJSONObject(i).getString("trans_No"));
                                     client_name = jsonArray.getJSONObject(i).getString("client_Name");
+                                    client_Photo = jsonArray.getJSONObject(i).getString("client_Photo");
                                     String table = jsonArray.getJSONObject(i).getString("fromtable");
                                     if(notification_Message.equals("Pending") || notification_Message.equals("Missed") || notification_Message.equals("Accepted by lsp") || notification_Message.equals("Declined by lsp") || notification_Message.equals("Finished")){
 
                                         ShopNotificationList shopNotificationList = new ShopNotificationList();
                                         shopNotificationList.setClientID(client_ID);
                                         shopNotificationList.setLspID(lsp_ID);
+                                        shopNotificationList.setImage(client_Photo);
                                         if(notification_Message.equals("Finished")){
                                             rating_Cust_Service = Float.parseFloat(jsonArray.getJSONObject(i).getString("rating_Cust_Service"));
                                             rating_QualityService = Float.parseFloat(jsonArray.getJSONObject(i).getString("rating_QualityService"));

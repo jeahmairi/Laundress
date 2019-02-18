@@ -16,6 +16,7 @@ public class ShopNotificationList {
     private String dateRate;
     private String comment;
     private String table;
+    private String image;
     int lspID;
 
     public float getRatingCustService() {
@@ -144,5 +145,13 @@ public class ShopNotificationList {
 
     public void setTable(String table) {
         this.table = table;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

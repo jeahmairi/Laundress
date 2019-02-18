@@ -17,6 +17,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 public class HandwasherHomepage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private HandwasherHomepage.SectionsPagerAdapter mSectionsPagerAdapter;
@@ -24,7 +26,9 @@ public class HandwasherHomepage extends AppCompatActivity implements NavigationV
     private ViewPager mViewPager;
     String handwasher_name;
     int handwasher_id, handwasher_lspid;
-
+    private int backButton = 2;
+    private View header;
+    TextView name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +42,8 @@ public class HandwasherHomepage extends AppCompatActivity implements NavigationV
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nv);
+        //header = navigationView.getHeaderView(R.layout.nav_header);
+        name = navigationView.getHeaderView(0).findViewById(R.id.namenavbar);
         navigationView.setNavigationItemSelectedListener(this);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -56,18 +62,24 @@ public class HandwasherHomepage extends AppCompatActivity implements NavigationV
         handwasher_name = extras.getString("name");
         handwasher_id = extras.getInt("id");
         handwasher_lspid = extras.getInt("lspid");
+        name.setText(handwasher_name);
 /*        handwasher_name = getIntent().getStringExtra("name");
         handwasher_id = getIntent().getIntExtra("id", 0);
         handwasher_lspid = getIntent().getIntExtra("lspid", 0);*/
     }
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
+        if(backButton < 1) {
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
         } else {
-            super.onBackPressed();
+            // Toast.makeText(this, "Press the back button once again", Toast.LENGTH_SHORT).show();
+            backButton++;
+            return;
         }
+        super.onBackPressed();
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -150,7 +162,7 @@ public class HandwasherHomepage extends AppCompatActivity implements NavigationV
             intent.putExtras(extras);
             startActivity(intent);
         } else if (id == R.id.logout) {
-            Intent intent = new Intent(HandwasherHomepage.this, HandwasherLogout.class);
+            Intent intent = new Intent(HandwasherHomepage.this, ClientLogout.class);
             startActivity(intent);
         }
 

@@ -6,8 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -43,16 +46,20 @@ public class ShopRegularClientsAdapter extends BaseAdapter {
         convertView = layoutInflater.inflate(R.layout.shop_regular_clients_adapter, parent, false);
         itemHolder.name = (TextView) convertView.findViewById(R.id.name);
         itemHolder.bookings = (TextView) convertView.findViewById(R.id.bookings);
+        itemHolder.imageView10 = (ImageView) convertView.findViewById(R.id.imageView10);
         itemHolder.rate = (RatingBar) convertView.findViewById(R.id.rate);
         //final ClientPostList clientPostList=clientPostLists.get(position);
 
-
+        if(!shopRegularClientsLists.get(position).getImage().isEmpty()){
+            Picasso.get().load(shopRegularClientsLists.get(position).getImage()).into(itemHolder.imageView10 );
+        }
         itemHolder.name.setText(shopRegularClientsLists.get(position).getName());
         itemHolder.bookings.setText(shopRegularClientsLists.get(position).getBookings());
         itemHolder.rate.setRating(shopRegularClientsLists.get(position).getRate());
         return convertView;
     }
     private class ItemHolder {
+        ImageView imageView10;
         TextView name, bookings;
         RatingBar rate;
     }

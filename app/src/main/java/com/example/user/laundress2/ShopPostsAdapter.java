@@ -7,7 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -46,17 +49,21 @@ public class ShopPostsAdapter extends BaseAdapter {
             itemHolder.message = (TextView) convertView.findViewById(R.id.tv_message);
             itemHolder.postDate = (TextView) convertView.findViewById(R.id.tv_postDate);
             itemHolder.contact = (TextView) convertView.findViewById(R.id.tv_contact);
+            itemHolder.photo =  (ImageView) convertView.findViewById(R.id.photo);
             itemHolder.name.setText(shopPostsLists.get(position).getName());
             itemHolder.meters.setText(shopPostsLists.get(position).getMeters());
             itemHolder.message.setText(shopPostsLists.get(position).getMessage());
             itemHolder.postDate.setText(shopPostsLists.get(position).getPostDate());
             itemHolder.contact.setText(shopPostsLists.get(position).getContact());
+            if(!shopPostsLists.get(position).getImage().isEmpty()){
+            Picasso.get().load(shopPostsLists.get(position).getImage()).into(itemHolder.photo);}
         }
 
         return convertView;
     }
 
     private class ItemHolder{
+        ImageView photo;
         TextView name;
         TextView meters;
         TextView message;

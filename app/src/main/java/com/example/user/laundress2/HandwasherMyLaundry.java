@@ -46,11 +46,17 @@ public class HandwasherMyLaundry extends Fragment {
     String trans_Status;
     float rating;
     float prices;
-    private static final String URL_ALL ="http://192.168.254.113/laundress/allbookinghandwasher.php";
+    /*private static final String URL_ALL ="http://192.168.254.113/laundress/allbookinghandwasher.php";
     private static final String URL_UPDATE ="http://192.168.254.113/laundress/updatetransactionfinish.php";
     private static String URL_ADDPOST = "http://192.168.254.113/laundress/addrateclient.php";
     private static String URL_ADDRECEIPT = "http://192.168.254.113/laundress/addreceipt.php";
-    private static String URL_RECEIPT = "http://192.168.254.113/laundress/receipttransaction.php";
+    private static String URL_RECEIPT = "http://192.168.254.113/laundress/receipttransaction.php";*/
+
+    private static final String URL_ALL ="http://192.168.254.117/laundress/allbookinghandwasher.php";
+        private static final String URL_UPDATE ="http://192.168.254.117/laundress/updatetransactionfinish.php";
+        private static String URL_ADDPOST = "http://192.168.254.117/laundress/addrateclient.php";
+        private static String URL_ADDRECEIPT = "http://192.168.254.117/laundress/addreceipt.php";
+        private static String URL_RECEIPT = "http://192.168.254.117/laundress/receipttransaction.php";
 
 
     public static HandwasherMyLaundry newInstance(int handwasher_id, String handwasher_name, int handwasher_lspid) {
@@ -373,7 +379,7 @@ public class HandwasherMyLaundry extends Fragment {
 
                                 }
                             } else if (success.equals("0")) {
-                                Toast.makeText(getActivity(), "failed: ", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), "No Booking: ", Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

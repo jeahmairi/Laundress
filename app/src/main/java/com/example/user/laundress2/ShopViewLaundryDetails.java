@@ -31,7 +31,8 @@ public class ShopViewLaundryDetails extends AppCompatActivity {
     LinearLayout llhori, llverti;
     String name;
     int trans_No, client_id, shop_id;
-    private static final String URL_ALL="http://192.168.254.113/laundress/shop_viewlaundrydetails.php";
+    //private static final String URL_ALL="http://192.168.254.113/laundress/shop_viewlaundrydetails.php";
+    private static final String URL_ALL="http://192.168.254.117/laundress/shop_viewlaundrydetails.php";
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button

@@ -6,8 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -42,6 +45,7 @@ public class ViewClientsAdapter extends BaseAdapter {
         itemHolder = new ViewClientsAdapter.ItemHolder();
         convertView = layoutInflater.inflate(R.layout.viewclients_adapter, parent, false);
         itemHolder.name = (TextView) convertView.findViewById(R.id.name);
+        itemHolder.imagephoto = (ImageView) convertView.findViewById(R.id.imagephoto);
         itemHolder.bookings = (TextView) convertView.findViewById(R.id.bookings);
         itemHolder.rate = (RatingBar) convertView.findViewById(R.id.rate);
         //final ClientPostList clientPostList=clientPostLists.get(position);
@@ -50,10 +54,12 @@ public class ViewClientsAdapter extends BaseAdapter {
         itemHolder.name.setText(viewClientsLists.get(position).getName());
         itemHolder.bookings.setText(viewClientsLists.get(position).getBookings());
         itemHolder.rate.setRating(viewClientsLists.get(position).getRate());
+        Picasso.get().load(viewClientsLists.get(position).getImage()).into(itemHolder.imagephoto);
         return convertView;
     }
     private class ItemHolder {
         TextView name, bookings;
+        ImageView imagephoto;
         RatingBar rate;
     }
 }

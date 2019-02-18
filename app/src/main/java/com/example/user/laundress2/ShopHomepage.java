@@ -17,6 +17,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class ShopHomepage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -24,9 +25,10 @@ public class ShopHomepage extends AppCompatActivity implements NavigationView.On
 
     private ViewPager mViewPager;
     String name;
+    TextView namev;
     int shop_id;
     String stringShopID;
-
+    private int backButton = 2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +42,7 @@ public class ShopHomepage extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nv);
+        namev = navigationView.getHeaderView(0).findViewById(R.id.namenavbar);
         navigationView.setNavigationItemSelectedListener(this);
 
 
@@ -59,15 +62,21 @@ public class ShopHomepage extends AppCompatActivity implements NavigationView.On
         Bundle extras = intent.getExtras();
         name = extras.getString("name");
         shop_id = extras.getInt("id");
+        namev.setText(name);
     }
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
+        if(backButton < 1) {
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
         } else {
-            super.onBackPressed();
+            // Toast.makeText(this, "Press the back button once again", Toast.LENGTH_SHORT).show();
+            backButton++;
+            return;
         }
+        super.onBackPressed();
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

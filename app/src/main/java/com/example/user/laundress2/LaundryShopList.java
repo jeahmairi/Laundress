@@ -12,6 +12,34 @@ public class LaundryShopList {
     private  String closehours;
     private  String contact;
 
+    public String getSort() {
+        return sort;
+    }
+
+    public void setSort(String sort) {
+        this.sort = sort;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public String getRecomm() {
+        return recomm;
+    }
+
+    public void setRecomm(String recomm) {
+        this.recomm = recomm;
+    }
+
+    private  String sort;
+    private  String price;
+    private  String recomm;
+
     public String getName() {
         return name;
     }

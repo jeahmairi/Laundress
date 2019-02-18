@@ -38,8 +38,8 @@ public class HandwasherPosts extends Fragment {
     ClientPostAdapter clientPostAdapter;
     float time;
     ListView posts;
-    // private static final String URL_ALL ="http://192.168.254.117/laundress/allclientpost.php";
-    private static final String URL_ALLHW ="http://192.168.254.113/laundress/allclientpost.php";
+    //private static final String URL_ALLHW ="http://192.168.254.113/laundress/allclientpost.php";
+    private static final String URL_ALLHW ="http://192.168.254.117/laundress/allclientpost.php";
     // newInstance constructor for creating fragment with arguments
     public static HandwasherPosts newInstance(int handwasher_id, String handwasher_name) {
         HandwasherPosts handwasherPosts = new HandwasherPosts();
@@ -98,6 +98,7 @@ public class HandwasherPosts extends Fragment {
                                     String poster_name=jsonArray2.getJSONObject(i).getString("poster_name").toString();
                                     String post_message = jsonArray2.getJSONObject(i).getString("post_message").toString();
                                     String client_Contact = jsonArray2.getJSONObject(i).getString("client_Contact").toString();
+                                    String client_Photo = jsonArray2.getJSONObject(i).getString("client_Photo").toString();
                                     int post_datetime = Integer.parseInt(jsonArray2.getJSONObject(i).getString("post_datetime").toString());;
                                     if(post_datetime >= 60)
                                     {
@@ -115,6 +116,7 @@ public class HandwasherPosts extends Fragment {
                                     clientPostList.setPost_message(post_message);
                                     clientPostList.setPost_datetime((int) time);
                                     clientPostList.setContact(client_Contact);
+                                    clientPostList.setImage(client_Photo);
                                     clientPostList.setPost_name(poster_name);
                                     clientPostList.setPost_showAddress(address);
                                     clientPostLists.add(clientPostList);
@@ -124,7 +126,7 @@ public class HandwasherPosts extends Fragment {
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(getActivity(), "failedddd" +e.toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "Failed" +e.toString(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 },

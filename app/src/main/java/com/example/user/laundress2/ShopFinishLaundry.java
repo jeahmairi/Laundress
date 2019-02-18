@@ -34,9 +34,8 @@ public class ShopFinishLaundry extends AppCompatActivity {
     String shop_name, cue;
 
     ArrayList<ShopRatingList> shopRatingLists = new ArrayList<>();
-    private static final String URL_TRANS ="http://192.168.254.113/laundress/shop_finish_laundry.php";
-    private static String URL_ADDRECEIPT = "http://192.168.254.113/laundress/addreceipt.php";
-    private static String URL_RECEIPT = "http://192.168.254.113/laundress/receipttransaction.php";
+    //private static final String URL_TRANS ="http://192.168.254.113/laundress/shop_finish_laundry.php";
+    private static final String URL_TRANS ="http://192.168.254.117/laundress/shop_finish_laundry.php";
     float prices;
 
     @Override
