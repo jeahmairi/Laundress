@@ -5,7 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -40,12 +43,8 @@ public class AddLaundryDetailsAdapter extends BaseAdapter {
         LayoutInflater layoutInflater =  (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         itemHolder = new AddLaundryDetailsAdapter.ItemHolder();
         convertView = layoutInflater.inflate(R.layout.addclientlaundrydet_adapter, parent, false);
-        itemHolder.itemtag = (TextView) convertView.findViewById(R.id.itemtag);
-        itemHolder.itemtag.setText(addLaundryDetailLists.get(position).getItemTag());
-        itemHolder.itembrand = (TextView) convertView.findViewById(R.id.itembrand);
-        itemHolder.itembrand.setText(addLaundryDetailLists.get(position).getItemBrand());
-        itemHolder.itemcolor = (TextView) convertView.findViewById(R.id.itemcolor);
-        itemHolder.itemcolor.setText(addLaundryDetailLists.get(position).getItemColor());
+        itemHolder.photo = (ImageView) convertView.findViewById(R.id.photo);
+        Picasso.get().load(addLaundryDetailLists.get(position).getPhoto()).into(itemHolder.photo );
         itemHolder.itemdescription = (TextView) convertView.findViewById(R.id.itemdescription);
         itemHolder.itemdescription.setText(addLaundryDetailLists.get(position).getItemDescription());
         itemHolder.itemnoofpieces = (TextView) convertView.findViewById(R.id.itemnoofpieces);
@@ -55,6 +54,7 @@ public class AddLaundryDetailsAdapter extends BaseAdapter {
     }
 
     private class ItemHolder {
-        TextView itemtag, itembrand, itemcolor, itemdescription, itemnoofpieces;
+        TextView itemdescription, itemnoofpieces;
+        ImageView photo;
     }
 }

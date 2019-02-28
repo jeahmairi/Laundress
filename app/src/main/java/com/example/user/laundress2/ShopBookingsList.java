@@ -32,10 +32,30 @@ public class ShopBookingsList{
     private String transWeight;
     private String transDateTime;
     private String transStat;
+    private String photo;
     private int id;
     private int transNo;
     private int shopID;
     private String shopName;
+    private String contact;
+    private String location;
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
 
     public int getShopID() {
         return shopID;
@@ -123,5 +143,13 @@ public class ShopBookingsList{
 
     public void setTransStat(String transStat) {
         this.transStat = transStat;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 }

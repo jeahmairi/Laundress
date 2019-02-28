@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,6 +20,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,8 +34,8 @@ public class ViewLaundryDetails extends AppCompatActivity {
     String name;
     int trans_No, lsp_id, handwasher_id;
 
-    private static final String URL_ALL="http://192.168.254.113/laundress/viewlaundrydetails.php";
-    //private static final String URL_ALL="http://192.168.254.117/laundress/viewlaundrydetails.php";
+//    private static final String URL_ALL="http://192.168.254.113/laundress/viewlaundrydetails.php";
+    private static final String URL_ALL="http://192.168.254.117/laundress/viewlaundrydetails.php";
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -86,10 +88,9 @@ public class ViewLaundryDetails extends AppCompatActivity {
                                     llhori.setOrientation(LinearLayout.HORIZONTAL);
                                     llhori.setPadding(5, 5, 5, 5);
 
-                                    TextView tv1 = new TextView(ViewLaundryDetails.this);
-                                    tv1.setText(cinv_ItemTag);
+                                    ImageView tv1 = new ImageView(ViewLaundryDetails.this);
+                                    Picasso.get().load(cinv_ItemTag).into(tv1);
                                     tv1.setLayoutParams(params);
-                                    tv1.setGravity(Gravity.CENTER);
                                     llhori.addView(tv1);
 
                                     TextView tv2 = new TextView(ViewLaundryDetails.this);

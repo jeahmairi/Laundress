@@ -6,16 +6,6 @@
     android:background="@color/gray"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/post"
-        android:layout_width="match_parent"
-        android:layout_height="111dp"
-        android:layout_margin="5dp"
-        android:background="@android:color/background_light"
-        android:text="Make Post"
-        android:textColor="@color/gray"
-        android:textSize="18sp" />
-
     <ListView
         android:id="@+id/lvpost"
         android:layout_width="match_parent"

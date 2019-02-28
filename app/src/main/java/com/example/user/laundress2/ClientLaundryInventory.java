@@ -31,11 +31,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ClientLaundryInventory extends AppCompatActivity {
-    private static final String URL_ALL ="http://192.168.254.113/laundress/allinventory.php";
-    private static final String URl_ADD_LAUNDRY_DETAILS ="http://192.168.254.113/laundress/addlaunddetails.php";
+    /*private static final String URL_ALL ="http://192.168.254.113/laundress/allinventory.php";
+    private static final String URl_ADD_LAUNDRY_DETAILS ="http://192.168.254.113/laundress/addlaunddetails.php";*/
 
-    /*private static final String URL_ALL ="http://192.168.254.117/laundress/allinventory.php";
-    private static final String URl_ADD_LAUNDRY_DETAILS ="http://192.168.254.117/laundress/addlaunddetails.php";*/
+    private static final String URL_ALL ="http://192.168.254.117/laundress/allinventory.php";
+    private static final String URl_ADD_LAUNDRY_DETAILS ="http://192.168.254.117/laundress/addlaunddetails.php";
 
     String client_name;
     Button btnselect, btnskip;
@@ -58,7 +58,7 @@ public class ClientLaundryInventory extends AppCompatActivity {
         setContentView(R.layout.allinventory);
         llall = findViewById(R.id.llall);
         btnselect = findViewById(R.id.select);
-        btnskip = findViewById(R.id.skip);
+        //btnskip = findViewById(R.id.skip);
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         client_name = extras.getString("client_name");
@@ -105,12 +105,12 @@ public class ClientLaundryInventory extends AppCompatActivity {
             }
         });
 
-        btnskip.setOnClickListener(new View.OnClickListener() {
+       /* btnskip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showChangeLangDialogSkip();
             }
-        });
+        });*/
 
     }
 
@@ -212,6 +212,7 @@ public class ClientLaundryInventory extends AppCompatActivity {
                                     int cinv_id = Integer.parseInt(jsonArray.getJSONObject(i).getString("cinv_id"));
                                     String cinv_itemDescription=jsonArray.getJSONObject(i).getString("cinv_itemDescription").toString();
                                     String category_Name=jsonArray.getJSONObject(i).getString("category_Name").toString();
+                                    String cinv_Photo=jsonArray.getJSONObject(i).getString("cinv_Photo").toString();
                                     int cinv_noOfPieces= Integer.parseInt(jsonArray.getJSONObject(i).getString("cinv_noOfPieces"));
                                     int cinv_category_No= Integer.parseInt(jsonArray.getJSONObject(i).getString("cinv_noOfPieces"));
 
@@ -222,16 +223,18 @@ public class ClientLaundryInventory extends AppCompatActivity {
                                     arrclientid.add(client_id);
                                     arrcategid.add(cinv_category_No);
                                     arrcinvno.add(cinv_id);
+                                    if(cinv_noOfPieces>0) {
+                                        AddLaundryDetailList addLaundryDetailList = new AddLaundryDetailList();
+                                        addLaundryDetailList.setAllNameDet(cinv_itemDescription);
+                                        addLaundryDetailList.setCategoryname(category_Name);
+                                        addLaundryDetailList.setItemNoofPieces(cinv_noOfPieces);
+                                        addLaundryDetailList.setClientId(client_id);
+                                        addLaundryDetailList.setPhoto(cinv_Photo);
+                                        addLaundryDetailList.setCategoryId(cinv_category_No);
+                                        addLaundryDetailList.setCinv_no(cinv_id);
 
-                                    AddLaundryDetailList addLaundryDetailList = new AddLaundryDetailList();
-                                    addLaundryDetailList.setAllNameDet(cinv_itemDescription);
-                                    addLaundryDetailList.setCategoryname(category_Name);
-                                    addLaundryDetailList.setItemNoofPieces(cinv_noOfPieces);
-                                    addLaundryDetailList.setClientId(client_id);
-                                    addLaundryDetailList.setCategoryId(cinv_category_No);
-                                    addLaundryDetailList.setCinv_no(cinv_id);
-
-                                    addLaundryDetailLists.add(addLaundryDetailList);
+                                        addLaundryDetailLists.add(addLaundryDetailList);
+                                    }
 
                                 }
                                 laundryInventoryAdapter = new LaundryInventoryAdapter(ClientLaundryInventory.this,addLaundryDetailLists);

@@ -127,15 +127,6 @@ public class HandwasherHomepage extends AppCompatActivity implements NavigationV
             intent.putExtras(extras);
             startActivity(intent);
 
-        }  else if (id == R.id.mypost) {
-            Bundle extras = new Bundle();
-            extras.putString("handwasher_name",handwasher_name);
-            extras.putInt("handwasher_id", handwasher_id);
-            extras.putInt("handwasher_lspid", handwasher_lspid);
-            Intent intent = new Intent(HandwasherHomepage.this, HandwasherMyPost.class);
-            intent.putExtras(extras);
-            startActivity(intent);
-
         }  else if (id == R.id.myclient) {
             Bundle extras = new Bundle();
             extras.putString("handwasher_name",handwasher_name);
@@ -184,8 +175,6 @@ public class HandwasherHomepage extends AppCompatActivity implements NavigationV
                     return HandwasherMyLaundry.newInstance(handwasher_id, handwasher_name, handwasher_lspid);
                 case 1:
                     return HandwasherBookings.newInstance(handwasher_id, handwasher_name, handwasher_lspid);
-                case 2:
-                    return HandwasherPosts.newInstance(handwasher_id, handwasher_name);
                 default:
                     return null;
             }
@@ -194,7 +183,7 @@ public class HandwasherHomepage extends AppCompatActivity implements NavigationV
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 3;
+            return 2;
         }
     }
 }

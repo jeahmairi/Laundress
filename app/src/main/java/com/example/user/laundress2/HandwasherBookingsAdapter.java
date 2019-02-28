@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -48,13 +49,14 @@ public class HandwasherBookingsAdapter extends BaseAdapter {
         itemHolder = new HandwasherBookingsAdapter.ItemHolder();
         convertView = layoutInflater.inflate(R.layout.handwasherbooking_adapter, parent, false);
         itemHolder.photo = (ImageView) convertView.findViewById(R.id.photo);
+        itemHolder.btnmap = (ImageButton) convertView.findViewById(R.id.btnmap);
         itemHolder.name = (TextView) convertView.findViewById(R.id.name);
         itemHolder.llservoff = (LinearLayout) convertView.findViewById(R.id.llservoff);
         itemHolder.llextra = (LinearLayout) convertView.findViewById(R.id.llextra);
         itemHolder.servicetype = (TextView) convertView.findViewById(R.id.servicetype);
         itemHolder.weight = (TextView) convertView.findViewById(R.id.weight);
         itemHolder.datetime = (TextView) convertView.findViewById(R.id.datetime);
-        itemHolder.btnconfirmreq = convertView.findViewById(R.id.btnconfirmreq);
+        //itemHolder.btnconfirmreq = convertView.findViewById(R.id.btnconfirmreq);
         itemHolder.btnviewlaundry = convertView.findViewById(R.id.btnviewlaundry);
         itemHolder.name.setText(handwasherBookingsLists.get(position).getName());
        // itemHolder.servicereq.setText(handwasherBookingsLists.get(position).getServices());
@@ -72,7 +74,7 @@ public class HandwasherBookingsAdapter extends BaseAdapter {
         tv1.setText(handwasherBookingsLists.get(position).getExtraservices());
         tv1.setPadding(10, 10, 10, 10);
         itemHolder.llextra.addView(tv1);
-        itemHolder.btnconfirmreq.setOnClickListener(new View.OnClickListener() {
+        /*itemHolder.btnconfirmreq.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Bundle extras = new Bundle();
@@ -84,16 +86,33 @@ public class HandwasherBookingsAdapter extends BaseAdapter {
                 intent.putExtras(extras);
                 context.startActivity(intent);
             }
-        });
+        });*/
         itemHolder.btnviewlaundry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Bundle extras = new Bundle();
                 Bundle extras = new Bundle();
+                extras.putInt("lsp_id", handwasherBookingsList.getLsp_id());
                 extras.putInt("trans_No", handwasherBookingsList.getTrans_no());
-                Intent intent = new Intent(context, ViewLaundryDetails.class);
+                extras.putInt("handwasher_id", handwasherBookingsList.getHandwasher_id());
+                extras.putString("name", handwasherBookingsList.getName());
+                Intent intent = new Intent(context, ConfirmLaundryDetails.class);
+                //intent.putExtra("trans_No", handwasherBookingsList.getTrans_no());
                 intent.putExtras(extras);
                 context.startActivity(intent);
 
+            }
+        });
+        itemHolder.btnmap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle extras = new Bundle();
+                extras.putString("handwasher_name",handwasherBookingsList.getName());
+                extras.putString("handwasher_location", handwasherBookingsList.getLocation());
+                extras.putString("handwasher_contact", handwasherBookingsList.getContact());
+                Intent intent = new Intent(context, LaundryShopLocation.class);
+                intent.putExtras(extras);
+                context.startActivity(intent);
             }
         });
         /*String message = handwasherBookingsLists.get(position).getNotification_message();
@@ -106,6 +125,7 @@ public class HandwasherBookingsAdapter extends BaseAdapter {
     private class ItemHolder {
         ImageView photo;
         LinearLayout llextra, llservoff;
+        ImageButton btnmap;
         TextView name, servicereq, extraservice, servicetype, weight, datetime;
         Button btnviewlaundry, btnconfirmreq;
 

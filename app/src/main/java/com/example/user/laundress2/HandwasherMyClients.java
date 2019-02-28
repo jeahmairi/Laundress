@@ -33,8 +33,8 @@ public class HandwasherMyClients extends AppCompatActivity {
     private String location, name, contact;
     private int lsp_id;
 
-    private static final String URL_ALL_ClIENTS ="http://192.168.254.113/laundress/viewallclients.php";
-    //private static final String URL_ALL_ClIENTS ="http://192.168.254.117/laundress/viewallclients.php";
+//    private static final String URL_ALL_ClIENTS ="http://192.168.254.113/laundress/viewallclients.php";
+    private static final String URL_ALL_ClIENTS ="http://192.168.254.117/laundress/viewallclients.php";
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button

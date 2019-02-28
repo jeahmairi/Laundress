@@ -17,8 +17,9 @@
 
             <ImageView
                 android:id="@+id/profilepic"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
                 app:srcCompat="@mipmap/ic_launcher_round" />
 
     </LinearLayout>

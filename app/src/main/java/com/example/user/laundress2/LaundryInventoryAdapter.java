@@ -9,9 +9,12 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,16 +54,19 @@ public class LaundryInventoryAdapter extends BaseAdapter {
         convertView = layoutInflater.inflate(R.layout.inventory_adapter, parent, false);
         itemHolder.checkBox = (CheckBox) convertView.findViewById(R.id.checkBox);
         itemHolder.itemdet = (TextView) convertView.findViewById(R.id.itemdet);
+        itemHolder.photo = (ImageView) convertView.findViewById(R.id.photo);
         itemHolder.itemdet.setText(addLaundryDetailLists.get(position).getAllNameDet());
         itemHolder.noofpieces = convertView.findViewById(R.id.noofpieces);
-        itemHolder.noofpieces1 = convertView.findViewById(R.id.noofpieces1);
+        //itemHolder.noofpieces1 = convertView.findViewById(R.id.noofpieces1);
 
-        if(addLaundryDetailLists.get(position).getItemNoofPieces() == 1){
+        Picasso.get().load(addLaundryDetailLists.get(position).getPhoto()).into(itemHolder.photo);
+
+        /*if(addLaundryDetailLists.get(position).getItemNoofPieces() == 1){
             itemHolder.noofpieces.setVisibility(View.GONE);
-            itemHolder.noofpieces1.setVisibility(View.VISIBLE);
+            //itemHolder.noofpieces1.setVisibility(View.VISIBLE);
             itemHolder.noofpieces1.setText(""+addLaundryDetailLists.get(position).getItemNoofPieces());
-        }
-        if(addLaundryDetailLists.get(position).getItemNoofPieces() > 1) {
+        }*/
+        if(addLaundryDetailLists.get(position).getItemNoofPieces() >= 1) {
             list = new ArrayList<String>();
             for (int i = 1; i <= addLaundryDetailLists.get(position).getItemNoofPieces(); i++) {
                 if (list.indexOf(i) < 0) {
@@ -116,6 +122,7 @@ public class LaundryInventoryAdapter extends BaseAdapter {
         TextView itemdet, noofpieces1;
         CheckBox checkBox;
         Spinner noofpieces;
+        ImageView photo;
         int nop;
     }
 }

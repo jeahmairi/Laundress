@@ -47,7 +47,7 @@ public class HandwasherNotifAdapter extends BaseAdapter {
         itemHolder.photo = convertView.findViewById(R.id.photo);
         itemHolder.name = (TextView) convertView.findViewById(R.id.name);
         itemHolder.status = (TextView) convertView.findViewById(R.id.status);
-        itemHolder.ratings = convertView.findViewById(R.id.ratings);
+        //itemHolder.ratings = convertView.findViewById(R.id.ratings);
         //final ClientPostList clientPostList=clientPostLists.get(position);
         //}
         itemHolder.name.setText(handwasherNotifLists.get(position).getClient_name());
@@ -59,11 +59,9 @@ public class HandwasherNotifAdapter extends BaseAdapter {
             itemHolder.status.setText("Requested your service.");
         }else if(message.equals("Missed")){
             itemHolder.status.setText("You Missed the Service.");
-        }else if(message.equals("Finished")){
+        }else if(message.equals("Finished")||message.equals("Claimed")){
             itemHolder.name.setText(handwasherNotifLists.get(position).getClient_name());
             itemHolder.status.setText(handwasherNotifLists.get(position).getClient_name()+" has rated you");
-            itemHolder.ratings.setVisibility(View.VISIBLE);
-            itemHolder.ratings.setRating(handwasherNotifLists.get(position).getRate());
         }
 
 

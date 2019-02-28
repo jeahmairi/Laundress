@@ -41,15 +41,15 @@ public class HandwasherMyPost extends AppCompatActivity {
     MyPostAdapter myPostAdapter;
     ArrayList<ClientPostList> clientPostLists = new ArrayList<ClientPostList>();
     String handwasher_name, showlocation;
-    int handwasher_id, handwasher_lspid;
+    int handwasher_id   ;
     int pos =0;
 
-    private static final String URL_ALL ="http://192.168.254.113/laundress/allhandwashermypost.php";
+    /*private static final String URL_ALL ="http://192.168.254.113/laundress/allhandwashermypost.php";
     private static final String URL_UPDATE ="http://192.168.254.113/laundress/updatehandwashermypost.php";
-    private static final String URL_DELETE ="http://192.168.254.113/laundress/deletehandwashermypost.php";
-    /*private static final String URL_ALL ="http://192.168.254.117/laundress/allhandwashermypost.php";
+    private static final String URL_DELETE ="http://192.168.254.113/laundress/deletehandwashermypost.php";*/
+    private static final String URL_ALL ="http://192.168.254.117/laundress/allhandwashermypost.php";
     private static final String URL_UPDATE ="http://192.168.254.117/laundress/updatehandwashermypost.php";
-    private static final String URL_DELETE ="http://192.168.254.117/laundress/deletehandwashermypost.php";*/
+    private static final String URL_DELETE ="http://192.168.254.117/laundress/deletehandwashermypost.php";
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
@@ -80,13 +80,13 @@ public class HandwasherMyPost extends AppCompatActivity {
         clientpost = findViewById(R.id.clientpost);
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
-        handwasher_name = extras.getString("handwasher_name");
-        handwasher_id = extras.getInt("handwasher_id");
-        handwasher_lspid = extras.getInt("handwasher_lspid");
-        registerForContextMenu(clientpost);
+        handwasher_name = extras.getString("shop_name");
+        handwasher_id = extras.getInt("shop_id");
+        //handwasher_lspid = extras.getInt("handwasher_lspid");
+        //registerForContextMenu(clientpost);
         allHandwasherPost();
     }
-
+/*
     public boolean onContextItemSelected(MenuItem item) {
         // below variable info contains clicked item info and it can be null; scroll down to see a fix for it
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
@@ -102,7 +102,7 @@ public class HandwasherMyPost extends AppCompatActivity {
             default:
                 return super.onContextItemSelected(item);
         }
-    }
+    }*/
 
     public void onRadioButtonClicked(View view) {
         boolean checked = ((RadioButton) view).isChecked();
@@ -272,13 +272,13 @@ public class HandwasherMyPost extends AppCompatActivity {
                                     int post_no = Integer.parseInt(jsonArray.getJSONObject(i).getString("post_no"));
                                     String post_message=jsonArray.getJSONObject(i).getString("post_message").toString();
                                     String post_datetime=jsonArray.getJSONObject(i).getString("post_datetime").toString();
-                                    String post_show_location=jsonArray.getJSONObject(i).getString("post_show_location").toString();
+                                   // String post_show_location=jsonArray.getJSONObject(i).getString("post_show_location").toString();
                                     String name=jsonArray.getJSONObject(i).getString("name").toString();
                                     ClientPostList clientPostList = new ClientPostList();
                                     clientPostList.setPost_no(post_no);
                                     clientPostList.setPost_message(post_message);
                                     clientPostList.setPost_name(name);
-                                    clientPostList.setPost_showAddress(post_show_location);
+                                   // clientPostList.setPost_showAddress(post_show_location);
                                     clientPostList.setDate(post_datetime);
                                     clientPostLists.add(clientPostList);
                                 }

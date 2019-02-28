@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Laundress</string>
+    <string name="app_name">ALabaApp</string>
     <string name="radiomale">Male</string>
     <string name="radiofemale">Female</string>
 
@@ -68,18 +68,21 @@
     </string-array>
     <string name="title_activity_client_homepage">ClientHomepage</string>
     <string name="mylaundry">My Laundries</string>
-    <string name="post">Posts</string>
+    <string name="post">Announcements</string>
+    <string name="alllsp">All</string>
     <string name="findlaundryshop">Laundry Shop</string>
-    <string name="findhandwasher">Laundry Handwasher</string>
+    <string name="findhandwasher">Laundry Worker</string>
     <string-array name="filterby">
-        <item>Nearest Location</item>
-        <item>Cheapest Laundry Service</item>
-        <item>Recommended Laundry Shop</item>
+        <item>Nearest</item>
+        <item>Cheapest</item>
+        <item>Highly Rated</item>
+        <item>My Favorites</item>
     </string-array>
     <string-array name="filterbyh">
-        <item>Nearest Location</item>
-        <item>Cheapest Laundry Handwasher</item>
-        <item>Recommended Laundry Handwasher</item>
+        <item>Nearest</item>
+        <item>Cheapest</item>
+        <item>Highly Rated</item>
+        <item>My Favorites</item>
     </string-array>
     <string name="title_activity_laundry_shop_location">Map</string>
     <string name="mylaundryh">My Laundry</string>

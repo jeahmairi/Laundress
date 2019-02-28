@@ -22,7 +22,7 @@
 
         <TextView
             android:id="@+id/textView40"
-            android:layout_width="128dp"
+            android:layout_width="172dp"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:padding="5dp"
@@ -30,7 +30,7 @@
 
         <TextView
             android:id="@+id/textView41"
-            android:layout_width="204dp"
+            android:layout_width="143dp"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:padding="5dp"
@@ -41,16 +41,7 @@
     <ListView
         android:id="@+id/llall"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-    <Button
-        android:id="@+id/skip"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@color/darkBlue"
-        android:padding="5dp"
-        android:text="Skip"
-        android:textColor="@android:color/background_light" />
+        android:layout_height="388dp" />
 
     <Button
         android:id="@+id/select"

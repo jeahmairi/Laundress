@@ -11,6 +11,25 @@ public class LaundryShopList {
     private  String openhours;
     private  String closehours;
     private  String contact;
+    private  String photo;
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
+    public String getTable() {
+        return table;
+    }
+
+    public void setTable(String table) {
+        this.table = table;
+    }
+
+    private  String table;
 
     public String getSort() {
         return sort;

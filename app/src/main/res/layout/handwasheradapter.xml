@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -44,15 +45,29 @@
                 android:padding="5dp"
                 android:text="Meters Away" />
 
-            <Button
-                android:id="@+id/btnchoose"
-                android:layout_width="106dp"
-                android:layout_height="35dp"
-                android:layout_marginLeft="100dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/green"
-                android:text="Choose"
-                android:textColor="@android:color/background_light" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/favorites"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@android:color/background_light"
+                    app:srcCompat="@drawable/ic_stars_black_24dp"
+                    tools:ignore="VectorDrawableCompat" />
+
+                <Button
+                    android:id="@+id/btnchoose"
+                    android:layout_width="106dp"
+                    android:layout_height="40dp"
+                    android:background="@color/green"
+                    android:text="Choose"
+                    android:textColor="@android:color/background_light" />
+            </LinearLayout>
+
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

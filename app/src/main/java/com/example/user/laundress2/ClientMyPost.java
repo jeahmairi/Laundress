@@ -44,13 +44,13 @@ public class ClientMyPost extends AppCompatActivity {
     int client_id;
     int pos =0;
 
-    private static final String URL_ALL ="http://192.168.254.113/laundress/allclientmypost.php";
+    /*private static final String URL_ALL ="http://192.168.254.113/laundress/allclientmypost.php";
     private static final String URL_UPDATE ="http://192.168.254.113/laundress/updateclientmypost.php";
-    private static final String URL_DELETE ="http://192.168.254.113/laundress/deleteclientmypost.php";
+    private static final String URL_DELETE ="http://192.168.254.113/laundress/deleteclientmypost.php";*/
 
-    /*private static final String URL_ALL ="http://192.168.254.117/laundress/allclientmypost.php";
+    private static final String URL_ALL ="http://192.168.254.117/laundress/allclientmypost.php";
     private static final String URL_UPDATE ="http://192.168.254.117/laundress/updateclientmypost.php";
-    private static final String URL_DELETE ="http://192.168.254.117/laundress/deleteclientmypost.php";*/
+    private static final String URL_DELETE ="http://192.168.254.117/laundress/deleteclientmypost.php";
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);

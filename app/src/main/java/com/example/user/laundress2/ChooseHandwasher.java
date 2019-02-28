@@ -59,19 +59,19 @@ public class ChooseHandwasher extends AppCompatActivity {
     int lsp_id, client_id ;
     float average = 0;
     final Context context = this;
-    private static final String URL_ALL_SERVICE_TYPE="http://192.168.254.113/laundress/allhandwasherservtype.php";
+    /*private static final String URL_ALL_SERVICE_TYPE="http://192.168.254.113/laundress/allhandwasherservtype.php";
     private static final String URL_ALL_SERVICES="http://192.168.254.113/laundress/allhandwasherservices.php";
     private static final String URL_ALL_HANDWASHER="http://192.168.254.113/laundress/allhandwasherLSP.php";
     private static final String URL_ALL_SERVICE_OFFERED ="http://192.168.254.113/laundress/allhandwasherservoff.php";
     private static final String URL_ALL_EXTRA_SERVICES ="http://192.168.254.113/laundress/allhandwasherextserv.php";
-    private static final String URL_ADD_LAUND_TRANS ="http://192.168.254.113/laundress/addlaundrytransaction.php";
+    private static final String URL_ADD_LAUND_TRANS ="http://192.168.254.113/laundress/addlaundrytransaction.php";*/
     //
-    /*private static final String URL_ALL_SERVICE_TYPE="http://192.168.254.117/laundress/allhandwasherservtype.php";
+    private static final String URL_ALL_SERVICE_TYPE="http://192.168.254.117/laundress/allhandwasherservtype.php";
     private static final String URL_ALL_SERVICES="http://192.168.254.117/laundress/allhandwasherservices.php";
     private static final String URL_ALL_HANDWASHER="http://192.168.254.117/laundress/allhandwasherLSP.php";
     private static final String URL_ALL_SERVICE_OFFERED ="http://192.168.254.117/laundress/allhandwasherservoff.php";
     private static final String URL_ALL_EXTRA_SERVICES ="http://192.168.254.117/laundress/allhandwasherextserv.php";
-    private static final String URL_ADD_LAUND_TRANS ="http://192.168.254.117/laundress/addlaundrytransaction.php";*/
+    private static final String URL_ADD_LAUND_TRANS ="http://192.168.254.117/laundress/addlaundrytransaction.php";
 
     private int servicesOffered;
 

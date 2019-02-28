@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="10dp"
@@ -13,27 +14,29 @@
         <CheckBox
             android:id="@+id/checkBox"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center" />
+
+        <ImageView
+            android:id="@+id/photo"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            app:srcCompat="@mipmap/ic_launcher" />
 
         <TextView
             android:id="@+id/itemdet"
-            android:layout_width="204dp"
-            android:layout_height="wrap_content"
+            android:layout_width="196dp"
+            android:layout_height="match_parent"
             android:gravity="center"
             android:text="TextView" />
 
         <Spinner
             android:id="@+id/noofpieces"
-            android:layout_width="140dp"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/noofpieces1"
-            android:layout_width="204dp"
+            android:layout_width="87dp"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="TextView"
-            android:visibility="gone" />
+            android:layout_gravity="center"
+            android:gravity="center" />
 
     </LinearLayout>
 

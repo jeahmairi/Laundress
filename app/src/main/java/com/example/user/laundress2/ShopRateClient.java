@@ -33,12 +33,12 @@ public class ShopRateClient extends AppCompatActivity {
     int clientID, trans_No, shop_id, lsp_ID;
     String shop_name, comments;
     float rating;
-    private static final String URL_UPDATE ="http://192.168.254.113/laundress/shop_rateclient.php";
+    /*private static final String URL_UPDATE ="http://192.168.254.113/laundress/shop_rateclient.php";
     private static String URL_ADDRECEIPT = "http://192.168.254.113/laundress/addreceipt.php";
-    private static String URL_RECEIPT = "http://192.168.254.113/laundress/receipttransaction.php";
-    /*private static final String URL_UPDATE ="http://192.168.254.117/laundress/shop_rateclient.php";
+    private static String URL_RECEIPT = "http://192.168.254.113/laundress/receipttransaction.php";*/
+    private static final String URL_UPDATE ="http://192.168.254.117/laundress/shop_rateclient.php";
     private static String URL_ADDRECEIPT = "http://192.168.254.117/laundress/addreceipt.php";
-    private static String URL_RECEIPT = "http://192.168.254.117/laundress/receipttransaction.php";*/
+    private static String URL_RECEIPT = "http://192.168.254.117/laundress/receipttransaction.php";
 
     private float prices;
 

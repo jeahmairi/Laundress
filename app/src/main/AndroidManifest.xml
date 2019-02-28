@@ -3,6 +3,14 @@
     package="com.example.user.laundress2">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA"></uses-permission>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+
+
+
+
 
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
@@ -11,6 +19,7 @@
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -147,8 +156,11 @@
             android:name=".ShopFinishLaundry"
             android:label="Finish Laundry"/>
         <activity
-            android:name=".ShopViewLaundryDetails"
-            android:label="View Laundry Details"/>
+            android:name=".ConfirmLaundryDetails"
+            android:label="Confirm Laundry Details"/>
+        <activity
+            android:name=".ConfirmLaundryDetailsShop"
+            android:label="Confirm Laundry Details"/>
         <activity
             android:name=".ShopVIewRequestDetails"
             android:label="View Laundry Details"/>
@@ -161,6 +173,22 @@
         <activity
             android:name=".ShopNotificationOnClick"
             android:label="Notification"/>
+        <activity
+            android:name=".CancelBooking"
+            android:label="Cancel Booking"/>
+        <activity
+            android:name=".CancelBookingHandwasher"
+            android:label="Cancel Booking"/>
+        <activity
+            android:name=".CancelBookingShop"
+            android:label="Cancel Booking"/>
+        <activity
+            android:name=".AddToFav"
+            android:label="Favorites"/>
+        <activity
+            android:name=".ClaimDetails"
+            android:label="Claim Details"/>
+
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -180,6 +208,16 @@
         <activity
             android:name=".HandwasherLocation"
             android:label="@string/title_activity_laundry_shop_location" />
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.example.android.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"></meta-data>
+        </provider>
 
     </application>
 

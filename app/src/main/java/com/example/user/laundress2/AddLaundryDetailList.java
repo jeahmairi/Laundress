@@ -7,6 +7,7 @@ public class AddLaundryDetailList {
     private  String itemColor;
     private  String categoryname;
     private  String allNameDet;
+    private  String photo;
     private  int itemNoofPieces;
     private  int selectitemNoofPieces;
     private  int clientId;
@@ -109,5 +110,13 @@ public class AddLaundryDetailList {
 
     public void setSelectitemNoofPieces(int selectitemNoofPieces) {
         this.selectitemNoofPieces = selectitemNoofPieces;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 }

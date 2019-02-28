@@ -48,15 +48,16 @@ public class FindLaundryShop extends Fragment implements SearchView.OnQueryTextL
     ArrayList<Integer> arrlspid = new ArrayList<>();
     private Context context;
 
-    private static final String URL_ALL ="http://192.168.254.113/laundress/alllaundryshop.php";
+    /*private static final String URL_ALL ="http://192.168.254.113/laundress/alllaundryshop.php";
     private static final String URL_ALL_CLIENT ="http://192.168.254.113/laundress/client.php";
     private static final String URL_ALL_CHEAPEST="http://192.168.254.113/laundress/alllaundryshopcheap.php";
-    private static final String URL_ALL_RECOMMENDED="http://192.168.254.113/laundress/alllaundryshoprecom.php";
+    private static final String URL_ALL_RECOMMENDED="http://192.168.254.113/laundress/alllaundryshoprecom.php";*/
 
-    /*private static final String URL_ALL ="http://192.168.254.117/laundress/alllaundryshop.php";
+    private static final String URL_ALL ="http://192.168.254.117/laundress/alllaundryshop.php";
     private static final String URL_ALL_CLIENT ="http://192.168.254.117/laundress/client.php";
     private static final String URL_ALL_CHEAPEST="http://192.168.254.117/laundress/alllaundryshopcheap.php";
-    private static final String URL_ALL_RECOMMENDED="http://192.168.254.117/laundress/alllaundryshoprecom.php";*/
+    private static final String URL_ALL_RECOMMENDED="http://192.168.254.117/laundress/alllaundryshoprecom.php";
+    private static final String URL_ALL_MY_FAVORITES="http://192.168.254.117/laundress/allfavoritesshop.php";
 
     ArrayList<LaundryShopList> laundryShopLists = new ArrayList<LaundryShopList>();
     LaundryShopAdapter laundryShopAdapter;
@@ -64,7 +65,7 @@ public class FindLaundryShop extends Fragment implements SearchView.OnQueryTextL
     String client_Address;
     ListView listView;
     private int client_id;
-    ListView lvcheap, lvrecommended;
+    ListView lvcheap, lvrecommended, lvfav;
     Spinner spinner;
     SearchView editsearch;
     private String filterby;
@@ -96,6 +97,7 @@ public class FindLaundryShop extends Fragment implements SearchView.OnQueryTextL
         View rootView = inflater.inflate(R.layout.findlaundryshop, container, false);
          listView = rootView.findViewById(R.id.lvlaundryshop);
         lvcheap = rootView.findViewById(R.id.lvcheap);
+        lvfav = rootView.findViewById(R.id.lvfav);
         editsearch = rootView.findViewById(R.id.search);
         lvrecommended = rootView.findViewById(R.id.lvrecommended);
         spinner = rootView.findViewById(R.id.spinner);
@@ -107,19 +109,33 @@ public class FindLaundryShop extends Fragment implements SearchView.OnQueryTextL
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 filterby = parent.getItemAtPosition(position).toString();
-                if(filterby.equals("Nearest Location")){
+                if(filterby.equals("Nearest")){
+                    lvfav.setVisibility(View.GONE);
+                    lvrecommended.setVisibility(View.GONE);
+                    lvcheap.setVisibility(View.GONE);
                     listView.setVisibility(View.VISIBLE);
                     allShop();
-                } else if(filterby.equals("Cheapest Laundry Service")){
+                } else if(filterby.equals("Cheapest")){
+                    listView.setVisibility(View.GONE);
+                    lvfav.setVisibility(View.GONE);
+                    lvrecommended.setVisibility(View.GONE);
                     listView.setVisibility(View.GONE);
                     lvcheap.setVisibility(View.VISIBLE);
                     allShopCheapest();
                 } else
-                if(filterby.equals("Recommended Laundry Shop")){
+                if(filterby.equals("Highly Rated")){
                     listView.setVisibility(View.GONE);
                     lvcheap.setVisibility(View.GONE);
+                    lvfav.setVisibility(View.GONE);
                     lvrecommended.setVisibility(View.VISIBLE);
                     allShopRecommended();
+                }else
+                if(filterby.equals("My Favorites")){
+                    listView.setVisibility(View.GONE);
+                    lvcheap.setVisibility(View.GONE);
+                    lvrecommended.setVisibility(View.GONE);
+                    lvfav.setVisibility(View.VISIBLE);
+                    allMyFavorites();
                 }
             }
 
@@ -199,6 +215,7 @@ public class FindLaundryShop extends Fragment implements SearchView.OnQueryTextL
                                     String contact = jsonArray.getJSONObject(i).getString("contact").toString();
                                     String openhours = jsonArray.getJSONObject(i).getString("openhours").toString();
                                     String closehours = jsonArray.getJSONObject(i).getString("closehours").toString();
+                                    String table = jsonArray.getJSONObject(i).getString("table").toString();
                                     arrid.add(id);
                                     arrlspid.add(lspid);
                                     arrname.add(name);
@@ -217,6 +234,7 @@ public class FindLaundryShop extends Fragment implements SearchView.OnQueryTextL
                                     laundryShopList.setContact(contact);
                                     laundryShopList.setOpenhours(openhours);
                                     laundryShopList.setClosehours(closehours);
+                                    laundryShopList.setTable(table);
                                     getLocationToAddress(meter);
                                     laundryShopList.setMeter(getDistance(lat, lng, lat2, lng2));
                                     laundryShopLists.add(laundryShopList);
@@ -265,6 +283,7 @@ public class FindLaundryShop extends Fragment implements SearchView.OnQueryTextL
                                     String openhours = jsonArray.getJSONObject(i).getString("openhours").toString();
                                     String closehours = jsonArray.getJSONObject(i).getString("closehours").toString();
                                     String price = jsonArray.getJSONObject(i).getString("price").toString();
+                                    String table = jsonArray.getJSONObject(i).getString("table").toString();
                                     arrid.add(id);
                                     arrlspid.add(lspid);
                                     arrname.add(name);
@@ -284,6 +303,7 @@ public class FindLaundryShop extends Fragment implements SearchView.OnQueryTextL
                                     laundryShopList.setContact(contact);
                                     laundryShopList.setOpenhours(openhours);
                                     laundryShopList.setClosehours(closehours);
+                                    laundryShopList.setTable(table);
                                     getLocationToAddress(meter);
                                     laundryShopList.setMeter(getDistance(lat, lng, lat2, lng2));
                                     laundryShopLists.add(laundryShopList);
@@ -331,6 +351,7 @@ public class FindLaundryShop extends Fragment implements SearchView.OnQueryTextL
                                     String contact = jsonArray.getJSONObject(i).getString("contact").toString();
                                     String openhours = jsonArray.getJSONObject(i).getString("openhours").toString();
                                     String closehours = jsonArray.getJSONObject(i).getString("closehours").toString();
+                                    String table = jsonArray.getJSONObject(i).getString("table").toString();
                                     String average = jsonArray.getJSONObject(i).getString("average").toString();
                                     arrid.add(id);
                                     arrlspid.add(lspid);
@@ -351,6 +372,7 @@ public class FindLaundryShop extends Fragment implements SearchView.OnQueryTextL
                                     laundryShopList.setRecomm(average);
                                     laundryShopList.setOpenhours(openhours);
                                     laundryShopList.setClosehours(closehours);
+                                    laundryShopList.setTable(table);
                                     getLocationToAddress(meter);
                                     laundryShopList.setMeter(getDistance(lat, lng, lat2, lng2));
                                     laundryShopLists.add(laundryShopList);
@@ -370,6 +392,75 @@ public class FindLaundryShop extends Fragment implements SearchView.OnQueryTextL
                         Toast.makeText(getActivity(), error.toString(), Toast.LENGTH_LONG).show();
                     }
                 });
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        requestQueue.add(stringRequest);
+
+    }
+    private void allMyFavorites() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_ALL_MY_FAVORITES,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String success = jsonObject.getString("success");
+                            //JSONArray jArray = json.getJSONArray("platform");
+                            //JSONArray jsonArray = new JSONArray(response);
+                            JSONArray jsonArray = jsonObject.getJSONArray("alllaundryshop");
+                            if (success.equals("1")){
+                                laundryShopLists.clear();
+                                for (int i =0;i<jsonArray.length();i++)
+                                {
+                                    int id = Integer.parseInt(jsonArray.getJSONObject(i).getString("id").toString());
+                                    int lspid = Integer.parseInt(jsonArray.getJSONObject(i).getString("lsp_ID").toString());
+                                    String name=jsonArray.getJSONObject(i).getString("name").toString();
+                                    String meter = jsonArray.getJSONObject(i).getString("address").toString();
+                                    String contact = jsonArray.getJSONObject(i).getString("contact").toString();
+                                    String openhours = jsonArray.getJSONObject(i).getString("openhours").toString();
+                                    String closehours = jsonArray.getJSONObject(i).getString("closehours").toString();
+                                    // String average = jsonArray.getJSONObject(i).getString("average").toString();
+                                    String table = jsonArray.getJSONObject(i).getString("table").toString();
+                                    LaundryShopList laundryShopList = new LaundryShopList();
+                                    laundryShopList.setClient_id(client_id);
+                                    laundryShopList.setId(id);
+                                    laundryShopList.setLsp_id(lspid);
+                                    laundryShopList.setName(name);
+                                    laundryShopList.setClient_name(client_name);
+                                    laundryShopList.setLocation(meter);
+                                    laundryShopList.setContact(contact);
+                                    laundryShopList.setSort("Favorites");
+                                    //laundryShopList.setRecomm(average);
+                                    laundryShopList.setOpenhours(openhours);
+                                    laundryShopList.setClosehours(closehours);
+                                    laundryShopList.setTable(table);
+                                    getLocationToAddress(meter);
+                                    laundryShopList.setMeter(getDistance(lat, lng, lat2, lng2));
+                                    laundryShopLists.add(laundryShopList);
+                                }
+                                laundryShopAdapter = new LaundryShopAdapter(context,laundryShopLists);
+                                lvfav.setAdapter(laundryShopAdapter);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(getActivity(), "failedddd" +e.toString(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getActivity(), error.toString(), Toast.LENGTH_LONG).show();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params = new HashMap<>();
+                params.put("client_id", String.valueOf(client_id));
+                //params.put("lsp_id", String.valueOf(lsp_id));
+                return params;
+            }
+        };
 
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
         requestQueue.add(stringRequest);

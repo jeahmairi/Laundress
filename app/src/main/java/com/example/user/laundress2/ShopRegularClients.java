@@ -32,8 +32,8 @@ public class ShopRegularClients extends AppCompatActivity {
     ArrayList<ShopRegularClientsList> shopRegularClientsLists = new ArrayList<ShopRegularClientsList>();
     private String location, name, contact;
     private int lsp_id;
-    private static final String URL_ALL_ClIENTS ="http://192.168.254.113/laundress/shop_regularclients.php";
-    //private static final String URL_ALL_ClIENTS ="http://192.168.254.117/laundress/shop_regularclients.php";
+//    private static final String URL_ALL_ClIENTS ="http://192.168.254.113/laundress/shop_regularclients.php";
+    private static final String URL_ALL_ClIENTS ="http://192.168.254.117/laundress/shop_regularclients.php";
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button

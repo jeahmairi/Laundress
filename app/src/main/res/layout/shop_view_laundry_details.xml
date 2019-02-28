@@ -57,5 +57,25 @@
             android:layout_height="match_parent"
             android:orientation="vertical"/>
 
+        <Button
+            android:id="@+id/btnconfirm"
+            android:layout_width="match_parent"
+            android:layout_height="37dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/darkBlue"
+            android:text="Confirm Request Details"
+            android:textColor="@color/lightBlue" />
+
+        <Button
+            android:id="@+id/btncancel"
+            android:layout_width="match_parent"
+            android:layout_height="37dp"
+            android:layout_margin="10dp"
+            android:background="@color/red"
+            android:text="Cancel Request"
+            android:textColor="@android:color/background_light" />
+
     </LinearLayout>
 </ScrollView>

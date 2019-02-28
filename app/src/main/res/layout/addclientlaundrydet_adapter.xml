@@ -11,36 +11,19 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
+        <ImageView
+            android:id="@+id/photo"
+            android:layout_width="182dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/handwasher" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_weight="1"
             android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/itemtag"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:text="Item Tag"
-                android:textColor="@color/darkBlue" />
-
-            <TextView
-                android:id="@+id/itembrand"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:text="Item Brand"
-                android:textColor="@color/darkBlue" />
-
-            <TextView
-                android:id="@+id/itemcolor"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:text="Item Color"
-                android:textColor="@color/darkBlue" />
 
             <TextView
                 android:id="@+id/itemdescription"

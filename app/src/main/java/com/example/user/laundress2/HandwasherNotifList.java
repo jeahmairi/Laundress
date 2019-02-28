@@ -7,6 +7,8 @@ public class HandwasherNotifList {
     private int rate_no;
     private String notification_message;
     private String client_name;
+    private String location;
+    private String contact;
     private String table;
     private String comment;
     private String datecomment;
@@ -98,5 +100,21 @@ public class HandwasherNotifList {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
     }
 }

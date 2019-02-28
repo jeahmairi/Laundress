@@ -9,13 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 
 public class ShopMyLaundryAdapter extends BaseAdapter {
     Context context;
@@ -49,10 +49,12 @@ public class ShopMyLaundryAdapter extends BaseAdapter {
             itemHolder.name = (TextView) convertView.findViewById(R.id.tv_name);
             itemHolder.contact = (TextView) convertView.findViewById(R.id.tv_phone);
             itemHolder.address = (TextView) convertView.findViewById(R.id.tv_address);
-            itemHolder.date = (TextView) convertView.findViewById(R.id.tv_date);
+            //itemHolder.date = (TextView) convertView.findViewById(R.id.tv_date);
             itemHolder.viewReq = convertView.findViewById(R.id.btn_viewrequest);
             itemHolder.viewLaun = convertView.findViewById(R.id.btn_viewlaundry);
             itemHolder.finish = convertView.findViewById(R.id.btn_finish);
+            itemHolder.btnmap = convertView.findViewById(R.id.btnmap);
+            itemHolder.photo = convertView.findViewById(R.id.photo);
 
             final ShopMyLaundryList shopMyLaundryList = shopMyLaundryLists.get(position);
             itemHolder.viewReq.setOnClickListener(new View.OnClickListener() {
@@ -71,7 +73,7 @@ public class ShopMyLaundryAdapter extends BaseAdapter {
             itemHolder.viewLaun.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(context, ShopViewLaundryDetails.class);
+                    Intent intent = new Intent(context, ConfirmLaundryDetails.class);
                     intent.putExtra("clientID", shopMyLaundryList.getClientID());
                     intent.putExtra("shopID", shopMyLaundryList.getShopID());
                     intent.putExtra("transNo", shopMyLaundryList.getTransNo());
@@ -96,11 +98,23 @@ public class ShopMyLaundryAdapter extends BaseAdapter {
                     context.startActivity(intent);
                 }
             });
-
+        itemHolder.btnmap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle extras = new Bundle();
+                extras.putString("handwasher_name",shopMyLaundryList.getName());
+                extras.putString("handwasher_location", shopMyLaundryList.getAddress());
+                extras.putString("handwasher_contact", shopMyLaundryList.getContact());
+                Intent intent = new Intent(context, LaundryShopLocation.class);
+                intent.putExtras(extras);
+                context.startActivity(intent);
+            }
+        });
+            Picasso.get().load(shopMyLaundryList.getPhoto()).into(itemHolder.photo);
             itemHolder.name.setText(shopMyLaundryLists.get(position).getName());
             itemHolder.address.setText(shopMyLaundryLists.get(position).getAddress());
             itemHolder.contact.setText(shopMyLaundryLists.get(position).getContact());
-            itemHolder.date.setText(shopMyLaundryLists.get(position).getDate());
+           // itemHolder.date.setText(shopMyLaundryLists.get(position).getDate());
 
         return convertView;
     }
@@ -111,7 +125,9 @@ public class ShopMyLaundryAdapter extends BaseAdapter {
         TextView address;
         TextView contact;
         Button viewReq;
-        Button viewLaun;
+        ImageButton viewLaun;
         Button finish;
+        ImageButton btnmap;
+        ImageView photo;
     }
 }

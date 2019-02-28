@@ -29,8 +29,8 @@ import java.util.Map;
 public class ShopNotification extends AppCompatActivity {
     ArrayList<ShopNotificationList> shopNotificationLists = new ArrayList<>();
     ShopNotifAdapter shopNotifAdapter;
-    private static final String URL_ALL ="http://192.168.254.113/laundress/shop_notification.php";
-    //private static final String URL_ALL ="http://192.168.254.117/laundress/shop_notification.php";
+//    private static final String URL_ALL ="http://192.168.254.113/laundress/shop_notification.php";
+    private static final String URL_ALL ="http://192.168.254.117/laundress/shop_notification.php";
     ListView lvnotif;
     String shop_name, client_name;
     String notification_Message;
@@ -38,6 +38,7 @@ public class ShopNotification extends AppCompatActivity {
     String rating_Date, rating_Comment, comments;
     float rating_Cust_Service, rating_QualityService, rating_Overall, rating_Ontime;
     private String client_Photo;
+    private String client_Address, client_Contact;
 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -87,31 +88,15 @@ public class ShopNotification extends AppCompatActivity {
                                     int trans_No= Integer.parseInt(jsonArray.getJSONObject(i).getString("trans_No"));
                                     client_name = jsonArray.getJSONObject(i).getString("client_Name");
                                     client_Photo = jsonArray.getJSONObject(i).getString("client_Photo");
+                                    client_Address = jsonArray.getJSONObject(i).getString("client_Address");
+                                    client_Contact = jsonArray.getJSONObject(i).getString("client_Contact");
                                     String table = jsonArray.getJSONObject(i).getString("fromtable");
-                                    if(notification_Message.equals("Pending") || notification_Message.equals("Missed") || notification_Message.equals("Accepted by lsp") || notification_Message.equals("Declined by lsp") || notification_Message.equals("Finished")){
+                                    if(notification_Message.equals("Pending") || notification_Message.equals("Missed") || notification_Message.equals("Accepted by lsp") || notification_Message.equals("Declined by lsp") || notification_Message.equals("Finished") ||notification_Message.equals("Claimed")){
 
                                         ShopNotificationList shopNotificationList = new ShopNotificationList();
                                         shopNotificationList.setClientID(client_ID);
                                         shopNotificationList.setLspID(lsp_ID);
                                         shopNotificationList.setImage(client_Photo);
-                                        if(notification_Message.equals("Finished")){
-                                            rating_Cust_Service = Float.parseFloat(jsonArray.getJSONObject(i).getString("rating_Cust_Service"));
-                                            rating_QualityService = Float.parseFloat(jsonArray.getJSONObject(i).getString("rating_QualityService"));
-                                            rating_Ontime = Float.parseFloat(jsonArray.getJSONObject(i).getString("rating_Ontime"));
-                                            rating_Overall = Float.parseFloat(jsonArray.getJSONObject(i).getString("rating_Overall"));
-                                            rating_Comment = jsonArray.getJSONObject(i).getString("rating_Comment");
-                                            rating_Date = jsonArray.getJSONObject(i).getString("rating_Date");
-                                            rate_NO = Integer.parseInt(jsonArray.getJSONObject(i).getString("rating_No"));
-
-                                            shopNotificationList.setRatingCustService(rating_Cust_Service);
-                                            shopNotificationList.setRatingQualityService(rating_QualityService);
-                                            shopNotificationList.setRatingOntime(rating_Ontime);
-                                            shopNotificationList.setRatingOverall(rating_Overall);
-                                            shopNotificationList.setComment(rating_Comment);
-                                            shopNotificationList.setDateRate(rating_Date);
-                                            shopNotificationList.setRateNo(rate_NO);
-
-                                        }
                                         //if(notification_Message.equals("Pending") || notification_Message.equals("Missed")){
                                         lvnotif.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                             @Override
@@ -127,6 +112,8 @@ public class ShopNotification extends AppCompatActivity {
                                                     extras.putString("notif_message", shopNotificationLists.get(position).getMessage());
                                                     extras.putInt("trans_no", shopNotificationLists.get(position).getTransNo());
                                                     extras.putInt("client_id", shopNotificationLists.get(position).getClientID());
+                                                    extras.putString("client_location", shopNotificationLists.get(position).getLocation());
+                                                    extras.putString("client_contact", shopNotificationLists.get(position).getContact());
 
                                                     //extras.putString("client_name", client_name);
                                                     Intent intent = new Intent(ShopNotification.this, ShopNotificationOnClick.class);
@@ -140,6 +127,8 @@ public class ShopNotification extends AppCompatActivity {
                                         shopNotificationList.setTransNo(trans_No);
                                         shopNotificationList.setMessage(notification_Message);
                                         shopNotificationList.setClientName(client_name);
+                                        shopNotificationList.setContact(client_Contact);
+                                        shopNotificationList.setLocation(client_Address);
                                         shopNotificationList.setTable(table);
                                         shopNotificationLists.add(shopNotificationList);
                                     }

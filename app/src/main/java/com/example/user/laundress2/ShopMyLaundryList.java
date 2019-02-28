@@ -4,6 +4,7 @@ public class ShopMyLaundryList {
     private String name;
     private String address;
     private String contact;
+    private String photo;
     private int clientID;
     private String shopName;
     private int shopID;
@@ -81,5 +82,13 @@ public class ShopMyLaundryList {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 }

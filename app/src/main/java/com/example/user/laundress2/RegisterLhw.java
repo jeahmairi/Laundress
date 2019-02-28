@@ -42,8 +42,8 @@ public class RegisterLhw extends AppCompatActivity {
     private Button register;
     private DatePickerDialog picker;
     private ProgressBar load;
-    private static String URL_REGISTER = "http://192.168.254.113/laundress/lhwregister.php";
-    //private static String URL_REGISTER = "http://192.168.254.117/laundress/lhwregister.php";
+//    private static String URL_REGISTER = "http://192.168.254.113/laundress/lhwregister.php";
+    private static String URL_REGISTER = "http://192.168.254.117/laundress/lhwregister.php";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

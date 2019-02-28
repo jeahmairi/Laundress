@@ -30,9 +30,9 @@ public class AddCategoryDetails extends AppCompatActivity {
     int client_id;
     EditText categoryname;
     Button addcategory;
-    private static String URL_ADD_CATEGORY = "http://192.168.254.113/laundress/addcategory.php";
+    //private static String URL_ADD_CATEGORY = "http://192.168.254.113/laundress/addcategory.php";
 
-    //private static String URL_ADD_CATEGORY = "http://192.168.254.117/laundress/addcategory.php";
+    private static String URL_ADD_CATEGORY = "http://192.168.254.117/laundress/addcategory.php";
 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

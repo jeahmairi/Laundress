@@ -35,11 +35,12 @@ public class HandwasherBookings extends Fragment {
     private Context context;
     ArrayList<HandwasherBookingsList> handwasherBookingsLists = new ArrayList<HandwasherBookingsList>();
     HandwasherBookingsAdapter handwasherBookingsAdapter;
-    private static final String URL_ALL ="http://192.168.254.113/laundress/allbookingapprove.php";
-   // private static final String URL_ALL ="http://192.168.254.117/laundress/allbookingapprove.php";
+//    private static final String URL_ALL ="http://192.168.254.113/laundress/allbookingapprove.php";
+    private static final String URL_ALL ="http://192.168.254.117/laundress/allbookingapprove.php";
     private String name, services, extraservices, servicetype, weight, datetime, client_Photo ;
     private int trans_No;
     private String xtraserve, serve;
+    private String client_Address, client_Contact;
 
     public static HandwasherBookings newInstance(int handwasher_id, String handwasher_name, int handwasher_lspid) {
         HandwasherBookings handwasherBookings = new HandwasherBookings();
@@ -84,6 +85,8 @@ public class HandwasherBookings extends Fragment {
                                 for (int i =0;i<jsonArray2.length();i++)
                                 {
                                      name=jsonArray2.getJSONObject(i).getString("name").toString();
+                                     client_Address=jsonArray2.getJSONObject(i).getString("client_Address").toString();
+                                     client_Contact=jsonArray2.getJSONObject(i).getString("client_Contact").toString();
                                      services = jsonArray2.getJSONObject(i).getString("trans_Service").toString();
                                      extraservices = jsonArray2.getJSONObject(i).getString("trans_ExtService").toString();
                                      servicetype = jsonArray2.getJSONObject(i).getString("trans_ServiceType").toString();
@@ -97,6 +100,8 @@ public class HandwasherBookings extends Fragment {
                                     //serve = serve + " " +services;
                                     HandwasherBookingsList handwasherBookingsList = new HandwasherBookingsList();
                                     handwasherBookingsList.setName(name);
+                                    handwasherBookingsList.setLocation(client_Address);
+                                    handwasherBookingsList.setContact(client_Contact);
                                     handwasherBookingsList.setLsp_id(handwasher_lspid);
                                     handwasherBookingsList.setHandwasher_id(handwasher_id);
                                     handwasherBookingsList.setTrans_no(trans_No);

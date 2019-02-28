@@ -47,10 +47,10 @@ public class HandwasherRate extends AppCompatActivity {
     int handwasher_id, handwasher_lspid;
     HandwasherRateAdapter clientRateAdapter;
     ArrayList<RateList> rateLists = new ArrayList<RateList>();
-    private static final String URL_ALL ="http://192.168.254.113/laundress/allratehandwasher.php";
-    private static final String URL_UPDATE ="http://192.168.254.113/laundress/updateratehandwasher.php";
-    /*private static final String URL_ALL ="http://192.168.254.117/laundress/allratehandwasher.php";
-    private static final String URL_UPDATE ="http://192.168.254.117/laundress/updateratehandwasher.php";*/
+    /*private static final String URL_ALL ="http://192.168.254.113/laundress/allratehandwasher.php";
+    private static final String URL_UPDATE ="http://192.168.254.113/laundress/updateratehandwasher.php";*/
+    private static final String URL_ALL ="http://192.168.254.117/laundress/allratehandwasher.php";
+    private static final String URL_UPDATE ="http://192.168.254.117/laundress/updateratehandwasher.php";
     float average;
 
     public boolean onOptionsItemSelected(MenuItem item) {

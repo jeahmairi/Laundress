@@ -4,6 +4,8 @@
         android:title="My Ratings"/>
     <item android:id="@+id/clients"
         android:title="Regular Clients"/>
+    <item android:id="@+id/mypost"
+        android:title="My Announcements"/>
     <item android:id="@+id/history"
         android:title="History"/>
     <item android:id="@+id/logout"

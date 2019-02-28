@@ -37,8 +37,8 @@ public class ClientPost extends Fragment {
     ArrayList<String> arrmessage = new ArrayList<>();
     private Context context;
 
-    private static final String URL_ALLHW ="http://192.168.254.113/laundress/allhandwasherpost.php";
-    //private static final String URL_ALLHW ="http://192.168.254.117/laundress/allhandwasherpost.php";
+    //private static final String URL_ALLHW ="http://192.168.254.113/laundress/allhandwasherpost.php";
+    private static final String URL_ALLHW ="http://192.168.254.117/laundress/allhandwasherpost.php";
 
     ArrayList<ClientPostList> clientPostLists = new ArrayList<ClientPostList>();
     ClientPostAdapter clientPostAdapter;
@@ -94,7 +94,7 @@ public class ClientPost extends Fragment {
         /*clientPostAdapter = new ClientPostAdapter(context,clientPostLists);
         listView.setAdapter(clientPostAdapter);*/
 
-        Button post = rootView.findViewById(R.id.post);
+        /*Button post = rootView.findViewById(R.id.post);
         post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,7 +105,7 @@ public class ClientPost extends Fragment {
                 intent.putExtras(extras);
                 startActivity(intent);
             }
-        });
+        });*/
         return rootView;
     }
 

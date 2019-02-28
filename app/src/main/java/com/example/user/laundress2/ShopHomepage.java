@@ -113,6 +113,14 @@ public class ShopHomepage extends AppCompatActivity implements NavigationView.On
             Intent intent = new Intent(ShopHomepage.this, ShopRate.class);
             intent.putExtras(extras);
             startActivity(intent);
+        } else if (id == R.id.mypost) {
+            Bundle extras = new Bundle();
+            extras.putString("shop_name",name);
+            extras.putInt("shop_id", shop_id);
+            Intent intent = new Intent(ShopHomepage.this, HandwasherMyPost.class);
+            intent.putExtras(extras);
+            startActivity(intent);
+
         } else if (id == R.id.clients) {
             Bundle extras = new Bundle();
             extras.putString("shop_name",name);
@@ -150,9 +158,7 @@ public class ShopHomepage extends AppCompatActivity implements NavigationView.On
                     return ShopMyLaundry.newInstance(shop_id, name);
                 case 1:
                     return ShopBookings.newInstance(shop_id, name);
-                case 2:
-                    ShopPosts shopPosts = new ShopPosts();
-                    return shopPosts;
+
                 default:
                     return null;
             }
@@ -161,7 +167,7 @@ public class ShopHomepage extends AppCompatActivity implements NavigationView.On
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 3;
+            return 2;
         }
     }
 }

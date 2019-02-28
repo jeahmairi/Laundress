@@ -41,8 +41,8 @@ public class ShopBookings extends Fragment {
     ArrayList<Integer> arrShopID = new ArrayList<>();
     private Context context;
     ListView listView;
-    private static final String URL_ALL = "http://192.168.254.113/laundress/shop_bookings.php";
-   // private static final String URL_ALL = "http://192.168.254.117/laundress/shop_bookings.php";
+//    private static final String URL_ALL = "http://192.168.254.113/laundress/shop_bookings.php";
+    private static final String URL_ALL = "http://192.168.254.117/laundress/shop_bookings.php";
     ArrayList<ShopBookingsList> shopBookingsLists = new ArrayList<>();
     ShopBookingsAdapter shopBookingsAdapter;
     private RequestQueue requestQueue;
@@ -102,11 +102,14 @@ public class ShopBookings extends Fragment {
                                     int id = jsonArray.getJSONObject(i).getInt("clientID");
                                     String name = jsonArray.getJSONObject(i).getString("clientName");
                                     String transServ = jsonArray.getJSONObject(i).getString("transService");
+                                    String client_Address = jsonArray.getJSONObject(i).getString("client_Address");
+                                    String client_Contact = jsonArray.getJSONObject(i).getString("client_Contact");
                                     String transExt = jsonArray.getJSONObject(i).getString("transExtra");
                                     String transServType = jsonArray.getJSONObject(i).getString("transServType");
                                     String transWeight = jsonArray.getJSONObject(i).getString("transWeight");
                                     String transDateTime = jsonArray.getJSONObject(i).getString("transDateTime");
                                     String transStat = jsonArray.getJSONObject(i).getString("transStat");
+                                    String client_Photo = jsonArray.getJSONObject(i).getString("client_Photo");
                                     int lsp_id = Integer.parseInt(jsonArray.getJSONObject(i).getString("lsp_ID").toString());
                                     int transNo = jsonArray.getJSONObject(i).getInt("transNo");
                                     arrID.add(id);
@@ -125,6 +128,9 @@ public class ShopBookings extends Fragment {
                                     shopBookingsList.setTransNo(transNo);
                                     shopBookingsList.setId(lsp_id);
                                     shopBookingsList.setName(name);
+                                    shopBookingsList.setContact(client_Contact);
+                                    shopBookingsList.setLocation(client_Address);
+                                    shopBookingsList.setPhoto(client_Photo);
                                     shopBookingsList.setTransServ1(transServ);
                                     shopBookingsList.setTransExtra1(transExt);
                                     shopBookingsList.setTransServType(transServType);

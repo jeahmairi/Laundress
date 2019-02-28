@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Show Results By:"
+                android:textSize="18sp" />
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:entries="@array/filterby" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/gray"
+                android:padding="5dp"
+                android:text="ALL"
+                android:textColor="@android:color/background_light"
+                android:textSize="18sp" />
+
+            <SearchView
+                android:id="@+id/search"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:iconifiedByDefault="false">
+
+                <requestFocus />
+            </SearchView>
+
+            <ListView
+                android:id="@+id/lvlaundryshop"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"/>
+            <ListView
+                android:id="@+id/lvcheap"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"></ListView>
+            <ListView
+                android:id="@+id/lvrecommended"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"></ListView>
+            <ListView
+                android:id="@+id/lvfav"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"></ListView>
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

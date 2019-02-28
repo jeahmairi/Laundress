@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -31,6 +32,7 @@ import java.util.Map;
 public class NotificationOnClick extends AppCompatActivity {
     TextView status, name, extraservice, servicereq, servicetype, weight;
     ImageView photo;
+    ImageButton location;
     EditText estdatetime;
     String client_name,notif_message;
     Button accept, decline, btnviewdet;
@@ -39,13 +41,14 @@ public class NotificationOnClick extends AppCompatActivity {
     LinearLayout llservoff, llextra;
     int handwasher_id, handwasher_lspid;
 
-    private static final String URL_ALL ="http://192.168.254.113/laundress/alltrans.php";
-    private static final String URL_ALL_UPDATE ="http://192.168.254.113/laundress/updatetrans.php";
-    private static final String URL_ALL_UPDATE_DECLINE ="http://192.168.254.113/laundress/updatetransdecline.php";
-    /*private static final String URL_ALL ="http://192.168.254.117/laundress/alltrans.php";
+//    private static final String URL_ALL ="http://192.168.254.113/laundress/alltrans.php";
+//    private static final String URL_ALL_UPDATE ="http://192.168.254.113/laundress/updatetrans.php";
+//    private static final String URL_ALL_UPDATE_DECLINE ="http://192.168.254.113/laundress/updatetransdecline.php";
+    private static final String URL_ALL ="http://192.168.254.117/laundress/alltrans.php";
     private static final String URL_ALL_UPDATE ="http://192.168.254.117/laundress/updatetrans.php";
-    private static final String URL_ALL_UPDATE_DECLINE ="http://192.168.254.117/laundress/updatetransdecline.php";*/
+    private static final String URL_ALL_UPDATE_DECLINE ="http://192.168.254.117/laundress/updatetransdecline.php";
     private String image;
+    private String client_Address, client_Contact;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,11 +64,14 @@ public class NotificationOnClick extends AppCompatActivity {
         accept = findViewById(R.id.accept);
         decline = findViewById(R.id.decline);
         btnviewdet = findViewById(R.id.btnviewdet);
+        location = findViewById(R.id.location);
         photo = findViewById(R.id.photo);
 
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         client_name = extras.getString("client_name");
+        client_Address = extras.getString("client_Address");
+        client_Contact = extras.getString("client_Contact");
         notif_message = extras.getString("notif_message");
         image = extras.getString("image");
         trans_no = extras.getInt("trans_no");
@@ -101,6 +107,18 @@ public class NotificationOnClick extends AppCompatActivity {
                 extras.putInt("lsp_id", handwasher_id);
                 extras.putInt("handwasher_id", handwasher_lspid);
                 Intent intent = new Intent(NotificationOnClick.this, ViewLaundryDetails.class);
+                intent.putExtras(extras);
+                startActivity(intent);
+            }
+        });
+        location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle extras = new Bundle();
+                extras.putString("handwasher_name",client_name);
+                extras.putString("handwasher_location", client_Address);
+                extras.putString("handwasher_contact", client_Contact);
+                Intent intent = new Intent(NotificationOnClick.this, LaundryShopLocation.class);
                 intent.putExtras(extras);
                 startActivity(intent);
             }

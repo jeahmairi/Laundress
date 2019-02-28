@@ -46,7 +46,7 @@ public class ClientNotifAdapter extends BaseAdapter {
         convertView = layoutInflater.inflate(R.layout.clientnotif_adapter, parent, false);
         itemHolder.name = (TextView) convertView.findViewById(R.id.name);
         itemHolder.status = (TextView) convertView.findViewById(R.id.status);
-        itemHolder.ratings = convertView.findViewById(R.id.ratings);
+       // itemHolder.ratings = convertView.findViewById(R.id.ratings);
         itemHolder.photo = (ImageView) convertView.findViewById(R.id.photo);
         //final ClientPostList clientPostList=clientPostLists.get(position);
         //}
@@ -65,11 +65,12 @@ public class ClientNotifAdapter extends BaseAdapter {
         }else if(message.equals("Declined")){
             itemHolder.name.setText(clientNotifLists.get(position).getClient_name());
             itemHolder.status.setText("Your Request has been declined");
-        }else if(message.equals("Finished")){
+        }else if(message.equals("Cancelled")){
+            itemHolder.name.setText(clientNotifLists.get(position).getClient_name());
+            itemHolder.status.setText("Your Service has been Cancelled");
+        }else if(message.equals("Finished")|| message.equals("Claimed")){
             itemHolder.name.setText(clientNotifLists.get(position).getClient_name());
             itemHolder.status.setText("Laundry Service is finished. \n" +clientNotifLists.get(position).getClient_name()+" has rated you");
-            itemHolder.ratings.setVisibility(View.VISIBLE);
-            itemHolder.ratings.setRating(clientNotifLists.get(position).getRate());
         }
 
         return convertView;

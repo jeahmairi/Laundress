@@ -41,8 +41,8 @@ public class ShopMyLaundry extends Fragment {
     ArrayList<String> arrDate = new ArrayList<>();
     private Context context;
     ListView listView;
-    private static final String URL_ALL = "http://192.168.254.113/laundress/shop_mylaundry.php";
-   // private static final String URL_ALL = "http://192.168.254.117/laundress/shop_mylaundry.php";
+//    private static final String URL_ALL = "http://192.168.254.113/laundress/shop_mylaundry.php";
+    private static final String URL_ALL = "http://192.168.254.117/laundress/shop_mylaundry.php";
     ArrayList<ShopMyLaundryList> shopMyLaundryLists = new ArrayList<>();
     ShopMyLaundryAdapter shopMyLaundryAdapter;
     private RequestQueue requestQueue;
@@ -109,6 +109,7 @@ public class ShopMyLaundry extends Fragment {
                                     String address = jsonArray.getJSONObject(i).getString("clientAddress");
                                     String contact = jsonArray.getJSONObject(i).getString("clientContact");
                                     String date = jsonArray.getJSONObject(i).getString("transDate");
+                                    String client_Photo = jsonArray.getJSONObject(i).getString("client_Photo");
                                     arrClientID.add(clientID);
                                     arrTransNo.add(transNo);
                                     arrName.add(name);
@@ -127,6 +128,7 @@ public class ShopMyLaundry extends Fragment {
                                     shopMyLaundryList.setAddress(address);
                                     shopMyLaundryList.setContact(contact);
                                     shopMyLaundryList.setDate(date);
+                                    shopMyLaundryList.setPhoto(client_Photo);
                                     shopMyLaundryLists.add(shopMyLaundryList);
                                 }
                                 shopMyLaundryAdapter.notifyDataSetChanged();

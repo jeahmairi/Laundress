@@ -14,6 +14,8 @@ public class ShopNotificationList {
     private float ratingOverall;
     private int rateNo;
     private String dateRate;
+    private String location;
+    private String contact;
     private String comment;
     private String table;
     private String image;
@@ -153,5 +155,21 @@ public class ShopNotificationList {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
     }
 }

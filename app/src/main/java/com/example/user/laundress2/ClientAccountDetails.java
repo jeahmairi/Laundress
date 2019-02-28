@@ -4,13 +4,17 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.TokenWatcher;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,6 +35,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -39,6 +44,9 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -55,12 +63,12 @@ public class ClientAccountDetails extends AppCompatActivity {
     LinearLayout layoutgender;
     DatePickerDialog picker;
     ImageView profilepic;
-    private static final String URL_ALL ="http://192.168.254.113/laundress/laundryclientdetails.php";
+   /* private static final String URL_ALL ="http://192.168.254.113/laundress/laundryclientdetails.php";
     private static final String URL_UPDATE_PROFILE ="http://192.168.254.113/laundress/laundryclientupdateprofile.php";
-    private static final String URL_UPDATE_ACCOUNT ="http://192.168.254.113/laundress/laundryclientupdateaccount.php";
-    /*private static final String URL_ALL ="http://192.168.254.117/laundress/laundryclientdetails.php";
+    private static final String URL_UPDATE_ACCOUNT ="http://192.168.254.113/laundress/laundryclientupdateaccount.php";*/
+    private static final String URL_ALL ="http://192.168.254.117/laundress/laundryclientdetails.php";
     private static final String URL_UPDATE_PROFILE ="http://192.168.254.117/laundress/laundryclientupdateprofile.php";
-    private static final String URL_UPDATE_ACCOUNT ="http://192.168.254.117/laundress/laundryclientupdateaccount.php";*/
+    private static final String URL_UPDATE_ACCOUNT ="http://192.168.254.117/laundress/laundryclientupdateaccount.php";
     private Uri imagePath;
     private Bitmap bitmap;
 
@@ -127,7 +135,6 @@ public class ClientAccountDetails extends AppCompatActivity {
                 startActivityForResult(photoIntent, 1);
             }
         });
-
         bdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -379,6 +386,7 @@ public class ClientAccountDetails extends AppCompatActivity {
                             if(success.equals("1")){
                                 Toast.makeText(ClientAccountDetails.this, "Updated Successfully ", Toast.LENGTH_SHORT).show();
 
+                                ClientAccountDetails.this.recreate();
                                 /*Intent intent = new Intent(context, Login.class);
                                 startActivity(intent);*/
                             }
@@ -440,7 +448,8 @@ public class ClientAccountDetails extends AppCompatActivity {
                     String client_gender=jsonArray.getJSONObject(i).getString("client_gender").toString();
                     String client_email=jsonArray.getJSONObject(i).getString("client_email").toString();
                     String client_Photo=jsonArray.getJSONObject(i).getString("client_Photo").toString();
-
+                    //new DownloadImageTask(profilepic).execute(client_Photo);
+                    // bitmap = getBitmapFromURL(client_Photo);
                     if(client_gender.equals("M")) {
                         radiogender.check(R.id.radioMale);
                     } else if(client_gender.equals("F")) {
@@ -459,7 +468,18 @@ public class ClientAccountDetails extends AppCompatActivity {
                     contact.setText(client_contact);
                     contact.setEnabled(false);
                     email.setText(client_email);
-                    Picasso.get().load(client_Photo).into(profilepic);
+                    Picasso.get().load(client_Photo).into(profilepic, new Callback() {
+                        @Override
+                        public void onSuccess() {
+                            bitmap = ((BitmapDrawable)profilepic.getDrawable()).getBitmap();
+                        }
+
+                        @Override
+                        public void onError(Exception e) {
+
+                        }
+                    });
+                    //Toast.makeText(ClientAccountDetails.this, "bitmap " +bitmap, Toast.LENGTH_LONG).show();
 
                 }
             } else if(success.equals("0")) {
@@ -489,5 +509,41 @@ public class ClientAccountDetails extends AppCompatActivity {
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
         byte[] imgBytes = byteArrayOutputStream.toByteArray();
         return Base64.encodeToString(imgBytes, Base64.DEFAULT);
+    }
+   /* public static Bitmap getBitmapFromURL(String src) {
+        try {
+            URL url = new URL(src);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            Bitmap myBitmap = BitmapFactory.decodeStream(input);
+            return myBitmap;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }*/
+    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+        ImageView bmImage;
+        public DownloadImageTask(ImageView bmImage) {
+            this.bmImage = bmImage;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+             bitmap = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                bitmap = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return bitmap;
+        }
+        protected void onPostExecute(Bitmap result) {
+            bmImage.setImageBitmap(result);
+        }
     }
 }

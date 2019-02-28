@@ -33,8 +33,8 @@ public class ShopPosts extends Fragment {
     ArrayList<String> arrContact = new ArrayList<>();
     private Context context;
     ListView listView;
-    private static final String URL_ALL = "http://192.168.254.113/laundress/shop_posts.php";
-   // private static final String URL_ALL = "http://192.168.254.117/laundress/shop_posts.php";
+//    private static final String URL_ALL = "http://192.168.254.113/laundress/shop_posts.php";
+    private static final String URL_ALL = "http://192.168.254.117/laundress/shop_posts.php";
     ArrayList<ShopPostsList> shopPostsLists = new ArrayList<>();
     ShopPostsAdapter shopPostsAdapter;
     private RequestQueue requestQueue;

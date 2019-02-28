@@ -66,8 +66,10 @@ public class FindLaundryServiceProv extends AppCompatActivity {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return FindLaundryShop.newInstance(client_id, client_name);
+                    return FindAllLsp.newInstance(client_id, client_name);
                 case 1:
+                    return FindLaundryShop.newInstance(client_id, client_name);
+                case 2:
                     return FindHandwasher.newInstance(client_id, client_name);
                 default:
                     return null;
@@ -77,7 +79,7 @@ public class FindLaundryServiceProv extends AppCompatActivity {
         @Override
         public int getCount() {
             // Show 2 total pages.
-            return 2;
+            return 3;
         }
     }
 }

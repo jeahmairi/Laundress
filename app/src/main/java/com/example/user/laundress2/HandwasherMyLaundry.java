@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.RatingBar;
@@ -40,23 +41,22 @@ public class HandwasherMyLaundry extends Fragment {
     String handwasher_name, comments;
     int handwasher_id;
     int handwasher_lspid, trans_No, client_ID;
-    TextView section_label, section_label2, aname, number, address, textView31, datetime, statusname, timeleft, time, timename;
-    ImageView picture, bgtime;
-    Button finish;
     String trans_Status;
-    float rating;
-    float prices;
-    private static final String URL_ALL ="http://192.168.254.113/laundress/allbookinghandwasher.php";
+    ListView lv_laundrylist;
+    ArrayList<HandwasherMyList> handwasherMyLists = new ArrayList<>();
+    HandwasherMyAdapter handwasherMyAdapter;
+   /* private static final String URL_ALL ="http://192.168.254.113/laundress/allbookinghandwasher.php";
     private static final String URL_UPDATE ="http://192.168.254.113/laundress/updatetransactionfinish.php";
     private static String URL_ADDPOST = "http://192.168.254.113/laundress/addrateclient.php";
     private static String URL_ADDRECEIPT = "http://192.168.254.113/laundress/addreceipt.php";
-    private static String URL_RECEIPT = "http://192.168.254.113/laundress/receipttransaction.php";
+    private static String URL_RECEIPT = "http://192.168.254.113/laundress/receipttransaction.php";*/
 
-    /*private static final String URL_ALL ="http://192.168.254.117/laundress/allbookinghandwasher.php";
+    private static final String URL_ALL ="http://192.168.254.117/laundress/allbookinghandwasher.php";
         private static final String URL_UPDATE ="http://192.168.254.117/laundress/updatetransactionfinish.php";
         private static String URL_ADDPOST = "http://192.168.254.117/laundress/addrateclient.php";
         private static String URL_ADDRECEIPT = "http://192.168.254.117/laundress/addreceipt.php";
-        private static String URL_RECEIPT = "http://192.168.254.117/laundress/receipttransaction.php";*/
+        private static String URL_RECEIPT = "http://192.168.254.117/laundress/receipttransaction.php";
+
 
 
     public static HandwasherMyLaundry newInstance(int handwasher_id, String handwasher_name, int handwasher_lspid) {
@@ -80,33 +80,12 @@ public class HandwasherMyLaundry extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.handwasher_mylaundry, container, false);
-        section_label = rootView.findViewById(R.id.sectionlabel1);
-        section_label2 = rootView.findViewById(R.id.sectionlabel2);
-        picture = rootView.findViewById(R.id.picture);
-        bgtime = rootView.findViewById(R.id.bgtime);
-        aname = rootView.findViewById(R.id.name);
-        address = rootView.findViewById(R.id.address);
-        number = rootView.findViewById(R.id.number);
-        textView31 = rootView.findViewById(R.id.textView31);
-        time = rootView.findViewById(R.id.time);
-        datetime = rootView.findViewById(R.id.datetime);
-        finish = rootView.findViewById(R.id.finish);
+        lv_laundrylist = rootView.findViewById(R.id.lv_laundrylist);
         allbooking();
-
-
-        //Toast.makeText(getActivity(),  " trans_No "+trans_No+" price "+prices , Toast.LENGTH_LONG).show();
-        finish.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //updateTransactionFinish();
-                showChangeLangDialog();
-            }
-        });
-
         return rootView;
     }
 
-    public void showChangeLangDialog() {
+    /*public void showChangeLangDialog() {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = this.getLayoutInflater();
         final View dialogView = inflater.inflate(R.layout.rate, null);
@@ -128,11 +107,11 @@ public class HandwasherMyLaundry extends Fragment {
                 addRating(client_ID, handwasher_lspid, trans_No, rating, comments);
                 addReceipt(client_ID, handwasher_lspid, trans_No, prices);
                // Toast.makeText(getActivity(), "rating " + rating+" comments "+comments+ " client_ID "+client_ID+ " handwasher_lspid "+handwasher_lspid + " trans_No "+trans_No , Toast.LENGTH_LONG).show();
-/*                String updatemessage = message.getText().toString().trim();
+*//*                String updatemessage = message.getText().toString().trim();
                 String location = showlocation.toString().trim();
                 int post_no = clientPostLists.get(pos).getPost_no();
                 updatePost(updatemessage, location, post_no);
-                ClientMyPost.this.recreate();*/
+                ClientMyPost.this.recreate();*//*
             }
         });
         dialogBuilder.setNegativeButton("Skip", new DialogInterface.OnClickListener() {
@@ -143,9 +122,9 @@ public class HandwasherMyLaundry extends Fragment {
         });
         AlertDialog b = dialogBuilder.create();
         b.show();
-    }
+    }*/
 
-    private void addReceipt(final int client_ID, final int handwasher_lspid, final int trans_No, final float prices) {
+    /*private void addReceipt(final int client_ID, final int handwasher_lspid, final int trans_No, final float prices) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_ADDRECEIPT,
                 new Response.Listener<String>() {
                     @Override
@@ -167,8 +146,8 @@ public class HandwasherMyLaundry extends Fragment {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Toast.makeText(getActivity(), "Add Failed. No connection." +error.toString(), Toast.LENGTH_SHORT).show();
-                       /* load.setVisibility(View.GONE);
-                        login.setVisibility(View.VISIBLE);*/
+                       *//* load.setVisibility(View.GONE);
+                        login.setVisibility(View.VISIBLE);*//*
                     }
                 }
         )
@@ -257,8 +236,8 @@ public class HandwasherMyLaundry extends Fragment {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Toast.makeText(getActivity(), "Add Failed. No connection." +error.toString(), Toast.LENGTH_SHORT).show();
-                       /* load.setVisibility(View.GONE);
-                        login.setVisibility(View.VISIBLE);*/
+                       *//* load.setVisibility(View.GONE);
+                        login.setVisibility(View.VISIBLE);*//*
                     }
                 }
         )
@@ -314,7 +293,7 @@ public class HandwasherMyLaundry extends Fragment {
         };
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
         requestQueue.add(stringRequest);
-    }
+    }*/
 
 
     private void allbooking(){
@@ -339,45 +318,25 @@ public class HandwasherMyLaundry extends Fragment {
                                     trans_Status = object.getString("trans_Status").trim();
                                     trans_No = Integer.parseInt(object.getString("trans_No"));
                                     client_ID = Integer.parseInt(object.getString("client_ID"));
-                                    allprice(trans_No);
+
+                                    HandwasherMyList handwasherMyList = new HandwasherMyList();
+                                    handwasherMyList.setLspID(handwasher_lspid);
+                                    handwasherMyList.setId(handwasher_id);
+                                    //handwasherMyList.setName(name);
+                                    handwasherMyList.setTransNo(trans_No);
+                                    handwasherMyList.setClientID(client_ID);
+                                    handwasherMyList.setName(name);
+                                    handwasherMyList.setAddress(caddress);
+                                    handwasherMyList.setPhoto(client_Photo);
+                                    handwasherMyList.setContact(cnumber);
+                                    handwasherMyList.setDate(cdatetime);
+                                    handwasherMyLists.add(handwasherMyList);
+
+                                    //allprice(trans_No);
                                     //Toast.makeText(getActivity(), "trans_No " + trans_No, Toast.LENGTH_SHORT).show();
-                                    if(trans_Status.equals("Confirmed")){
-                                        Picasso.get().load(client_Photo).into(picture);
-                                        aname.setText(name);
-                                        address.setText(caddress);
-                                        number.setText(cnumber);
-                                        datetime.setText(cdatetime);
-                                        time.setText(trans_Status);
-                                        number.setVisibility(View.VISIBLE);
-                                        textView31.setVisibility(View.VISIBLE);
-                                        bgtime.setVisibility(View.VISIBLE);
-                                        picture.setVisibility(View.VISIBLE);
-                                        aname.setVisibility(View.VISIBLE);
-                                        address.setVisibility(View.VISIBLE);
-                                        number.setVisibility(View.VISIBLE);
-                                        datetime.setVisibility(View.VISIBLE);
-                                        time.setVisibility(View.VISIBLE);
-                                        finish.setVisibility(View.VISIBLE);
-
-                                        section_label.setVisibility(View.GONE);
-                                        section_label2.setVisibility(View.GONE);
-                                    } else {
-                                        number.setVisibility(View.GONE);
-                                        textView31.setVisibility(View.GONE);
-                                        bgtime.setVisibility(View.GONE);
-                                        picture.setVisibility(View.GONE);
-                                        aname.setVisibility(View.GONE);
-                                        address.setVisibility(View.GONE);
-                                        number.setVisibility(View.GONE);
-                                        datetime.setVisibility(View.GONE);
-                                        time.setVisibility(View.GONE);
-                                        finish.setVisibility(View.GONE);
-                                        //Toast.makeText(getActivity(), "sud" + trans_Status, Toast.LENGTH_SHORT).show();
-                                        section_label.setVisibility(View.VISIBLE);
-                                        section_label2.setVisibility(View.VISIBLE);
-                                    }
-
                                 }
+                                handwasherMyAdapter = new HandwasherMyAdapter(getActivity(), handwasherMyLists);
+                                lv_laundrylist.setAdapter(handwasherMyAdapter);
                             } else if (success.equals("0")) {
                                 Toast.makeText(getActivity(), "No Booking: ", Toast.LENGTH_SHORT).show();
                             }

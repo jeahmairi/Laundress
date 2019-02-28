@@ -2,6 +2,8 @@ package com.example.user.laundress2;
 
 public class HandwasherBookingsList {
     private String name;
+    private String location;
+    private String contact;
     private String services;
     private String extraservices;
     private String servicetype;
@@ -99,5 +101,21 @@ public class HandwasherBookingsList {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
     }
 }

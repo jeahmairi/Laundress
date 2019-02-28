@@ -47,24 +47,25 @@ public class FindHandwasher extends Fragment implements SearchView.OnQueryTextLi
     //  ListView listview;
     private Context context;
 
-   private static final String URL_ALL ="http://192.168.254.113/laundress/allhandwasher.php";
+   /*private static final String URL_ALL ="http://192.168.254.113/laundress/allhandwasher.php";
    private static final String URL_ALL_CLIENT ="http://192.168.254.113/laundress/client.php";
    private static final String URL_ALL_CHEAP ="http://192.168.254.113/laundress/allhandwashercheap.php";
-   private static final String URL_ALL_REC ="http://192.168.254.113/laundress/allhandwasherrecom.php";
-   /*private static final String URL_ALL ="http://192.168.254.117/laundress/allhandwasher.php";
+   private static final String URL_ALL_REC ="http://192.168.254.113/laundress/allhandwasherrecom.php";*/
+   private static final String URL_ALL ="http://192.168.254.117/laundress/allhandwasher.php";
    private static final String URL_ALL_CLIENT ="http://192.168.254.117/laundress/client.php";
    private static final String URL_ALL_CHEAP ="http://192.168.254.117/laundress/allhandwashercheap.php";
-   private static final String URL_ALL_REC ="http://192.168.254.117/laundress/allhandwasherrecom.php";*/
+   private static final String URL_ALL_REC ="http://192.168.254.117/laundress/allhandwasherrecom.php";
+    private static final String URL_ALL_MY_FAVORITES="http://192.168.254.117/laundress/allfavoriteshandwaasher.php";
 
     ArrayList<HandwasherList> handwasherLists = new ArrayList<HandwasherList>();
     HandwasherAdapter handwasherAdapter;
 
     private String client_name, filterby;
-    private int client_id;
+    private int client_id, lsp_id;
     Spinner spinner;
     String client_Address;
     SearchView editsearch;
-    ListView listView, lvcheap, lvrecommended;
+    ListView listView, lvcheap, lvrecommended, lvfav;
     double lat;
     double lng;
     double lat2;
@@ -93,8 +94,8 @@ public class FindHandwasher extends Fragment implements SearchView.OnQueryTextLi
     public View onCreateView(@NonNull LayoutInflater inflater,  ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.findhandwasher, container, false);
          listView = rootView.findViewById(R.id.lvhandwashers);
-
          lvcheap = rootView.findViewById(R.id.lvcheap);
+         lvfav = rootView.findViewById(R.id.lvfav);
         editsearch = rootView.findViewById(R.id.search);
          lvrecommended = rootView.findViewById(R.id.lvrecommended);
          spinner = rootView.findViewById(R.id.spinner);
@@ -105,19 +106,29 @@ public class FindHandwasher extends Fragment implements SearchView.OnQueryTextLi
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 filterby = parent.getItemAtPosition(position).toString();
-                if(filterby.equals("Nearest Location")){
+                if(filterby.equals("Nearest")){
                     listView.setVisibility(View.VISIBLE);
                     allHandwasher();
-                } else if(filterby.equals("Cheapest Laundry Handwasher")){
+                } else if(filterby.equals("Cheapest")){
                     listView.setVisibility(View.GONE);
+                    lvfav.setVisibility(View.GONE);
+                    lvrecommended.setVisibility(View.GONE);
                     lvcheap.setVisibility(View.VISIBLE);
                     allHandwasherCheapeast();
                 } else
-                if(filterby.equals("Recommended Laundry Handwasher")){
+                if(filterby.equals("Highly Rated")){
                     listView.setVisibility(View.GONE);
                     lvcheap.setVisibility(View.GONE);
+                    lvfav.setVisibility(View.GONE);
                     lvrecommended.setVisibility(View.VISIBLE);
                     allHandwasherRecommend();
+                }else
+                if(filterby.equals("My Favorites")){
+                    listView.setVisibility(View.GONE);
+                    lvcheap.setVisibility(View.GONE);
+                    lvfav.setVisibility(View.VISIBLE);
+                    lvrecommended.setVisibility(View.GONE);
+                    allMyFavorites();
                 }
             }
 
@@ -331,7 +342,8 @@ public class FindHandwasher extends Fragment implements SearchView.OnQueryTextLi
                                     String contact = jsonArray.getJSONObject(i).getString("contact").toString();
                                     //String photo = jsonArray.getJSONObject(i).getString("photo").toString();
                                     String average = jsonArray.getJSONObject(i).getString("average").toString();
-                                    int lsp_id = Integer.parseInt(jsonArray.getJSONObject(i).getString("lspid").toString());
+
+                                    lsp_id = Integer.parseInt(jsonArray.getJSONObject(i).getString("lspid").toString());
                                     arrname.add(name);
                                     arrmeter.add(meter);
                                     arrcontact.add(contact);
@@ -370,6 +382,74 @@ public class FindHandwasher extends Fragment implements SearchView.OnQueryTextLi
         requestQueue.add(stringRequest);
 
     }
+    private void allMyFavorites() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_ALL_MY_FAVORITES,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String success = jsonObject.getString("success");
+                            //JSONArray jArray = json.getJSONArray("platform");
+                            //JSONArray jsonArray = new JSONArray(response);
+                            JSONArray jsonArray = jsonObject.getJSONArray("alllaundryshop");
+                            if (success.equals("1")){
+                                handwasherLists.clear();
+                                for (int i =0;i<jsonArray.length();i++)
+                                {
+                                    String name=jsonArray.getJSONObject(i).getString("name").toString();
+                                    String meter = jsonArray.getJSONObject(i).getString("address").toString();
+                                    String contact = jsonArray.getJSONObject(i).getString("contact").toString();
+                                    //String photo = jsonArray.getJSONObject(i).getString("photo").toString();
+                                   // String average = jsonArray.getJSONObject(i).getString("average").toString();
+                                    int lsp_id = Integer.parseInt(jsonArray.getJSONObject(i).getString("lsp_ID").toString());
+                                    arrname.add(name);
+                                    arrmeter.add(meter);
+                                    arrcontact.add(contact);
+                                    HandwasherList handwasherList = new HandwasherList();
+                                    handwasherList.setClient_id(client_id);
+                                    handwasherList.setHandwasherName(name);
+                                    handwasherList.setContact(contact);
+                                    handwasherList.setSort("Favorites");
+                                    handwasherList.setLsp_id(lsp_id);
+                                    //handwasherList.setPhoto(photo);
+                                    handwasherList.setHwlocation(meter);
+                                    //handwasherList.setReccom(average);
+                                    getLocationToAddress(meter);
+                                    handwasherList.setHwmeter(getDistance(lat, lng, lat2, lng2));
+                                    handwasherList.setHwmeterdouble(getDistanceDouble(lat, lng, lat2, lng2));
+                                    handwasherLists.add(handwasherList);
+                                }
+                                handwasherAdapter = new HandwasherAdapter(context,handwasherLists);
+                                lvfav.setAdapter(handwasherAdapter);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(getActivity(), "failedddd" +e.toString(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getActivity(), error.toString(), Toast.LENGTH_LONG).show();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params = new HashMap<>();
+                params.put("client_id", String.valueOf(client_id));
+                //params.put("lsp_id", String.valueOf(lsp_id));
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        requestQueue.add(stringRequest);
+
+    }
+
+
 
 
     public static String getDistance(double lat_a, double lng_a, double lat_b, double lng_b) {

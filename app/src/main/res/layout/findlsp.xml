@@ -12,6 +12,10 @@
         android:layout_height="wrap_content"
         app:tabIndicatorColor="@color/darkBlue"
         app:tabTextColor="@color/gray">
+        <android.support.design.widget.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/alllsp" />
 
         <android.support.design.widget.TabItem
             android:layout_width="wrap_content"

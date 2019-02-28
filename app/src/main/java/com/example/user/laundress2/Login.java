@@ -31,8 +31,8 @@ public class Login extends AppCompatActivity {
     private Button login;
     private ProgressBar load;
     private int backButton = 1;
-    private static String URL_LOGIN = "http://192.168.254.113/laundress/login.php";
-    //private static String URL_LOGIN = "http://192.168.254.117/laundress/login.php";
+//    private static String URL_LOGIN = "http://192.168.254.113/laundress/login.php";
+    private static String URL_LOGIN = "http://192.168.254.117/laundress/login.php";
 
     @Override
     public void onBackPressed() {

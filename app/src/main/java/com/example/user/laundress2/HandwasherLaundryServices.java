@@ -54,14 +54,14 @@ public class HandwasherLaundryServices extends AppCompatActivity {
     String home;
     int pricelaund, price_dry, pricelaundanddry, priceiron, pricefold;
     int handwasher_id, handwasher_lspid;
-    private static String URL_HANDWASHER_SERVICES = "http://192.168.254.113/laundress/addhandwasherextraservices.php";
+    /*private static String URL_HANDWASHER_SERVICES = "http://192.168.254.113/laundress/addhandwasherextraservices.php";
     private static String URL_HANDWASHER_SERVICESTYPE = "http://192.168.254.113/laundress/addhandwasherservicetype.php";
     private static String URL_HANDWASHER_SERVICEOFFERED = "http://192.168.254.113/laundress/addhandwasherserviceoffered.php";
-    private static String URL_ALL_HANDWASHER_SERVICES = "http://192.168.254.113/laundress/allhandwasherservices.php";
-   /* private static String URL_HANDWASHER_SERVICES = "http://192.168.254.117/laundress/addhandwasherextraservices.php";
+    private static String URL_ALL_HANDWASHER_SERVICES = "http://192.168.254.113/laundress/allhandwasherservices.php";*/
+    private static String URL_HANDWASHER_SERVICES = "http://192.168.254.117/laundress/addhandwasherextraservices.php";
     private static String URL_HANDWASHER_SERVICESTYPE = "http://192.168.254.117/laundress/addhandwasherservicetype.php";
     private static String URL_HANDWASHER_SERVICEOFFERED = "http://192.168.254.117/laundress/addhandwasherserviceoffered.php";
-    private static String URL_ALL_HANDWASHER_SERVICES = "http://192.168.254.117/laundress/allhandwasherservices.php";*/
+    private static String URL_ALL_HANDWASHER_SERVICES = "http://192.168.254.117/laundress/allhandwasherservices.php";
 
     String uomlaundry;
     String uomdry;
