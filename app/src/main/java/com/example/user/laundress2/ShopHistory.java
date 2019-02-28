@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -30,8 +32,8 @@ public class ShopHistory extends AppCompatActivity {
     ShopHistoryAdapter shopHistoryAdapter;
     ArrayList<ShopHistoryList> shopHistoryLists = new ArrayList<>();
     private Context context;
-//    private static final String URL_ALL ="http://192.168.254.113/laundress/shop_history.php";
     private static final String URL_ALL ="http://192.168.254.117/laundress/shop_history.php";
+    //private static final String URL_ALL ="http://192.168.254.117/laundress/shop_history.php";
     String shop_name;
     int shop_id;
 
@@ -80,16 +82,30 @@ public class ShopHistory extends AppCompatActivity {
                                 {
                                     String name=jsonArray2.getJSONObject(i).getString("name").toString();
                                     String date=jsonArray2.getJSONObject(i).getString("date").toString();
-                                    String weight=jsonArray2.getJSONObject(i).getString("weight").toString();
-                                    float rating_Score= Float.parseFloat(jsonArray2.getJSONObject(i).getString("rating_Score").toString());
+                                    String status=jsonArray2.getJSONObject(i).getString("trans_Status").toString();
                                     int trans_No= Integer.parseInt(jsonArray2.getJSONObject(i).getString("trans_No").toString());
+                                    int client_ID= Integer.parseInt(jsonArray2.getJSONObject(i).getString("client_ID").toString());
+
+                                    history.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                        @Override
+                                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                            Bundle extras = new Bundle();
+                                            extras.putInt("shopID", shop_id);
+                                            extras.putString("client_Name", shopHistoryLists.get(position).getName());
+                                            extras.putInt("trans_No", shopHistoryLists.get(position).getTrans_No());
+                                            extras.putString("date", shopHistoryLists.get(position).getDate());
+                                            Intent intent = new Intent(ShopHistory.this, ShopHistoryOnClick.class);
+                                            intent.putExtras(extras);
+                                            startActivity(intent);
+                                        }
+                                    });
 
                                     ShopHistoryList shopHistoryList = new ShopHistoryList();
                                     shopHistoryList.setName(name);
                                     shopHistoryList.setDate(date);
-                                    shopHistoryList.setLaundryweight(weight);
-                                    shopHistoryList.setRatings(rating_Score);
+                                    shopHistoryList.setStatus(status);
                                     shopHistoryList.setTrans_No(trans_No);
+                                    shopHistoryList.setClient_ID(client_ID);
                                     shopHistoryLists.add(shopHistoryList);
                                 }
                                 shopHistoryAdapter = new ShopHistoryAdapter(ShopHistory.this, shopHistoryLists);
@@ -97,14 +113,14 @@ public class ShopHistory extends AppCompatActivity {
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(ShopHistory.this, "failedddd" +e.toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ShopHistory.this, "Catch Exception  on History " +e.toString(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(ShopHistory.this, "Failed. No Connection. " + error.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ShopHistory.this, "Response Error on History " + error.toString(), Toast.LENGTH_SHORT).show();
                     }
                 })
 

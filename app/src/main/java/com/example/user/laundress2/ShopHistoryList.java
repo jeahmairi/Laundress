@@ -1,9 +1,25 @@
 package com.example.user.laundress2;
 
 public class ShopHistoryList {
-    private String name, date, laundryweight;
-    private float ratings;
+    private String name, date, status;
     private int trans_No;
+    private int client_ID;
+
+    public int getClient_ID() {
+        return client_ID;
+    }
+
+    public void setClient_ID(int client_ID) {
+        this.client_ID = client_ID;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public String getName() {
         return name;
@@ -19,22 +35,6 @@ public class ShopHistoryList {
 
     public void setDate(String date) {
         this.date = date;
-    }
-
-    public String getLaundryweight() {
-        return laundryweight;
-    }
-
-    public void setLaundryweight(String laundryweight) {
-        this.laundryweight = laundryweight;
-    }
-
-    public float getRatings() {
-        return ratings;
-    }
-
-    public void setRatings(float ratings) {
-        this.ratings = ratings;
     }
 
     public int getTrans_No() {

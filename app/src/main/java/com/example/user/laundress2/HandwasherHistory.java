@@ -7,6 +7,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -31,8 +33,8 @@ public class HandwasherHistory extends AppCompatActivity {
     HistoryAdapter historyAdapter;
     ArrayList<HistoryList> historyLists = new ArrayList<HistoryList>();
     private Context context;
-//    private static final String URL_ALL ="http://192.168.254.113/laundress/handwasherhistory.php";
     private static final String URL_ALL ="http://192.168.254.117/laundress/handwasherhistory.php";
+    //private static final String URL_ALL ="http://192.168.254.117/laundress/handwasherhistory.php";
     String handwasher_name;
     int handwasher_id, handwasher_lspid;
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -53,7 +55,7 @@ public class HandwasherHistory extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.clienthistory);
+        setContentView(R.layout.shop_history);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         history = findViewById(R.id.lvhistory);
@@ -62,6 +64,7 @@ public class HandwasherHistory extends AppCompatActivity {
         handwasher_name = extras.getString("handwasher_name");
         handwasher_id = extras.getInt("handwasher_id");
         handwasher_lspid = extras.getInt("handwasher_lspid");
+        //Toast.makeText(HandwasherHistory.this, "Failed" +handwasher_lspid, Toast.LENGTH_SHORT).show();
         allHistory();
     }
     private void allHistory() {
@@ -78,15 +81,29 @@ public class HandwasherHistory extends AppCompatActivity {
                                 {
                                     String name=jsonArray2.getJSONObject(i).getString("name").toString();
                                     String date=jsonArray2.getJSONObject(i).getString("date").toString();
-                                    String weight=jsonArray2.getJSONObject(i).getString("weight").toString();
-                                    float rating_Score= Float.parseFloat(jsonArray2.getJSONObject(i).getString("rating_Score").toString());
+                                    String status=jsonArray2.getJSONObject(i).getString("trans_Status").toString();
+                                    int client_ID= Integer.parseInt(jsonArray2.getJSONObject(i).getString("client_ID").toString());
                                     int trans_No= Integer.parseInt(jsonArray2.getJSONObject(i).getString("trans_No").toString());
+
+                                    history.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                        @Override
+                                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                            Bundle extras = new Bundle();
+                                            extras.putInt("handwasher_lspid", handwasher_lspid);
+                                            extras.putString("client_Name", historyLists.get(position).getName());
+                                            extras.putInt("trans_No", historyLists.get(position).getTrans_No());
+                                            extras.putString("date", historyLists.get(position).getDate());
+                                            Intent intent = new Intent(HandwasherHistory.this, ShopHistoryOnClick.class);
+                                            intent.putExtras(extras);
+                                            startActivity(intent);
+                                        }
+                                    });
 
                                     HistoryList historyList = new HistoryList();
                                     historyList.setName(name);
                                     historyList.setDate(date);
-                                    historyList.setLaundryweight(weight);
-                                    historyList.setRatings(rating_Score);
+                                    historyList.setStatus(status);
+                                    historyList.setClient_ID(client_ID);
                                     historyList.setTrans_No(trans_No);
                                     historyLists.add(historyList);
                                 }

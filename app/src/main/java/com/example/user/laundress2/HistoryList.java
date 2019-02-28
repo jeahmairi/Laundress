@@ -1,9 +1,25 @@
 package com.example.user.laundress2;
 
 public class HistoryList {
-    private String name, date, laundryweight;
+    private String name, date, laundryweight, status;
     private float ratings;
-    private int trans_No;
+    private int trans_No, client_ID;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public int getClient_ID() {
+        return client_ID;
+    }
+
+    public void setClient_ID(int client_ID) {
+        this.client_ID = client_ID;
+    }
 
     public String getName() {
         return name;

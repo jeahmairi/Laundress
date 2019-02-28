@@ -188,6 +188,9 @@
         <activity
             android:name=".ClaimDetails"
             android:label="Claim Details"/>
+        <activity
+            android:name=".ShopHistoryOnClick"
+            android:label="Details"/>
 
 
         <!--

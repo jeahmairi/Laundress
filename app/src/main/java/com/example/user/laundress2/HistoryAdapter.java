@@ -43,33 +43,18 @@ public class HistoryAdapter extends BaseAdapter {
     public View getView(final int position, View convertView, ViewGroup parent) {
         LayoutInflater layoutInflater = ((Activity) context).getLayoutInflater();
         itemHolder = new HistoryAdapter.ItemHolder();
-        convertView = layoutInflater.inflate(R.layout.clienthistory_adapter, parent, false);
-        itemHolder.date = convertView.findViewById(R.id.date);
-        itemHolder.washername = convertView.findViewById(R.id.washername);
-        itemHolder.laundryweight = convertView.findViewById(R.id.laundryweight);
-        itemHolder.ratings = convertView.findViewById(R.id.ratings);
-        itemHolder.btnviewlaundrydet = convertView.findViewById(R.id.btnviewlaundrydet);
-        itemHolder.btnviewlaundrydet.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Bundle extras = new Bundle();
-                extras.putInt("trans_No",historyLists.get(position).getTrans_No());
-                Intent intent = new Intent(context, ViewLaundryDetails.class);
-                intent.putExtras(extras);
-                context.startActivity(intent);
-            }
-        });
+        convertView = layoutInflater.inflate(R.layout.shop_history_adapter, parent, false);
+        itemHolder.date = convertView.findViewById(R.id.tv_date);
+        itemHolder.clientName = convertView.findViewById(R.id.tv_clientName);
+        itemHolder.status = convertView.findViewById(R.id.tv_status);
         itemHolder.date.setText(historyLists.get(position).getDate());
-        itemHolder.washername.setText(historyLists.get(position).getName());
-        itemHolder.laundryweight.setText(historyLists.get(position).getLaundryweight());
-        itemHolder.ratings.setRating(historyLists.get(position).getRatings());
+        itemHolder.clientName.setText(historyLists.get(position).getName());
+        itemHolder.status.setText(historyLists.get(position).getStatus());
         return convertView;
     }
 
     private class ItemHolder {
-        TextView date, washername, laundryweight;
-        RatingBar ratings;
-        Button btnviewlaundrydet;
+        TextView date, clientName, status;
 
     }
 }

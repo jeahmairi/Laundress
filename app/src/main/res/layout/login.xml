@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="211dp"
         android:layout_marginTop="50dp"
-        app:srcCompat="@drawable/logo" />
+        app:srcCompat="@drawable/logowithlabel" />
 
     <EditText
         android:id="@+id/email"

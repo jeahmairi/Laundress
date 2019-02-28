@@ -130,11 +130,11 @@ public class ClientNotification extends AppCompatActivity {
                                         clientNotifList.setTrans_no(trans_No);
                                         clientNotifList.setImage(photo);
                                         clientNotifList.setTable(istable);
-                                        if(notification_Message.equals("Claimed")|| notification_Message.equals("Finished")){
+                                        if(notification_Message.equals("Claimed") || notification_Message.equals("Finished")){
                                             lvnotif.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                                 @Override
                                                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                                    if(clientNotifLists.get(position).getNotification_message().equals("Finished")){
+                                                    if(clientNotifLists.get(position).getNotification_message().equals("Finished") || clientNotifLists.get(position).getNotification_message().equals("Claimed")){
 
                                                         transno = clientNotifLists.get(position).getTrans_no();
                                                         String tablefrom = clientNotifLists.get(position).getTable();
@@ -145,7 +145,7 @@ public class ClientNotification extends AppCompatActivity {
                                                                 showChangeLangDialogReceipt();
                                                             }
                                                     }
-                                                   // Toast.makeText(ClientNotification.this, "sud " +position, Toast.LENGTH_SHORT).show();
+                                                   // Toast.makeText(ClientNotification.this, "sud " + clientNotifLists.get(position).getNotification_message(), Toast.LENGTH_SHORT).show();
                                                 }
                                             });
                                         }

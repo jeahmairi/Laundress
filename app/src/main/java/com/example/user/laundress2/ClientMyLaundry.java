@@ -127,17 +127,21 @@ public class ClientMyLaundry extends Fragment {
                                     address = object.getString("address");
                                     contact = object.getString("contact");
                                     if(!trans_Status.equals("Cancelled")) {
-                                        ClientMyList clientMyList = new ClientMyList();
-                                        clientMyList.setName(name);
-                                        clientMyList.setClient_name(client_name);
-                                        clientMyList.setAddress(address);
-                                        clientMyList.setContact(contact);
-                                        clientMyList.setTable(table);
-                                        clientMyList.setTrans_status(trans_Status);
-                                        clientMyList.setTransNo(trans_No);
-                                        clientMyList.setLspID(lsp_ID);
-                                        clientMyList.setClientID(client_id);
-                                        clientMyLists.add(clientMyList);
+                                        if(!trans_Status.equals("Claimed")) {
+                                            if(!trans_Status.equals("Declined")) {
+                                                ClientMyList clientMyList = new ClientMyList();
+                                                clientMyList.setName(name);
+                                                clientMyList.setClient_name(client_name);
+                                                clientMyList.setAddress(address);
+                                                clientMyList.setContact(contact);
+                                                clientMyList.setTable(table);
+                                                clientMyList.setTrans_status(trans_Status);
+                                                clientMyList.setTransNo(trans_No);
+                                                clientMyList.setLspID(lsp_ID);
+                                                clientMyList.setClientID(client_id);
+                                                clientMyLists.add(clientMyList);
+                                            }
+                                        }
                                     }
                                     //Toast.makeText(getActivity(), "shop_id " +shop_id, Toast.LENGTH_SHORT).show();
                                     //Toast.makeText(getActivity(), "handwasher_id " +handwasher_id, Toast.LENGTH_SHORT).show();

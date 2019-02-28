@@ -73,7 +73,7 @@
         android:id="@+id/textView51"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Estimated weight"
+        android:text="Estimated Date Finished"
         android:layout_marginLeft="10dp"
         android:padding="10dp"
         android:textSize="18sp"

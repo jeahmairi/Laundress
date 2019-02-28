@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -30,15 +32,15 @@ public class ClientHistory extends AppCompatActivity {
     HistoryAdapter historyAdapter;
     ArrayList<HistoryList> historyLists = new ArrayList<HistoryList>();
     private Context context;
-    //private static final String URL_ALL ="http://192.168.254.113/laundress/clienthistory.php";
     private static final String URL_ALL ="http://192.168.254.117/laundress/clienthistory.php";
+    //private static final String URL_ALL ="http://192.168.254.117/laundress/clienthistory.php";
     String client_name;
     int client_id;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.clienthistory);
+        setContentView(R.layout.shop_history);
         history = findViewById(R.id.lvhistory);
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
@@ -60,15 +62,29 @@ public class ClientHistory extends AppCompatActivity {
                                 {
                                     String name=jsonArray2.getJSONObject(i).getString("name").toString();
                                     String date=jsonArray2.getJSONObject(i).getString("date").toString();
-                                    String weight=jsonArray2.getJSONObject(i).getString("weight").toString();
-                                    float rating_Score= Float.parseFloat(jsonArray2.getJSONObject(i).getString("rating_Score").toString());
+                                    String status=jsonArray2.getJSONObject(i).getString("trans_Status").toString();
+                                    int lsp_ID= Integer.parseInt(jsonArray2.getJSONObject(i).getString("lsp_ID").toString());
                                     int trans_No= Integer.parseInt(jsonArray2.getJSONObject(i).getString("trans_No").toString());
+
+                                    history.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                        @Override
+                                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                            Bundle extras = new Bundle();
+                                            extras.putInt("client_id", client_id);
+                                            extras.putString("client_Name", historyLists.get(position).getName());
+                                            extras.putInt("trans_No", historyLists.get(position).getTrans_No());
+                                            extras.putString("date", historyLists.get(position).getDate());
+                                            Intent intent = new Intent(ClientHistory.this, ShopHistoryOnClick.class);
+                                            intent.putExtras(extras);
+                                            startActivity(intent);
+                                        }
+                                    });
 
                                     HistoryList historyList = new HistoryList();
                                     historyList.setName(name);
                                     historyList.setDate(date);
-                                    historyList.setLaundryweight(weight);
-                                    historyList.setRatings(rating_Score);
+                                    historyList.setStatus(status);
+                                    historyList.setClient_ID(lsp_ID);
                                     historyList.setTrans_No(trans_No);
                                     historyLists.add(historyList);
                                 }

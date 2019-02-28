@@ -64,7 +64,7 @@
                 android:layout_height="100dp"
                 android:layout_weight="2"
                 android:background="@android:color/transparent"
-                android:text="Laundry Handwasher"
+                android:text="Laundry Worker"
                 android:textColor="@color/lightBlue"
                 android:textSize="16sp" />
         </LinearLayout>
